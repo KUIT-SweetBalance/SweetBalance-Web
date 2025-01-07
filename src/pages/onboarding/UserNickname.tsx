@@ -1,5 +1,5 @@
 import React from 'react';
-import UserDataInput from '../../components/input/UserDataInput';
+import UserDataInput from '../../components/input/userDataInput/UserDataInput';
 import { useForm } from 'react-hook-form';
 
 const UserNickname = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import UserDataInput from '../../components/input/UserDataInput';
+import UserDataInput from '../../components/input/userDataInput/UserDataInput';
 
 const UserPassword = () => {
   const {

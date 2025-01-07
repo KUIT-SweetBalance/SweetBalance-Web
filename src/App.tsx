@@ -1,11 +1,12 @@
-import './App.css'
-import TailwindExample from './pages/TailwindExample'
-import UserDataInput from './components/input/UserDataInput'
+import './App.css';
+// import TailwindExample from './pages/TailwindExample';
+// import UserNickname from './pages/onboarding/UserNickname';
+import UserPassword from './pages/onboarding/UserPassword';
 
 function App() {
   return (
-    <UserDataInput />
-  )
+    <UserPassword />
+  );
 }
 
-export default App
+export default App;

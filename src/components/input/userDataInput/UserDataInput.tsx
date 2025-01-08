@@ -34,11 +34,11 @@ const UserDataInput = ({
     >
       {props.label && <label htmlFor={props.id}>{props.label}</label>}
       <input
-        className={`w-auto 
+        className={`w-auto
           py-3 
           border 
           rounded-full 
-          text-base 
+          text-base
           text-[#909090] 
           placeholder-gray-400
           focus:outline-none 

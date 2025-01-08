@@ -1,10 +1,12 @@
-import './App.css'
-import TailwindExample from './pages/TailwindExample'
+import './App.css';
+// import TailwindExample from './pages/TailwindExample';
+// import UserNickname from './pages/onboarding/UserNickname';
+import UserPassword from './pages/onboarding/UserPassword';
 
 function App() {
   return (
-    <TailwindExample />
-  )
+    <UserPassword />
+  );
 }
 
-export default App
+export default App;

@@ -24,8 +24,13 @@ export default [
 
   // Prettier 통합 규칙
   {
+    extends: [
+      'eslint:recommended',
+      'plugin:react/recommended',
+      'plugin:prettier/recommended', // Prettier와 ESLint의 충돌 방지
+    ],
     plugins: { prettier: pluginPrettier },
-    rules: { 'prettier/prettier': 'error' },
+    rules: { 'prettier/prettier': ['error', { endOfLine: 'auto' }] },
   },
 
   // Prettier와 ESLint 충돌 방지

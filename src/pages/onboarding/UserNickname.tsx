@@ -2,28 +2,19 @@ import React from 'react';
 import UserDataInput from '../../components/input/userDataInput/UserDataInput';
 import { useForm } from 'react-hook-form';
 
+// 여기서 제출 버튼 만들고,
+// getValues로 입력한 닉네임 값 가져와서 요청에 보내면 될 듯
+
 const UserNickname = () => {
-    const {
-        handleSubmit, // 폼 제출 메서드
-        // watch, // 입력 필드 값 확인
-        // getValues,
-        register,
-        formState: { isValid, errors }, // 폼 상태 값
-      } = useForm({ mode: 'onChange' }); // mode: onChange로 설정
-
-  // form 제출 시 실행되는 메서드
-  const onSubmit = (data: unknown) => {
-    console.log(data);
-    console.log(isValid)
-  };
-
-  // 에러 핸들링용 메서드
-  const onError = (errors: unknown) => {
-    console.log(errors);
-  };
+  const {
+    // watch, // 입력 필드 값 확인
+    // getValues,
+    register, // 유효성 검사와 값 관리에 사용
+    formState: { isValid, errors }, // 폼 상태 값
+  } = useForm({ mode: 'onChange' }); // mode: onChange로 설정
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, onError)}>
+    <div>
       <UserDataInput
         id="userNickname"
         type="text"
@@ -37,7 +28,7 @@ const UserNickname = () => {
         register={register}
         errors={errors}
       />
-    </form>
+    </div>
   );
 };
 

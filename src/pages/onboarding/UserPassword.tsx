@@ -11,16 +11,6 @@ const UserPassword = () => {
     formState: { isValid, errors }, // 폼 상태 값
   } = useForm({ mode: 'onChange' }); // mode: onChange로 설정
 
-  // form 제출 시 실행되는 메서드
-  const onSubmit = (data: any) => {
-    console.log('폼 데이터:', data);
-  };
-
-  // 에러 핸들링용 메서드
-  const onError = (errors: any) => {
-    console.log('에러 발생:', errors);
-  };
-
   // userPassword 필드값 실시간 추적(콘솔 확인용)
   const passwordValue = watch('userPassword'); // userPassword 값 추적
   const passwordConfirmValue = watch('userPasswordConfirm'); // userPasswordConfirm 값 추적
@@ -30,10 +20,7 @@ const UserPassword = () => {
   }, [passwordValue, passwordConfirmValue]);
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit, onError)}
-      className="flex flex-col space-y-4"
-    >
+    <div className="flex flex-col space-y-4">
       <UserDataInput
         useFormMode="onChange"
         id="userPassword"
@@ -72,7 +59,7 @@ const UserPassword = () => {
       >
         제출
       </button>
-    </form>
+    </div>
   );
 };
 

@@ -1,12 +1,11 @@
 import './App.css';
-// import TailwindExample from './pages/TailwindExample';
+import CustomMain from './pages/custom/custom-main/custom';
 // import UserNickname from './pages/onboarding/UserNickname';
 // import UserPassword from './pages/onboarding/UserPassword';
-import Today from './pages/main/main-today/Today';
-
-function App() {
+        
+const  App=()=> {
   return (
-    <Today />
+    <CustomMain brand="스타벅스" drink="아이스 아메리카노" sugar={0} kcal={0} caffeine={5}/>
   );
 }
 

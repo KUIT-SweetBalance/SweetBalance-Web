@@ -19,7 +19,7 @@ const SearchInput = ({ height = '40px', ...props }: SearchInputProps) => {
         type={props.type}
         placeholder={props.placeholder}
         {...props.register(props.id)}
-        className="w-full p-[12px] border rounded-full placeholder-[#BABABA] bg-[#F4F4F4] focus:outline-none focus:ring-1 focus:ring-primary"
+        className="w-full p-[12px] text-[13px] pl-4 border rounded-full placeholder-[#BABABA] bg-[#F4F4F4] focus:outline-none focus:ring-1 focus:ring-primary"
       />
       <button
         type="button"

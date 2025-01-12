@@ -14,20 +14,24 @@ const UserNickname = () => {
   } = useForm({ mode: 'onChange' }); // mode: onChange로 설정
 
   return (
-    <div>
-      <UserDataInput
-        id="userNickname"
-        type="text"
-        placeholder="닉네임을 입력해주세요"
-        requiredMessage="닉네임은 필수 입력 항목입니다"
-        pattern={{
-          value: /^[가-힣]{2,5}$/, // 한글 2~5자 허용
-          message: '닉네임은 2자 이상 5자 이내의 한글이어야 합니다.',
-        }}
-        position="center"
-        register={register}
-        errors={errors}
-      />
+    <div className='flex flex-col items-center m-5'> {/* 전체 wrapper */}
+
+      {/* UserDataInput wrapper */}
+      <div className='w-full'>
+        <UserDataInput
+          id="userNickname"
+          type="text"
+          placeholder="닉네임을 입력해주세요"
+          requiredMessage="닉네임은 필수 입력 항목입니다"
+          pattern={{
+            value: /^[가-힣]{2,5}$/, // 한글 2~5자 허용
+            message: '닉네임은 2자 이상 5자 이내의 한글이어야 합니다.',
+          }}
+          position="center"
+          register={register}
+          errors={errors}
+        />
+      </div>
     </div>
   );
 };

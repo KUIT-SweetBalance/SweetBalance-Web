@@ -15,14 +15,14 @@ const Home = () => {
       <AppTitle />
 
       {/* UserGreeting 컴포넌트(안녕하세요 달달해님! ~ ) */}
-      <div className="flex flex-row justify-between space-x-8 mx-[34px]">
+      <div className="flex flex-row w-[calc(100%-48px)] justify-between">
         <div className="flex flex-col">
           <div className="flex flex-row">
             <div className="text-lg font-normal">안녕하세요,&nbsp;</div>
             <div className="text-lg font-medium">달달해</div>
             <div className="text-lg font-normal">님!</div>
           </div>
-          <div className="text-sm text-[#121212]">
+          <div className="text-sm text-[#909090]">
             오늘도 활기차게 당 관리를 시작해볼까요?
           </div>
         </div>
@@ -43,7 +43,7 @@ const Home = () => {
       </div>
 
       {/* 오늘/주간 버튼 */}
-      <div className="mt-6 mb-4 w-[calc(100%-68px)]">
+      <div className="mt-6 mb-4 w-[calc(100%-48px)]">
         <TodayWeekSwitcher
             selected={selectedView}
             onChange={(view) => setSelectedView(view)}

@@ -10,7 +10,7 @@ interface WeeklyStatsProps {
 
 const WeeklyStats = (props: WeeklyStatsProps) => {
   return (
-    <div className="flex flex-col flex-1 h-[226px] border rounded-lg p-3">
+    <div className="flex flex-col flex-1 h-[226px] border rounded-lg p-[10px]">
       <div className="flex justify-start text-sm ml-1">{props.title}</div>
 
       {props.weeklySugarIntake && (

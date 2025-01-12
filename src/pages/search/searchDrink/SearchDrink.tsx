@@ -50,7 +50,7 @@ const SearchDrink = () => {
     <div className="flex flex-col items-center w-full">
       <AppTitle />
 
-      <div className="flex mx-6 w-[calc(100%-68px)] mb-[46px]">
+      <div className="flex mx-6 w-[calc(100%-48px)] mb-[40px]">
         <SearchInput
           id="SearchDrink"
           type="text"
@@ -60,14 +60,14 @@ const SearchDrink = () => {
         />
       </div>
 
-      <div className="flex w-[calc(100%-68px)] justify-between mb-[18px] items-baseline">
+      <div className="flex w-[calc(100%-48px)] justify-between mb-[18px] items-baseline">
         <div className="font-medium text-[18px]">브랜드</div>
         <button type="button" className="text-[14px] text-primary">
           더보기
         </button>
       </div>
 
-      <div className="flex w-[calc(100%-68px)] mb-[34px] space-x-5 overflow-x-auto scrollbar-hide">
+      <div className="flex w-[calc(100%-48px)] mb-[34px] space-x-5 overflow-x-auto scrollbar-hide">
         {/* scrollbar-hide를 사용하려면 tailwind-scrollbar-hide 설치하고 config파일에 플러그인 추가해야 함 */}
         {brands.map((brand, index) => (
           <button
@@ -85,14 +85,14 @@ const SearchDrink = () => {
 
       <div className="w-full h-[15px] mb-[30px] bg-[#F4F4F4]"></div>
 
-      <div className="flex w-[calc(100%-68px)] justify-between mb-[18px] items-baseline">
+      <div className="flex w-[calc(100%-48px)] justify-between mb-[18px] items-baseline">
         <div className="font-medium text-[18px]">음료 카테고리</div>
         <button type="button" className="text-[14px] text-primary">
           당 함량 높은 순
         </button>
       </div>
 
-      <div className="relative w-[calc(100%-68px)] overflow-x-auto scrollbar-hide">
+      <div className="relative w-[calc(100%-48px)] overflow-x-auto scrollbar-hide">
         <div className="relative z-10 flex space-x-[32px]">
           {drinkCategory.map((category, index) => (
             <button
@@ -119,7 +119,7 @@ const SearchDrink = () => {
         ></div>
       </div>
 
-      <div className="flex flex-col w-[calc(100%-60px)] mt-5">
+      <div className="flex flex-col w-[calc(100%-45px)] mt-[18px]">
         <DrinkInfo></DrinkInfo>
         <DrinkInfo></DrinkInfo>
         <DrinkInfo></DrinkInfo>

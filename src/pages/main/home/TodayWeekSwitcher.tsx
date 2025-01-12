@@ -10,10 +10,10 @@ const TodayWeekSwitcher = (props: TodayWeekSwitcherProps) => {
         <button
           type="button"
           onClick={() => props.onChange('today')}
-          className={`flex-1 h-full text-center rounded-full transition-all ${
+          className={`flex-1 h-full text-center text-[14px] rounded-full transition-all ${
             props.selected === 'today'
-              ? 'bg-[#F4F4F4] text-black'
-              : 'bg-transparent text-gray-500'
+              ? 'bg-primary text-white'
+              : 'bg-transparent text-primary'
           }`}
         >
           오늘
@@ -21,10 +21,10 @@ const TodayWeekSwitcher = (props: TodayWeekSwitcherProps) => {
         <button
           type="button"
           onClick={() => props.onChange('week')}
-          className={`flex-1 h-full text-center rounded-full transition-all ${
+          className={`flex-1 h-full text-center text-[14px] rounded-full transition-all ${
             props.selected === 'week'
-              ? 'bg-[#F4F4F4] text-black'
-              : 'bg-transparent text-gray-500'
+              ? 'bg-primary text-white'
+              : 'bg-transparent text-primary'
           }`}
         >
           주간

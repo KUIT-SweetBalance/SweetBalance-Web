@@ -1,12 +1,14 @@
-import React from 'react';
+import { useState } from 'react';
 import AppTitle from '../../../components/appTitle/AppTitle';
-import TodayWeekButton from './TodayWeekButton';
-import DailyIntake from './DailyIntake';
-import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
+import TodayWeekSwitcher from './TodayWeekSwitcher';
 import bell from '../../../assets/bell.png';
 import line3 from '../../../assets/line3.png';
+import DailyInfo from '../main-today/DailyInfo';
+import WeeklyInfo from '../main-week/WeeklyInfo';
 
-const Today = () => {
+const Home = () => {
+  const [selectedView, setSelectedView] = useState<'today' | 'week'>('today');
+
   return (
     <div className="flex flex-col items-center">
       {/* SweetBalance 타이틀 */}
@@ -42,34 +44,17 @@ const Today = () => {
 
       {/* 오늘/주간 버튼 */}
       <div className="mt-6 mb-4 w-[calc(100%-68px)]">
-        <TodayWeekButton></TodayWeekButton>
+        <TodayWeekSwitcher
+            selected={selectedView}
+            onChange={(view) => setSelectedView(view)}
+        />
       </div>
 
-      {/* 표 */}
-      <div className="w-[calc(100%-68px)] mt-3">
-        <DailyIntake></DailyIntake>
-      </div>
-
-      {/* 경계선 */}
-      <div className="w-full h-[15px] mt-7 bg-[#F4F4F4]"></div>
-
-      {/* 오늘 마신 음료수 */}
-      <div className="flex justify-between w-[calc(100%-68px)] mt-6 mb-5">
-        <div className="text-[18px]">오늘 마신 음료수</div>
-        <button type="button" className="text-[14px]">
-          수정하기
-        </button>
-      </div>
-
-      {/* 음료 정보 */}
-      <div className='flex flex-col w-[calc(100%-60px)]'>
-        <DrinkInfo></DrinkInfo>
-        <DrinkInfo></DrinkInfo>
-        <DrinkInfo></DrinkInfo>
-        <DrinkInfo></DrinkInfo>
+      <div className="w-full">
+        {selectedView === 'today' ? <DailyInfo /> : <WeeklyInfo />}
       </div>
     </div>
   );
 };
 
-export default Today;
+export default Home;

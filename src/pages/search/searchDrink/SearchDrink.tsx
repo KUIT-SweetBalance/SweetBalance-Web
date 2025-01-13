@@ -13,14 +13,14 @@ const SearchDrink = () => {
 
   const [clickedCategory, setClickedCategory] = useState<number>(0);
 
-  const handleCategoryClick = (index: number) => {
-    setClickedCategory(index);
-  };
-
   // 검색버튼 클릭 시 실행되는 메서드
   const handleSearchClick = () => {
     const inputValue = getValues('SearchDrink');
     console.log(inputValue);
+  };
+
+  const handleCategoryClick = (index: number) => {
+    setClickedCategory(index);
   };
 
   // 임시 데이터
@@ -50,7 +50,7 @@ const SearchDrink = () => {
     <div className="flex flex-col items-center w-full">
       <AppTitle />
 
-      <div className="flex mx-6 w-[calc(100%-48px)] mb-[40px]">
+      <div className="flex w-[calc(100%-48px)] mb-[40px]">
         <SearchInput
           id="SearchDrink"
           type="text"
@@ -120,10 +120,34 @@ const SearchDrink = () => {
       </div>
 
       <div className="flex flex-col w-[calc(100%-45px)] mt-[18px]">
-        <DrinkInfo></DrinkInfo>
-        <DrinkInfo></DrinkInfo>
-        <DrinkInfo></DrinkInfo>
-        <DrinkInfo></DrinkInfo>
+      <DrinkInfo
+          cafeName="스타벅스"
+          drinkName="아이스 아메리카노"
+          sugar={0}
+          kcal={0}
+          size="tall"
+        />
+        <DrinkInfo
+          cafeName="더벤티"
+          drinkName="카페라떼"
+          sugar={0}
+          kcal={0}
+          size="tall"
+        />
+        <DrinkInfo
+          cafeName="스타벅스"
+          drinkName="자몽 허니 블랙 티"
+          sugar={0}
+          kcal={0}
+          size="tall"
+        />
+        <DrinkInfo
+          cafeName="빽다방"
+          drinkName="딸기 스무디"
+          sugar={0}
+          kcal={0}
+          size="tall"
+        />
       </div>
     </div>
   );

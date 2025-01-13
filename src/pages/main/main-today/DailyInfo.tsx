@@ -15,17 +15,41 @@ const DailyInfo = () => {
       {/* 오늘 마신 음료수 */}
       <div className="flex justify-between w-[calc(100%-48px)] mt-6 mb-5">
         <div className="text-[18px]">오늘 마신 음료수</div>
-        <button type="button" className="text-[14px]">
+        <button type="button" className="text-[14px] text-[#909090]">
           수정하기
         </button>
       </div>
 
       {/* 음료 정보 */}
       <div className="flex flex-col w-[calc(100%-50px)]">
-        <DrinkInfo></DrinkInfo>
-        <DrinkInfo></DrinkInfo>
-        <DrinkInfo></DrinkInfo>
-        <DrinkInfo></DrinkInfo>
+      <DrinkInfo
+          cafeName="스타벅스"
+          drinkName="아이스 아메리카노"
+          sugar={0}
+          kcal={0}
+          size="tall"
+        />
+        <DrinkInfo
+          cafeName="더벤티"
+          drinkName="카페라떼"
+          sugar={0}
+          kcal={0}
+          size="tall"
+        />
+        <DrinkInfo
+          cafeName="스타벅스"
+          drinkName="자몽 허니 블랙 티"
+          sugar={0}
+          kcal={0}
+          size="tall"
+        />
+        <DrinkInfo
+          cafeName="빽다방"
+          drinkName="딸기 스무디"
+          sugar={0}
+          kcal={0}
+          size="tall"
+        />
       </div>
     </div>
   );

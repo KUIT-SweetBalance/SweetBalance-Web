@@ -3,8 +3,8 @@ import AppTitle from '../../../components/appTitle/AppTitle';
 import TodayWeekSwitcher from './TodayWeekSwitcher';
 import bell from '../../../assets/bell.png';
 import line3 from '../../../assets/line3.png';
-import DailyInfo from '../main-today/DailyInfo';
-import WeeklyInfo from '../main-week/WeeklyInfo';
+import DailyInfo from '../home-today/DailyInfo';
+import WeeklyInfo from '../home-week/WeeklyInfo';
 
 const Home = () => {
   const [selectedView, setSelectedView] = useState<'today' | 'week'>('today');

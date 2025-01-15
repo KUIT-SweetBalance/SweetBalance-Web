@@ -5,6 +5,7 @@ import UserPassword from './pages/onboarding/UserPassword';
 import Home from './pages/main/home/Home';       
 import SearchDrink from './pages/search/searchDrink/SearchDrink'; 
 import Mypage from './pages/mypage/Mypage';
+import LoginButton from './pages/onboarding/Kakaotalk/LoginButton';
 // import SearchDrink from './pages/search/searchDrink/SearchDrink';
 
 const  App=()=> {
@@ -13,6 +14,7 @@ const  App=()=> {
     // <Home />
     // <SearchDrink />
     <Mypage/>
+    // <LoginButton/>
     // <UserNickname />
     // <UserPassword />
   );

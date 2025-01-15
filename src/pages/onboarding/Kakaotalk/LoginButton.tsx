@@ -1,10 +1,13 @@
 import React from 'react';
-import { login } from './apiService'; // API 호출 함수 import
+import RedirectButton from './apiClient';
 
-const LoginButton = () => {
-  return (
-    <button onClick={login}>로그인</button> // 클릭 시 로그인 함수 호출
-  );
-};
 
+
+    const LoginButton = () => {
+      return (
+        <RedirectButton/>
+      );
+    };
+
+ 
 export default LoginButton;

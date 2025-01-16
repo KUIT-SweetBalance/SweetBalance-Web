@@ -1,5 +1,5 @@
 import DailyIntake from './DailyIntake';
-import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
+import DrinkInfo from '../../../../components/drinkInfo/DrinkInfo';
 
 const DailyInfo = () => {
   return (
@@ -21,13 +21,14 @@ const DailyInfo = () => {
       </div>
 
       {/* 음료 정보 */}
-      <div className="flex flex-col w-[calc(100%-50px)]">
-      <DrinkInfo
+      <div className="flex flex-col w-[calc(100%-75px)] space-y-5 mb-5">
+        <DrinkInfo
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"
           sugar={0}
           kcal={0}
           size="tall"
+          marginRight="4"
         />
         <DrinkInfo
           cafeName="더벤티"
@@ -35,6 +36,7 @@ const DailyInfo = () => {
           sugar={0}
           kcal={0}
           size="tall"
+          marginRight="4"
         />
         <DrinkInfo
           cafeName="스타벅스"
@@ -42,6 +44,7 @@ const DailyInfo = () => {
           sugar={0}
           kcal={0}
           size="tall"
+          marginRight="4"
         />
         <DrinkInfo
           cafeName="빽다방"
@@ -49,6 +52,7 @@ const DailyInfo = () => {
           sugar={0}
           kcal={0}
           size="tall"
+          marginRight="4"
         />
       </div>
     </div>

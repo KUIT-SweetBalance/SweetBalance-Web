@@ -4,7 +4,7 @@ import NavigateHeader from '../../../components/header/NavigateHeader';
 import SearchInput from '../../../components/input/searchInput/SearchInput';
 import { useForm } from 'react-hook-form';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
-import EditDrinkModal from './EditDrinkModal';
+import EditDrinkModal from '../modal/EditDrinkModal';
 
 const EditDrink = () => {
   const {
@@ -34,7 +34,7 @@ const EditDrink = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <AppTitle />
+      {/* <AppTitle /> */}
 
       <div className="w-[calc(100%-48px)] mb-[16px]">
         <NavigateHeader headerTitle="알림 페이지" confirmButton="완료" />
@@ -50,7 +50,7 @@ const EditDrink = () => {
         />
       </div>
 
-      <div className="flex  w-[calc(100%-48px)] justify-between mb-[30px]">
+      <div className="flex w-[calc(100%-48px)] justify-between mb-[30px]">
         <div className="text-[18px] font-medium">오늘 마신 브랜드</div>
         <button type="button" className="text-[14px] text-primary">
           삭제하기
@@ -83,7 +83,7 @@ const EditDrink = () => {
       </div>
 
       {/* 음료 정보 */}
-      <div className="flex flex-col w-[calc(100%-50px)]">
+      <div className="flex flex-col w-[calc(100%-50px)] space-y-5 mb-5">
         <DrinkInfo
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"

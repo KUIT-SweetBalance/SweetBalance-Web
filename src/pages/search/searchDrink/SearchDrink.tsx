@@ -48,7 +48,7 @@ const SearchDrink = () => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <AppTitle />
+      {/* <AppTitle /> */}
 
       <div className="flex w-[calc(100%-48px)] mb-[40px]">
         <SearchInput
@@ -119,13 +119,14 @@ const SearchDrink = () => {
         ></div>
       </div>
 
-      <div className="flex flex-col w-[calc(100%-45px)] mt-[18px]">
+      <div className="flex flex-col w-[calc(100%-45px)] mt-[18px] space-y-5 mb-5">
       <DrinkInfo
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"
           sugar={0}
           kcal={0}
           size="tall"
+          marginRight="4"
         />
         <DrinkInfo
           cafeName="더벤티"
@@ -133,6 +134,7 @@ const SearchDrink = () => {
           sugar={0}
           kcal={0}
           size="tall"
+          marginRight="4"
         />
         <DrinkInfo
           cafeName="스타벅스"
@@ -140,6 +142,7 @@ const SearchDrink = () => {
           sugar={0}
           kcal={0}
           size="tall"
+          marginRight="4"
         />
         <DrinkInfo
           cafeName="빽다방"
@@ -147,6 +150,7 @@ const SearchDrink = () => {
           sugar={0}
           kcal={0}
           size="tall"
+          marginRight="4"
         />
       </div>
     </div>

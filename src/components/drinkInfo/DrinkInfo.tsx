@@ -8,15 +8,16 @@ interface DrinkInfoProps {
     sugar: number;
     kcal: number;
     size: string;
+    marginRight?: string;
 }
 
 const DrinkInfo = (props: DrinkInfoProps) => {
   const [selected, setSelected] = useState<boolean>(false);
 
   return (
-    <div className="w-full flex justify-between p-2 mb-2">
+    <div className="w-full flex justify-between">
       <div className="w-[74px] h-[74px] bg-[#F4F4F4] rounded-full"></div>
-      <div className="flex w-[220px] flex-col">
+      <div className={`flex flex-col  ${props.marginRight ? `mr-${props.marginRight}` : ''}`}>
         <div className="text-xs mt-[2px]">{props.cafeName}</div>
         <div className="flex justify-between">
           <div className="text-[16px] font-medium mt-[4px]">{props.drinkName}</div>

@@ -3,8 +3,8 @@ import AppTitle from '../../../components/appTitle/AppTitle';
 import TodayWeekSwitcher from './TodayWeekSwitcher';
 import bell from '../../../assets/bell.png';
 import line3 from '../../../assets/line3.png';
-import DailyInfo from '../home-today/DailyInfo';
-import WeeklyInfo from '../home-week/WeeklyInfo';
+import DailyInfo from './home-today/DailyInfo';
+import WeeklyInfo from './home-week/WeeklyInfo';
 
 const Home = () => {
   const [selectedView, setSelectedView] = useState<'today' | 'week'>('today');
@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center">
       {/* SweetBalance 타이틀 */}
-      <AppTitle />
+      {/* <AppTitle /> */}
 
       {/* UserGreeting 컴포넌트(안녕하세요 달달해님! ~ ) */}
       <div className="flex flex-row w-[calc(100%-48px)] justify-between">
@@ -45,8 +45,8 @@ const Home = () => {
       {/* 오늘/주간 버튼 */}
       <div className="mt-6 mb-4 w-[calc(100%-48px)]">
         <TodayWeekSwitcher
-            selected={selectedView}
-            onChange={(view) => setSelectedView(view)}
+          selected={selectedView}
+          onChange={(view) => setSelectedView(view)}
         />
       </div>
 

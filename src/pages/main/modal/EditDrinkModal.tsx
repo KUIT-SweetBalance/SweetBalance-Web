@@ -1,6 +1,14 @@
 import React, { useRef } from 'react';
 
-const EditDrinkModal = () => {
+interface EditDrinkModalProps {
+  cafeName: string;
+  drinkName: string;
+  sugar: number;
+  kcal?: number;
+  size?: string;
+}
+
+const EditDrinkModal = (props: EditDrinkModalProps) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center">
       <div className="flex flex-col bg-white rounded-lg shadow-lg p-6 w-[calc(100%-48px)]">

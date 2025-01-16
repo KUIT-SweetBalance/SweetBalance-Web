@@ -12,6 +12,7 @@ import { BrowserRouter } from 'react-router-dom';
 import LargeFavoriteDrinkModal from './pages/main/modal/LargeFavoriteDrinkModal';
 import SmallFavoriteDrinkModal from './pages/main/modal/SmallFavoriteDrinkModal';
 import EditCompleted from './pages/main/edit/EditCompleted';
+import Alarm from './pages/main/alarm/Alarm';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
     <Router />
     // <SmallFavoriteDrinkModal />
     // <EditCompleted />
+    // <Alarm />
   );
 };
 

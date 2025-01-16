@@ -36,7 +36,7 @@ const EditDrink = () => {
     <div className="flex flex-col items-center">
       {/* <AppTitle /> */}
 
-      <div className="w-[calc(100%-48px)] mb-[16px]">
+      <div className="w-[calc(100%-48px)] mb-[30px]">
         <NavigateHeader headerTitle="알림 페이지" confirmButton="완료" />
       </div>
 
@@ -83,7 +83,7 @@ const EditDrink = () => {
       </div>
 
       {/* 음료 정보 */}
-      <div className="flex flex-col w-[calc(100%-75px)] space-y-5 mb-5">
+      <div className="flex flex-col w-[calc(100%-75px)] space-y-6 mb-5">
         <DrinkInfo
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"

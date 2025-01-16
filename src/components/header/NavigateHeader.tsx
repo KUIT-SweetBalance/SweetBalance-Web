@@ -8,7 +8,7 @@ interface NavigateHeaderProps {
 
 const NavigateHeader = (props: NavigateHeaderProps) => {
   return (
-    <div className="flex w-full px-[10px] py-[10px] justify-center justify-between">
+    <div className="flex w-full px-[10px] justify-center justify-between">
       <button type="button" className='w-[25px]'>
         <img src={left} alt="뒤로가기" className="w-[8px] h-[14px]" />
       </button>

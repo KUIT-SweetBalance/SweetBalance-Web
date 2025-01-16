@@ -18,6 +18,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
     <div className="w-full flex justify-between">
       <div className="w-[74px] h-[74px] bg-[#F4F4F4] rounded-full"></div>
       <div className={`flex flex-col  ${props.marginRight ? `mr-${props.marginRight}` : ''}`}>
+        {/* mr-{} 적용 안될 때 있는데 코드 지웠다가 다시 작성하면 적용됨 */}
         <div className="text-xs mt-[2px]">{props.cafeName}</div>
         <div className="flex justify-between">
           <div className="text-[16px] font-medium mt-[4px]">{props.drinkName}</div>

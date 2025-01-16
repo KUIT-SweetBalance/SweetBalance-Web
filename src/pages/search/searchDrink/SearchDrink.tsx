@@ -119,8 +119,8 @@ const SearchDrink = () => {
         ></div>
       </div>
 
-      <div className="flex flex-col w-[calc(100%-45px)] mt-[18px] space-y-5 mb-5">
-      <DrinkInfo
+      <div className="flex flex-col w-[calc(100%-70px)] mt-[22px] space-y-5 mb-5">
+        <DrinkInfo
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"
           sugar={0}

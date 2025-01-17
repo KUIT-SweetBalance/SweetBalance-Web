@@ -1,7 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import DailyIntake from './DailyIntake';
 import DrinkInfo from '../../../../components/drinkInfo/DrinkInfo';
 
 const DailyInfo = () => {
+  const navigate = useNavigate();
+  const handleEditClick = () => {
+    navigate('/edit');
+  };
+
   return (
     <div className="w-full flex flex-col items-center">
       {/* 표 */}
@@ -15,7 +21,11 @@ const DailyInfo = () => {
       {/* 오늘 마신 음료수 */}
       <div className="flex justify-between w-[calc(100%-48px)] mt-6 mb-5">
         <div className="text-[18px]">오늘 마신 음료수</div>
-        <button type="button" className="text-[14px] text-[#909090]">
+        <button
+          type="button"
+          className="text-[14px] text-[#909090]"
+          onClick={handleEditClick}
+        >
           수정하기
         </button>
       </div>
@@ -28,7 +38,7 @@ const DailyInfo = () => {
           sugar={0}
           kcal={0}
           size="tall"
-          marginRight='4'
+          marginRight="4"
         />
         <DrinkInfo
           cafeName="더벤티"

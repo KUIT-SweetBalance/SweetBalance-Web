@@ -1,6 +1,6 @@
 import React from 'react';
 import AppTitle from '../../../components/appTitle/AppTitle';
-import NavigateHeader from '../../../components/header/NavigateHeader';
+import Header from '../../../components/header/Header';
 import AlarmItem from './AlarmItem';
 
 const Alarm = () => {
@@ -9,7 +9,7 @@ const Alarm = () => {
       <AppTitle />
 
       <div className="w-[calc(100%-48px)] mb-[30px]">
-        <NavigateHeader headerTitle="알림 페이지" />
+        <Header headerTitle="알림 페이지" />
       </div>
 
       <div className="w-[calc(100%-48px)] space-y-5">

@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center">
       {/* SweetBalance 타이틀 */}
-      {/* <AppTitle /> */}
+      <AppTitle />
 
       {/* UserGreeting 컴포넌트(안녕하세요 달달해님! ~ ) */}
       <div className="flex flex-row w-[calc(100%-48px)] justify-between">

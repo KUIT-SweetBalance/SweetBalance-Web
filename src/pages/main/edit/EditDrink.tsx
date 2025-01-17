@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AppTitle from '../../../components/appTitle/AppTitle';
-import NavigateHeader from '../../../components/header/NavigateHeader';
+import Header from '../../../components/header/Header';
 import SearchInput from '../../../components/input/searchInput/SearchInput';
 import { useForm } from 'react-hook-form';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
@@ -19,7 +19,7 @@ const EditDrink = () => {
     console.log(inputValue);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const brands = [
     '스타벅스',
@@ -34,10 +34,10 @@ const EditDrink = () => {
 
   return (
     <div className="flex flex-col items-center">
-      {/* <AppTitle /> */}
+      <AppTitle />
 
       <div className="w-[calc(100%-48px)] mb-[30px]">
-        <NavigateHeader headerTitle="알림 페이지" confirmButton="완료" />
+        <Header headerTitle="알림 페이지" confirmButton="완료" />
       </div>
 
       <div className="flex w-[calc(100%-48px)] mb-[30px]">
@@ -77,7 +77,10 @@ const EditDrink = () => {
 
       <div className="flex justify-between w-[calc(100%-48px)] mb-5">
         <div className="text-[18px]">오늘 마신 음료수</div>
-        <button type="button" className="text-[14px] text-[#909090]">
+        <button
+          type="button"
+          className="text-[14px] text-[#909090]"
+        >
           수정하기
         </button>
       </div>

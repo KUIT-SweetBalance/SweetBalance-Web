@@ -48,7 +48,7 @@ const SearchDrink = () => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      {/* <AppTitle /> */}
+      <AppTitle />
 
       <div className="flex w-[calc(100%-48px)] mb-[40px]">
         <SearchInput

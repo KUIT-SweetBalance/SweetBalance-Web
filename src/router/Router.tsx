@@ -6,12 +6,15 @@ import Home from '../pages/main/home/Home';
 import SearchDrink from '../pages/search/searchDrink/SearchDrink';
 import EditDrink from '../pages/main/edit/EditDrink';
 import EditCompleted from '../pages/main/edit/EditCompleted';
+import Header from '../components/header/Header';
+import LargeFavoriteDrinkModal from '../pages/main/modal/LargeFavoriteDrinkModal';
+
 
 const Router = () => {
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <AppTitle />,
+      // path: '/',
+      // element: <AppTitle />,
       children: [
         {
           path: '/home',
@@ -25,10 +28,6 @@ const Router = () => {
           path: '/edit',
           element: <EditDrink />,
         },
-        // {
-        //   path: '/edit/completed',
-        //   element: <EditCompleted />
-        // }
       ],
     },
   ]);

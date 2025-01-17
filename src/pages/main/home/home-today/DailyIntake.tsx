@@ -2,7 +2,7 @@ import React from 'react';
 
 const DailyIntake = () => {
   return (
-    <div className="w-full flex flex-col p-5 border rounded-3xl ring-4 ring-[#F4F4F4]">
+    <div className="w-full flex flex-col p-5 border shadow-lg rounded-[20px]"> {/* ring-1 ring-[#F4F4F4] */}
       <div className="flex justify-between">
         <div className="flex flex-col">
           <div className="flex items-baseline">

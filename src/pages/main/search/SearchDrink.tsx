@@ -1,8 +1,9 @@
-import AppTitle from '../../../../components/appTitle/AppTitle';
-import SearchInput from '../../../../components/input/searchInput/SearchInput';
-import DrinkInfo from '../../../../components/drinkInfo/DrinkInfo';
+import AppTitle from '../../../components/appTitle/AppTitle';
+import SearchInput from '../../../components/input/searchInput/SearchInput';
+import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SearchDrink = () => {
   const {
@@ -10,6 +11,11 @@ const SearchDrink = () => {
     getValues, // 입력값 가져오기
     register, // 유효성 검사와 값 관리에 사용
   } = useForm(); // mode: onChange로 설정
+
+  const navigate = useNavigate();
+  const handleEditClick = () => {
+    navigate('/all-brands');
+  };
 
   const [clickedCategory, setClickedCategory] = useState<number>(0);
 
@@ -62,7 +68,11 @@ const SearchDrink = () => {
 
       <div className="flex w-[calc(100%-48px)] justify-between mb-[18px] items-baseline">
         <div className="font-medium text-[18px]">브랜드</div>
-        <button type="button" className="text-[14px] text-primary">
+        <button
+          type="button"
+          className="text-[14px] text-primary"
+          onClick={handleEditClick}
+        >
           더보기
         </button>
       </div>

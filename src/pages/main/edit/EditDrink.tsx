@@ -51,7 +51,7 @@ const EditDrink = () => {
       </div>
 
       <div className="flex w-[calc(100%-48px)] justify-between mb-[30px]">
-        <div className="text-[18px] font-medium">오늘 마신 브랜드</div>
+        <div className="text-[17px] font-medium">오늘 마신 브랜드</div>
         <button type="button" className="text-[14px] text-primary">
           삭제하기
         </button>

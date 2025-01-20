@@ -1,6 +1,6 @@
-import AppTitle from '../../../components/appTitle/AppTitle';
-import SearchInput from '../../../components/input/searchInput/SearchInput';
-import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
+import AppTitle from '../../../../components/appTitle/AppTitle';
+import SearchInput from '../../../../components/input/searchInput/SearchInput';
+import DrinkInfo from '../../../../components/drinkInfo/DrinkInfo';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 

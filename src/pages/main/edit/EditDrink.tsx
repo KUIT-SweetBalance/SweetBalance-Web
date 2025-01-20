@@ -73,10 +73,10 @@ const EditDrink = () => {
         ))}
       </div>
 
-      <div className="w-full h-[15px] my-[30px] bg-[#F4F4F4]"></div>
+      <div className="w-full h-[15px] mt-[30px] bg-[#F4F4F4]"></div>
 
-      <div className="flex justify-between w-[calc(100%-48px)] mb-5">
-        <div className="text-[18px]">오늘 마신 음료수</div>
+      <div className="flex justify-between w-[calc(100%-48px)] my-5">
+        <div className="text-[17px]">오늘 마신 음료수</div>
         <button
           type="button"
           className="text-[14px] text-[#909090]"

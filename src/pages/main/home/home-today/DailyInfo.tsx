@@ -19,8 +19,8 @@ const DailyInfo = () => {
       <div className="w-full h-[15px] mt-7 bg-[#F4F4F4]"></div>
 
       {/* 오늘 마신 음료수 */}
-      <div className="flex justify-between w-[calc(100%-48px)] mt-6 mb-5">
-        <div className="text-[18px]">오늘 마신 음료수</div>
+      <div className="flex justify-between w-[calc(100%-48px)] my-5">
+        <div className="text-[17px]">오늘 마신 음료수</div>
         <button
           type="button"
           className="text-[14px] text-[#909090]"

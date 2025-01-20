@@ -3,12 +3,11 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import AppTitle from '../components/appTitle/AppTitle';
 import App from '../App';
 import Home from '../pages/main/home/Home';
-import SearchDrink from '../pages/search/searchDrink/SearchDrink';
+import SearchDrink from '../pages/main/search/searchDrink/SearchDrink';
 import EditDrink from '../pages/main/edit/EditDrink';
 import EditCompleted from '../pages/main/edit/EditCompleted';
 import Header from '../components/header/Header';
 import LargeFavoriteDrinkModal from '../pages/main/modal/LargeFavoriteDrinkModal';
-
 
 const Router = () => {
   const router = createBrowserRouter([

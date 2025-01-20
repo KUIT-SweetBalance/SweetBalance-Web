@@ -6,7 +6,7 @@ display: flex;
 align-items: center;
 gap: 13px;
 `;
-const MiniButtonYes = styled.div`
+const MiniButtonYes = styled.button`
 width: 146px;
 height: 50px;
 border-radius: 100px;
@@ -21,7 +21,7 @@ line-height: 50px; /* 166.667% */
 letter-spacing: -0.45px;
 
 `;
-const MiniButtonNo = styled.div`
+const MiniButtonNo = styled.button`
 width: 146px;
 height: 50px;
 border-radius: 100px;
@@ -36,11 +36,13 @@ line-height: 50px; /* 166.667% */
 letter-spacing: -0.45px;
 `;
 
-const MiniButton: React.FC = () => {
+
+
+const MiniButton: React.FC<{ onClick: (response: boolean) => void }> = ({ onClick }) => {
     return (
         <MiniButtonBox>
-            <MiniButtonYes>네</MiniButtonYes>
-            <MiniButtonNo>아니오</MiniButtonNo>
+            <MiniButtonYes onClick={() => onClick(true)}>네</MiniButtonYes>
+            <MiniButtonNo onClick={() => onClick(false)}>아니오</MiniButtonNo>
         </MiniButtonBox>
     );
 };

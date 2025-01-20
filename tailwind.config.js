@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Pretendard', 'Arial', 'sans-serif'], // Tailwind의 기본 sans를 덮어쓰기
+        agbalumo: ['Agbalumo', 'sans-serif'],
       },
       colors: {
         primary: '#722A2A',
@@ -17,5 +18,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };

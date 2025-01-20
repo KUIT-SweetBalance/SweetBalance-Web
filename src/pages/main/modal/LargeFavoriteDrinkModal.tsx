@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import useLargeFavoriteDrinkModalStore from '../../../store/modal/LargeFavoriteModalStore';
 
 interface LargeFavoriteDrinkModalProps {
   cafeName: string;
@@ -10,10 +11,14 @@ interface LargeFavoriteDrinkModalProps {
 }
 
 const LargeFavoriteDrinkModalProps = (props: LargeFavoriteDrinkModalProps) => {
+  const { isOpen, closeModal } = useLargeFavoriteDrinkModalStore();
+
+  if (!isOpen) return null;
+
   return (
     // fixed: 부모 요소나 다른 컨텍스트에 상관없이 뷰포트를 기준으로 위치가 고정
     // inset-0: top, right, bottom, left를 모두 0으로 설정하는 css속성, 즉 요소가 부모 전체를 꽉 채우도록 확장
-    <div className="fixed inset-0 top-[-30px] bg-black bg-opacity-30 flex items-center justify-center z-1000">
+    <div className="fixed inset-0 top-[-30px] bg-black bg-opacity-10 flex items-center justify-center z-1000">
       <div className="flex flex-col items-center bg-white rounded-lg shadow-lg p-6 w-[calc(100%-48px)] space-y-[21px]">
         <div className="space-y-2 text-center">
           <p className="text-[18px]">
@@ -38,7 +43,7 @@ const LargeFavoriteDrinkModalProps = (props: LargeFavoriteDrinkModalProps) => {
         <button
           className="w-full rounded-full bg-primary text-white text-center py-[14px]"
           type="button"
-          // onClick={props.onClose}
+          onClick={closeModal}
         >
           확인
         </button>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import heart from '../../assets/heart.png';
 import heartFilled from '../../assets/heart-filled.png';
 import LargeFavoriteDrinkModal from '../../pages/main/modal/LargeFavoriteDrinkModal';
+import useLargeFavoriteDrinkModalStore from '../../store/modal/LargeFavoriteModalStore';
 
 interface DrinkInfoProps {
   cafeName: string;
@@ -14,10 +15,12 @@ interface DrinkInfoProps {
 }
 
 const DrinkInfo = (props: DrinkInfoProps) => {
+  const { isOpen, openModal } = useLargeFavoriteDrinkModalStore();
   // const [isFavoriteModalOpen, setIsFavoriteModalOpen] = useState(false);
   const [selected, setSelected] = useState<boolean>(false);
   const handleFavoriteClick = () => {
     setSelected((prev) => !prev);
+    openModal()
     // setIsFavoriteModalOpen(true);
   };
   // const handleModalClose = () => {
@@ -58,16 +61,15 @@ const DrinkInfo = (props: DrinkInfoProps) => {
       </div>
 
       {/* 즐겨찾기 추가 모달창 */}
-      {/* {isFavoriteModalOpen && (
+      {isOpen && (
         <LargeFavoriteDrinkModal
           cafeName={props.cafeName}
           drinkName={props.drinkName}
           sugar={props.sugar}
           kcal={props.kcal}
           size={props.size}
-          onClose={handleModalClose}
         />
-      )} */}
+      )}
     </>
   );
 };

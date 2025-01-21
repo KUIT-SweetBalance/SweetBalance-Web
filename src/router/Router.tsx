@@ -9,6 +9,7 @@ import EditCompleted from '../pages/main/edit/EditCompleted';
 import Header from '../components/header/Header';
 import LargeFavoriteDrinkModal from '../pages/main/modal/LargeFavoriteDrinkModal';
 import AllBrands from '../pages/main/search/AllBrands';
+import BrandSearchResult from '../pages/main/search/BrandSearchResult';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const Router = () => {
         {
           path: 'all-brands',
           element: <AllBrands />
+        },
+        {
+          path: 'brand-result',
+          element: <BrandSearchResult />
         }
       ],
     },

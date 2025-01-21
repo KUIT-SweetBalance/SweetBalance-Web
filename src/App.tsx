@@ -16,6 +16,7 @@ import SmallFavoriteDrinkModal from './pages/main/modal/SmallFavoriteDrinkModal'
 import EditCompleted from './pages/main/edit/EditCompleted';
 import Alarm from './pages/main/alarm/Alarm';
 import AllBrands from './pages/main/search/AllBrands';
+import BrandSearchResult from './pages/main/search/BrandSearchResult';
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
     // <EditCompleted />
     // <Alarm />
     // <AllBrands />
+    // <BrandSearchResult />
   );
 };
 

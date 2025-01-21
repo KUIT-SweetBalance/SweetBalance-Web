@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppTitle from '../../../components/appTitle/AppTitle';
 import TodayWeekSwitcher from './TodayWeekSwitcher';
 import bell from '../../../assets/bell.png';
@@ -8,6 +9,10 @@ import WeeklyInfo from './home-week/WeeklyInfo';
 
 const Home = () => {
   const [selectedView, setSelectedView] = useState<'today' | 'week'>('today');
+  const navigate = useNavigate();
+  const handleAlarmClick = () => {
+    navigate('/alarm');
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -30,6 +35,7 @@ const Home = () => {
           <button
             type="button"
             className="w-12 h-12 flex items-center justify-center border rounded-full"
+            onClick={handleAlarmClick}
           >
             <img src={bell} alt="알림" className="w-4 h-5" />
           </button>

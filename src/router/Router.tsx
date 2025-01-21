@@ -10,6 +10,7 @@ import Header from '../components/header/Header';
 import LargeFavoriteDrinkModal from '../pages/main/modal/LargeFavoriteDrinkModal';
 import AllBrands from '../pages/main/search/AllBrands';
 import BrandSearchResult from '../pages/main/search/BrandSearchResult';
+import Alarm from '../pages/main/alarm/Alarm';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const Router = () => {
         {
           path: '/home',
           element: <Home />,
+        },
+        {
+          path: '/alarm',
+          element: <Alarm />
         },
         {
           path: '/search',

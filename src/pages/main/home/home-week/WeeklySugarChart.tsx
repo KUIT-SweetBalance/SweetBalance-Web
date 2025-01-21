@@ -61,6 +61,8 @@ const WeeklySugarChart = (props: WeeklySugarChartProps) => {
           return gradient;
         },
         borderColor: 'rgba(255, 102, 127, 0.8)', // 진한 핑크 선
+        borderWidth: 1,
+        pointRadius: 1.5,
         tension: 0.4, // 곡선 정도
       },
     ],

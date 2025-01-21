@@ -8,12 +8,12 @@ import {MypageWithdraw, MypageWithdrawLast} from './mypage-Setting/mypage-withdr
 const Mypage: React.FC = () => {
     return (
         <>
-        {/* <Mypages/>메인 페이지  */}
+        <Mypages/>
         {/* <Mypagerevise/>수정하기 */}
         {/* <MypageSettingManage/> */}
         {/* <MypageLogout/>
         <MypageRealLogout/> */}
-        <MypageWithdrawLast/>
+        {/* <MypageWithdrawLast/> */}
         </>
     );
 };

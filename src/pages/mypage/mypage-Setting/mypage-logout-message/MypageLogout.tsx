@@ -5,6 +5,7 @@ import MiniButton from './MiniButton';
 const MypageLogoutBox = styled.div`
 display: flex;
 width:345px;
+height:173px;
 padding: 30px 20px;
 flex-direction: column;
 align-items: center;
@@ -13,10 +14,16 @@ align-self: stretch;
 border-radius: 20px;
 background: #FFF;
 box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
 `;
 const MypageLogoutRealBox = styled.div`
 display: flex;
 width:345px;
+height:223px;
+
 padding: 30px 20px;
 flex-direction: column;
 align-items: center;
@@ -25,6 +32,10 @@ align-self: stretch;
 border-radius: 20px;
 background: #FFF;
 box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
 `;
 
 const MypageLogoutTop = styled.div`
@@ -55,7 +66,7 @@ letter-spacing: -0.35px;
 
 `;
 
-export const MypageLogout: React.FC = () => {
+export const MypageLogout: React.FC<{ onClick: () => void }> = ({ onClick }) => {
 
    
 
@@ -63,23 +74,21 @@ export const MypageLogout: React.FC = () => {
         <MypageLogoutBox>
             <MypageLogoutTop>로그아웃 하시겠습니까?</MypageLogoutTop>
             <MypageLogoutBottom>
-                <MiniButton/>
+                <MiniButton onClick={onClick}/>
             </MypageLogoutBottom>
         </MypageLogoutBox>
     );
 };
 
-export const MypageRealLogout:React.FC = () =>{
-    return(
+export const MypageRealLogout: React.FC<{ onClick: () => void }> = ({ onClick }) => {
+    return (
         <MypageLogoutRealBox>
             <MypageLogoutTop>정말 떠나시겠어요?</MypageLogoutTop>
-            <MypageLogoutMiddle>지금까지 커스텀 음료 기록과 <br/>맞춤형 추천 서비스를 유지할 수 없게 돼요.</MypageLogoutMiddle>
-
+            <MypageLogoutMiddle>지금까지 커스텀 음료 기록과 <br />맞춤형 추천 서비스를 유지할 수 없게 돼요.</MypageLogoutMiddle>
             <MypageLogoutBottom>
-                <MiniButton/>
+                <MiniButton onClick={onClick} />
             </MypageLogoutBottom>
         </MypageLogoutRealBox>
-
     );
-}
+};
 

@@ -8,6 +8,7 @@ const MypageWithdrawBox = styled.div`
     flex-direction: column;
     align-items: center;
     position : relative;
+    
 `;
 
 const MypageWithdrawImg = styled.img`
@@ -82,24 +83,33 @@ const MypageWithdrawContent = styled.div`
     line-height: 20px; /* 142.857% */
     letter-spacing: -0.35px;
 `;
+const TemporyBox = styled.div`
+position:fixed;
+top:50%;
+left:50%;
+transform: translate(-50%, -50%);
 
+`;
 export const MypageWithdraw: React.FC = () => {
   return (
-    <MypageWithdrawBox>
-      <MypageWithdrawCircle>
-        <MypageWithdrawImg src="/Characterghost.svg" alt="Ghost" />
-      </MypageWithdrawCircle>
-      <MypageWithdrawTextBox>
-        <MypageWithdrawBoldContent>그간의 여정이 너무 아쉬워요😢</MypageWithdrawBoldContent>
-        <MypageWithdrawContent>
-          탈퇴를 선택하시면 그동안 저장된 맞춤 음료 기록과<br/> 추천 데이터가 모두 삭제됩니다.
-        </MypageWithdrawContent>
-      </MypageWithdrawTextBox>
-    </MypageWithdrawBox>
+    <TemporyBox>
+      <MypageWithdrawBox>
+        <MypageWithdrawCircle>
+          <MypageWithdrawImg src="/Characterghost.svg" alt="Ghost" />
+        </MypageWithdrawCircle>
+        <MypageWithdrawTextBox>
+          <MypageWithdrawBoldContent>그간의 여정이 너무 아쉬워요😢</MypageWithdrawBoldContent>
+          <MypageWithdrawContent>
+            탈퇴를 선택하시면 그동안 저장된 맞춤 음료 기록과<br/> 추천 데이터가 모두 삭제됩니다.
+          </MypageWithdrawContent>
+        </MypageWithdrawTextBox>
+      </MypageWithdrawBox>
+    </TemporyBox>
   );
 };
 export const MypageWithdrawLast: React.FC = () => {
     return (
+      <TemporyBox>
       <MypageWithdrawBox>
         <MypageWithdrawCircle>
           <MypageWithdrawImg src="/Characterghost.svg" alt="Ghost" />
@@ -111,6 +121,7 @@ export const MypageWithdrawLast: React.FC = () => {
           </MypageWithdrawContent>
         </MypageWithdrawTextBox>
       </MypageWithdrawBox>
+      </TemporyBox>
     );
   };
 

@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 
+const  MypageSettingBox = styled.div`
+    padding : 24px;
+
+`;
 const MypageSettingManagementBox = styled.div`
     display: flex;
     padding: 20px 20px 30px 20px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 30px;
+    gap: 69px;
     align-self: stretch;
     border-radius: 20px 20px 40px 20px;
 background: #F4F4F4;
@@ -60,29 +64,31 @@ const MypageSettingManagement: React.FC = () => {
             setSelected(prevSelected => !prevSelected);
         };
     return (
-        <MypageSettingManagementBox>
-            <MypageSettingManagementContent>
-                <MypageSettingManagementLeft>알림</MypageSettingManagementLeft>
-                <MypageSettingManagementImg src={selected ? '/SettingSelected.svg' : '/SettingunSelected.svg'} alt='selected?' onClick={toggleSelected}/>
-            </MypageSettingManagementContent>
+        <MypageSettingBox>
+            <MypageSettingManagementBox>
+                <MypageSettingManagementContent>
+                    <MypageSettingManagementLeft>알림</MypageSettingManagementLeft>
+                    <MypageSettingManagementImg src={selected ? '/SettingSelected.svg' : '/SettingunSelected.svg'} alt='selected?' onClick={toggleSelected}/>
+                </MypageSettingManagementContent>
 
-            <MypageSettingManagementContent>
-                <MypageSettingManagementLeft>서비스 가이드 보기 </MypageSettingManagementLeft>
-            </MypageSettingManagementContent>
+                <MypageSettingManagementContent>
+                    <MypageSettingManagementLeft>서비스 가이드 보기 </MypageSettingManagementLeft>
+                </MypageSettingManagementContent>
 
-            <MypageSettingManagementContent>
-                <MypageSettingManagementLeft>버전 정보</MypageSettingManagementLeft>
-                <MypageSettingManagementRight>현재 ver 1.0</MypageSettingManagementRight>
-            </MypageSettingManagementContent>
+                <MypageSettingManagementContent>
+                    <MypageSettingManagementLeft>버전 정보</MypageSettingManagementLeft>
+                    <MypageSettingManagementRight>현재 ver 1.0</MypageSettingManagementRight>
+                </MypageSettingManagementContent>
 
-            <MypageSettingManagementContent>
-                <MypageSettingManagementLeft>1:1문의</MypageSettingManagementLeft>
-            </MypageSettingManagementContent>
+                <MypageSettingManagementContent>
+                    <MypageSettingManagementLeft>1:1문의</MypageSettingManagementLeft>
+                </MypageSettingManagementContent>
 
-            <MypageSettingManagementContent>
-                <MypageSettingManagementLeft>서비스 이용 약관 </MypageSettingManagementLeft>
-            </MypageSettingManagementContent>
-        </MypageSettingManagementBox>
+                <MypageSettingManagementContent>
+                    <MypageSettingManagementLeft>서비스 이용 약관 </MypageSettingManagementLeft>
+                </MypageSettingManagementContent>
+            </MypageSettingManagementBox>
+        </MypageSettingBox>
     );
 };
 

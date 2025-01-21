@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import NavigateHeader from '../../../components/header/NavigateHeader';
 interface MypageInfoItem {
     key: string;
     value: string;
   }
-const MypagereviseBox = styled.div``;
+const MypagereviseBox = styled.div`
+margin-top:35px;
+`;
 const MypagereviseItem = styled.div`
 display: inline-flex;
 padding: 10px 24px 5px 24px;
@@ -52,16 +55,18 @@ const Mypagerevise: React.FC = () => {
       ];
 
     return (
-        <MypagereviseBox>
-            {info.map((item,index)=>(
-                <MypagereviseItem key = {index}>
-                    <MypageTitle>{item.key === 'nickname'?"닉네임":(item.key ==='sex'?"성별":"한 줄 소개")}</MypageTitle>
-                    <MypageNickname><Mypagerevisecontent>{item.value}</Mypagerevisecontent></MypageNickname>
-                </MypagereviseItem>
-            ))}
-           
-        </MypagereviseBox>
-
+        <>
+        <NavigateHeader headerTitle='내 프로필 편집하기 ' confirmButton='완료'/>
+            <MypagereviseBox>
+                {info.map((item,index)=>(
+                    <MypagereviseItem key = {index}>
+                        <MypageTitle>{item.key === 'nickname'?"닉네임":(item.key ==='sex'?"성별":"한 줄 소개")}</MypageTitle>
+                        <MypageNickname><Mypagerevisecontent>{item.value}</Mypagerevisecontent></MypageNickname>
+                    </MypagereviseItem>
+                ))}
+            
+            </MypagereviseBox>
+        </>
             
 
     );

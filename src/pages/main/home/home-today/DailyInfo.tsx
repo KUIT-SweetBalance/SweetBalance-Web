@@ -31,7 +31,7 @@ const DailyInfo = () => {
       </div>
 
       {/* 음료 정보 */}
-      <div className="flex flex-col w-[calc(100%-70px)] space-y-6 mb-5">
+      <div className="flex flex-col w-[calc(100%-70px)] space-y-6 mt-2 mb-5">
         <DrinkInfo
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"

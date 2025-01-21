@@ -41,7 +41,7 @@ const Home = () => {
           </button>
           <button
             type="button"
-            className="w-12 h-12 flex items-center justify-center"
+            className="h-12 ml-4 mr-1 flex items-center justify-center"
           >
             <img src={line3} alt="메뉴" className="w-4 h-4" />
           </button>

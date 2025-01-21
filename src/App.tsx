@@ -26,11 +26,11 @@ const App = () => {
     // <Mypage/>
     // <LoginButton/>
     // <UserNickname />
-    // <UserPassword />
+    <UserPassword />
     // <EditDrink />
     // <EditDrinkModal />
     // <LargeFavoriteDrinkModal />
-    <Router />
+    // <Router />
     // <SmallFavoriteDrinkModal />
     // <EditCompleted />
     // <Alarm />

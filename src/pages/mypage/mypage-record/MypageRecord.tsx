@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigateHeader from '../../../components/header/NavigateHeader';
+import Header from '../../../components/header/Header'; 
 import SearchInput from '../../../components/input/searchInput/SearchInput';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
@@ -19,7 +19,7 @@ const MypageRecord: React.FC = () => {
       };
     return (
         <>
-        <NavigateHeader headerTitle='나의 기록 목록' confirmButton='완료' />
+        <Header headerTitle='나의 기록 목록' confirmButton='완료' />
         <Padding>
             <SearchInput id='MypageRecord' type='input' placeholder='검색어로 빠르게 기록 찾기' register={register}
             onSearch={handleSearchClick} />

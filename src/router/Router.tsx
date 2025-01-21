@@ -60,6 +60,7 @@ const Router = () => {
           path: '/mypage/navi',
           element: <BottomNavi />,
         },
+        {
           path: 'all-brands',
           element: <AllBrands />
         },

@@ -1,5 +1,5 @@
 import './App.css';
-import CustomMain from './pages/custom/custom-main/custom';
+import CustomMain from './pages/custom/custom';
 import UserNickname from './pages/onboarding/UserNickname';
 import UserPassword from './pages/onboarding/UserPassword';
 import Home from './pages/main/home/Home';

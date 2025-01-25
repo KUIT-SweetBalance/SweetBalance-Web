@@ -60,6 +60,10 @@ const Router = () => {
           path: '/mypage/navi',
           element: <BottomNavi />,
         },
+        // {BottomNavi
+        //   path: '/edit/completed',
+        //   element: <EditCompleted />
+        // }
         {
           path: 'all-brands',
           element: <AllBrands />
@@ -69,6 +73,10 @@ const Router = () => {
           element: <BrandSearchResult />
         }
       ],
+    },{
+      path: '/custom',
+      element: <CustomMain brand="스타벅스" drink="아이스 아메리카노" sugar={0} kcal={0} caffeine={5}/>,
+
     },
   ]);
 

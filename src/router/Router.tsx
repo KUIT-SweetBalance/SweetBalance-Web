@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import AppTitle from '../components/appTitle/AppTitle';
 import App from '../App';
 import Home from '../pages/main/home/Home';
-import SearchDrink from '../pages/search/searchDrink/SearchDrink';
+import SearchDrink from '../pages/main/search/SearchDrink';
 import EditDrink from '../pages/main/edit/EditDrink';
 import EditCompleted from '../pages/main/edit/EditCompleted';
 import Mypage from '../pages/mypage/Mypage';
@@ -12,17 +12,25 @@ import MypageSettingManage from '../pages/mypage/mypage-Setting/MypageSettingMan
 import MypageFeedContent from '../pages/mypage/mypage-main/mypage-feed/MypageFeedContent';
 import MypageRecord from '../pages/mypage/mypage-record/MypageRecord';
 import BottomNavi from '../components/BottomNavi/BottomNavi';
-import CustomMain from '../pages/custom/custom';
+import Header from '../components/header/Header';
+import LargeFavoriteDrinkModal from '../pages/main/modal/LargeFavoriteDrinkModal';
+import AllBrands from '../pages/main/search/AllBrands';
+import BrandSearchResult from '../pages/main/search/BrandSearchResult';
+import Alarm from '../pages/main/alarm/Alarm';
 
 const Router = () => {
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <AppTitle />,
+      // path: '/',
+      // element: <AppTitle />,
       children: [
         {
           path: '/home',
           element: <Home />,
+        },
+        {
+          path: '/alarm',
+          element: <Alarm />
         },
         {
           path: '/search',
@@ -52,12 +60,18 @@ const Router = () => {
           path: '/mypage/navi',
           element: <BottomNavi />,
         },
-        
-        
         // {BottomNavi
         //   path: '/edit/completed',
         //   element: <EditCompleted />
         // }
+        {
+          path: 'all-brands',
+          element: <AllBrands />
+        },
+        {
+          path: 'brand-result',
+          element: <BrandSearchResult />
+        }
       ],
     },{
       path: '/custom',

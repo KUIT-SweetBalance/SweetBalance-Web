@@ -17,6 +17,7 @@ import EditCompleted from './pages/main/edit/EditCompleted';
 import Alarm from './pages/main/alarm/Alarm';
 import AllBrands from './pages/main/search/AllBrands';
 import BrandSearchResult from './pages/main/search/BrandSearchResult';
+import UserListTest from './api/apis/main/UserListTest';
 
 const App = () => {
   return (
@@ -26,7 +27,8 @@ const App = () => {
     // <Mypage/>
     // <LoginButton/>
     // <UserNickname />
-    <UserPassword />
+    // <UserPassword />
+    <UserListTest />
     // <EditDrink />
     // <EditDrinkModal />
     // <LargeFavoriteDrinkModal />

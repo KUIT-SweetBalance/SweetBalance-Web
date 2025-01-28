@@ -34,6 +34,8 @@ const GrayBox = styled.div`
   width: 393px;
   height: 15px;
   background: #f4f4f4;
+  margin: 20px 0 0 0;
+
 `;
 
 
@@ -89,10 +91,9 @@ const CustomMain: React.FC<Props> = ({ brand, drink, sugar, kcal, caffeine }) =>
             <SizeComponent sizes={sizes} />
             <SKC sugar={sugar} kcal={kcal} caffeine={caffeine} />
             <GrayBox />
-            <Recommend    brand={brand} />
+            <Recommend  sugar={sugar}  brand={brand} />
             <Askinfo>정보 수정을 요청하고 싶어요</Askinfo>
             <Recoding sugar={sugar} onClick ={handleRecodingClick } />
-
             {/* 팝업 모달 */}
             {isModalOpen && (
                 <Modal onClick={handleModalClose} sizes={sizes}/>

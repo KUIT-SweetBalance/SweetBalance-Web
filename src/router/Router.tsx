@@ -13,6 +13,7 @@ import MypageFeedContent from '../pages/mypage/mypage-main/mypage-feed/MypageFee
 import MypageRecord from '../pages/mypage/mypage-record/MypageRecord';
 import BottomNavi from '../components/BottomNavi/BottomNavi';
 import CustomMain from '../pages/custom/custom';
+import CusSuccess from '../pages/custom/success/cussuccess';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -61,7 +62,11 @@ const Router = () => {
       ],
     },{
       path: '/custom',
-      element: <CustomMain brand="스타벅스" drink="아이스 아메리카노" sugar={0} kcal={0} caffeine={5}/>,
+      element: <CustomMain brand="스타벅스" drink="아이스 바닐라 크림 콜드브루" sugar={11} kcal={125} caffeine={155}/>,
+
+    },{
+      path: '/success',
+      element: <CusSuccess/>,
 
     },
   ]);

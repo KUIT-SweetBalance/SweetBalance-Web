@@ -17,7 +17,7 @@ import EditCompleted from './pages/main/edit/EditCompleted';
 import Alarm from './pages/main/alarm/Alarm';
 import AllBrands from './pages/main/search/AllBrands';
 import BrandSearchResult from './pages/main/search/BrandSearchResult';
-import UserListTest from './api/apis/main/UserListTest';
+import UserListTest from './api/apis/example/UserListTest';
 
 const App = () => {
   return (

@@ -1,12 +1,7 @@
-
-
-
 // react-query를 사용하지 않은 코드
 
-
-
 import React, { useState, useEffect } from 'react';
-import { fetchUsers } from './Main';
+import { fetchUsers } from './Example';
 
 interface User {
   id: number;

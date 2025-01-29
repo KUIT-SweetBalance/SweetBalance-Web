@@ -5,7 +5,7 @@ import axios, {
 } from 'axios';
 
 // Axios 인스턴스 생성
-const apiClient: AxiosInstance = axios.create({
+const ApiManager: AxiosInstance = axios.create({
   baseURL: 'https://d543cd32-ca4d-4060-ac01-7c610ac6bc7b.mock.pstmn.io', // 기본 API URL
   headers: {
     'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ const apiClient: AxiosInstance = axios.create({
 });
 
 // 요청 인터셉터
-apiClient.interceptors.request.use(
+ApiManager.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const token = localStorage.getItem('token'); // 토큰 가져오기
     if (token) {
@@ -31,7 +31,7 @@ apiClient.interceptors.request.use(
 );
 
 // 응답 인터셉터
-apiClient.interceptors.response.use(
+ApiManager.interceptors.response.use(
   (response: AxiosResponse) => {
     console.log('응답 인터셉터 실행 성공');
     return response;
@@ -42,4 +42,4 @@ apiClient.interceptors.response.use(
   },
 );
 
-export default apiClient;
+export default ApiManager;

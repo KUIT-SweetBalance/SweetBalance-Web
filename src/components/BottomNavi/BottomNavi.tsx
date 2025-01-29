@@ -4,10 +4,10 @@ import styled from 'styled-components';
 // 스타일 정의
 const BottomNaviContainer = styled.div`
   position: fixed;
-  bottom: 10px;
+  bottom: 18px;
   left: 5%;
   width: 90%;
-  height: 74px;
+  height: 72px;
   background-color: white;
   box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1); /* 위쪽 그림자 */
   border-radius: 100px; /* 둥근 모서리 */

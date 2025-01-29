@@ -19,6 +19,8 @@ const Home = () => {
       {/* SweetBalance 타이틀 */}
       <AppTitle />
 
+      {/* 테스트 */}
+
       {/* UserGreeting 컴포넌트(안녕하세요 달달해님! ~ ) */}
       <div className="flex flex-row w-[calc(100%-48px)] justify-between">
         <div className="flex flex-col">

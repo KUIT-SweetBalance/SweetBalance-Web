@@ -4,28 +4,31 @@ import styled from 'styled-components';
 // 스타일 정의
 const BottomNaviContainer = styled.div`
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  bottom: 10px;
+  left: 5%;
+  width: 90%;
   height: 74px;
   background-color: white;
   box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1); /* 위쪽 그림자 */
-  border-radius: 25px; /* 둥근 모서리 */
-`;
-
-const Padding = styled.div`
-  padding: 0 22.7px;
+  border-radius: 100px; /* 둥근 모서리 */
+  padding: 10px;
   display: flex;
   justify-content: space-around; /* 균등 간격 */
   align-items: center;
 `;
 
+// const Padding = styled.div`
+//   display: flex;
+//   justify-content: space-around; /* 균등 간격 */
+//   align-items: center;
+// `;
+
 const NavItem = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 5px; /* 아이콘과 텍스트 간격 */
-  padding: 10px 35px;
 
   & img {
     opacity: ${(props) => (props.active ? 1 : 0.5)}; /* 비활성화된 아이콘 투명도 */
@@ -33,8 +36,8 @@ const NavItem = styled.div<{ active: boolean }>`
 `;
 
 const Icon = styled.img`
-  width: 32px; /* 아이콘 크기 */
-  height: 32px;
+  width: 28px; /* 아이콘 크기 */
+  height: 28px;
 `;
 
 const Label = styled.span<{ active: boolean }>`
@@ -61,7 +64,7 @@ const BottomNavi: React.FC = () => {
 
   return (
     <BottomNaviContainer>
-      <Padding>
+      {/* <Padding> */}
         {navItems.map((item) => (
           <NavItem
             key={item.id}
@@ -75,7 +78,7 @@ const BottomNavi: React.FC = () => {
             <Label active={item.id === activeIndex}>{item.label}</Label>
           </NavItem>
         ))}
-      </Padding>
+      {/* </Padding> */}
     </BottomNaviContainer>
   );
 };

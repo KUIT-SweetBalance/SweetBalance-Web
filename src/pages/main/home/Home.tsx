@@ -6,6 +6,7 @@ import bell from '../../../assets/bell.png';
 import line3 from '../../../assets/line3.png';
 import DailyInfo from './home-today/DailyInfo';
 import WeeklyInfo from './home-week/WeeklyInfo';
+import BottomNavi from '../../../components/BottomNavi/BottomNavi';
 
 const Home = () => {
   const [selectedView, setSelectedView] = useState<'today' | 'week'>('today');
@@ -18,8 +19,6 @@ const Home = () => {
     <div className="flex flex-col items-center">
       {/* SweetBalance 타이틀 */}
       <AppTitle />
-
-      {/* 테스트 */}
 
       {/* UserGreeting 컴포넌트(안녕하세요 달달해님! ~ ) */}
       <div className="flex flex-row w-[calc(100%-48px)] justify-between">
@@ -60,6 +59,10 @@ const Home = () => {
 
       <div className="w-full">
         {selectedView === 'today' ? <DailyInfo /> : <WeeklyInfo />}
+      </div>
+
+      <div className='m-5'>
+        <BottomNavi />
       </div>
     </div>
   );

@@ -28,11 +28,11 @@ const App = () => {
     // <LoginButton/>
     // <UserNickname />
     // <UserPassword />
-    <UserListTest />
+    // <UserListTest />
     // <EditDrink />
     // <EditDrinkModal />
     // <LargeFavoriteDrinkModal />
-    // <Router />
+    <Router />
     // <SmallFavoriteDrinkModal />
     // <EditCompleted />
     // <Alarm />

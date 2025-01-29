@@ -28,7 +28,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
             className="flex border w-[24px] h-[24px] bg-[#F4F4F4] rounded-full justify-center items-center"
           >
             <img src={selected ? heartFilled : heart} alt="저장" className="w-[14px] h-[13px]" />
-          </button>
+          </button>  
         </div>
         <div className="flex text-xs ml-[10px] space-x-10 mt-[10px]">
           <div >당 {props.sugar}g</div>

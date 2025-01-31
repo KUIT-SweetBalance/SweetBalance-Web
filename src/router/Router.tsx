@@ -17,59 +17,84 @@ import LargeFavoriteDrinkModal from '../pages/main/modal/LargeFavoriteDrinkModal
 import AllBrands from '../pages/main/search/AllBrands';
 import BrandSearchResult from '../pages/main/search/BrandSearchResult';
 import Alarm from '../pages/main/alarm/Alarm';
+import Login from '../pages/onboarding/login/Login';
+import AuthSelection from '../pages/onboarding/auth-selection/AuthSelection';
+import Splash from '../pages/onboarding/splash/Splash';
+import ForgotPassword from '../pages/onboarding/login/ForgotPassword';
+import SignIn from '../pages/onboarding/sign-in/SignIn';
 
 const Router = () => {
   const router = createBrowserRouter([
+    // {
+    //   path: '/',
+    //   element: <Login />,
+    //   children: [
     {
-      // path: '/',
-      // element: <AppTitle />,
-      children: [
-        {
-          path: '/home',
-          element: <Home />,
-        },
-        {
-          path: '/alarm',
-          element: <Alarm />
-        },
-        {
-          path: '/search',
-          element: <SearchDrink />,
-        },
-        {
-          path: '/edit',
-          element: <EditDrink />,
-        },
-        {
-          path: '/mypage',
-          element: <Mypage />,
-        },
-        {
-          path: '/mypage/revise',
-          element: <Mypagerevise />,
-        },
-        {
-          path: '/mypage/setting',
-          element: <MypageSettingManage />,
-        },
-        {
-          path: '/mypage/record',
-          element: <MypageRecord />,
-        },
-        {
-          path: '/mypage/navi',
-          element: <BottomNavi />,
-        },
-        {
-          path: 'all-brands',
-          element: <AllBrands />
-        },
-        {
-          path: 'brand-result',
-          element: <BrandSearchResult />
-        }
-      ],
+      path: '/',
+      element: <Splash />,
     },
+    {
+      path: '/login',
+      element: <Login />,
+    },
+    {
+      path: '/auth-selection',
+      element: <AuthSelection />,
+    },
+    {
+      path: '/forgot-password',
+      element: <ForgotPassword />,
+    },
+    {
+      path: '/sign-in',
+      element: <SignIn />,
+    },
+    {
+      path: '/home',
+      element: <Home />,
+    },
+    // {
+    //   path: '/alarm',
+    //   element: <Alarm />,
+    // },
+    // {
+    //   path: '/search',
+    //   element: <SearchDrink />,
+    // },
+    // {
+    //   path: '/edit',
+    //   element: <EditDrink />,
+    // },
+    // {
+    //   path: '/mypage',
+    //   element: <Mypage />,
+    // },
+    // {
+    //   path: '/mypage/revise',
+    //   element: <Mypagerevise />,
+    // },
+    // {
+    //   path: '/mypage/setting',
+    //   element: <MypageSettingManage />,
+    // },
+    // {
+    //   path: '/mypage/record',
+    //   element: <MypageRecord />,
+    // },
+    // {
+    //   path: '/mypage/navi',
+    //   element: <BottomNavi />,
+    // },
+    // {
+    //   path: 'all-brands',
+    //   element: <AllBrands />,
+    // },
+    // {
+    //   path: 'brand-result',
+    //   element: <BrandSearchResult />,
+    // },
+    //   ],
+    // },
   ]);
 
   return <RouterProvider router={router} />;

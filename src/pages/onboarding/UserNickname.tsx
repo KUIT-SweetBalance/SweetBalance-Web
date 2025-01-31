@@ -22,11 +22,11 @@ const UserNickname: React.FC<UserPasswordProps> = ({ onNext }) => {
   };
 
   return (
-    <div className="flex flex-col items-center m-5">
+    <div className="w-full flex flex-col items-center m-0">
       {' '}
       {/* 전체 wrapper */}
       {/* UserDataInput wrapper */}
-      <div className="w-full">
+      <div className="w-[300px] pb-[200px]">
         <UserDataInput
           id="userNickname"
           type="text"
@@ -34,7 +34,7 @@ const UserNickname: React.FC<UserPasswordProps> = ({ onNext }) => {
           requiredMessage="닉네임은 필수 입력 항목입니다"
           pattern={{
             value: /^[가-힣]{2,5}$/, // 한글 2~5자 허용
-            message: '닉네임은 2자 이상 5자 이내의 한글이어야 합니다.',
+            message: '5자 내로 작성해주세요',
           }}
           position="center"
           register={register}

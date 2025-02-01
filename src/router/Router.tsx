@@ -19,12 +19,38 @@ import BrandSearchResult from '../pages/main/search/BrandSearchResult';
 import Alarm from '../pages/main/alarm/Alarm';
 import CustomMain from '../pages/custom/custom';
 import Home2 from '../pages/main/home2/Home2';
+import Login from '../pages/onboarding/login/Login';
+import AuthSelection from '../pages/onboarding/auth-selection/AuthSelection';
+import Splash from '../pages/onboarding/splash/Splash';
+import ForgotPassword from '../pages/onboarding/login/ForgotPassword';
+import SignIn from '../pages/onboarding/sign-in/SignIn';
 
 const Router = () => {
   const router = createBrowserRouter([
+    // {
+    //   path: '/',
+    //   element: <Login />,
+    //   children: [
     {
-      // path: '/',
-      // element: <AppTitle />,
+      path: '/',
+      element: <Splash />,
+    },
+    {
+      path: '/login',
+      element: <Login />,
+    },
+    {
+      path: '/auth-selection',
+      element: <AuthSelection />,
+    },
+    {
+      path: '/forgot-password',
+      element: <ForgotPassword />,
+    },
+    {
+      path: '/sign-in',
+      element: <SignIn />,
+    },
       children: [
         {
           path: '/home',
@@ -41,6 +67,10 @@ const Router = () => {
         {
           path: '/edit',
           element: <EditDrink />,
+        },
+        {
+          path: '/custom',
+          element: <CustomMain brand="스타벅스" drink="아이스 아메리카노" sugar={0} kcal={0} caffeine={5}/>,
         },
         {
           path: '/mypage',
@@ -75,10 +105,6 @@ const Router = () => {
           element: <BrandSearchResult />
         }
       ],
-    },{
-      path: '/custom',
-      element: <CustomMain brand="스타벅스" drink="아이스 아메리카노" sugar={0} kcal={0} caffeine={5}/>,
-
     },
   ]);
 

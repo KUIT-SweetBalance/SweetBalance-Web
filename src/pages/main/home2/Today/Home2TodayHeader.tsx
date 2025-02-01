@@ -23,10 +23,10 @@ const Home2TodayHeader = () => {
 
         <button
           type="button"
-          className="w-[43px] h-[43px] flex items-center justify-center border rounded-full"
+          className="w-[39px] h-[39px] flex items-center justify-center border rounded-full"
           // onClick={handleAlarmClick}
         >
-          <img src="/bell2.png" alt="알림" className="w-[18px] h-[20px]" />
+          <img src="/bell2.png" alt="알림" className="w-[16px] h-[18px]" />
         </button>
       </div>
 

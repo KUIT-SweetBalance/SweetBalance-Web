@@ -68,7 +68,7 @@ const BrandSearchResult = () => {
           <span className="font-[500] text-[19px]">스타벅스</span>
         </div>
         <div className="flex space-x-2 bg-[#F4F4F4] items-center rounded-full px-3 py-[6px]">
-          <img src={star} alt="즐겨찾기" className="w-[14px] h-[14px]" />
+          <img src='/star.png' alt="즐겨찾기" className="w-[14px] h-[14px]" />
           <span className="text-[12px]">즐겨찾기</span>
         </div>
       </div>

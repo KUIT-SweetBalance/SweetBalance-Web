@@ -10,7 +10,7 @@ const Home2 = () => {
   const [selectedView, setSelectedView] = useState<'today' | 'week'>('today');
 
   return (
-    <div className="flex flex-col mb-[90px]">
+    <div className="flex flex-col mb-[100px]">
       <TodayWeekSwitcher
         selected={selectedView}
         onChange={(view) => setSelectedView(view)}
@@ -20,7 +20,7 @@ const Home2 = () => {
         {selectedView === 'today' ? <Home2TodayHeader /> : <Home2WeeklyHeader />}
       </div>
       
-      <div>
+      <div className='mt-[10px]'>
         {selectedView === 'today' ? <Home2TodayBody /> : <Home2WeeklyBody />}
       </div>
 

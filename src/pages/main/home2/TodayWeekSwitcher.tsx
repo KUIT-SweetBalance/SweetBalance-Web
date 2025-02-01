@@ -11,18 +11,18 @@ const TodayWeekSwitcher = (props: TodayWeekSwitcherProps) => {
       <button
         type="button"
         onClick={() => props.onChange('today')}
-        className={`flex-1 p-[10px] text-white text-[14px] text-start border-t border-t-white ${
+        className={`p-[10px] text-white text-[14px] text-start border-t border-t-white transition-all duration-300 ease-in-out ${
           props.selected === 'week' ? 'text-opacity-50 border-opacity-50' : ''
-        }`}
+        } ${props.selected === 'today' ? 'flex-1' : 'flex-3'}`}
       >
         Today
       </button>
       <button
         type="button"
         onClick={() => props.onChange('week')}
-        className={`flex-1 p-[10px] text-white text-[14px] text-start border-t border-t-white ${
-          props.selected === 'today' ? 'text-opacity-50 border-opacity-50' : ''
-        }`}
+        className={`p-[10px] text-white text-[14px] text-start border-t border-t-white transition-all duration-300 ease-in-out ${
+          props.selected === 'today' ? ' text-opacity-50 border-opacity-50' : ''
+        } ${props.selected === 'week' ? 'flex-1' : 'flex-3'}`}
       >
         Weekly
       </button>

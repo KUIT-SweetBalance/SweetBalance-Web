@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppTitle from '../../../components/appTitle/AppTitle';
 import TodayWeekSwitcher from './TodayWeekSwitcher';
-import bell from '../../../assets/bell.png';
 import line3 from '../../../assets/line3.png';
 import DailyInfo from './home-today/DailyInfo';
 import WeeklyInfo from './home-week/WeeklyInfo';
@@ -38,7 +37,7 @@ const Home = () => {
             className="w-12 h-12 flex items-center justify-center border rounded-full"
             onClick={handleAlarmClick}
           >
-            <img src={bell} alt="알림" className="w-4 h-5" />
+            <img src='/bell.png' alt="알림" className="w-4 h-5" />
           </button>
           <button
             type="button"

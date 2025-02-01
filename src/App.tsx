@@ -33,9 +33,9 @@ const App = () => {
     // <EditDrink />
     // <EditDrinkModal />
     // <LargeFavoriteDrinkModal />
-    // <Router />
+    <Router />
     // <SmallFavoriteDrinkModal />
-    <EditCompleted />
+    // <EditCompleted />
     // <Alarm />
     // <AllBrands />
     // <BrandSearchResult />

@@ -18,6 +18,7 @@ import AllBrands from '../pages/main/search/AllBrands';
 import BrandSearchResult from '../pages/main/search/BrandSearchResult';
 import Alarm from '../pages/main/alarm/Alarm';
 import CustomMain from '../pages/custom/custom';
+import Home2 from '../pages/main/home2/Home2';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -27,7 +28,7 @@ const Router = () => {
       children: [
         {
           path: '/home',
-          element: <Home />,
+          element: <Home2 />,
         },
         {
           path: '/alarm',

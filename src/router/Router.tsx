@@ -49,52 +49,61 @@ const Router = () => {
       path: '/sign-in',
       element: <SignIn />,
     },
-    {
-      path: '/home',
-      element: <Home />,
+      children: [
+        {
+          path: '/home',
+          element: <Home />,
+        },
+        {
+          path: '/alarm',
+          element: <Alarm />
+        },
+        {
+          path: '/search',
+          element: <SearchDrink />,
+        },
+        {
+          path: '/edit',
+          element: <EditDrink />,
+        },
+        {
+          path: '/custom',
+          element: <CustomMain brand="스타벅스" drink="아이스 아메리카노" sugar={0} kcal={0} caffeine={5}/>,
+        },
+        {
+          path: '/mypage',
+          element: <Mypage />,
+        },
+        {
+          path: '/mypage/revise',
+          element: <Mypagerevise />,
+        },
+        {
+          path: '/mypage/setting',
+          element: <MypageSettingManage />,
+        },
+        {
+          path: '/mypage/record',
+          element: <MypageRecord />,
+        },
+        {
+          path: '/mypage/navi',
+          element: <BottomNavi />,
+        },
+        // {BottomNavi
+        //   path: '/edit/completed',
+        //   element: <EditCompleted />
+        // }
+        {
+          path: 'all-brands',
+          element: <AllBrands />
+        },
+        {
+          path: 'brand-result',
+          element: <BrandSearchResult />
+        }
+      ],
     },
-    // {
-    //   path: '/alarm',
-    //   element: <Alarm />,
-    // },
-    // {
-    //   path: '/search',
-    //   element: <SearchDrink />,
-    // },
-    // {
-    //   path: '/edit',
-    //   element: <EditDrink />,
-    // },
-    // {
-    //   path: '/mypage',
-    //   element: <Mypage />,
-    // },
-    // {
-    //   path: '/mypage/revise',
-    //   element: <Mypagerevise />,
-    // },
-    // {
-    //   path: '/mypage/setting',
-    //   element: <MypageSettingManage />,
-    // },
-    // {
-    //   path: '/mypage/record',
-    //   element: <MypageRecord />,
-    // },
-    // {
-    //   path: '/mypage/navi',
-    //   element: <BottomNavi />,
-    // },
-    // {
-    //   path: 'all-brands',
-    //   element: <AllBrands />,
-    // },
-    // {
-    //   path: 'brand-result',
-    //   element: <BrandSearchResult />,
-    // },
-    //   ],
-    // },
   ]);
 
   return <RouterProvider router={router} />;

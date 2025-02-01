@@ -17,6 +17,8 @@ import EditCompleted from './pages/main/edit/EditCompleted';
 import Alarm from './pages/main/alarm/Alarm';
 import AllBrands from './pages/main/search/AllBrands';
 import BrandSearchResult from './pages/main/search/BrandSearchResult';
+import UserListTest from './api/apis/example/UserListTest';
+import Home2 from './pages/main/home2/Home2';
 
 const App = () => {
   return (
@@ -26,16 +28,19 @@ const App = () => {
     // <Mypage/>
     // <LoginButton/>
     // <UserNickname />
-    <UserPassword />
+    // <UserPassword />
+    // <UserListTest />
     // <EditDrink />
     // <EditDrinkModal />
     // <LargeFavoriteDrinkModal />
-    // <Router />
+    <Router />
     // <SmallFavoriteDrinkModal />
     // <EditCompleted />
     // <Alarm />
     // <AllBrands />
     // <BrandSearchResult />
+    // <Home2Header />
+    // <Home2 />
   );
 };
 

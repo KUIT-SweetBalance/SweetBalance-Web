@@ -17,6 +17,8 @@ import LargeFavoriteDrinkModal from '../pages/main/modal/LargeFavoriteDrinkModal
 import AllBrands from '../pages/main/search/AllBrands';
 import BrandSearchResult from '../pages/main/search/BrandSearchResult';
 import Alarm from '../pages/main/alarm/Alarm';
+import CustomMain from '../pages/custom/custom';
+import Home2 from '../pages/main/home2/Home2';
 import Login from '../pages/onboarding/login/Login';
 import AuthSelection from '../pages/onboarding/auth-selection/AuthSelection';
 import Splash from '../pages/onboarding/splash/Splash';
@@ -52,7 +54,7 @@ const Router = () => {
       children: [
         {
           path: '/home',
-          element: <Home />,
+          element: <Home2 />,
         },
         {
           path: '/alarm',

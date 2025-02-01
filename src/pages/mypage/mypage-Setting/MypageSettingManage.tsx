@@ -51,6 +51,8 @@ const MypageSettingManage: React.FC = () => {
     const [logout, setLogout] = React.useState(false);
     const [withdraw, setWithdraw] = React.useState(false);
     const [withdrawment,setwithdrawment] = React.useState(false);
+    const [withdrawment2,setwithdrawment2] = React.useState(false);
+
     const handleLogoutClick = () => {
         setLogout(prev => !prev);
     };
@@ -62,6 +64,15 @@ const MypageSettingManage: React.FC = () => {
         setWithdraw(false)
         setwithdrawment(prev => !prev);
     }
+    const handleWithdraw2Click = () =>{
+        
+        setwithdrawment(prev => !prev);
+        setwithdrawment2(prev=>!prev);
+    }
+    const handleWithdraw3=()=>{
+        setwithdrawment2(prev=>!prev);
+
+    }
     return (
         <>
             <NavigateHeader headerTitle='설정 관리'/>
@@ -69,7 +80,7 @@ const MypageSettingManage: React.FC = () => {
             <ButtonBox>
             <Button2 content='로그아웃' bgColor='bg-white' size='xl' onClick={handleLogoutClick}/>
             <Withdraw onClick={handleWithClick}>회원탈퇴</Withdraw>
-            {/* withdrawbottom.svg 2번째 사진진 */}
+            {/* withdrawbottom.svg 2번째 사진 */}
             </ButtonBox>
             {logout && 
             <GrayBox>
@@ -84,7 +95,13 @@ const MypageSettingManage: React.FC = () => {
             {withdrawment&&
             <GrayBox>
                 {/* <MypageWithdraw/> */}
-                <With src='/WithDraw.svg' alt='dl'/>
+                <With src='/WithDraw.svg' alt='dl'onClick={handleWithdraw2Click}/>
+            </GrayBox>
+            }
+            {withdrawment2&&
+            <GrayBox>
+                {/* <MypageWithdraw/> */}
+                <With src='/withdrawbottom.svg' alt='dl' onClick={handleWithdraw3}/>
             </GrayBox>
             }
         </>

@@ -35,12 +35,12 @@ const App = () => {
     // <LargeFavoriteDrinkModal />
     // <Router />
     // <SmallFavoriteDrinkModal />
-    // <EditCompleted />
+    <EditCompleted />
     // <Alarm />
     // <AllBrands />
     // <BrandSearchResult />
     // <Home2Header />
-    <Home2 />
+    // <Home2 />
   );
 };
 

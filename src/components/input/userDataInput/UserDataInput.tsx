@@ -3,7 +3,7 @@
 // 프로필 한 줄 소개 설정
 // 브랜드와 제품 검색, 나의 음료 기록 검색
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
-import visibility from '../../../assets/visibility.png'
+import visibility from '../../../assets/visibility.png';
 
 interface UserDataInputProps {
   useFormMode?: 'onChange' | 'onBlur' | 'onSubmit'; // useForm의 mode
@@ -46,6 +46,7 @@ const UserDataInput = ({
         <input
           className={`
           w-full
+          h-[6.52vh]
           p-3 
           border 
           rounded-full 
@@ -75,7 +76,11 @@ const UserDataInput = ({
             className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-primary"
             onClick={props.togglePasswordVisibility}
           >
-            <img src={visibility} alt="비밀번호 보기, 가리기" className='w-[20px] h-[20px]'/>
+            <img
+              src={visibility}
+              alt="비밀번호 보기, 가리기"
+              className="w-[20px] h-[20px]"
+            />
           </button>
         )}
       </div>

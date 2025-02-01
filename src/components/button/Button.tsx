@@ -10,7 +10,7 @@ interface ButtonProps {
 }
 
 const sizeClass = {
-  xl: 'w-[calc(100%-48px)] h-[6.52vh]',
+  xl: 'w-[calc(100%-48px)] h-[6.52vh] mx-auto',
   lg: 'w-full h-[6vh] max-w-[calc(100%-60px)] mx-auto', // <main page/오늘/모달/즐겨찾기>
   md: 'w-[35vw] h-[5vh]',
   sm: 'w-[16vw] h-[3.53vh] text-sm',
@@ -43,9 +43,15 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${combinedClassName} ${bgColor} ${sizeClass[size]} flex justify-center items-center rounded-[100px]`}
-      onClick={onClick}
-      disabled={disabled}
+      className={`
+        ${
+          disabled
+            ? 'bg-gray-200 text-gray-400 cursor-not-allowed border-gray_light' // disabled 상태
+            : `${combinedClassName} ${bgColor}` // 활성 상태
+        }
+        ${sizeClass[size]} flex justify-center items-center rounded-[100px] 
+        `}
+      onClick={!disabled ? onClick : undefined} // 비활성화 상태에서 onClick 실행 방지
     >
       {content}
     </button>

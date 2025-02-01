@@ -53,34 +53,37 @@
 
 // export default RedirectButton;
 
-
-
-
-
-import React from "react";
-import styled from "styled-components";
-import axios from "axios";
+import React from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import kakao_logo from '../../../assets/onboarding/kakao_logo.svg';
 
 // Axios 기본 설정
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://13.209.98.76:8080";
+axios.defaults.baseURL = 'http://13.209.98.76:8080';
 
 // // 요청을 보낼 때마다 쿠키가 포함됨
 // const response = await axios.get("");
 
 // 스타일드 컴포넌트로 버튼 정의
 const Button = styled.a`
-  display: inline-block;
-  text-align: center; 
+  width: 300px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
   text-decoration: none;
   background-color: #fee500;
   color: #3c1e1e;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
+  box-sizing: border-box;
+  // padding: 20px 30px;
   cursor: pointer;
-
+  // margin-left: 40px;
+  // margin-top: 20px;
+  // margin-bottom: 20px;
   &:hover {
     background-color: #ffd700;
   }
@@ -90,9 +93,10 @@ const RedirectButton: React.FC = () => {
   return (
     // href에 백엔드 리디렉션 엔드포인트 설정
     <Button href="http://13.209.98.76:8080/oauth2/authorization/kakao">
-      로그인 요청
+      <img className={`w-5 h-5 pr-1`} src={kakao_logo} alt="kakao_logo" />
+      카카오 로그인
     </Button>
-    // 리이슈에 대한 응답 
+    // 리이슈에 대한 응답
   );
 };
 

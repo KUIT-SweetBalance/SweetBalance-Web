@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import UserDataInput from '../../components/input/userDataInput/UserDataInput';
+import Button from '../../components/button/Button';
 
-const UserPassword = () => {
+interface UserPasswordProps {
+  onNext: () => void; // 다음 단계로 이동하는 함수
+}
+
+const UserPassword: React.FC<UserPasswordProps> = ({ onNext }) => {
   const {
     handleSubmit, // 폼 제출 메서드
     watch, // 입력 필드 값 확인
@@ -24,6 +29,10 @@ const UserPassword = () => {
     console.log('비밀번호:', passwordValue);
     console.log('비밀번호 확인:', passwordConfirmValue);
   }, [passwordValue, passwordConfirmValue]);
+
+  const onSubmit = () => {
+    onNext(); // 부모 컴포넌트에서 전달된 onNext 호출
+  };
 
   return (
     <div className="flex flex-col m-5">
@@ -62,13 +71,15 @@ const UserPassword = () => {
           register={register}
           errors={errors}
         />
-        <button
-          type="submit"
-          className="w-full py-2 px-4 bg-blue-500 text-white rounded-full"
+
+        {/* Button 컴포넌트로 대체 */}
+        <Button
+          content="다음"
+          bgColor="bg-primary"
+          size="xl"
           disabled={!isValid}
-        >
-          제출
-        </button>
+          onClick={handleSubmit(onSubmit)}
+        />
       </div>
     </div>
   );

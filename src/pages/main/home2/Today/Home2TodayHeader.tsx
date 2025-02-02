@@ -45,8 +45,8 @@ const Home2TodayHeader = () => {
         </div>
         <div className="w-[1.5px] h-10 bg-[#F4F4F4]"></div>
         <div className="flex-1 flex-col space-y-1">
-          <div className="text-center text-secondary text-[12px]">칼로리</div>
-          <div className="text-center text-white">000kcal</div>
+          <div className="text-center text-secondary text-[12px]">하루 음료 섭취량</div>
+          <div className="text-center text-white">3잔</div>
         </div>
       </div>
     </div>

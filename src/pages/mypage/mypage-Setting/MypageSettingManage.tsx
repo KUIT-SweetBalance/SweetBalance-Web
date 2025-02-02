@@ -1,6 +1,5 @@
 import React from 'react';
 import MypageSettingManagement from './MypageSettingManagement';
-import NavigateHeader from '../../../components/header/NavigateHeader';
 import Header from '../../../components/header/Header';
 import Button from '../../../components/button/Button';
 import styled from 'styled-components';

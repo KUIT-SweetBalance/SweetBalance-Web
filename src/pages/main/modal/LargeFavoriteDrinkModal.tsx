@@ -1,16 +1,8 @@
 import React, { useState, useRef } from 'react';
 import useLargeFavoriteDrinkModalStore from '../../../store/modal/LargeFavoriteModalStore';
+import { LargeFavoriteDrinkModalProps } from '../../../types/drink';
 
-interface LargeFavoriteDrinkModalProps {
-  cafeName: string;
-  drinkName: string;
-  sugar: number;
-  kcal: number;
-  size: string;
-  // onClose: () => void;
-}
-
-const LargeFavoriteDrinkModalProps = (props: LargeFavoriteDrinkModalProps) => {
+const LargeFavoriteDrinkModal = (props: LargeFavoriteDrinkModalProps) => {
   const { isOpen, closeModal } = useLargeFavoriteDrinkModalStore();
 
   if (!isOpen) return null;
@@ -36,8 +28,8 @@ const LargeFavoriteDrinkModalProps = (props: LargeFavoriteDrinkModalProps) => {
 
         <div className="flex space-x-[56px] text-[16px] text-center">
           <span>당 {props.sugar}g</span>
-          <span>{props.kcal}kcal</span>
-          <span>{props.size}(size)</span>
+          <span>{props.syrupType}&nbsp;{props.syrup}</span>
+          <span>{props.size}</span>
         </div>
 
         <button
@@ -52,4 +44,4 @@ const LargeFavoriteDrinkModalProps = (props: LargeFavoriteDrinkModalProps) => {
   );
 };
 
-export default LargeFavoriteDrinkModalProps;
+export default LargeFavoriteDrinkModal;

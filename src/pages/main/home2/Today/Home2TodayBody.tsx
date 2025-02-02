@@ -34,22 +34,25 @@ const Home2TodayBody = () => {
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"
           sugar={100}
-          kcal={700}
-          size="tall(size)"
+          syrupType='카라멜 시럽'
+          syrup={1}
+          size="tall"
         />
         <DrinkCard
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"
           sugar={100}
-          kcal={700}
-          size="tall(size)"
+          syrupType='딸기 시럽'
+          syrup={1}
+          size="tall"
         />
         <DrinkCard
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"
           sugar={100}
-          kcal={700}
-          size="tall(size)"
+          syrupType='딸기 시럽'
+          syrup={1}
+          size="tall"
         />
       </div>
     </div>

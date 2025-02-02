@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-
-interface DrinkCardProps {
-    image?: string;
-    isAdded?: boolean; // 즐겨찾기 추가 여부
-    cafeName: string;
-    drinkName: string;
-    sugar: number;
-    kcal: number;
-    size: string;
-}
+import { DrinkCardProps } from '../../../../types/drink';
 
 const DrinkCard = (props: DrinkCardProps) => {
   const [selected, setSelected] = useState(false);
@@ -41,7 +32,7 @@ const DrinkCard = (props: DrinkCardProps) => {
 
       <div className='flex text-center text-[12px]'>
         <span className='flex-1'>당 {props.sugar}g</span>
-        <span className='flex-1'>{props.kcal}kcal</span>
+        <span className='flex-1'>{props.syrupType}&nbsp;{props.syrup}</span>
         <span className='flex-1'>{props.size}</span>
       </div>
     </div>

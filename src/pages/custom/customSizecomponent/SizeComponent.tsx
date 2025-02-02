@@ -21,10 +21,27 @@ const SizeBox = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const Sizeimg = styled.img`
+const Sizeimg = styled.div`
   width: 73px;
   height: 73px;
+  border-radius: 50%;
+  background: rgba(240, 128, 127, 0.20);
+  border: 1.5px solid #F0807F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+const Sizeimg2 = styled.div`
+  width: 73px;
+  height: 73px;
+  border-radius: 50%;
+  background:#f4f4f4;
+  border: 1.5px solid #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Img = styled.img``;
 const SizeName = styled.div`
   color: #121212;
   text-align: center;
@@ -40,7 +57,7 @@ const SizeMl = styled.div`
   height: 20px;
   color: rgba(18, 18, 18, 0.5);
   text-align: center;
-  font-family: Pretendard;
+  font-family: 'Pretendard';
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -51,11 +68,18 @@ const SizeMl = styled.div`
 `;
 
 const SizeComponent: React.FC<{ sizes: SizeProps[] }> = ({ sizes }) => {
+  const handleSizeClick = (index: number) => {
+    setSelectedSize(index);
+  };
+  const [selectedSize, setSelectedSize] = React.useState<number>(0);
     return (
       <SizeList>
         {sizes.map((size, index) => (
           <SizeBox key={index}>
-            <Sizeimg src='/sizeimg.svg'alt='size'/>
+            {  selectedSize===index?
+                <Sizeimg onClick={() => handleSizeClick(index)}><Img src={`/size/fill${size.name}.svg`} alt="size"/></Sizeimg>:
+                <Sizeimg2 onClick={() => handleSizeClick(index)}><Img src={`/size/unfill${size.name}.svg`} alt="size"/></Sizeimg2>
+          }
             <SizeName>{size.name}</SizeName>
             <SizeMl>{size.size}ml</SizeMl>
           </SizeBox>

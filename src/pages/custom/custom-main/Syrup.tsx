@@ -2,6 +2,7 @@ import React ,{useState}from 'react';
 import styled from 'styled-components';
 import Dial from './dial';
 import Recoding from './Recording';
+import Pump from './pump';
 
 const SlideUpContainers = styled.div`
  position: fixed;
@@ -46,17 +47,12 @@ const SizeButton = styled.button`
   flex: 1;
   height: 50px;
   border: none;
-  background: #f4f4f4; /* 문자열 제거 */
+  /* background: #f4f4f4; 문자열 제거 */
   color: #722a2a; /* 문자열 제거 */
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 400;
-  &:first-child {
-    border-radius: 100px 0 0 100px;
-  }
-  &:last-child {
-    border-radius: 0 100px 100px 0;
-  }
+  
   cursor: pointer;
 `;
 
@@ -69,12 +65,8 @@ const SizeButtonSelected = styled.button`
   font-family: Pretendard;
   font-size: 14px;
   font-weight: 400;
-  &:first-child {
-    border-radius: 100px 0 0 100px;
-  }
-  &:last-child {
-    border-radius: 0 100px 100px 0;
-  }
+  border-radius: 100px 100px 0 100px;
+  
   cursor: pointer;
 `;
 
@@ -227,7 +219,7 @@ const Syrup: React.FC<Pick<Props, 'sugar'>& { onClick: () => void }> = ({sugar,o
     <SyrupsubLabel>최대 5펌프까지 빼거나 추가할 수 있어요</SyrupsubLabel>
   </SyrupTitle>
 
-  <Dial/>
+  <Pump/>
 </SyrupControlContainer>
 
                     <HowBox>

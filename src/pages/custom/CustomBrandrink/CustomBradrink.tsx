@@ -10,7 +10,7 @@ interface Props {
   }
 type BrandProps = Pick<Props, 'brand' | 'drink'>;
 const BrandrinkBox = styled.div`
-  height: 112px;
+  height: auto;
 `;
 const BrandBox = styled.div`
   display: flex;
@@ -25,31 +25,32 @@ const Brand = styled.div`
   font-weight: 400;
   line-height: 20px; /* 111.111% */
   letter-spacing: 0.25px;
+  
 `;
-const StarBox = styled.div`
+const StarBox = styled.img`
   width: 97px;
   height: 30px;
-  border-radius: 30px;
+  /* border-radius: 30px;
   background: #f4f4f4;
   display: flex;
   align-items: center;
   gap: 6px;
   padding-left: 13px;
-  padding-right: 15px;
+  padding-right: 15px; */
 `;
-const StarImg = styled.img`
-width: 18px;
-height: 18px;
-`;
-const Star = styled.div`
-  color: #000;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-`;
+// const StarImg = styled.img`
+// width: 18px;
+// height: 18px;
+// `;
+// const Star = styled.div`
+//   color: #000;
+//   text-align: center;
+//   font-family: Pretendard;
+//   font-size: 12px;
+//   font-style: normal;
+//   font-weight: 400;
+//   line-height: normal;
+// `;
 const Drink = styled.div`
   color: #121212;
   font-family: Pretendard;
@@ -60,7 +61,14 @@ const Drink = styled.div`
   letter-spacing: 0.25px;
 
   padding: 0px 51px 15px 25px;
-  height: 50px;
+  /* height: 50px; */
+  width: 22rem;
+  overflow-wrap: break-word; /* 긴 단어를 줄바꿈 */
+  word-break: break-word; /* 브라우저 호환성 추가 */
+  white-space: normal; /* 자동 줄바꿈 허용 */
+  overflow: hidden;
+  display: block;
+  height:auto;
 `;
 
 const Brandrink: React.FC<BrandProps & { onClick: () => void }> = ({ brand, drink, onClick }) => {
@@ -68,9 +76,9 @@ const Brandrink: React.FC<BrandProps & { onClick: () => void }> = ({ brand, drin
         <BrandrinkBox>
             <BrandBox>
                 <Brand>{brand}</Brand>
-                <StarBox onClick={onClick}>
-                    <StarImg src="/fillstar.svg" alt="star" />
-                    <Star>즐겨찾기</Star>
+                <StarBox onClick={onClick} src="/unfillstar.svg"alt="star">
+                    {/* <StarImg src="/fillstar.svg" alt="star" />
+                    <Star>즐겨찾기</Star> */}
                 </StarBox>
             </BrandBox>
             <Drink>{drink}</Drink>

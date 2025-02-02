@@ -18,6 +18,7 @@ import AllBrands from '../pages/main/search/AllBrands';
 import BrandSearchResult from '../pages/main/search/BrandSearchResult';
 import Alarm from '../pages/main/alarm/Alarm';
 import CustomMain from '../pages/custom/custom';
+import CusSuccess from '../pages/custom/success/cussuccess';
 import Home2 from '../pages/main/home2/Home2';
 import Login from '../pages/onboarding/login/Login';
 import AuthSelection from '../pages/onboarding/auth-selection/AuthSelection';

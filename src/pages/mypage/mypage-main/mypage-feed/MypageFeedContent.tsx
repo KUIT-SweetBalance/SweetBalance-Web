@@ -61,7 +61,7 @@ const MypageFeedContent: React.FC = () => {
             <MypageFeedContentRight>
                 <MypageFeedContentLeftTop>
                     <MypageFeedContentTopText>나의</MypageFeedContentTopText>
-                    <MypageFeedContentTopText>기록 목록</MypageFeedContentTopText>
+                    <MypageFeedContentTopText>즐겨찾기 목록</MypageFeedContentTopText>
                 </MypageFeedContentLeftTop>
                 <MypageFeedContentRightBottom src = '/FeedStar.svg' alt='Star'/>
             </MypageFeedContentRight>

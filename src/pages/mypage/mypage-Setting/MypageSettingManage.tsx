@@ -1,10 +1,11 @@
 import React from 'react';
 import MypageSettingManagement from './MypageSettingManagement';
+import NavigateHeader from '../../../components/header/NavigateHeader';
 import Header from '../../../components/header/Header';
 import Button from '../../../components/button/Button';
 import styled from 'styled-components';
 import { MypageLogout,MypageRealLogout } from './mypage-logout-message/MypageLogout'; 
-import { MypageWithdraw,MypageWithdrawLast } from './mypage-withdraw/MypageWithdraw';
+import Button2 from '../../../components/button/Button2';
 
 const ButtonBox = styled.div`
 /* padding: 24px; */
@@ -12,6 +13,8 @@ display:flex;
 flex-direction:column;
 align-items:center;
 gap: 30px;
+margin-top: 18rem;
+/* position:absolute; */
 `;
 const GrayBox = styled.div`
  position: fixed;
@@ -31,10 +34,27 @@ const With = styled.img`
     transform: translate(-50%, -50%);
 
 `;
+const Withdraw = styled.button`
+color: var(--gray-text, #909090);
+text-align: center;
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 18px; /* 128.571% */
+letter-spacing: -0.35px;
+text-decoration-line: underline;
+text-decoration-style: solid;
+text-decoration-skip-ink: auto;
+text-decoration-thickness: auto;
+text-underline-offset: auto;
+text-underline-position: from-font;`;
 const MypageSettingManage: React.FC = () => {
     const [logout, setLogout] = React.useState(false);
     const [withdraw, setWithdraw] = React.useState(false);
     const [withdrawment,setwithdrawment] = React.useState(false);
+    const [withdrawment2,setwithdrawment2] = React.useState(false);
+
     const handleLogoutClick = () => {
         setLogout(prev => !prev);
     };
@@ -46,13 +66,23 @@ const MypageSettingManage: React.FC = () => {
         setWithdraw(false)
         setwithdrawment(prev => !prev);
     }
+    const handleWithdraw2Click = () =>{
+        
+        setwithdrawment(prev => !prev);
+        setwithdrawment2(prev=>!prev);
+    }
+    const handleWithdraw3=()=>{
+        setwithdrawment2(prev=>!prev);
+
+    }
     return (
         <>
             <Header headerTitle='설정 관리'/>
             <MypageSettingManagement/>
             <ButtonBox>
-            <Button content='로그아웃' bgColor='bg-gray_light' size='xl' onClick={handleLogoutClick}/>
-            <Button content='회원탈퇴' bgColor='bg-gray_light' size='xl' onClick={handleWithClick}/>
+            <Button2 content='로그아웃' bgColor='bg-white' size='xl' onClick={handleLogoutClick}/>
+            <Withdraw onClick={handleWithClick}>회원탈퇴</Withdraw>
+            {/* withdrawbottom.svg 2번째 사진 */}
             </ButtonBox>
             {logout && 
             <GrayBox>
@@ -67,7 +97,13 @@ const MypageSettingManage: React.FC = () => {
             {withdrawment&&
             <GrayBox>
                 {/* <MypageWithdraw/> */}
-                <With src='/WithDraw.svg' alt='dl'/>
+                <With src='/WithDraw.svg' alt='dl'onClick={handleWithdraw2Click}/>
+            </GrayBox>
+            }
+            {withdrawment2&&
+            <GrayBox>
+                {/* <MypageWithdraw/> */}
+                <With src='/withdrawbottom.svg' alt='dl' onClick={handleWithdraw3}/>
             </GrayBox>
             }
         </>

@@ -1,7 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import DrinkCard from './DrinkCard';
 
 const Home2TodayBody = () => {
+  const navigate = useNavigate();
+  const handleEditClick = () => {
+    navigate('/edit');
+  };
+
   return (
     <div className="w-full flex flex-col">
       <div className="flex justify-between pt-[20px] px-[34px] pb-[10px]">
@@ -13,7 +19,11 @@ const Home2TodayBody = () => {
         </div>
 
         <div>
-          <button type="button" className="text-[14px] text-gray_text pt-[6px]">
+          <button
+            type="button"
+            className="text-[14px] text-gray_text pt-[6px]"
+            onClick={handleEditClick}
+          >
             수정하기
           </button>
         </div>

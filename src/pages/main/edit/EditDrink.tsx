@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AppTitle from '../../../components/appTitle/AppTitle';
 import Header from '../../../components/header/Header';
+import { useNavigate } from 'react-router-dom';
 import SearchInput from '../../../components/input/searchInput/SearchInput';
 import { useForm } from 'react-hook-form';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
@@ -12,6 +13,12 @@ const EditDrink = () => {
     getValues, // 입력값 가져오기
     register, // 유효성 검사와 값 관리에 사용
   } = useForm(); // mode: onChange로 설정
+
+  const navigate = useNavigate();
+  const handleBackClick = () => {
+    navigate(-1);
+    // 브라우저의 History API 사용(브라우저 히스토리를 프로그래밍적으로 다룰 수 있는 Javascript API)
+  };
 
   // 검색버튼 클릭 시 실행되는 메서드
   const handleSearchClick = () => {
@@ -33,14 +40,18 @@ const EditDrink = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center">
-      <AppTitle />
+    <div className="flex flex-col items-center mt-[60px]">
+      {/* <AppTitle />
 
       <div className="w-[calc(100%-48px)] mb-[30px]">
         <Header headerTitle="알림 페이지" confirmButton="완료" />
-      </div>
+      </div> */}
 
-      <div className="flex w-[calc(100%-48px)] mb-[30px]">
+      <div className="flex w-[calc(100%-48px)] mb-[30px] space-x-5">
+        <button type="button">
+          <img src='/chevron-left-primary.png' alt="뒤로가기" className='w-[8px] h-[14px]' onClick={handleBackClick}/>
+        </button>
+
         <SearchInput
           id="SearchDrink"
           type="text"

@@ -2,8 +2,8 @@ import './App.css';
 import CustomMain from './pages/custom/custom';
 import UserNickname from './pages/onboarding/UserNickname';
 import UserPassword from './pages/onboarding/UserPassword';
-import Home from './pages/main/home/Home';       
-import SearchDrink from './pages/search/searchDrink/SearchDrink'; 
+import Home from './pages/main/home/Home';
+import SearchDrink from './pages/main/search/SearchDrink';
 import Mypage from './pages/mypage/Mypage';
 import LoginButton from './pages/onboarding/Kakaotalk/LoginButton';
 // import SearchDrink from './pages/search/searchDrink/SearchDrink';
@@ -15,6 +15,10 @@ import LargeFavoriteDrinkModal from './pages/main/modal/LargeFavoriteDrinkModal'
 import SmallFavoriteDrinkModal from './pages/main/modal/SmallFavoriteDrinkModal';
 import EditCompleted from './pages/main/edit/EditCompleted';
 import Alarm from './pages/main/alarm/Alarm';
+import AllBrands from './pages/main/search/AllBrands';
+import BrandSearchResult from './pages/main/search/BrandSearchResult';
+import UserListTest from './api/apis/example/UserListTest';
+import Home2 from './pages/main/home2/Home2';
 
 const App = () => {
   return (
@@ -25,6 +29,7 @@ const App = () => {
     // <LoginButton/>
     // <UserNickname />
     // <UserPassword />
+    // <UserListTest />
     // <EditDrink />
     // <EditDrinkModal />
     // <LargeFavoriteDrinkModal />
@@ -32,6 +37,10 @@ const App = () => {
     // <SmallFavoriteDrinkModal />
     // <EditCompleted />
     // <Alarm />
+    // <AllBrands />
+    // <BrandSearchResult />
+    // <Home2Header />
+    // <Home2 />
   );
 };
 

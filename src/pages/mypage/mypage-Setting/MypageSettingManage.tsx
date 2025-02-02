@@ -1,6 +1,8 @@
 import React from 'react';
 import MypageSettingManagement from './MypageSettingManagement';
 import NavigateHeader from '../../../components/header/NavigateHeader';
+import Header from '../../../components/header/Header';
+import Button from '../../../components/button/Button';
 import styled from 'styled-components';
 import { MypageLogout,MypageRealLogout } from './mypage-logout-message/MypageLogout'; 
 import Button2 from '../../../components/button/Button2';
@@ -75,7 +77,7 @@ const MypageSettingManage: React.FC = () => {
     }
     return (
         <>
-            <NavigateHeader headerTitle='설정 관리'/>
+            <Header headerTitle='설정 관리'/>
             <MypageSettingManagement/>
             <ButtonBox>
             <Button2 content='로그아웃' bgColor='bg-white' size='xl' onClick={handleLogoutClick}/>

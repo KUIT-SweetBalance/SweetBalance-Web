@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import useBottomNaviIndex from '../../store/bottomNavi/BottomNaviIndex';
 
 // 스타일 정의
 const BottomNaviContainer = styled.div`
@@ -31,7 +33,8 @@ const NavItem = styled.div<{ active: boolean }>`
   gap: 5px; /* 아이콘과 텍스트 간격 */
 
   & img {
-    opacity: ${(props) => (props.active ? 1 : 0.5)}; /* 비활성화된 아이콘 투명도 */
+    opacity: ${(props) =>
+      props.active ? 1 : 0.5}; /* 비활성화된 아이콘 투명도 */
   }
 `;
 
@@ -53,31 +56,57 @@ const Label = styled.span<{ active: boolean }>`
 
 // 컴포넌트 정의
 const BottomNavi: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState<number>(0); // 활성화된 아이템의 인덱스
+  // const [activeIndex, setActiveIndex] = useState<number>(0); // 활성화된 아이템의 인덱스
+  const navigate = useNavigate();
+  const { index, setBottomNaviIndex } = useBottomNaviIndex();
 
   // 네비게이션 데이터
   const navItems = [
-    { id: 0, label: '홈', src: '/Homefill1.svg', inactiveSrc: '/Homefill2.svg' },
-    { id: 1, label: '음료탐색', src: '/Drinkfill1.svg', inactiveSrc: '/Drinkfill2.svg' },
+    {
+      id: 0,
+      label: '홈',
+      src: '/Homefill1.svg',
+      inactiveSrc: '/Homefill2.svg',
+    },
+    {
+      id: 1,
+      label: '음료탐색',
+      src: '/Drinkfill1.svg',
+      inactiveSrc: '/Drinkfill2.svg',
+    },
     { id: 2, label: '마이', src: '/Myfill1.svg', inactiveSrc: '/Myfill2.svg' },
   ];
+
+  const handleBottomNaviClick = (id: number) => {
+    setBottomNaviIndex(id);
+  };
+
+  useEffect(() => {
+    if (index === 0) {
+      navigate('/home');
+    } else if (index === 1) {
+      navigate('/search');
+    } else if (index === 2) {
+      navigate('/mypage');
+    }
+  }, [index]);
 
   return (
     <BottomNaviContainer>
       {/* <Padding> */}
-        {navItems.map((item) => (
-          <NavItem
-            key={item.id}
-            active={item.id === activeIndex}
-            onClick={() => setActiveIndex(item.id)} // 클릭 시 활성화된 인덱스 변경
-          >
-            <Icon
-              src={item.id === activeIndex ? item.src : item.inactiveSrc} // 활성화 상태에 따라 이미지 변경
-              alt={item.label}
-            />
-            <Label active={item.id === activeIndex}>{item.label}</Label>
-          </NavItem>
-        ))}
+      {navItems.map((item) => (
+        <NavItem
+          key={item.id}
+          active={item.id === index}
+          onClick={() => handleBottomNaviClick(item.id)} // 클릭 시 활성화된 인덱스 변경
+        >
+          <Icon
+            src={item.id === index ? item.src : item.inactiveSrc} // 활성화 상태에 따라 이미지 변경
+            alt={item.label}
+          />
+          <Label active={item.id === index}>{item.label}</Label>
+        </NavItem>
+      ))}
       {/* </Padding> */}
     </BottomNaviContainer>
   );

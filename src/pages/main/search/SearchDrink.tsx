@@ -4,6 +4,7 @@ import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BottomNavi from '../../../components/BottomNavi/BottomNavi';
 
 const SearchDrink = () => {
   const {
@@ -53,8 +54,8 @@ const SearchDrink = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <AppTitle />
+    <div className="flex flex-col items-center w-full mt-[60px]  mb-[100px]">
+      {/* <AppTitle /> */}
 
       <div className="flex w-[calc(100%-48px)] mb-[40px]">
         <SearchInput
@@ -163,6 +164,8 @@ const SearchDrink = () => {
           marginRight="4"
         />
       </div>
+
+      <BottomNavi />
     </div>
   );
 };

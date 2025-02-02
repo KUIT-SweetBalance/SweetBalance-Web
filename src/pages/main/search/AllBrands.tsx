@@ -30,7 +30,7 @@ const AllBrands = () => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <AppTitle leftButton={true} />
+      {/* <AppTitle leftButton={true} /> */}
 
       <div className="flex w-[calc(100%-48px)] mb-[40px]">
         <SearchInput

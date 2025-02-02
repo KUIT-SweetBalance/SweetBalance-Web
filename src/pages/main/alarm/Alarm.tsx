@@ -6,13 +6,13 @@ import AlarmItem from './AlarmItem';
 const Alarm = () => {
   return (
     <div className="flex flex-col items-center mb-[20px] overflow-y-auto scrollbar-hide">
-      <AppTitle />
+      {/* <AppTitle /> */}
 
-      <div className="w-[calc(100%-48px)] mb-[30px]">
+      <div className="w-[calc(100%-48px)] mt-[50px] mb-[30px]">
         <Header headerTitle="알림 페이지" />
       </div>
 
-      <div className="w-[calc(100%-48px)] space-y-5">
+      <div className="w-[calc(100%-48px)]">
         <div className="flex font-[500] mb-[14px]">2024.11.22</div>
         <AlarmItem
           time="17:34"
@@ -31,7 +31,7 @@ const Alarm = () => {
           drinkName="아이스 아메리카노"
         />
 
-        <div className="flex font-[500] mb-[14px]">2024.11.20</div>
+        <div className="flex font-[500] mt-[30px] my-[14px]">2024.11.20</div>
         <AlarmItem
           time="17:34"
           cafeName="스타벅스"

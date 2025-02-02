@@ -1,7 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import WeeklySugarChart from './WeeklySugarChart';
 
 const Home2WeeklyHeader = () => {
+  const navigate = useNavigate();
+  const handleAlarmClick = () => {
+    navigate('/alarm');
+  };
+
   const sugarData = [30, 10, 25, 32, 30, 0, 35]; // 일요일~토요일 섭취량 데이터
   const startDate = '10월 16일';
   const endDate = '10월 23일';
@@ -30,13 +36,16 @@ const Home2WeeklyHeader = () => {
         <button
           type="button"
           className="w-[39px] h-[39px] flex items-center justify-center border rounded-full"
-          // onClick={handleAlarmClick}
+          onClick={handleAlarmClick}
         >
-          <img src="/bell2.png" alt="알림" className="w-[16px] h-[18px]" />
+          <div className="relative inline-block">
+            <img src="/bell2.png" alt="알림" className="w-[16px] h-[18px]" />
+            <div className="absolute top-0 right-0 w-[6px] h-[6px] bg-alert rounded-full"></div>
+          </div>
         </button>
       </div>
 
-      <div className='mt-[40px] h-[200px]'>
+      <div className="mt-[40px] h-[200px]">
         <WeeklySugarChart
           data={sugarData}
           startDate={startDate}

@@ -25,9 +25,9 @@ const EditCompleted = () => {
             cafeName="스타벅스"
             drinkName="아이스 아메리카노"
             sugar={0}
-            kcal={0}
+            syrupType="딸기 시럽"
+            syrup={2}
             size="tall"
-            marginRight="4"
           />
         </div>
       </div>

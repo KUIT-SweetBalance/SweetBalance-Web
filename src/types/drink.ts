@@ -15,3 +15,4 @@ export interface DrinkCardProps extends BaseDrinkInfoProps {
   image?: string;
   isAdded?: boolean; // 즐겨찾기 추가 여부
 }
+

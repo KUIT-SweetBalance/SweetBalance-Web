@@ -6,6 +6,7 @@ import SearchInput from '../../../components/input/searchInput/SearchInput';
 import { useForm } from 'react-hook-form';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
 import EditDrinkModal from '../modal/EditDrinkModal';
+import NoContents from '../../../components/noContents/NoContents';
 
 const EditDrink = () => {
   const {
@@ -82,6 +83,7 @@ const EditDrink = () => {
             </div>
           </button>
         ))}
+        {/* <NoContents height='100px' /> */}
       </div>
 
       <div className="w-full h-[15px] mt-[30px] bg-[#F4F4F4]"></div>
@@ -98,37 +100,37 @@ const EditDrink = () => {
 
       {/* 음료 정보 */}
       <div className="flex flex-col w-[calc(100%-75px)] space-y-6 mb-5">
-        <DrinkInfo
+      <DrinkInfo
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"
           sugar={0}
-          kcal={0}
+          syrupType="딸기 시럽"
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
         <DrinkInfo
           cafeName="더벤티"
           drinkName="카페라떼"
           sugar={0}
-          kcal={0}
+          syrupType='딸기 시럽'
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
         <DrinkInfo
           cafeName="스타벅스"
           drinkName="자몽 허니 블랙 티"
           sugar={0}
-          kcal={0}
+          syrupType="딸기 시럽"
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
         <DrinkInfo
           cafeName="빽다방"
           drinkName="딸기 스무디"
           sugar={0}
-          kcal={0}
+          syrupType='딸기 시럽'
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
       </div>
     </div>

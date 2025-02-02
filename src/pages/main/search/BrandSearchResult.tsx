@@ -68,7 +68,7 @@ const BrandSearchResult = () => {
           <span className="font-[500] text-[19px]">스타벅스</span>
         </div>
         <div className="flex space-x-2 bg-[#F4F4F4] items-center rounded-full px-3 py-[6px]">
-          <img src='/star.png' alt="즐겨찾기" className="w-[14px] h-[14px]" />
+          <img src="/star.png" alt="즐겨찾기" className="w-[14px] h-[14px]" />
           <span className="text-[12px]">즐겨찾기</span>
         </div>
       </div>
@@ -82,11 +82,8 @@ const BrandSearchResult = () => {
 
       <div className="flex w-[calc(100%-48px)] space-x-5 overflow-x-auto scrollbar-hide">
         {brands.map((brand, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center text-center"
-          >
-            <div className='text-[13px] mb-[8px]'>{index + 1}위</div>
+          <div key={index} className="flex flex-col items-center text-center">
+            <div className="text-[13px] mb-[8px]">{index + 1}위</div>
             <div className="w-[90px] h-[90px] rounded-full border border-[#E5E5E5] mb-[11px]"></div>
             <div className="text-[12px] text-[#909090]">{brand}</div>
           </div>
@@ -134,33 +131,33 @@ const BrandSearchResult = () => {
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"
           sugar={0}
-          kcal={0}
+          syrupType="딸기 시럽"
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
         <DrinkInfo
           cafeName="더벤티"
           drinkName="카페라떼"
           sugar={0}
-          kcal={0}
+          syrupType='딸기 시럽'
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
         <DrinkInfo
           cafeName="스타벅스"
           drinkName="자몽 허니 블랙 티"
           sugar={0}
-          kcal={0}
+          syrupType="딸기 시럽"
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
         <DrinkInfo
           cafeName="빽다방"
           drinkName="딸기 스무디"
           sugar={0}
-          kcal={0}
+          syrupType='딸기 시럽'
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
       </div>
     </div>

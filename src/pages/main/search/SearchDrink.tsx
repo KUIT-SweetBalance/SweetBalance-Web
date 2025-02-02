@@ -135,33 +135,33 @@ const SearchDrink = () => {
           cafeName="스타벅스"
           drinkName="아이스 아메리카노"
           sugar={0}
-          kcal={0}
+          syrupType="딸기 시럽"
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
         <DrinkInfo
           cafeName="더벤티"
           drinkName="카페라떼"
           sugar={0}
-          kcal={0}
+          syrupType="딸기 시럽"
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
         <DrinkInfo
           cafeName="스타벅스"
           drinkName="자몽 허니 블랙 티"
           sugar={0}
-          kcal={0}
+          syrupType="딸기 시럽"
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
         <DrinkInfo
           cafeName="빽다방"
           drinkName="딸기 스무디"
           sugar={0}
-          kcal={0}
+          syrupType="딸기 시럽"
+          syrup={2}
           size="tall"
-          marginRight="4"
         />
       </div>
 

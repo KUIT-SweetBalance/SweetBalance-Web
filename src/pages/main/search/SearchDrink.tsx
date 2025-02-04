@@ -40,7 +40,12 @@ const SearchDrink = () => {
   // 검색버튼 클릭 시 실행되는 메서드
   const handleSearchClick = () => {
     const inputValue = getValues('SearchDrink');
+    if(!inputValue) {
+      alert('검색어를 입력해주세요!')
+      return;
+    }
     console.log(inputValue);
+    navigate(`/drink-result/${encodeURIComponent(inputValue)}`)
   };
 
   const handleCategoryClick = (index: number) => {
@@ -77,13 +82,13 @@ const SearchDrink = () => {
 
       <div className="flex w-[calc(100%-48px)] justify-between mb-[18px] items-baseline">
         <div className="font-medium text-[18px]">브랜드</div>
-        <button
+        {/* <button
           type="button"
           className="text-[14px] text-primary"
           onClick={handleEditClick}
         >
           더보기
-        </button>
+        </button> */}
       </div>
 
       <div className="flex w-[calc(100%-48px)] mb-[34px] space-x-5 overflow-x-auto scrollbar-hide">

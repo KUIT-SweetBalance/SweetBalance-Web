@@ -1,9 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SearchInput from '../../../components/input/searchInput/SearchInput';
+import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
 
 const DrinkSearchResult = () => {
+  const { cafeName, drinkName } = useParams();
+
   const {
     // watch, // 입력 필드 값 실시간 확인
     getValues, // 입력값 가져오기
@@ -45,6 +48,44 @@ const DrinkSearchResult = () => {
             onSearch={handleSearchClick}
           />
         </div>
+      </div>
+
+      <p className="w-full my-[20px] pl-[24px] space-x-[6px]">
+        {cafeName && (
+          <span className="text-[18px] text-gray_text">
+            {cafeName}&nbsp;내&nbsp;
+          </span>
+        )}
+        <span className="text-[18px] font-[600]">'{drinkName}'&nbsp;</span>
+        <span className="text-[18px] text-gray_text">검색 결과&nbsp;</span>
+        <span className="text-[18px] text-primary">{8}</span>
+      </p>
+
+      <div className="flex flex-col w-full  mb-5">
+        <DrinkInfo
+          drinkName="아이스 아메리카노"
+          isFavoriteBtnExist={true}
+          cafeNameTop="투썸플레이스"
+          sugar={1}
+        />
+        <DrinkInfo
+          drinkName="아이스 아메리카노"
+          isFavoriteBtnExist={true}
+          cafeNameTop="투썸플레이스"
+          sugar={1}
+        />
+        <DrinkInfo
+          drinkName="아이스 아메리카노"
+          isFavoriteBtnExist={true}
+          cafeNameTop="투썸플레이스"
+          sugar={1}
+        />
+        <DrinkInfo
+          drinkName="아이스 아메리카노"
+          isFavoriteBtnExist={true}
+          cafeNameTop="투썸플레이스"
+          sugar={1}
+        />
       </div>
     </div>
   );

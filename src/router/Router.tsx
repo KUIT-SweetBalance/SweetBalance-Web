@@ -21,6 +21,7 @@ import ForgotPassword from '../pages/onboarding/login/ForgotPassword';
 import SignIn from '../pages/onboarding/sign-in/SignIn';
 import AllBrands from '../pages/main/search/AllBrands';
 import BrandSearchResult from '../pages/main/search/BrandSearchResult';
+import DrinkSearchResult from '../pages/main/search/DrinkSearchResult';
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,14 @@ const router = createBrowserRouter([
     path: '/brand-result',
     element: <BrandSearchResult />,
   },
+  {
+    path: '/drink-result/:drinkName',
+    element: <DrinkSearchResult />
+  },
+  {
+    path: '/drink-result/:cafeName/:drinkName',
+    element: <DrinkSearchResult />
+  }
 ]);
 
 const Router = () => {

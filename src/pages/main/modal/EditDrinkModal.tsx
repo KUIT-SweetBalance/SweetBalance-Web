@@ -1,4 +1,5 @@
 // 수정|수정하기, 수정|삭제하기 화면 모달창
+// ~를 즐겨찾기에 추가하시겠어요? ~를 삭제하시겠어요? 이런 화면
 
 import React, { useRef } from 'react';
 import { BaseDrinkInfoProps } from '../../../types/drink';
@@ -6,10 +7,10 @@ import { BaseDrinkInfoProps } from '../../../types/drink';
 interface EditDrinkModalProps {
   cafeName: string;
   drinkName: string;
-  content: string;
-  button1: string;
-  button2: string;
-  editCompleted?: string;
+  content: string; // 본문 내용(추가하시겠어요? 삭제하시겠어요? 이런거)
+  button1: string; // 왼쪽 버튼 내용(아니오)
+  button2: string; // 오른쪽 버튼 내용(추가할래요, 삭제할래요)
+  editCompleted?: string; // 버튼, 내용 없이 그냥 '삭제가 완료되었습니다' 이런 것만 필요하면 이 Prop만 보내기
 }
 
 const EditDrinkModal = (props: EditDrinkModalProps) => {

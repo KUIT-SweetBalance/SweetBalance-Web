@@ -19,6 +19,7 @@ const BrandSearchResult = () => {
   // 검색버튼 클릭 시 실행되는 메서드
   const handleSearchClick = () => {
     const inputValue = getValues('SearchDrink');
+    navigate(`/drink-result/${encodeURIComponent('스타벅스')}/${encodeURIComponent(inputValue)}`)
     console.log(inputValue);
   };
 

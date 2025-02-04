@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import SearchInput from '../../../components/input/searchInput/SearchInput';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
+import useLargeFavoriteDrinkModalStore from '../../../store/modal/LargeFavoriteModalStore';
+import LargeFavoriteDrinkModal from '../modal/LargeFavoriteDrinkModal';
 
 const DrinkSearchResult = () => {
   const { cafeName, drinkName } = useParams();

@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BottomNavi from '../../../components/BottomNavi/BottomNavi';
+import useLargeFavoriteDrinkModalStore from '../../../store/modal/LargeFavoriteModalStore';
+import LargeFavoriteDrinkModal from '../modal/LargeFavoriteDrinkModal';
 
 const SearchDrink = () => {
   const {
@@ -40,17 +42,19 @@ const SearchDrink = () => {
   // 검색버튼 클릭 시 실행되는 메서드
   const handleSearchClick = () => {
     const inputValue = getValues('SearchDrink');
-    if(!inputValue) {
-      alert('검색어를 입력해주세요!')
+    if (!inputValue) {
+      alert('검색어를 입력해주세요!');
       return;
     }
     console.log(inputValue);
-    navigate(`/drink-result/${encodeURIComponent(inputValue)}`)
+    navigate(`/drink-result/${encodeURIComponent(inputValue)}`);
   };
 
   const handleCategoryClick = (index: number) => {
     setClickedCategory(index);
   };
+
+  const { isOpen } = useLargeFavoriteDrinkModalStore();
 
   // 임시 데이터
   const brands = [
@@ -137,8 +141,8 @@ const SearchDrink = () => {
         </span>
       </div>
 
-      <div className="relative w-[calc(100%-48px)] overflow-x-auto scrollbar-hide mt-[15px]">
-        <div className="relative z-10 flex space-x-[32px] justify-between">
+      <div className="w-[calc(100%-48px)] overflow-x-auto scrollbar-hide mt-[15px]">
+        <div className="flex space-x-[32px] justify-between border-b-[3px] ">
           {drinkCategory.map((category, index) => (
             <button
               key={index}
@@ -156,7 +160,7 @@ const SearchDrink = () => {
           ))}
         </div>
         {/* <div className='absolute z-0 w-full h-[3px] bg-[#F4F4F4] bottom-0'></div> */}
-        <div className="absolute w-full z-0 h-[3px] bg-[#F4F4F4] bottom-0"></div>
+        {/* <div className="w-full h-[3px] bg-[#F4F4F4] bottom-0"></div> */}
       </div>
 
       <div className="flex flex-col w-full mt-[10px] mb-5">
@@ -187,6 +191,9 @@ const SearchDrink = () => {
       </div>
 
       <BottomNavi />
+
+      {/* 모달을 조건부 렌더링 */}
+      {isOpen && <LargeFavoriteDrinkModal />}
     </div>
   );
 };

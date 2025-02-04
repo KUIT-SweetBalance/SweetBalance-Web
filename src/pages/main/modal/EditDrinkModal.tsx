@@ -3,22 +3,19 @@
 
 import React, { useRef } from 'react';
 import { BaseDrinkInfoProps } from '../../../types/drink';
+import useEditDrinkModalStore from '../../../store/modal/EditDrinkModal';
 
-interface EditDrinkModalProps {
-  cafeName: string;
-  drinkName: string;
-  content: string; // 본문 내용(추가하시겠어요? 삭제하시겠어요? 이런거)
-  button1: string; // 왼쪽 버튼 내용(아니오)
-  button2: string; // 오른쪽 버튼 내용(추가할래요, 삭제할래요)
-  editCompleted?: string; // 버튼, 내용 없이 그냥 '삭제가 완료되었습니다' 이런 것만 필요하면 이 Prop만 보내기
-}
+const EditDrinkModal = () => {
+  const { isOpen, closeModal, editCompleted, cafeName, drinkName, content, button1, button2 } =
+    useEditDrinkModalStore();
 
-const EditDrinkModal = (props: EditDrinkModalProps) => {
-  if (props.editCompleted) {
+  if (editCompleted) {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center">
         <div className="flex flex-col bg-white rounded-lg shadow-lg w-[calc(100%-48px)]">
-          <p className="text-[20px] text-center my-[25px] mx-[20px]">{props.editCompleted}</p>
+          <p className="text-[20px] text-center my-[25px] mx-[20px]">
+            {editCompleted}
+          </p>
         </div>
       </div>
     );
@@ -28,12 +25,12 @@ const EditDrinkModal = (props: EditDrinkModalProps) => {
     <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center">
       <div className="flex flex-col bg-white rounded-lg shadow-lg p-6 w-[calc(100%-48px)]">
         <div className="text-[20px] space-y-[2px]">
-          <p>{props.cafeName}</p>
+          <p>{cafeName}</p>
           <p>
             <span className="text-[25px] font-[600] text-primary">
-              {props.drinkName}
+              {drinkName}
             </span>
-            {props.content}
+            {content}
           </p>
         </div>
 
@@ -45,14 +42,15 @@ const EditDrinkModal = (props: EditDrinkModalProps) => {
           <button
             type="button"
             className="flex-1 text-center py-[10px] text-primary text-[17px] rounded-full border border-1-[#F4F4F4] whitespace-nowrap"
+            onClick={closeModal}
           >
-            {props.button1}
+            {button1}
           </button>
           <button
             type="button"
             className="flex-1 text-center py-[10px] text-white bg-primary text-[187x] rounded-full whitespace-nowrap"
           >
-            {props.button2}
+            {button2}
           </button>
         </div>
       </div>

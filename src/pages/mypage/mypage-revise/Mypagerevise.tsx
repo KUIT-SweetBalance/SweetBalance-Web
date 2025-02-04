@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import NavigateHeader from '../../../components/header/NavigateHeader';
+import Header from '../../../components/header/Header';
 interface MypageInfoItem {
     key: string;
     value: string;
@@ -56,7 +56,7 @@ const Mypagerevise: React.FC = () => {
 
     return (
         <>
-        <NavigateHeader headerTitle='내 프로필 편집하기 ' confirmButton='완료'/>
+        <Header headerTitle='내 프로필 편집하기 ' confirmButton='완료'/>
             <MypagereviseBox>
                 {info.map((item,index)=>(
                     <MypagereviseItem key = {index}>

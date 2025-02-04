@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import onboarding1_logo from '../../../assets/onboarding/onboarding1_logo.svg';
 import onboarding1_icon from '../../../assets/onboarding/onboarding1_icon.svg';
 import Button from '../../../components/button/Button';
 import RedirectButton from '../Kakaotalk/LoginButton';
-import { useNavigate } from 'react-router-dom';
 
 const Logo = () => {
   return (
@@ -15,9 +16,17 @@ const Logo = () => {
 
 const Icon = () => {
   return (
-    <div className={`flex justify-center`}>
+    <motion.div
+      className="flex justify-center"
+      animate={{ y: [0, -15, 0] }} // 사선 이동 효과 추가
+      transition={{
+        duration: 3.5, // 천천히 떠오르는 효과
+        repeat: Infinity, // 무한 반복
+        ease: 'easeInOut', // 부드러운 움직임
+      }}
+    >
       <img src={onboarding1_icon} alt="onboarding1_icon" />
-    </div>
+    </motion.div>
   );
 };
 

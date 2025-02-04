@@ -3,10 +3,9 @@ import EditCompletedImage from '../../../assets/edit-completed.png';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
 import SugarProgressCircle from './SugarProgressCircle';
 
-// 디자인 미완료
 const EditCompleted = () => {
   return (
-    <div className="flex flex-col items-center mt-[50px]">
+    <div className="flex flex-col h-full items-center mt-[50px] mb-[20px]">
       {/* // mt-[50px]: statusbar영역 */}
       <div className="flex justify-center items-center mx-[60px] my-[85px]">
         <div className="flex justify-center items-center">
@@ -16,20 +15,25 @@ const EditCompleted = () => {
 
       <div className="w-full h-[15px] mt-7 bg-[#F4F4F4]"></div>
 
-      <div className="w-[calc(100%-70px)]">
-        <p className="text-[16px] mt-[30px] mb-[20px]">
-          해당 메뉴를 즐겨찾기로 등록하시겠어요?
-        </p>
-        <div>
-          <DrinkInfo
-            cafeName="스타벅스"
-            drinkName="아이스 아메리카노"
-            sugar={0}
-            syrupType="딸기 시럽"
-            syrup={2}
-            size="tall"
-          />
-        </div>
+      <p className="text-[18px] w-full mt-[30px] pl-[34px] mb-[10px]">
+        해당 메뉴를 즐겨찾기로 등록하시겠어요?
+      </p>
+
+      <div className="flex flex-col w-full mb-5">
+        <DrinkInfo
+          drinkName="아이스 아메리카노"
+          isFavoriteBtnExist={true}
+          cafeNameTop="투썸플레이스"
+          sugar={1}
+          syrupType='카라멜 시럽'
+          syrup={1}
+          size='tall'
+        />
+      </div>
+
+      <div className='fixed bottom-0 w-full flex space-x-[17px] mt-[10px] mb-[20px] px-[24px]'>
+        <button type="button" className='flex-1 h-[50px] items-center justify-center text-primary text-[18px] border border-1-gray_text rounded-[100px]'>계속 기록하기</button>
+        <button type="button" className='flex-1 h-[50px] items-center justify-center text-primary text-[18px] bg-primary text-white rounded-[100px]'>홈으로</button>
       </div>
     </div>
   );

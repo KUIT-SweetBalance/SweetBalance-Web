@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-
-interface DrinkCardProps {
-    image?: string;
-    isAdded?: boolean; // 즐겨찾기 추가 여부
-    cafeName: string;
-    drinkName: string;
-    sugar: number;
-    kcal: number;
-    size: string;
-}
+import { DrinkCardProps } from '../../../../types/drink';
 
 const DrinkCard = (props: DrinkCardProps) => {
   const [selected, setSelected] = useState(false);
@@ -34,15 +25,15 @@ const DrinkCard = (props: DrinkCardProps) => {
         </button>
       </div>
 
-      <div className='flex flex-col text-center'>
+      <div className='flex flex-col text-center space-y-1'>
         <p className='text-[12px] truncate'>{props.cafeName}</p>
         <p className='text-[20px] truncate'>{props.drinkName}</p>
       </div>
 
-      <div className='flex text-center text-[12px]'>
-        <span className='flex-1'>당 {props.sugar}g</span>
-        <span className='flex-1'>{props.kcal}kcal</span>
-        <span className='flex-1'>{props.size}</span>
+      <div className='flex text-center justify-between text-[12px] px-[15px]'>
+        <span className=''>당 {props.sugar}g</span>
+        <span className=''><span className='w-[80px] truncate'>{props.syrupType}</span>&nbsp;{props.syrup}</span>
+        <span className=''>{props.size}</span>
       </div>
     </div>
   );

@@ -1,29 +1,27 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import useLargeFavoriteDrinkModalStore from '../../../store/modal/LargeFavoriteModalStore';
 
-interface LargeFavoriteDrinkModalProps {
-  cafeName: string;
-  drinkName: string;
-  sugar: number;
-  kcal: number;
-  size: string;
-  // onClose: () => void;
-}
-
-const LargeFavoriteDrinkModalProps = (props: LargeFavoriteDrinkModalProps) => {
-  const { isOpen, closeModal } = useLargeFavoriteDrinkModalStore();
+const LargeFavoriteDrinkModal = () => {
+  const {
+    isOpen,
+    closeModal,
+    cafeName,
+    drinkName,
+    sugar,
+    syrupType,
+    syrup,
+    size,
+  } = useLargeFavoriteDrinkModalStore();
 
   if (!isOpen) return null;
 
   return (
-    // fixed: 부모 요소나 다른 컨텍스트에 상관없이 뷰포트를 기준으로 위치가 고정
-    // inset-0: top, right, bottom, left를 모두 0으로 설정하는 css속성, 즉 요소가 부모 전체를 꽉 채우도록 확장
     <div className="fixed inset-0 top-[-30px] bg-black bg-opacity-10 flex items-center justify-center z-1000">
       <div className="flex flex-col items-center bg-white rounded-lg shadow-lg p-6 w-[calc(100%-48px)] space-y-[21px]">
         <div className="space-y-2 text-center">
           <p className="text-[18px]">
-            <span>{props.cafeName}</span>&nbsp;
-            <span className="font-[600]">{props.drinkName}</span>
+            <span>{cafeName}</span>&nbsp;
+            <span className="font-[600]">{drinkName}</span>
             <span>&nbsp;이(가)</span>
           </p>
           <p className="text-[23px]">
@@ -35,9 +33,11 @@ const LargeFavoriteDrinkModalProps = (props: LargeFavoriteDrinkModalProps) => {
         <div className="w-[181px] h-[181px] bg-[#F4F4F4] rounded-full"></div>
 
         <div className="flex space-x-[56px] text-[16px] text-center">
-          <span>당 {props.sugar}g</span>
-          <span>{props.kcal}kcal</span>
-          <span>{props.size}(size)</span>
+          <span>당 {sugar}g</span>
+          {/* <span>
+            {syrupType}&nbsp;{syrup}
+          </span>
+          <span>{size}</span> */}
         </div>
 
         <button
@@ -52,4 +52,4 @@ const LargeFavoriteDrinkModalProps = (props: LargeFavoriteDrinkModalProps) => {
   );
 };
 
-export default LargeFavoriteDrinkModalProps;
+export default LargeFavoriteDrinkModal;

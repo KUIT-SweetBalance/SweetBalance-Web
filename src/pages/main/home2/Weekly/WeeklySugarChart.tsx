@@ -63,9 +63,9 @@ const WeeklySugarChart = (props: WeeklySugarChartProps) => {
         pointRadius: (context: any) => {
           return context.dataIndex === props.data.length - 1 ? 3 : 0.1;
         },
-        pointStyle: (context: any) => {
-          return context.raw > 25 ? angrySugar || 'triangle' : 'circle';
-        },
+        // pointStyle: (context: any) => {
+        //   return context.raw > 25 ? angrySugar || 'triangle' : 'circle';
+        // },
       },
     ],
   };

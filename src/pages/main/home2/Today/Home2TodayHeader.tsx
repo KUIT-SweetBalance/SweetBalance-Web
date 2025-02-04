@@ -1,6 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Home2TodayHeader = () => {
+  const navigate = useNavigate();
+  const handleAlarmClick = () => {
+    navigate('/alarm');
+    // 브라우저의 History API 사용(브라우저 히스토리를 프로그래밍적으로 다룰 수 있는 Javascript API)
+  };
+
   return (
     <div>
       <div className="flex px-[24px] py-[20px] justify-between">
@@ -24,9 +31,12 @@ const Home2TodayHeader = () => {
         <button
           type="button"
           className="w-[39px] h-[39px] flex items-center justify-center border rounded-full"
-          // onClick={handleAlarmClick}
+          onClick={handleAlarmClick}
         >
-          <img src="/bell2.png" alt="알림" className="w-[16px] h-[18px]" />
+          <div className="relative inline-block">
+            <img src="/bell2.png" alt="알림" className="w-[16px] h-[18px]" />
+            <div className="absolute top-0 right-0 w-[6px] h-[6px] bg-alert rounded-full"></div>
+          </div>
         </button>
       </div>
 
@@ -40,17 +50,21 @@ const Home2TodayHeader = () => {
 
       <div className="flex">
         <div className="flex-1 flex-col space-y-1">
-          <div className="text-center text-secondary text-[12px]">당 섭취량</div>
+          <div className="text-center text-secondary text-[12px]">
+            당 섭취량
+          </div>
           <div className="text-center text-white">00g</div>
         </div>
         <div className="w-[1.5px] h-10 bg-[#F4F4F4]"></div>
         <div className="flex-1 flex-col space-y-1">
-          <div className="text-center text-secondary text-[12px]">칼로리</div>
-          <div className="text-center text-white">000kcal</div>
+          <div className="text-center text-secondary text-[12px]">
+            하루 음료 섭취량
+          </div>
+          <div className="text-center text-white">3잔</div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home2TodayHeader
+export default Home2TodayHeader;

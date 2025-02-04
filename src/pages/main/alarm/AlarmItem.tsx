@@ -12,7 +12,7 @@ interface AlarmItemProps {
 // css가 의도한 대로 적용되긴 하는데 왜 되는지 모르겠음...
 const AlarmItem = (props: AlarmItemProps) => {
   return (
-    <div className="flex px-[10px] py-[12px] justify-between rounded-[10px] border border-1-[#F4F4F4]">
+    <div className="flex px-[10px] py-[18px] justify-between  border-b border-1-[#F4F4F4]">
       {props.time && (
         <div className="flex items-center flex-1">
           <span className="flex w-[63px] justify-center items-center text-center py-[6px] rounded-full bg-[#F4F4F4] text-primary text-[14px]">
@@ -39,7 +39,7 @@ const AlarmItem = (props: AlarmItemProps) => {
         type="button"
         className="flex w-[63px] justify-center items-center text-center py-[6px] rounded-full bg-primary text-white text-[14px]"
       >
-        확인
+        보기
       </button>
     </div>
   );

@@ -16,3 +16,11 @@ export interface DrinkCardProps extends BaseDrinkInfoProps {
   isAdded?: boolean; // 즐겨찾기 추가 여부
 }
 
+export interface DrinkInfoProps extends BaseDrinkInfoProps {
+    dateAndTime?: string;
+    cafeNameTop?: string;
+    cafeNameMiddle?: string;
+    cafeNameBottom?: string;
+    isEditDeleteBtnExist?: boolean;
+    isFavoriteBtnExist?: boolean;
+}

@@ -7,6 +7,8 @@ import { useForm } from 'react-hook-form';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
 import EditDrinkModal from '../modal/EditDrinkModal';
 import NoContents from '../../../components/noContents/NoContents';
+import BottomNavi from '../../../components/BottomNavi/BottomNavi';
+
 
 const EditDrink = () => {
   const {
@@ -41,16 +43,21 @@ const EditDrink = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center mt-[60px]">
+    <div className="flex flex-col items-center mt-[30px]">
       {/* <AppTitle />
 
       <div className="w-[calc(100%-48px)] mb-[30px]">
         <Header headerTitle="알림 페이지" confirmButton="완료" />
       </div> */}
 
-      <div className="flex w-[calc(100%-48px)] mb-[30px] space-x-5">
+      {/* <div className="flex w-[calc(100%-48px)] mb-[30px] space-x-5">
         <button type="button">
-          <img src='/chevron-left-primary.png' alt="뒤로가기" className='w-[8px] h-[14px]' onClick={handleBackClick}/>
+          <img
+            src="/chevron-left-primary.png"
+            alt="뒤로가기"
+            className="w-[8px] h-[14px]"
+            onClick={handleBackClick}
+          />
         </button>
 
         <SearchInput
@@ -60,17 +67,20 @@ const EditDrink = () => {
           register={register}
           onSearch={handleSearchClick}
         />
+      </div> */}
+
+      <div className="flex w-[calc(100%-48px)]">
+        <Header headerTitle='수정하기'/>
       </div>
 
-      <div className="flex w-[calc(100%-48px)] justify-between mb-[30px]">
+      {/* <div className="flex w-[calc(100%-48px)] justify-between mb-[30px]">
         <div className="text-[17px] font-medium">오늘 마신 브랜드</div>
         <button type="button" className="text-[14px] text-primary">
           삭제하기
         </button>
-      </div>
+      </div> */}
 
-      <div className="flex w-[calc(100%-48px)] space-x-5 overflow-x-auto scrollbar-hide">
-        {/* scrollbar-hide를 사용하려면 tailwind-scrollbar-hide 설치하고 config파일에 플러그인 추가해야 함 */}
+      {/* <div className="flex w-[calc(100%-48px)] space-x-5 overflow-x-auto scrollbar-hide">
         {brands.map((brand, index) => (
           <button
             type="button"
@@ -83,56 +93,75 @@ const EditDrink = () => {
             </div>
           </button>
         ))}
-        {/* <NoContents height='100px' /> */}
-      </div>
 
-      <div className="w-full h-[15px] mt-[30px] bg-[#F4F4F4]"></div>
+      </div> */}
+      {/* <NoContents height='100px' /> */}
 
-      <div className="flex justify-between w-[calc(100%-48px)] my-5">
+      {/* <div className="w-full h-[15px] mt-[30px] bg-[#F4F4F4]"></div> */}
+
+      <div className="flex flex-col justify-between w-[calc(100%-48px)] ml-[10px] my-5">
         <div className="text-[17px]">오늘 마신 음료수</div>
-        <button
-          type="button"
-          className="text-[14px] text-[#909090]"
-        >
+        <div className='text-[12px] text-gray_text mt-[6px]'>하단 별 클릭 시 빠른 기록이 가능해요!</div>
+        {/* <button type="button" className="text-[14px] text-[#909090]">
           수정하기
-        </button>
+        </button> */}
       </div>
 
       {/* 음료 정보 */}
-      <div className="flex flex-col w-[calc(100%-75px)] space-y-6 mb-5">
-      <DrinkInfo
-          cafeName="스타벅스"
+      <div className="flex flex-col w-full  mb-5">
+        <DrinkInfo
+          dateAndTime="2025.02.04 (화) 12:29"
+          isEditDeleteBtnExist={true}
+          cafeNameMiddle="스타벅스"
           drinkName="아이스 아메리카노"
-          sugar={0}
+          sugar={1}
           syrupType="딸기 시럽"
           syrup={2}
           size="tall"
         />
         <DrinkInfo
-          cafeName="더벤티"
-          drinkName="카페라떼"
-          sugar={0}
-          syrupType='딸기 시럽'
-          syrup={2}
-          size="tall"
-        />
-        <DrinkInfo
-          cafeName="스타벅스"
-          drinkName="자몽 허니 블랙 티"
-          sugar={0}
+          dateAndTime="2025.02.04 (화) 12:29"
+          isEditDeleteBtnExist={true}
+          cafeNameMiddle="스타벅스"
+          drinkName="아이스 아메리카노"
+          sugar={1}
           syrupType="딸기 시럽"
           syrup={2}
           size="tall"
         />
         <DrinkInfo
-          cafeName="빽다방"
-          drinkName="딸기 스무디"
-          sugar={0}
-          syrupType='딸기 시럽'
+          dateAndTime="2025.02.04 (화) 12:29"
+          isEditDeleteBtnExist={true}
+          cafeNameMiddle="스타벅스"
+          drinkName="아이스 아메리카노"
+          sugar={1}
+          syrupType="딸기 시럽"
+          syrup={2}
+          size="tall"
+        />
+        <DrinkInfo
+          dateAndTime="2025.02.04 (화) 12:29"
+          isEditDeleteBtnExist={true}
+          cafeNameMiddle="스타벅스"
+          drinkName="아이스 아메리카노"
+          sugar={1}
+          syrupType="딸기 시럽"
+          syrup={2}
+          size="tall"
+        />
+        <DrinkInfo
+          dateAndTime="2025.02.04 (화) 12:29"
+          isEditDeleteBtnExist={true}
+          cafeNameMiddle="스타벅스"
+          drinkName="아이스 아메리카노"
+          sugar={1}
+          syrupType="딸기 시럽"
           syrup={2}
           size="tall"
         />
       </div>
+
+      {/* <BottomNavi /> */}
     </div>
   );
 };

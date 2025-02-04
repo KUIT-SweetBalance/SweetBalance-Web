@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Dial from './dial';
 import Recoding from './Recording';
 import Pump from './pump';
+import SyrupSelect from './SyrupSelect/SyrupSelect';
 
 const SlideUpContainers = styled.div`
  position: fixed;
@@ -105,61 +106,63 @@ const SyrupsubLabel = styled.div`
 
 
 
-const HowBox = styled.div`
-  display: flex;
-  gap: 148px;
-  align-items: center;
-  padding: 0 0 24px 30px ;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 500;
-`;
+// const HowBox = styled.div`
+//   display: flex;
+//   gap: 148px;
+//   align-items: center;
+//   padding: 0 0 24px 30px ;
+//   font-family: Pretendard;
+//   font-size: 16px;
+//   font-weight: 500;
+// `;
 
-const HowTitle = styled.div`
-  display: flex;
-  align-items: center;
-  color: var(--text, #121212);
-font-family: Pretendard;
-font-size: 20px;
-font-style: normal;
-font-weight: 600;
-line-height: 28px; /* 140% */
-letter-spacing: -0.5px;`;
+// const HowTitle = styled.div`
+//   display: flex;
+//   align-items: center;
+//   color: var(--text, #121212);
+// font-family: Pretendard;
+// font-size: 20px;
+// font-style: normal;
+// font-weight: 600;
+// line-height: 28px; /* 140% */
+// letter-spacing: -0.5px;`;
 
 
 
-const DrinkControl = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
+// const DrinkControl = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+// `;
 
-const ControlButton = styled.button`
-    width: 16px;
-    height: 16px;
+// const ControlButton = styled.button`
+//     width: 16px;
+//     height: 16px;
 
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    background-color: var(--gray, #F4F4F4);
-    color: #722a2a;
-    font-size: 18px;
-    cursor: pointer;
-    line-height: 15px;
+//     border-radius: 50%;
+//     border: 1px solid #ddd;
+//     background-color: var(--gray, #F4F4F4);
+//     color: #722a2a;
+//     font-size: 18px;
+//     cursor: pointer;
+//     line-height: 15px;
   
+// `;
+
+// const DrinkCount = styled.div`
+//  color: var(--text, #121212);
+// text-align: center;
+// font-family: Pretendard;
+// font-size: 25px;
+// font-style: normal;
+// font-weight: 600;
+// line-height: 28px; /* 112% */
+// letter-spacing: -0.625px;
+
+// `;
+const SyrupCotainer = styled.div`
+padding : 30px 30px 15px 30px;
 `;
-
-const DrinkCount = styled.div`
- color: var(--text, #121212);
-text-align: center;
-font-family: Pretendard;
-font-size: 25px;
-font-style: normal;
-font-weight: 600;
-line-height: 28px; /* 112% */
-letter-spacing: -0.625px;
-
-`;
-
 interface Props {
     brand: string;
     drink: string;
@@ -179,20 +182,20 @@ const Syrup: React.FC<Pick<Props, 'sugar'>& { onClick: () => void }> = ({sugar,o
 
 
     
-      const [drinkCount, setDrinkCount] = useState(1); // 기본값: 1잔
+      // const [drinkCount, setDrinkCount] = useState(1); // 기본값: 1잔
 
-      const handleIncrease = () => {
-        setDrinkCount((prev) => prev + 1); // +1
-      };
+      // const handleIncrease = () => {
+      //   setDrinkCount((prev) => prev + 1); // +1
+      // };
     
-      const handleDecrease = () => {
-        setDrinkCount((prev) => (prev > 1 ? prev - 1 : 1)); // -1, 최소값은 1
-      };
+      // const handleDecrease = () => {
+      //   setDrinkCount((prev) => (prev > 1 ? prev - 1 : 1)); // -1, 최소값은 1
+      // };
     return (
         <SlideUpContainers>
                 <SlideUpContainer >
-                    <SizeLabel>사이즈 변경</SizeLabel>
-                     <SizeSelector>
+                    {/* <SizeLabel>사이즈 변경</SizeLabel> */}
+                     {/* <SizeSelector>
                      {sizess.map((size) =>
                       size === Size ? (
                             <SizeButtonSelected
@@ -210,8 +213,13 @@ const Syrup: React.FC<Pick<Props, 'sugar'>& { onClick: () => void }> = ({sugar,o
                             </SizeButton>
                         )
                         )}
-                    </SizeSelector>
+                    </SizeSelector> */}
 
+                    <SyrupCotainer>
+                      <SyrupSelect/>
+
+                    </SyrupCotainer>
+                    
                     {/* 시럽량 조절 */}
                     <SyrupControlContainer>
   <SyrupTitle>
@@ -222,7 +230,7 @@ const Syrup: React.FC<Pick<Props, 'sugar'>& { onClick: () => void }> = ({sugar,o
   <Pump/>
 </SyrupControlContainer>
 
-                    <HowBox>
+                    {/* <HowBox> 
                 <HowTitle>
                     몇 잔 마셨나요?
                 </HowTitle>
@@ -231,7 +239,8 @@ const Syrup: React.FC<Pick<Props, 'sugar'>& { onClick: () => void }> = ({sugar,o
                     <DrinkCount>{drinkCount}</DrinkCount>
                     <ControlButton onClick={handleIncrease}>+</ControlButton>
                 </DrinkControl>
-              </HowBox>
+              </HowBox> 
+              여기 빼도 됌 사라짐..*/}
                     <Recoding sugar={sugar} onClick ={onClick} />
                 </SlideUpContainer>
                 </SlideUpContainers>

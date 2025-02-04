@@ -55,7 +55,7 @@ const Askinfo = styled.div`
 
 
 
-
+  
 
 
 const CustomMain: React.FC<Props> = ({ brand, drink, sugar, kcal, caffeine }) => {

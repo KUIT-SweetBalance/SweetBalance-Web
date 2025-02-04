@@ -104,7 +104,7 @@ align-items: center;`;
 //     letter-spacing: -0.45px;
 // `;
 
-const MypageSettingManagement: React.FC = () => {
+const MypageSettingManagement: React.FC<{ onClick: () => void }> = ({ onClick }) => {
 
         const [selected, setSelected] = useState<boolean>(false);
         const toggleSelected = () => {
@@ -131,7 +131,7 @@ const MypageSettingManagement: React.FC = () => {
                         <MypageSettingManagementLeft>버전 정보</MypageSettingManagementLeft>
                         <MypageSettingManagementver>현재 ver 1.0</MypageSettingManagementver>
                     </MypageSettingManagementBottom>
-                    <MypageSettingManagementLeft>1:1문의</MypageSettingManagementLeft>
+                    <MypageSettingManagementLeft onClick={onClick}>1:1문의</MypageSettingManagementLeft>
                     <MypageSettingManagementLeft>서비스 이용 약관 </MypageSettingManagementLeft>
                 
             </MypageSettingManagementBox>

@@ -52,6 +52,7 @@ const MypageSettingManage: React.FC = () => {
     const [withdraw, setWithdraw] = React.useState(false);
     const [withdrawment,setwithdrawment] = React.useState(false);
     const [withdrawment2,setwithdrawment2] = React.useState(false);
+    const [number,setnumber] = React.useState(false);
 
     const handleLogoutClick = () => {
         setLogout(prev => !prev);
@@ -73,10 +74,14 @@ const MypageSettingManage: React.FC = () => {
         setwithdrawment2(prev=>!prev);
 
     }
+    const handleNumber=()=>{
+        setnumber(prev=>!prev);
+
+    }
     return (
         <>
             <NavigateHeader headerTitle='설정 관리'/>
-            <MypageSettingManagement/>
+            <MypageSettingManagement onClick={handleNumber}/>
             <ButtonBox>
             <Button2 content='로그아웃' bgColor='bg-white' size='xl' onClick={handleLogoutClick}/>
             <Withdraw onClick={handleWithClick}>회원탈퇴</Withdraw>
@@ -94,14 +99,17 @@ const MypageSettingManage: React.FC = () => {
             }
             {withdrawment&&
             <GrayBox>
-                {/* <MypageWithdraw/> */}
                 <With src='/WithDraw.svg' alt='dl'onClick={handleWithdraw2Click}/>
             </GrayBox>
             }
             {withdrawment2&&
             <GrayBox>
-                {/* <MypageWithdraw/> */}
-                <With src='/withdrawbottom.svg' alt='dl' onClick={handleWithdraw3}/>
+                <With src='/withdrawbottom.svg' alt='dl'onClick={handleWithdraw3}/>
+            </GrayBox>
+            }
+            {number&&
+            <GrayBox>
+                <With src='/phonenumber.svg' alt='phone' onClick={handleNumber}/>
             </GrayBox>
             }
         </>

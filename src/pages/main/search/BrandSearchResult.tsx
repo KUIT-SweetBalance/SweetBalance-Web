@@ -5,6 +5,13 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
 import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import {
+  Beverage,
+  BeverageResponse,
+  fetchPopularDrinks
+} from '../../../api/main/search/BrandSearchResult/BrandSearchResult';
+import { useQuery } from '@tanstack/react-query';
 
 const BrandSearchResult = () => {
   // input필드 설정
@@ -17,7 +24,7 @@ const BrandSearchResult = () => {
   // SearchDrink로부터 데이터 받기
   const location = useLocation();
   const { cafeName, imgSrc } = location.state || {};
-  const placeholderText = `${cafeName} 내에서 제품명을 검색해주세요`
+  const placeholderText = `${cafeName} 내에서 제품명을 검색해주세요`;
 
   // 검색버튼 클릭 시 실행되는 메서드
   const handleSearchClick = () => {
@@ -52,11 +59,38 @@ const BrandSearchResult = () => {
     setClickedCategory(index);
   };
 
+  // 인기 음료 데이터 호출(useEffect)
+  useEffect(() => {
+    console.log('실행됨');
+    const fetchData = async () => {
+      try {
+        const response = await fetchPopularDrinks(cafeName);
+        console.log('인기 음료 응답 데이터:', response.data);
+      } catch (error) {
+        console.error('인기 음료 조회 실패:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // 인기 음료 데이터 호출(useQuery)
+  const {
+    data: popularDrinks,
+    isLoading,
+    isError,
+    error,
+    refetch
+  } = useQuery<BeverageResponse, Error>({
+    queryKey: ['popularDrinks', cafeName], // cafeName이 바뀌면 다시 요청 보냄(여기서는 필요 없을 듯?)  
+    queryFn: () => fetchPopularDrinks(cafeName),
+    enabled: false,
+  })
+
   // 임시 데이터
   const brands = [
-    '스타벅스',
+    '딸기딸기딸기 아메리카노',
     '바닐라 크림 콜드 브루',
-    '투썸플레이스',
+    '당근수박당근수박참외참외',
   ];
 
   const drinkCategory = ['전체', '커피', '음료', '시그니처', '기타'];
@@ -108,12 +142,17 @@ const BrandSearchResult = () => {
         <span className="text-[13px] text-[#B6B6B6]">24.10.16 기준</span>
       </div>
 
-      <div className="flex w-[calc(100%-60px)] justify-between">
-        {brands.map((brand, index) => (
-          <div key={index} className="flex flex-col items-center text-center">
+      <div className="flex w-[calc(100%-48px)]">
+        {isLoading && <div>Loading...</div>}
+        {isError && <div>{error?.message || 'Failed to load data'}</div>}
+        {popularDrinks?.data.map((drink, index) => (
+          <div
+            key={index}
+            className="flex flex-col flex-1 items-center text-center"
+          >
             <div className="text-[13px] mb-[8px]">{index + 1}위</div>
-            <div className="w-[90px] h-[90px] rounded-full border border-[#E5E5E5] mb-[11px]"></div>
-            <div className="text-[12px] text-[#909090]">{brand}</div>
+            <img src={drink.imgUrl} alt="인기 음료 이미지" className="w-[90px] h-[90px] rounded-full border border-[#E5E5E5] mb-[11px]" />
+            <div className="text-[12px] text-[#909090]">{drink.name}</div>
           </div>
         ))}
       </div>

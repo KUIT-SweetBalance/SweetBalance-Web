@@ -14,7 +14,7 @@ interface User {
 
 const UserListTest2 = () => {
   const {
-    data: users,
+    data: users, // useQuery에서 받은 응답 데이터를 users에 저장하겠다는 뜻
     isLoading,
     isError,
     error,

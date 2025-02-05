@@ -46,7 +46,7 @@ const SugarProgressCircle = ({ sugarAmount }: SugarProgressCircleProps) => {
     maintainAspectRatio: false,
     animation: {
       animateRotate: true, // 회전 애니메이션
-      duration: 1200, // 애니메이션 지속 시간 (1.2초)
+      duration: 1800, // 애니메이션 지속 시간(ms)
     },
     plugins: {
       legend: { display: false }, // 범례 제거

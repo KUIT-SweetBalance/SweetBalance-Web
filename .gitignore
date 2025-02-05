@@ -38,3 +38,9 @@ bower_components
 psd
 thumb
 sketch
+
+# SSL 인증서 및 키 생성 후 관련 .gitignore 코드 작성
+build/
+.env
+cert.pem
+key.pem

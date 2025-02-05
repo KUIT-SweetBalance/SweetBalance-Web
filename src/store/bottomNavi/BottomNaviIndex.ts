@@ -6,7 +6,7 @@ interface BottomNaviIndex {
 }
 
 const useBottomNaviIndex = create<BottomNaviIndex>((set) => ({
-  index: -1,
+  index: 0,
   setBottomNaviIndex: (newIndex) => set({ index: newIndex }),
 }));
 

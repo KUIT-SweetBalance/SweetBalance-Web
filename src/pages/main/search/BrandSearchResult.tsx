@@ -3,10 +3,8 @@ import AppTitle from '../../../components/appTitle/AppTitle';
 import SearchInput from '../../../components/input/searchInput/SearchInput';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import star from '../../../assets/star.png';
-import starFilled from '../../../assets/star-filled.png';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
-import { spawn } from 'child_process';
+import { useLocation } from 'react-router-dom';
 
 const BrandSearchResult = () => {
   // input필드 설정
@@ -16,10 +14,17 @@ const BrandSearchResult = () => {
     register, // 유효성 검사와 값 관리에 사용
   } = useForm(); // mode: onChange로 설정
 
+  // SearchDrink로부터 데이터 받기
+  const location = useLocation();
+  const { cafeName, imgSrc } = location.state || {};
+  const placeholderText = `${cafeName} 내에서 제품명을 검색해주세요`
+
   // 검색버튼 클릭 시 실행되는 메서드
   const handleSearchClick = () => {
     const inputValue = getValues('SearchDrink');
-    navigate(`/drink-result/${encodeURIComponent('스타벅스')}/${encodeURIComponent(inputValue)}`)
+    navigate(
+      `/drink-result/${encodeURIComponent('스타벅스')}/${encodeURIComponent(inputValue)}`,
+    );
     console.log(inputValue);
   };
 
@@ -52,11 +57,6 @@ const BrandSearchResult = () => {
     '스타벅스',
     '바닐라 크림 콜드 브루',
     '투썸플레이스',
-    '이디야',
-    '커피빈',
-    '빽다방',
-    '메가커피',
-    '더벤티',
   ];
 
   const drinkCategory = ['전체', '커피', '음료', '시그니처', '기타'];
@@ -79,7 +79,7 @@ const BrandSearchResult = () => {
           <SearchInput
             id="SearchDrink"
             type="text"
-            placeholder="제품명을 검색해주세요."
+            placeholder={placeholderText}
             register={register}
             onSearch={handleSearchClick}
           />
@@ -88,8 +88,12 @@ const BrandSearchResult = () => {
 
       <div className="w-full flex justify-between justify-center items-center">
         <div className="flex items-center space-x-5 my-[20px] ml-[26px]">
-          <div className="w-[79px] h-[79px] rounded-full bg-[#F4F4F4]"></div>
-          <span className="font-[500] text-[19px]">스타벅스</span>
+          <img
+            src={imgSrc}
+            alt="카페 로고"
+            className="w-[79px] h-[79px] rounded-full bg-[#F4F4F4]"
+          />
+          <span className="font-[500] text-[19px]">{cafeName}</span>
         </div>
         {/* <div className="flex space-x-2 bg-[#F4F4F4] items-center rounded-full px-3 py-[6px]">
           <img src="/star.png" alt="즐겨찾기" className="w-[14px] h-[14px]" />
@@ -104,7 +108,7 @@ const BrandSearchResult = () => {
         <span className="text-[13px] text-[#B6B6B6]">24.10.16 기준</span>
       </div>
 
-      <div className="flex w-[calc(100%-48px)] space-x-5 overflow-x-auto scrollbar-hide">
+      <div className="flex w-[calc(100%-60px)] justify-between">
         {brands.map((brand, index) => (
           <div key={index} className="flex flex-col items-center text-center">
             <div className="text-[13px] mb-[8px]">{index + 1}위</div>

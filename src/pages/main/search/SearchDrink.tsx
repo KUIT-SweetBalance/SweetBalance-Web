@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import BottomNavi from '../../../components/BottomNavi/BottomNavi';
 import useLargeFavoriteDrinkModalStore from '../../../store/modal/LargeFavoriteModalStore';
 import LargeFavoriteDrinkModal from '../modal/LargeFavoriteDrinkModal';
+import { brands } from '../../../types/brands';
 
 const SearchDrink = () => {
   const {
@@ -33,8 +34,8 @@ const SearchDrink = () => {
     }
   };
 
-  const handleBrandClick = () => {
-    navigate('/brand-result');
+  const handleBrandClick = (cafeName: string, imgSrc: string) => {
+    navigate('/brand-result', { state: { cafeName, imgSrc } });
   };
 
   const [clickedCategory, setClickedCategory] = useState<number>(0);
@@ -55,18 +56,6 @@ const SearchDrink = () => {
   };
 
   const { isOpen } = useLargeFavoriteDrinkModalStore();
-
-  // 임시 데이터
-  const brands = [
-    '스타벅스',
-    '할리스',
-    '투썸플레이스',
-    '이디야',
-    '커피빈',
-    '빽다방',
-    '메가커피',
-    '더벤티',
-  ];
 
   const drinkCategory = ['전체', '커피', '음료', '시그니처', '기타'];
 
@@ -97,16 +86,20 @@ const SearchDrink = () => {
 
       <div className="flex w-[calc(100%-48px)] mb-[34px] space-x-5 overflow-x-auto scrollbar-hide">
         {/* scrollbar-hide를 사용하려면 tailwind-scrollbar-hide 설치하고 config파일에 플러그인 추가해야 함 */}
-        {brands.map((brand, index) => (
+        {brands.map(([cafeName, imgSrc], index) => (
           <button
             type="button"
             key={index}
             className="flex flex-col items-center space-y-2"
-            onClick={handleBrandClick}
+            onClick={() => handleBrandClick(cafeName, imgSrc)}
           >
-            <div className="w-[60px] h-[60px] rounded-full border"></div>
+            <img
+              src={imgSrc}
+              alt="브랜드 로고 이미지"
+              className="w-[60px] h-[60px] rounded-full border"
+            />
             <div className="text-[12px] text-[#000000] text-center whitespace-nowrap">
-              {brand}
+              {cafeName}
             </div>
           </button>
         ))}

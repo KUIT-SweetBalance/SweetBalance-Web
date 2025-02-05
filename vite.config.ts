@@ -1,13 +1,23 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from 'tailwindcss'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from 'tailwindcss';
+import fs from 'fs';
+import path from 'path';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   css: {
     postcss: {
-      plugins: [tailwindcss()]
-    }
-  }
-})
+      plugins: [tailwindcss()], // TailwindCSS 설정 추가
+    },
+  },
+  server: {
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'key.pem')), // HTTPS 키 파일
+      cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem')), // HTTPS 인증서 파일
+    },
+    host: 'localhost', // 로컬호스트에서 실행
+    port: 5173, // Vite 기본 포트
+    strictPort: true, // 5173 포트가 사용 중이면 실행 안 함
+  },
+});

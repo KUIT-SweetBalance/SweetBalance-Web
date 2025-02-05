@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import styled from 'styled-components';
-import Button from '../../../components/button/Button';
+import Button from '../../../../components/button/Button';
+
 const ModalContainer = styled.div`
   position: fixed;
   top: 0;
@@ -65,7 +66,7 @@ padding-top:24px;
 width: 100%;
 justify-content:space-evenly;
 `;
-const Modal: React.FC<{ onClick: () => void; onClick1:()=>void;drink: string; brand:string; }> = ({ onClick,onClick1, drink,brand })  => {
+const EditModal: React.FC<{ onClick: () => void; onClick1:()=>void;drink: string; brand:string; }> = ({ onClick,onClick1, drink,brand })  => {
     
     return (
         <ModalContainer>
@@ -73,11 +74,11 @@ const Modal: React.FC<{ onClick: () => void; onClick1:()=>void;drink: string; br
             <Brand>{brand}</Brand>
             <DrinkContent>
               <Drink>{drink}</Drink>
-              <Content>를 즐겨찾기에 추가하시겠어요?</Content>
+              <Content>를 수정하시겠어요?</Content>
             </DrinkContent>
           <ButtonBox>
-            <Button content='아니오' bgColor='bg-white' size='md'onClick={onClick}/>
-            <Button content='추가할래요' bgColor='bg-primary' size='md'onClick={onClick1}/>
+            <Button content='아니오' bgColor='bg-white' size='md'onClick={onClick1}/>
+            <Button content='수정할래요' bgColor='bg-primary' size='md'onClick={onClick1}/>
 
           </ButtonBox>
 
@@ -86,4 +87,4 @@ const Modal: React.FC<{ onClick: () => void; onClick1:()=>void;drink: string; br
     );
 };
 
-export default Modal;
+export default EditModal;

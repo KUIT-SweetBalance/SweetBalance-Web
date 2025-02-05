@@ -6,6 +6,11 @@ import styled from 'styled-components';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
 import Arrangement from './Arrangement';
 import MypageDrinkInfo from './MypageDrinkInfo';
+import { useState } from 'react';
+import EditModal from './Edit/Editmodel';
+import DeleModal from './Dele/Delemodal';
+import Deleted from './Dele/Deleted';
+
 interface DrinkInfo {
   id: number; // 유니크한 식별자
   date: {
@@ -30,6 +35,34 @@ const Padding = styled.div`
 padding: 25px;
 `;
 const MypageRecord: React.FC = () => {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen1, setIsModalOpen1] = useState(false);
+  const [Delete, setDelete] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const openModal1 = () => {
+    setIsModalOpen1(true);
+  };
+
+  const closeModal1 = () => {
+    setIsModalOpen1(false);
+    setDelete(true);
+
+  };
+  // const openDele = () => {
+  //   setDelete(true);
+  // };
+
+  const closeDele = () => {
+    setDelete(false);
+  };
   const drink: DrinkInfo = {
     id: 15,
     date: {
@@ -66,9 +99,12 @@ const MypageRecord: React.FC = () => {
             <SearchInput id='MypageRecord' type='input' placeholder='검색어로 빠르게 기록 찾기' register={register}
             onSearch={handleSearchClick} />
         </Padding>
-        <Arrangement title ='내가 즐겨찾기한 음료'/>
-        <MypageDrinkInfo drink = {drink}/>
-        {/* <DrinkInfo/> */}
+        <Arrangement title ='내가 기록한 음료'/>
+        <MypageDrinkInfo drink = {drink} onClick={openModal} onClick1={openModal1}/>
+      
+        {isModalOpen&&<EditModal onClick={openModal} onClick1={closeModal} drink={drink.name} brand={drink.brand}/>}
+        {isModalOpen1&&<DeleModal onClick={closeModal1} onClick1={closeModal1} drink={drink.name} brand={drink.brand}/>}
+        {Delete&&<Deleted onClick={closeDele}/>}
         </>
     );
 };

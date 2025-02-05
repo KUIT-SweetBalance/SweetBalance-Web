@@ -16,6 +16,7 @@ interface Props {
   sugar: number;
   kcal: number;
   caffeine: number;
+  scrap: boolean;
 }
 interface SizeProps {
   name: string;
@@ -34,7 +35,7 @@ const GrayBox = styled.div`
   width: 393px;
   height: 15px;
   background: #f4f4f4;
-  margin: 20px 0 0 0;
+  margin: 20px 0 0 0;  
 
 `;
 
@@ -58,17 +59,19 @@ const Askinfo = styled.div`
   
 
 
-const CustomMain: React.FC<Props> = ({ brand, drink, sugar, kcal, caffeine }) => {
+const CustomMain: React.FC<Props> = ({ brand, drink, sugar, kcal, caffeine ,scrap}) => {
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
     const [isSlideUpOpen, setIsSlideUpOpen] = useState(false); // 슬라이드 업 모달
+    const [realScrap, setrealScrap] = useState(scrap); // 슬라이드 업 모달
+
     const sizes: SizeProps[] = [
         { name: 'SHORT', size: 236 },
         { name: 'TALL', size: 354 },
         { name: 'GRANDE', size: 473 },
-        { name: 'VENTI', size: 591 },
+        { name: 'VENTI', size: 591 },  
     ];
 
-    const handleStarClick = () => {
+    const    handleStarClick = () => {
         setIsModalOpen(true); // 모달 열기
     };
 
@@ -82,12 +85,17 @@ const CustomMain: React.FC<Props> = ({ brand, drink, sugar, kcal, caffeine }) =>
     const handleSlideUpClose = () => {
       setIsSlideUpOpen(false); // 슬라이드 업 모달 닫기
   };
+  const handleScrap = () => {
+    setIsModalOpen(false); // 모달 닫기
+
+    setrealScrap(prev => !prev); // 스크랩 상태 토글
+};
 
       
     return (
         <Container>
             <CustomTop/>
-            <Brandrink brand={brand} drink={drink} onClick={handleStarClick} />
+            <Brandrink brand={brand} drink={drink} onClick={handleStarClick} onClick1={handleScrap} scrap ={realScrap} />
             <SizeComponent sizes={sizes} />
             <SKC sugar={sugar} kcal={kcal} caffeine={caffeine} />
             <GrayBox />
@@ -96,7 +104,7 @@ const CustomMain: React.FC<Props> = ({ brand, drink, sugar, kcal, caffeine }) =>
             <Recoding sugar={sugar} onClick ={handleRecodingClick } />
             {/* 팝업 모달 */}
             {isModalOpen && (
-                <Modal onClick={handleModalClose} sizes={sizes}/>
+                <Modal onClick={handleModalClose} onClick1={handleScrap}brand={brand} drink={drink}/>
             )}
               {isSlideUpOpen && (
                 <Syrup  sugar={sugar} onClick={handleSlideUpClose}/>

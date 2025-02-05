@@ -83,7 +83,7 @@ font-weight: 400;
 line-height: normal;
 letter-spacing: -0.3px;
 `;
-const MypageDrinkInfo: React.FC<{drink:DrinkInfo}> = ({drink}) => {
+const MypageDrinkInfo: React.FC<{drink:DrinkInfo;onClick:()=>void;onClick1:()=>void}> = ({drink,onClick,onClick1}) => {
     
     return (
         <ItemBox>
@@ -92,8 +92,8 @@ const MypageDrinkInfo: React.FC<{drink:DrinkInfo}> = ({drink}) => {
                 <Top>
                     <LeftTop>{drink.date.year}.{drink.date.month}.{drink.date.day}({drink.date.weekday}) {drink.time.hour}:{drink.time.minute}</LeftTop>
                     <RightTop>
-                        <RightImg src='/Edit.svg' alt='edit'/>
-                        <RightImg src='/Dele.svg' alt='Dele'/>
+                        <RightImg src='/Edit.svg' alt='edit' onClick={onClick}/>
+                        <RightImg src='/Dele.svg' alt='Dele' onClick={onClick1}/>
                     </RightTop>
                 </Top>
                 <Middle>

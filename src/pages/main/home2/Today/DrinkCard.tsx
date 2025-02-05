@@ -12,7 +12,7 @@ const DrinkCard = (props: DrinkCardProps) => {
       <div className="flex ml-[31px] justify-between relative">
         <div className="w-[115px] h-[115px] rounded-full bg-[#F4F4F4]"></div>
 
-        <button
+        {/* <button
           type="button"
           onClick={handleStarClick}
           className="absolute top-[6px] right-[6px]"
@@ -22,7 +22,7 @@ const DrinkCard = (props: DrinkCardProps) => {
             alt="저장"
             className="w-[14px] h-[13px]"
           />
-        </button>
+        </button> */}
       </div>
 
       <div className='flex flex-col text-center space-y-1'>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface NoContentsProps {
-  height: string;
+  height?: string;
 }
 
 const NoContents = (props: NoContentsProps) => {

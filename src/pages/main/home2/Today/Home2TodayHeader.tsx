@@ -1,5 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import {
+  DailyNutritionIntake,
+  DailyNutritionIntakeResponse,
+  fetchDailyNutritionIntake,
+} from '../../../../api/main/home2/Today/Home2TodayHeader';
 
 const Home2TodayHeader = () => {
   const navigate = useNavigate();
@@ -7,6 +13,17 @@ const Home2TodayHeader = () => {
     navigate('/alarm');
     // 브라우저의 History API 사용(브라우저 히스토리를 프로그래밍적으로 다룰 수 있는 Javascript API)
   };
+
+  const {
+    data: dailyNutritionIntakeData,
+    isLoading,
+    isError,
+    error,
+    refetch
+  } = useQuery<DailyNutritionIntakeResponse, Error>({
+    queryKey: ['dailyNutritionIntakeResponse'],
+    queryFn: fetchDailyNutritionIntake,
+  })
 
   return (
     <div>
@@ -53,14 +70,14 @@ const Home2TodayHeader = () => {
           <div className="text-center text-secondary text-[12px]">
             당 섭취량
           </div>
-          <div className="text-center text-white">00g</div>
+          <div className="text-center text-white">{dailyNutritionIntakeData?.data.totalSugar}g</div>
         </div>
         <div className="w-[1.5px] h-10 bg-[#F4F4F4]"></div>
         <div className="flex-1 flex-col space-y-1">
           <div className="text-center text-secondary text-[12px]">
             하루 음료 섭취량
           </div>
-          <div className="text-center text-white">3잔</div>
+          <div className="text-center text-white">{dailyNutritionIntakeData?.data.beverageCount}잔</div>
         </div>
       </div>
     </div>

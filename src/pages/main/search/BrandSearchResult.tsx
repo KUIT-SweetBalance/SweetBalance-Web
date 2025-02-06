@@ -83,7 +83,6 @@ const BrandSearchResult = () => {
   } = useQuery<BeverageResponse, Error>({
     queryKey: ['popularDrinks', cafeName], // cafeName이 바뀌면 다시 요청 보냄(여기서는 필요 없을 듯?)  
     queryFn: () => fetchPopularDrinks(cafeName),
-    enabled: false,
   })
 
   // 임시 데이터

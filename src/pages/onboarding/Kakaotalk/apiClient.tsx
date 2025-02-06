@@ -67,8 +67,8 @@ axios.defaults.baseURL = 'http://13.209.98.76:8080';
 
 // 스타일드 컴포넌트로 버튼 정의
 const Button = styled.a`
-  width: 300px;
-  height: 45px;
+  width: calc(100% - 93px);
+  height: 5.28vh;
   display: flex;
   justify-content: center;
   text-align: center;

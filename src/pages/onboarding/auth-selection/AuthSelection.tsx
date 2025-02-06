@@ -8,8 +8,18 @@ import RedirectButton from '../Kakaotalk/LoginButton';
 
 const Logo = () => {
   return (
-    <div className={`flex items-start justify-center pt-0`}>
-      <img src={onboarding1_logo} alt="Sweet Balance" />
+    <div
+      className={`flex flex-col items-center justify-center mt-[3.87vh] pt-[2.35vh] pb-[2.35vh] gap-[2.35vh]`}
+    >
+      {/* <img src={onboarding1_logo} alt="Sweet Balance" /> */}
+      <div
+        className={`font-stylescript text-[7.5vh] text-primary font-medium leading-[7.5vh]`}
+      >
+        Sweet Balance
+      </div>
+      <div className={`text-primary text-[16px]`}>
+        스마트한 당 관리, 지금 바로 시작하세요!
+      </div>
     </div>
   );
 };
@@ -17,12 +27,12 @@ const Logo = () => {
 const Icon = () => {
   return (
     <motion.div
-      className="flex justify-center"
-      animate={{ y: [0, -15, 0] }} // 사선 이동 효과 추가
+      className="flex justify-center "
+      animate={{ y: [0, -15, 0] }}
       transition={{
-        duration: 3.5, // 천천히 떠오르는 효과
-        repeat: Infinity, // 무한 반복
-        ease: 'easeInOut', // 부드러운 움직임
+        duration: 3.5,
+        repeat: Infinity,
+        ease: 'easeInOut',
       }}
     >
       <img src={onboarding1_icon} alt="onboarding1_icon" />
@@ -50,7 +60,9 @@ const LoginButton = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={`flex flex-col justify-center items-center pt-6 gap-2.5`}>
+    <div
+      className={`flex flex-col justify-center items-center pt-[2.35vh] pb-[8.57vh] gap-[1.18vh]`}
+    >
       <div className={``}>이미 계정이 있으신가요?</div>
       <button
         className={`text-gray_text underline decoration-1`}
@@ -81,14 +93,12 @@ const AuthSelection = () => {
       <Logo />
       <Icon />
       <SignInButton />
-      <div className={`flex items-center gap-4 py-5 px-6`}>
+      <div className={`flex items-center gap-4 px-[6.11vw] py-[2.35vh]`}>
         <hr className={`flex-grow border-gray-300`} />
         <span className={`text-sm text-gray-500`}>또는</span>
         <hr className={`flex-grow border-gray-300`} />
       </div>
-      <div
-        className={`flex flex-col items-center w-[100%-(50px)] m-0 p-0 box-border`}
-      >
+      <div className={`flex flex-col items-center py-[2.35vh]`}>
         <RedirectButton />
       </div>
       <LoginButton />

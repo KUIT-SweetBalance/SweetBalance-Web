@@ -50,7 +50,7 @@ const UserDataInput = ({
           p-3 
           border 
           rounded-full 
-          text-base
+          text-[12px]
           text-[#909090] 
           placeholder-gray-400
           focus:outline-none 

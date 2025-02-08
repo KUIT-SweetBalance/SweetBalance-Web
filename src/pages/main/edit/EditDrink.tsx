@@ -49,11 +49,12 @@ const EditDrink = () => {
 
       {/* 음료 정보 */}
       <div className="flex flex-col w-full  mb-5">
-        {drinkListTodayData?.data.map((drink, index) => (
+        {drinkListTodayData?.data?.map((drink, index) => (
           <DrinkInfo
+            imgUrl={drink.imgUrl}
             dateAndTime={drink.createdAt}
             isEditDeleteBtnExist={true}
-            cafeNameMiddle="스타벅스"
+            cafeNameMiddle={drink.brand}
             drinkName={drink.beverageName}
             sugar={drink.sugar}
             syrupType={drink.syrupName}

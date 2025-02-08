@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import WeeklySugarChart from './WeeklySugarChart';
+import { useQuery } from '@tanstack/react-query';
+import {
+  WeeklyNutritionIntakeResponse,
+  fetchWeeklyNutritionIntake,
+} from '../../../../api/main/home2/Weekly/Home2WeeklyHeader';
+import WeeklyIntakeStatBox from './WeeklyIntakeStatBox';
 
 const Home2WeeklyHeader = () => {
   const navigate = useNavigate();
@@ -8,9 +14,52 @@ const Home2WeeklyHeader = () => {
     navigate('/alarm');
   };
 
+  // dummy data
   const sugarData = [30, 10, 25, 32, 30, 0, 35]; // 일요일~토요일 섭취량 데이터
   const startDate = '10월 16일';
   const endDate = '10월 23일';
+
+  // query instance
+  const {
+    data: weeklyNutritionIntake,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery<WeeklyNutritionIntakeResponse, Error>({
+    queryKey: ['WeeklyNutritionIntakeResponse'],
+    queryFn: fetchWeeklyNutritionIntake,
+  });
+
+  const fetchedData = weeklyNutritionIntake?.data;
+  const fetchedSugarData =
+    fetchedData?.dailySugar.map((dailySugar) => dailySugar.sugar) ?? [];
+  const fetchedDateData =
+    fetchedData?.dailySugar.map(({ date }) => {
+      const dateObj = new Date(date);
+      return dateObj.toLocaleDateString('ko-KR', {
+        // 'ko-KR'에 의해 자동으로 '월'과 '일'이 붙음
+        month: 'long', // '2월 '
+        day: 'numeric', // '1'
+      });
+    }) ?? [];
+
+  const [todayWeekDay, setTodayWeekDay] = useState<string>('');
+  const [todayWeekDayIndex, setTodayWeekDayIndex] = useState(0);
+  const weekDays = [
+    '일요일',
+    '월요일',
+    '화요일',
+    '수요일',
+    '목요일',
+    '금요일',
+    '토요일',
+  ];
+  useEffect(() => {
+    const today = new Date();
+    setTodayWeekDay(weekDays[today.getDay()]); // 현재 요일 문자열로
+    setTodayWeekDayIndex(today.getDay());
+  }, []);
 
   return (
     <div className="flex flex-col w-full">
@@ -21,7 +70,8 @@ const Home2WeeklyHeader = () => {
               <img src="/chevron-left.png" alt="지난주" />
             </button>
             <span className="text-[13px] text-white text-opacity-50 pt-[2px]">
-              10월 16일 - 10월 23일
+              {fetchedDateData[0]}&nbsp;-&nbsp;
+              {fetchedDateData[fetchedDateData.length - 1]}
             </span>
             <button type="button" className="w-[8px] h-[13px]">
               <img src="/chevron-right.png" alt="다음주" />
@@ -29,7 +79,8 @@ const Home2WeeklyHeader = () => {
           </div>
 
           <p className="text-[28px] text-secondary">
-            오늘은 <span className="text-[28px] text-white">토요일</span>
+            오늘은{' '}
+            <span className="text-[28px] text-white">{todayWeekDay}</span>
           </p>
         </div>
 
@@ -47,9 +98,8 @@ const Home2WeeklyHeader = () => {
 
       <div className="mt-[40px] h-[200px]">
         <WeeklySugarChart
-          data={sugarData}
-          startDate={startDate}
-          endDate={endDate}
+          data={fetchedSugarData}
+          todayWeekDayIndex={todayWeekDayIndex}
         />
       </div>
     </div>

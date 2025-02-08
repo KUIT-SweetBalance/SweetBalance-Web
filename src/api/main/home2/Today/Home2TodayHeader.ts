@@ -2,14 +2,16 @@ import ApiManager from "../../../ApiManager";
 
 export interface DailyNutritionIntake {
     totalSugar: number;
+    additionalSugar: number;
     beverageCount: number;
+    unreadAlarmCount: number;
 }
 
 export interface DailyNutritionIntakeResponse {
     status: number;
     code: number;
     message: string;
-    data: DailyNutritionIntake;
+    data?: DailyNutritionIntake;
 }
 
 export const fetchDailyNutritionIntake = async (): Promise<DailyNutritionIntakeResponse> => {

@@ -10,7 +10,7 @@ const DrinkCard = (props: DrinkCardProps) => {
   return (
     <div className="px-[15px] py-[20px] w-[208px] h-[227px] flex-shrink-0 gap-[10px] flex flex-col border border-1-[#FFFFF] rounded-[20px]">
       <div className="flex ml-[31px] justify-between relative">
-        <div className="w-[115px] h-[115px] rounded-full bg-[#F4F4F4]"></div>
+        <img src={props.imgUrl} alt='음료 이미지' className="w-[115px] h-[115px] rounded-full bg-[#F4F4F4]"></img>
 
         {/* <button
           type="button"

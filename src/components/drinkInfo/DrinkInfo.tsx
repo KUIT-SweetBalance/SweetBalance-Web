@@ -41,10 +41,10 @@ const DrinkInfo = (props: DrinkInfoProps) => {
       drinkName: props.drinkName || '',
       content: '을/를 수정하시겠어요?',
       button1: '아니오',
-      button2: '수정할래요'
+      button2: '수정할래요',
     };
 
-    openEditModal(modalData)
+    openEditModal(modalData);
   };
 
   // 음료 삭제 모달창 띄우기
@@ -52,7 +52,11 @@ const DrinkInfo = (props: DrinkInfoProps) => {
   return (
     <div className="w-full px-[24px] py-[14px] flex border-b border-1-[#F4F4F4]">
       {/* 왼쪽 */}
-      <div className="w-[74px] h-[74px] flex-shrink-0 bg-[#F4F4F4] rounded-full mr-[25px]"></div>
+      <img
+        src={props.imgUrl}
+        alt="음료 사진"
+        className="w-[74px] h-[74px] flex-shrink-0 bg-[#F4F4F4] rounded-full mr-[25px]"
+      />
 
       {/* 오른쪽 */}
       <div className="flex flex-col w-full justify-center">
@@ -67,7 +71,11 @@ const DrinkInfo = (props: DrinkInfoProps) => {
 
           {props.isEditDeleteBtnExist && (
             <div className="space-x-[10px]">
-              <button type="button" className="w-[14px] h-[14px]" onClick={handleEditButtonClick}>
+              <button
+                type="button"
+                className="w-[14px] h-[14px]"
+                onClick={handleEditButtonClick}
+              >
                 <img src="/EditDrink.png" alt="음료수정" />
               </button>
               <button type="button" className="w-[14px] h-[14px]">
@@ -111,10 +119,10 @@ const DrinkInfo = (props: DrinkInfoProps) => {
           {props.cafeNameBottom && (
             <span className="flex items-start">{props.cafeNameBottom}</span>
           )}
-          {props.sugar && (
+          {Number.isFinite(props.sugar) && (
             <span className="flex items-start ">당 {props.sugar}g</span>
           )}
-          {props.syrup && (
+          {Number.isFinite(props.syrup) && (
             <span className="flex items-start ">
               {props.syrupType}&nbsp;{props.syrup}
             </span>

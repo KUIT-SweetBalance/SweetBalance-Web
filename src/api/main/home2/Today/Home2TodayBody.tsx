@@ -1,7 +1,10 @@
 import ApiManager from '../../../ApiManager';
 
 export interface DrinkListToday {
+  beverageLogId: number;
+  beverageSizeId: number;
   createdAt: string;
+  brand: string;
   beverageName: string;
   imgUrl: string;
   sugar: number;
@@ -14,7 +17,7 @@ export interface DrinkListTodayResponse {
   status: number;
   code: number;
   message: string;
-  data: DrinkListToday[];
+  data?: DrinkListToday[];
 }
 
 export const fetchDrinkListToday =

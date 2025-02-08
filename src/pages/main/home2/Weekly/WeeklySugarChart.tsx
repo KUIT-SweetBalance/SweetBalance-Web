@@ -25,8 +25,7 @@ ChartJS.register(
 
 interface WeeklySugarChartProps {
   data: number[]; // 7일 간의 당 섭취량 데이터
-  startDate: string;
-  endDate: string;
+  todayWeekDayIndex: number;
 }
 
 const WeeklySugarChart = (props: WeeklySugarChartProps) => {
@@ -38,8 +37,8 @@ const WeeklySugarChart = (props: WeeklySugarChartProps) => {
     const img = new Image();
     img.src = '/sugar_angry.png';
     img.onload = () => {
-      img.width = 50; // 
-      img.height = 50; // 
+      img.width = 50; //
+      img.height = 50; //
       console.log('angrySugar 이미지 로드 성공', img);
       setAngrySugar(img);
     };
@@ -99,7 +98,11 @@ const WeeklySugarChart = (props: WeeklySugarChartProps) => {
     scales: {
       x: {
         ticks: {
-          color: 'rgba(214, 172, 138, 1)',
+          color: (context: any) => {
+            return context.index === props.todayWeekDayIndex
+              ? 'white' // todayWeekDayIndex에 해당하는 요일은 흰색
+              : 'rgba(214, 172, 138, 1)'; // 나머지는 기본 색상
+          },
         },
         grid: {
           display: false, // X축 그리드 숨김

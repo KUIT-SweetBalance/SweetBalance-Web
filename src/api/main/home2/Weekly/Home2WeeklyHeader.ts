@@ -21,10 +21,10 @@ export interface WeeklyNutritionIntakeResponse {
     data?: WeeklyNutritionIntake;
 }
 
-export const fetchWeeklyNutritionIntake = async (): Promise<WeeklyNutritionIntakeResponse> => {
+export const fetchWeeklyNutritionIntake = async (lastSunday: string): Promise<WeeklyNutritionIntakeResponse> => {
     try {
         const response = await ApiManager.get<WeeklyNutritionIntakeResponse>(
-            '/api/user/weekly-consume-info'
+            `/api/user/weekly-consume-info?startDate=${lastSunday}`
         )
         console.log('fetchWeeklyNutritionIntake', response.data);
         return response.data

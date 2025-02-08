@@ -67,7 +67,7 @@ const SearchDrink = () => {
         <SearchInput
           id="SearchDrink"
           type="text"
-          placeholder="브랜드명이나 제품명을 검색해주세요."
+          placeholder="제품명을 검색해주세요"
           register={register}
           onSearch={handleSearchClick}
         />

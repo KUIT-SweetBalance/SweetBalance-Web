@@ -10,7 +10,11 @@ const DrinkCard = (props: DrinkCardProps) => {
   return (
     <div className="px-[15px] py-[20px] w-[208px] h-[227px] flex-shrink-0 gap-[10px] flex flex-col border border-1-[#FFFFF] rounded-[20px]">
       <div className="flex ml-[31px] justify-between relative">
-        <img src={props.imgUrl} alt='음료 이미지' className="w-[115px] h-[115px] rounded-full bg-[#F4F4F4]"></img>
+        <img
+          src={props.imgUrl}
+          alt="음료 이미지"
+          className="w-[115px] h-[115px] rounded-full bg-[#F4F4F4]"
+        ></img>
 
         {/* <button
           type="button"
@@ -25,15 +29,21 @@ const DrinkCard = (props: DrinkCardProps) => {
         </button> */}
       </div>
 
-      <div className='flex flex-col text-center space-y-1'>
-        <p className='text-[12px] truncate'>{props.cafeName}</p>
-        <p className='text-[20px] truncate'>{props.drinkName}</p>
+      <div className="flex flex-col text-center space-y-1">
+        <p className="text-[12px] truncate">{props.cafeName}</p>
+        <p className="text-[20px] truncate">{props.drinkName}</p>
       </div>
 
-      <div className='flex text-center justify-between text-[12px] px-[15px]'>
-        <span className=''>당 {props.sugar}g</span>
-        <span className=''><span className='w-[80px] truncate'>{props.syrupType}</span>&nbsp;{props.syrup}</span>
-        <span className=''>{props.size}</span>
+      <div className="flex text-center justify-between text-[12px] px-[15px] whitespace-nowrap">
+        <span className="">당 {props.sugar}g</span>
+        {props.syrupType === null ? (
+          <span className="w-[80px] truncate">시럽없음</span>
+        ) : (
+          <span className="w-[80px] truncate">
+            {props.syrupType}&nbsp;{props.syrup}
+          </span>
+        )}
+        <span className="">{props.size}</span>
       </div>
     </div>
   );

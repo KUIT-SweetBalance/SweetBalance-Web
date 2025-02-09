@@ -115,14 +115,18 @@ const DrinkInfo = (props: DrinkInfoProps) => {
 
         {/* 하단 */}
         {/* pr-[10px] border-r border-[#909090] */}
-        <div className="flex text-[12px] space-x-[20px] mt-[5px] items-start">
+        <div className="flex text-[12px] space-x-[20px] mt-[5px] items-start whitespace-nowrap">
           {props.cafeNameBottom && (
             <span className="flex items-start">{props.cafeNameBottom}</span>
           )}
           {Number.isFinite(props.sugar) && (
             <span className="flex items-start ">당 {props.sugar}g</span>
           )}
-          {Number.isFinite(props.syrup) && (
+          {props.syrupType === null ? (
+            <span className="flex items-start ">
+              시럽없음
+            </span>
+          ) : (
             <span className="flex items-start ">
               {props.syrupType}&nbsp;{props.syrup}
             </span>

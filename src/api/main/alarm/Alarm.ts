@@ -6,19 +6,26 @@ interface BeverageLogInfo {
   syrupName: string;
   syrupCount: number;
   size: string;
+  beverageLogId: number;
+  isRead: boolean;
 }
 
-interface Alarm {
+interface AlarmInfo {
   timeString: string;
   message: string;
-  beverageLogInfo?: BeverageLogInfo;
+  beverageLogInfo: BeverageLogInfo | null;
+}
+
+interface AlarmDate {
+    date: string;
+    info: AlarmInfo[];
 }
 
 export interface AlarmResponse {
   status: number;
   code: string;
   message: string;
-  data?: Alarm;
+  data: AlarmDate[] | null;
 }
 
 export const fetchAlarmResponse = async (): Promise<AlarmResponse> => {

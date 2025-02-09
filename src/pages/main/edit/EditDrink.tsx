@@ -12,7 +12,6 @@ import LargeFavoriteDrinkModal from '../modal/LargeFavoriteDrinkModal';
 import useEditDrinkModalStore from '../../../store/modal/EditDrinkModal';
 import { useQuery } from '@tanstack/react-query';
 import {
-  DrinkListToday,
   DrinkListTodayResponse,
   fetchDrinkListToday,
 } from '../../../api/main/home2/Today/Home2TodayBody';
@@ -51,6 +50,7 @@ const EditDrink = () => {
       <div className="flex flex-col w-full  mb-5">
         {drinkListTodayData?.data?.map((drink, index) => (
           <DrinkInfo
+            key={index}
             imgUrl={drink.imgUrl}
             dateAndTime={drink.createdAt}
             isEditDeleteBtnExist={true}

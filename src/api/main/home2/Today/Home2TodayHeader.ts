@@ -11,7 +11,7 @@ export interface DailyNutritionIntakeResponse {
     status: number;
     code: number;
     message: string;
-    data?: DailyNutritionIntake;
+    data: DailyNutritionIntake | null;
 }
 
 export const fetchDailyNutritionIntake = async (): Promise<DailyNutritionIntakeResponse> => {

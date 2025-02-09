@@ -17,7 +17,7 @@ export interface DrinkListTodayResponse {
   status: number;
   code: number;
   message: string;
-  data?: DrinkListToday[];
+  data: DrinkListToday[] | null;
 }
 
 export const fetchDrinkListToday =

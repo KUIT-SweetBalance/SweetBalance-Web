@@ -17,8 +17,8 @@ interface AlarmInfo {
 }
 
 interface AlarmDate {
-    date: string;
-    info: AlarmInfo[];
+  date: string;
+  info: AlarmInfo[];
 }
 
 export interface AlarmResponse {
@@ -39,4 +39,16 @@ export const fetchAlarmResponse = async (): Promise<AlarmResponse> => {
     console.error('fetchAlarmResponse 요청 실패', error);
     throw error;
   }
+};
+
+export interface AlarmReadResponse {
+  status: number;
+  code: number;
+  message: string;
+  data: null;
+}
+
+export const setAlarmAsRead = async (beverageLogId: number): Promise<AlarmReadResponse> => {
+  const response = await ApiManager.post(`/api/user/notice/${beverageLogId}`);
+  return response.data;
 };

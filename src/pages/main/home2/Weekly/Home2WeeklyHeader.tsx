@@ -35,7 +35,7 @@ const Home2WeeklyHeader = () => {
     // padStart(): 문자열의 길이가 지정된 길이(2)보타 짧으면 앞에 특정 문자('0')를 추가
     return `${year}-${month}-${day}`;
   };
-  const lastSunday = getLastSunday(); // 
+  const lastSunday = getLastSunday(); //
 
   // query instance
   const {

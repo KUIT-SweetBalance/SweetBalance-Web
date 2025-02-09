@@ -137,7 +137,9 @@ const BrandSearchResult = () => {
 
       <div className="w-[calc(100%-48px)] flex justify-between mt-5 mb-6 items-center">
         <span className="font-[500] text-[17px]">사람들이 많이 마신 음료</span>
-        <span className="text-[13px] text-[#B6B6B6]">{currentDate}&nbsp;기준</span>
+        <span className="text-[13px] text-[#B6B6B6]">
+          {currentDate}&nbsp;기준
+        </span>
       </div>
 
       <div className="flex w-[calc(100%-48px)]">

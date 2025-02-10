@@ -7,6 +7,7 @@ const LargeFavoriteDrinkModal = () => {
     closeModal,
     cafeName,
     drinkName,
+    imgUrl,
     sugar,
     syrupType,
     syrup,
@@ -30,7 +31,7 @@ const LargeFavoriteDrinkModal = () => {
           </p>
         </div>
 
-        <div className="w-[181px] h-[181px] bg-[#F4F4F4] rounded-full"></div>
+        <img src={imgUrl} alt="음료사진" className="w-[181px] h-[181px] bg-[#F4F4F4] rounded-full" />
 
         <div className="flex space-x-[56px] text-[16px] text-center">
           <span>당 {sugar}g</span>

@@ -8,7 +8,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
   const navigate = useNavigate();
 
   const [selected, setSelected] = useState<boolean>(false);
-  
+
   // 즐겨찾기 추가 모달창 띄우기
   const { openFavoriteModal } = useLargeFavoriteDrinkModalStore();
   const handleFavoriteButtonClick = () => {
@@ -22,6 +22,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
           props.cafeNameBottom ||
           '',
         drinkName: props.drinkName || '',
+        imgUrl: props.imgUrl,
         sugar: props.sugar,
         syrupType: props.syrupType,
         syrup: props.syrup,

@@ -8,6 +8,11 @@ import BottomNavi from '../../../components/BottomNavi/BottomNavi';
 import useLargeFavoriteDrinkModalStore from '../../../store/modal/LargeFavoriteModalStore';
 import LargeFavoriteDrinkModal from '../modal/LargeFavoriteDrinkModal';
 import { brands } from '../../../types/brands';
+import {
+  DrinkListResponse,
+  fetchDrinkList,
+} from '../../../api/main/search/DrinkList';
+import { useQuery } from '@tanstack/react-query';
 
 const SearchDrink = () => {
   const {
@@ -18,19 +23,15 @@ const SearchDrink = () => {
 
   const navigate = useNavigate();
 
-  const handleEditClick = () => {
-    navigate('/all-brands');
-  };
-
   // 검색결과 필터링
   const [selectedFilter, setSelectedFilter] = useState<
-    'ascending' | 'descending'
-  >('ascending');
-  const handleFilterClick = (selected: 'ascending' | 'descending') => {
-    if (selected === 'ascending') {
-      setSelectedFilter('descending');
+    'sugarAsc' | 'sugarDesc'
+  >('sugarDesc');
+  const handleFilterClick = (selected: 'sugarAsc' | 'sugarDesc') => {
+    if (selected === 'sugarAsc') {
+      setSelectedFilter('sugarDesc');
     } else {
-      setSelectedFilter('ascending');
+      setSelectedFilter('sugarAsc');
     }
   };
 
@@ -38,7 +39,7 @@ const SearchDrink = () => {
     navigate('/brand-result', { state: { cafeName, imgSrc } });
   };
 
-  const [clickedCategory, setClickedCategory] = useState<number>(0);
+  const [selectedCategory, setSelectedCategory] = useState<number>(0);
 
   // 검색버튼 클릭 시 실행되는 메서드
   const handleSearchClick = () => {
@@ -52,12 +53,35 @@ const SearchDrink = () => {
   };
 
   const handleCategoryClick = (index: number) => {
-    setClickedCategory(index);
+    setSelectedCategory(index);
   };
 
   const { isOpen } = useLargeFavoriteDrinkModalStore();
 
-  const drinkCategory = ['전체', '커피', '음료', '시그니처', '기타'];
+  const drinkCategory = ['전체', '커피', '음료', '시그니쳐', '기타'];
+
+  // page, size
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(20);
+
+  // 음료 데이터 get 요청
+  const {
+    data: drinkList,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery<DrinkListResponse, Error>({
+    queryKey: ['popularDrinks', page, size, selectedFilter, selectedCategory], // cafeName이 바뀌면 다시 요청 보냄(여기서는 필요 없을 듯?)
+    queryFn: () =>
+      fetchDrinkList({
+        page: page,
+        size: size,
+        sort: selectedFilter,
+        category: drinkCategory[selectedCategory],
+      }),
+    // keepPreviousData: true, // 이전 데이터를 유지하여 부드러운 페이지 전환
+  });
 
   return (
     <div className="flex flex-col items-center w-full mt-[60px] mb-[100px]">
@@ -116,15 +140,15 @@ const SearchDrink = () => {
             onClick={() => handleFilterClick(selectedFilter)}
           >
             <span>
-              {selectedFilter === 'ascending'
-                ? '당 함량 높은 순'
-                : '당 함량 낮은 순'}
+              {selectedFilter === 'sugarAsc'
+                ? '당 함량 낮은 순'
+                : '당 함량 높은 순'}
             </span>
             <img
               src="/updown.png"
               alt="정렬기준"
               className={`w-[15.6px] h-[14px] transition-transform duration-300 ${
-                selectedFilter === 'ascending' ? '' : 'scale-y-[-1]'
+                selectedFilter === 'sugarDesc' ? '' : 'scale-y-[-1]'
               }`}
             />
           </button>
@@ -142,7 +166,7 @@ const SearchDrink = () => {
               type="button"
               onClick={() => handleCategoryClick(index)}
               className={`text-center text-[14px] px-[4px] w-auto pb-[7px] whitespace-nowrap ${
-                clickedCategory === index
+                selectedCategory === index
                   ? 'text-primary font-medium border-b-[3px] border-primary'
                   : 'text-[#B5B5B5] font-normal border-b-[3px] border-transparent'
               }`}
@@ -157,30 +181,16 @@ const SearchDrink = () => {
       </div>
 
       <div className="flex flex-col w-full mt-[10px] mb-5">
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
+        {drinkList?.data.map((drinkItem, index) => (
+          <DrinkInfo
+            key={index}
+            drinkName={drinkItem.name}
+            imgUrl={drinkItem.imgUrl}
+            isFavoriteBtnExist={true}
+            cafeNameTop={drinkItem.brand}
+            sugar={drinkItem.sugarPer100ml}
+          />
+        ))}
       </div>
 
       <BottomNavi />

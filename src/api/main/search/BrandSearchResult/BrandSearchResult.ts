@@ -16,7 +16,9 @@ export interface BeverageResponse {
   data: Beverage[];
 }
 
-export const fetchPopularDrinks = async (cafeName: string): Promise<BeverageResponse> => {
+export const fetchPopularDrinks = async (
+  cafeName: string,
+): Promise<BeverageResponse> => {
   try {
     const response = await ApiManager.get<BeverageResponse>(
       `/api/beverages/brand/popular?brand-name=${encodeURIComponent(cafeName)}&top=3`,

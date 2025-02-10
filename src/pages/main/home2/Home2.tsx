@@ -10,17 +10,17 @@ const Home2 = () => {
   const [selectedView, setSelectedView] = useState<'today' | 'week'>('today');
 
   return (
-    <div className="flex flex-col mb-[100px]">
+    <div className="flex flex-col h-screen mb-[100px]">
       <TodayWeekSwitcher
         selected={selectedView}
         onChange={(view) => setSelectedView(view)}
       />
 
-      <div className="flex flex-col w-full h-[367px] bg-primary rounded-bl-[20px] rounded-br-[20px] mt-[-2px]">
+      <div className="flex flex-shrink-0 flex-col w-full h-[367px] bg-primary rounded-bl-[20px] rounded-br-[20px] mt-[-2px]">
         {selectedView === 'today' ? <Home2TodayHeader /> : <Home2WeeklyHeader />}
       </div>
       
-      <div className='mt-[10px]'>
+      <div className='flex w-full flex-grow mt-[10px]'>
         {selectedView === 'today' ? <Home2TodayBody /> : <Home2WeeklyBody />}
       </div>
 

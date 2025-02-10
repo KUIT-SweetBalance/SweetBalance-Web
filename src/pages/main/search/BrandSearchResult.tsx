@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import AppTitle from '../../../components/appTitle/AppTitle';
+import React, { useState, useEffect } from 'react';
 import SearchInput from '../../../components/input/searchInput/SearchInput';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import {
   Beverage,
   BeverageResponse,
-  fetchPopularDrinks
+  fetchPopularDrinks,
 } from '../../../api/main/search/BrandSearchResult/BrandSearchResult';
 import { useQuery } from '@tanstack/react-query';
 
@@ -59,18 +57,19 @@ const BrandSearchResult = () => {
     setClickedCategory(index);
   };
 
-  // 인기 음료 데이터 호출(useEffect)
+  // 현재 날짜 정보 저장('사람들이 많이 마신 음료' 컴포넌트에 사용)
+  const [currentDate, setCurrentDate] = useState<string>('');
   useEffect(() => {
-    console.log('실행됨');
-    const fetchData = async () => {
-      try {
-        const response = await fetchPopularDrinks(cafeName);
-        console.log('인기 음료 응답 데이터:', response.data);
-      } catch (error) {
-        console.error('인기 음료 조회 실패:', error);
-      }
-    };
-    fetchData();
+    const today = new Date();
+    const formattedDate = today
+      .toLocaleDateString('ko-KR', {
+        year: '2-digit',
+        month: '2-digit',
+        day: '2-digit',
+      })
+      .replace(/[^0-9.]/g, '') // 불필요한 문자 제거
+      .replace(/\.$/, ''); // 연.월.일. <- 일 뒤에 붙는 . 제거
+    setCurrentDate(formattedDate);
   }, []);
 
   // 인기 음료 데이터 호출(useQuery)
@@ -79,12 +78,11 @@ const BrandSearchResult = () => {
     isLoading,
     isError,
     error,
-    refetch
+    refetch,
   } = useQuery<BeverageResponse, Error>({
-    queryKey: ['popularDrinks', cafeName], // cafeName이 바뀌면 다시 요청 보냄(여기서는 필요 없을 듯?)  
+    queryKey: ['popularDrinks', cafeName], // cafeName이 바뀌면 다시 요청 보냄(여기서는 필요 없을 듯?)
     queryFn: () => fetchPopularDrinks(cafeName),
-    enabled: false,
-  })
+  });
 
   // 임시 데이터
   const brands = [
@@ -139,7 +137,9 @@ const BrandSearchResult = () => {
 
       <div className="w-[calc(100%-48px)] flex justify-between mt-5 mb-6 items-center">
         <span className="font-[500] text-[17px]">사람들이 많이 마신 음료</span>
-        <span className="text-[13px] text-[#B6B6B6]">24.10.16 기준</span>
+        <span className="text-[13px] text-[#B6B6B6]">
+          {currentDate}&nbsp;기준
+        </span>
       </div>
 
       <div className="flex w-[calc(100%-48px)]">
@@ -151,7 +151,11 @@ const BrandSearchResult = () => {
             className="flex flex-col flex-1 items-center text-center"
           >
             <div className="text-[13px] mb-[8px]">{index + 1}위</div>
-            <img src={drink.imgUrl} alt="인기 음료 이미지" className="w-[90px] h-[90px] rounded-full border border-[#E5E5E5] mb-[11px]" />
+            <img
+              src={drink.imgUrl}
+              alt="인기 음료 이미지"
+              className="w-[90px] h-[90px] rounded-full border border-[#E5E5E5] mb-[11px]"
+            />
             <div className="text-[12px] text-[#909090]">{drink.name}</div>
           </div>
         ))}

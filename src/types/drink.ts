@@ -12,11 +12,12 @@ export interface LargeFavoriteDrinkModalProps extends BaseDrinkInfoProps {
 }
 
 export interface DrinkCardProps extends BaseDrinkInfoProps {
-  image?: string;
+  imgUrl?: string;
   isAdded?: boolean; // 즐겨찾기 추가 여부
 }
 
 export interface DrinkInfoProps extends BaseDrinkInfoProps {
+    imgUrl?: string;
     dateAndTime?: string;
     cafeNameTop?: string;
     cafeNameMiddle?: string;

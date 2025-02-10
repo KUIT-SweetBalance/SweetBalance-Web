@@ -27,7 +27,7 @@ const Home2TodayBody = () => {
   });
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full flex flex-col mb-[100px]">
       <div className="flex justify-between items-baseline pt-[20px] px-[34px] pb-[10px]">
         <div className="flex flex-col text-start space-y-[5px]">
           <p className="text-[18px]">오늘 마신 음료수</p>
@@ -47,9 +47,9 @@ const Home2TodayBody = () => {
         </div>
       </div>
 
-      <div className="flex py-[10px] px-[24px] gap-[10px] overflow-x-auto scrollbar-hide">
+      <div className="flex h-full py-[10px] px-[24px] gap-[10px] overflow-x-auto scrollbar-hide">
         {drinkListTodayData?.data?.length === 0 ? (
-          <NoContents height="100%" />
+          <NoContents />
         ) : (
           drinkListTodayData?.data?.map((drink, index) => (
             <DrinkCard

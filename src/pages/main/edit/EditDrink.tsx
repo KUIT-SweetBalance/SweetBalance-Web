@@ -30,6 +30,24 @@ const EditDrink = () => {
     queryFn: fetchDrinkListToday,
   });
 
+  if (!drinkListTodayData?.data || drinkListTodayData.data.length === 0) {
+    return (
+      <div className="flex flex-col h-screen items-center mt-[30px]">
+        <div className="flex w-[calc(100%-48px)]">
+          <Header headerTitle="수정하기" />
+        </div>
+
+        <div className="flex flex-col justify-between w-[calc(100%-48px)] ml-[10px] mt-5 mb-3">
+          <div className="text-[17px]">오늘 마신 음료수</div>
+        </div>
+
+        <div className='flex-grow flex mb-[70px]'>
+          <NoContents />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center mt-[30px]">
       <div className="flex w-[calc(100%-48px)]">

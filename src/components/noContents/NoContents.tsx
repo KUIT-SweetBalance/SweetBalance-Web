@@ -7,8 +7,8 @@ interface NoContentsProps {
 const NoContents = (props: NoContentsProps) => {
   return (
     <div
-      className={`flex justify-center items-center w-full text-gray_text text-[14px]`}
-      style={{ height: props.height }}
+      className={`flex flex-grow justify-center items-center w-full text-gray_text text-[14px]`}
+      // style={{ height: props.height }}
     >
       아직 기록이 없습니다
     </div>

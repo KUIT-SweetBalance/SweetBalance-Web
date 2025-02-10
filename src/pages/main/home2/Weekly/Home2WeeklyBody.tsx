@@ -39,7 +39,7 @@ const Home2WeeklyBody = () => {
   const fetchedData = weeklyNutritionIntake?.data;
 
   return (
-    <div>
+    <div className='w-full'>
       <div className="mt-[20px] ml-[34px] mb-[20px] text-[18px]">
         주간 당 통계를 분석했어요!
       </div>

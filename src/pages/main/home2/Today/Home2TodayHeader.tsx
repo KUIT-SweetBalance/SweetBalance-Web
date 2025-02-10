@@ -29,7 +29,7 @@ const Home2TodayHeader = () => {
     (fetchedData?.totalSugar ?? 0) + (fetchedData?.additionalSugar ?? 0);
 
   return (
-    <div>
+    <div className='h-full'>
       <div className="flex px-[24px] py-[20px] justify-between">
         <div className="flex flex-col">
           <div className="flex mb-[10px]">

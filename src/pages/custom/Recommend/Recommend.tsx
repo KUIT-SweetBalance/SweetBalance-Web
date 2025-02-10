@@ -1,14 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { RecommendedBeverage } from "../../../api/custom/custommain";
 
-interface Props {
-    brand: string;
-    drink: string;
-    sugar: number;
-    kcal: number;
-    caffeine: number;
-  }
-type BrandjustProps = Pick<Props, 'brand'|'sugar'>;
 const RecommentBox = styled.div`
   width: 393px;
 `;
@@ -69,11 +62,7 @@ const DrinkSugar = styled.div`
   font-weight: 400;
 `;
 
-interface DrinkAboutBrand {
-  drink: string;
-  sugar: number;
-  src:string;
-}
+
 const DownColor = styled.div`
   color: #92ada4;
 `;
@@ -84,17 +73,7 @@ const UpColor = styled.div`
 
 
 
-const Recommend: React.FC<BrandjustProps> = ({ brand,sugar }) => {
-    const recom: DrinkAboutBrand[] = [
-      { drink: '한라봉 천혜향 블렌디드', sugar: 20,src:'/recommend/drink1.svg' },
-      { drink: '유스베리 티', sugar: 6 ,src:'/recommend/drink2.svg'},
-      { drink: '딸기 아사이 레모네이드', sugar: 34 ,src:'/recommend/drink3.svg'},
-      { drink: '캐모마일 블랜드 티', sugar: 6 ,src:'/recommend/drink4.svg'},
-      { drink: '캐모마일 블랜드 티', sugar: 6,src:'/recommend/drink4.svg' },
-      { drink: '한라봉 천혜향 블렌디드', sugar: 20 ,src:'/recommend/drink1.svg'},
-      { drink: '유스베리 티', sugar: 6 ,src:'/recommend/drink2.svg'},
-      { drink: '딸기 아사이 레모네이드', sugar: 34 ,src:'/recommend/drink3.svg'},
-    ];
+const Recommend: React.FC<{brand:string;sugar:number;recom:RecommendedBeverage[]}> = ({ brand,sugar,recom }) => {
     return (
       <RecommentBox>
         <RecommendTitle>
@@ -103,13 +82,13 @@ const Recommend: React.FC<BrandjustProps> = ({ brand,sugar }) => {
         <RecommendDrinkBox>
           {recom.map((item, index) => (
             <RecommendDrink key={index}>
-              <DrinkImg src={item.src} alt="drink" />
-              <DrinkName>{item.drink}</DrinkName>
+              <DrinkImg src={item.imgUrl} alt="drink" />
+              <DrinkName>{item.name}</DrinkName>
               <DrinkSugar>
-                {sugar-item.sugar > 0 ? (
-                  <DownColor>{sugar-item.sugar}g ▼</DownColor>
+                {item.sugarGap > 0 ? (
+                  <DownColor>{item.sugarGap}g ▼</DownColor>
                 ) : (
-                  <UpColor>{item.sugar-sugar}  g ▲</UpColor>
+                  <UpColor>{item.sugarGap}  g ▲</UpColor>
                 )}
               </DrinkSugar>
             </RecommendDrink>

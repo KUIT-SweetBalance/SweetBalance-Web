@@ -7,8 +7,8 @@ import MypageContentTop from './MypageContentTop';
 const MypageContentBox = styled.div`
     width: 393px;
     display: inline-flex;
-padding: 0px 24px 30px 24px;
-flex-direction: column;
+    padding: 30px 24px 10px 24px;
+    flex-direction: column;
 align-items: flex-start;
 gap: 10px;  
 `;

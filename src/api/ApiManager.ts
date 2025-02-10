@@ -9,7 +9,7 @@ const ApiManager: AxiosInstance = axios.create({
   baseURL: 'https://13.125.187.188.nip.io', // 기본 API URL
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlclR5cGUiOiJiYXNpYyIsInRva2VuVHlwZSI6ImFjY2VzcyIsImVtYWlsIjoidXNlcjFAbmF2ZXIuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTczODkyMjk5NywiZXhwIjoxNzQ2Njk4OTk3fQ.C8cQHIsGCRo9adeloM2jZD-AVI5DXiFI9fSX6GMnXJ0`,
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlclR5cGUiOiJiYXNpYyIsInRva2VuVHlwZSI6ImFjY2VzcyIsImVtYWlsIjoidXNlcjFAbmF2ZXIuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTczODc2NjQ0NywiZXhwIjoxNzQ2NTQyNDQ3fQ.JNl_QKW8baS_CsmNakFUhrvn7RT3plLyUHW0G6txY30`,
     // username6의 access token
   },
   timeout: 5000, // 요청 타임아웃

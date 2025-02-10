@@ -1,6 +1,9 @@
-import React,{useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Button from '../../../components/button/Button';
+import Button from '../../../../components/button/Button';
+import { useNavigate  } from "react-router-dom";
+import { RecoringDrink } from '../../../../api/mypage/record/MypageRecord';
+
 const ModalContainer = styled.div`
   position: fixed;
   top: 0;
@@ -65,20 +68,26 @@ padding-top:24px;
 width: 100%;
 justify-content:space-evenly;
 `;
-const Modal: React.FC<{ onClick: () => void; onClick1:()=>void;drink: string; brand:string; }> = ({ onClick,onClick1, drink,brand })  => {
-    
+
+const EditModal: React.FC<{ onClick: () => void;drink: RecoringDrink }> = ({ onClick, drink })  => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/mypage/record/${drink.beverageId}`, {
+      state: { drink }, // ✅ 전체 drink 객체를 함께 전달
+    });
+  };
+
     return (
         <ModalContainer>
           <ModalContent>
-            <Brand>{brand}</Brand>
+            <Brand>{drink.brand}</Brand>
             <DrinkContent>
-              <Drink>{drink}</Drink>
-              <Content>를 즐겨찾기에 추가하시겠어요?</Content>
+              <Drink>{drink.beverageName}</Drink>
+              <Content>를 수정하시겠어요?</Content>
             </DrinkContent>
           <ButtonBox>
             <Button content='아니오' bgColor='bg-white' size='md'onClick={onClick}/>
-            <Button content='추가할래요' bgColor='bg-primary' size='md'onClick={onClick1}/>
-
+            <Button content='수정할래요' bgColor='bg-primary' size='md'onClick={handleClick}/>
           </ButtonBox>
 
           </ModalContent>
@@ -86,4 +95,4 @@ const Modal: React.FC<{ onClick: () => void; onClick1:()=>void;drink: string; br
     );
 };
 
-export default Modal;
+export default EditModal;

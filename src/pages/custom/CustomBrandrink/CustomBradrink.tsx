@@ -7,8 +7,9 @@ interface Props {
     sugar: number;
     kcal: number;
     caffeine: number;
+    scrap:boolean;
   }
-type BrandProps = Pick<Props, 'brand' | 'drink'>;
+type BrandProps = Pick<Props, 'brand' | 'drink'|'scrap'>;
 const BrandrinkBox = styled.div`
   height: auto;
 `;
@@ -71,12 +72,12 @@ const Drink = styled.div`
   height:auto;
 `;
 
-const Brandrink: React.FC<BrandProps & { onClick: () => void }> = ({ brand, drink, onClick }) => {
+const Brandrink: React.FC<BrandProps & { onClick: () => void }&{onClick1:()=>void}> = ({ brand, drink, onClick,onClick1 ,scrap}) => {
     return (
         <BrandrinkBox>
             <BrandBox>
                 <Brand>{brand}</Brand>
-                <StarBox onClick={onClick} src="/unfillstar.svg"alt="star">
+                <StarBox onClick={scrap?onClick1:onClick} src={scrap?"/fillstar.svg":"/unfillstar.svg"}alt="star">
                     {/* <StarImg src="/fillstar.svg" alt="star" />
                     <Star>즐겨찾기</Star> */}
                 </StarBox>

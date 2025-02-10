@@ -1,17 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-interface RecoringDrink {
-    beverageLogId: number;
-    beverageSizeId: number;
-    createdAt: string; // 날짜 형식이므로 문자열로 유지
-    brand: string;
-    beverageName: string;
-    imgUrl: string;
-    sugar: number;
-    syrupName: string | null;
-    syrupCount: number;
-    sizeType: string; // 다른 사이즈 확장 가능성 고려
-  }
+interface FavoriteDrink {
+    favoriteId: number;   // 즐겨찾기 음료 고유 ID
+    beverageId: number;   // 음료 ID
+    name: string;         // 음료 이름
+    brand: string;        // 브랜드명 (예: "스타벅스")
+    imgUrl: string;       // 음료 이미지 URL
+    sugar: number;        // 당 함량
+    timeString: string;   // 기록된 시간 (문자열 형식)
+}
 const ItemBox = styled.div`
     display: flex;
     padding: 10px 24px;
@@ -40,11 +37,11 @@ justify-content: space-between;
 const LeftTop = styled.div`
 color: var(--text, #121212);
 font-family: Pretendard;
-font-size: 12px;
+font-size: 16px;
 font-style: normal;
-font-weight: 400;
+font-weight: 500;
 line-height: normal;
-letter-spacing: -0.3px;
+letter-spacing: -0.4px;
 `;
 const RightImg = styled.img`
 width:14px;
@@ -53,14 +50,7 @@ const RightTop = styled.div`
 display: flex;
 gap: 5px;
 `;
-const Middle= styled.div`
-color: var(--text, #121212);
-font-family: Pretendard;
-font-size: 16px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-letter-spacing: -0.4px;`;
+
 const Bottom = styled.div`
     display: flex;
 align-items: center;
@@ -77,29 +67,26 @@ font-weight: 400;
 line-height: normal;
 letter-spacing: -0.3px;
 `;
-const MypageDrinkInfo: React.FC<{drink:RecoringDrink;onClick:()=>void;onClick1:()=>void}> = ({drink,onClick,onClick1}) => {
+const MypageScrapInfo: React.FC<{drink:FavoriteDrink;onClick:()=>void}> = ({drink,onClick}) => {
     
     return (
         <ItemBox>
             <DrinkImg src={drink.imgUrl}/>
             <ContentBox>
                 <Top>
-                    <LeftTop>{drink.createdAt}</LeftTop>
+                    <LeftTop>{drink.name}</LeftTop>
                     <RightTop>
-                        <RightImg src='/Edit.svg' alt='edit' onClick={onClick}/>
-                        <RightImg src='/Dele.svg' alt='Dele' onClick={onClick1}/>
+                        <RightImg src='/Dele.svg' alt='Dele' onClick={onClick}/>
                     </RightTop>
                 </Top>
-                <Middle>
-                    {drink.brand} {drink.beverageName}
-                </Middle>
+                
                 <Bottom>
+                
+                <Name>{drink.brand}</Name>
+                |
+                <Name>당 {drink.sugar}g</Name>
                     
-                    <Name>당 {drink.sugar}g</Name>
-                    |
-                    <Name>{drink.syrupName ? drink.syrupName + drink.syrupCount : '시럽 없음'}</Name>
-                    |
-                    <Name>사이즈 {drink.sizeType}</Name>
+                    
                     
                     
                     {/* <Name>{drink.calories}kcal</Name> */}
@@ -109,4 +96,4 @@ const MypageDrinkInfo: React.FC<{drink:RecoringDrink;onClick:()=>void;onClick1:(
     );
 };
 
-export default MypageDrinkInfo;
+export default MypageScrapInfo;

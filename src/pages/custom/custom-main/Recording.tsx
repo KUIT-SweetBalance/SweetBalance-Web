@@ -7,7 +7,7 @@ const RecodingButton = styled.button`
   background: #722a2a;
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
+  font-family: 'Pretendard';
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -20,19 +20,12 @@ const Center = styled.div`
   display: flex;
   justify-content: center;
 `;
-interface Props {
-    brand: string;
-    drink: string;
-    sugar: number;
-    kcal: number;
-    caffeine: number;
-  }
-const Recoding : React.FC<Pick<Props, 'sugar'>& { onClick: () => void }> = ({sugar,onClick}) => {
-    const name = `당류 ${sugar}g 기록하기`;
+
+const Recoding : React.FC <{ onClick: () => void }> = ({onClick}) => {
     return (
         <>
             <Center>
-                <RecodingButton onClick={onClick}>{name}</RecodingButton> 
+                <RecodingButton onClick={onClick}>수정하기</RecodingButton> 
             </Center>
        </>
     )

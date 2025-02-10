@@ -9,17 +9,14 @@ import Brandrink from './CustomBrandrink/CustomBradrink';
 import SizeComponent from './customSizecomponent/SizeComponent';
 import SKC from './CustomSKC/SKC';
 import Recommend from './Recommend/Recommend';
+import { useParams,useLocation  } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-interface Props {
-  brand: string;
-  drink: string;
-  sugar: number;
-  kcal: number;
-  caffeine: number;
-}
+import { fetchCustomDrink,BeverageDetailResponse,BeverageDetail,SizeDetail,RecommendedBeverage } from '../../api/custom/custommain';
+
 interface SizeProps {
-  name: string;
-  size: number;
+  sizeType: string;
+  volume: number;
 }
 const Container = styled.div`
   width: 393px;
@@ -34,7 +31,7 @@ const GrayBox = styled.div`
   width: 393px;
   height: 15px;
   background: #f4f4f4;
-  margin: 20px 0 0 0;
+  margin: 20px 0 0 0;  
 
 `;
 
@@ -55,20 +52,41 @@ const Askinfo = styled.div`
 
 
 
+  
+// { brand, drink, sugar, kcal, caffeine ,scrap}
 
-
-
-const CustomMain: React.FC<Props> = ({ brand, drink, sugar, kcal, caffeine }) => {
+const CustomMain: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
     const [isSlideUpOpen, setIsSlideUpOpen] = useState(false); // 슬라이드 업 모달
-    const sizes: SizeProps[] = [
-        { name: 'SHORT', size: 236 },
-        { name: 'TALL', size: 354 },
-        { name: 'GRANDE', size: 473 },
-        { name: 'VENTI', size: 591 },
-    ];
+    const [realScrap, setrealScrap] = useState(false); // 슬라이드 업 모달
+    const { beverageId } = useParams();
+    const location = useLocation();
+    const Syrupinfo = location.state?.drink;
+    const handleSizeClick = (index: number) => {
+      setSelectedSize(index);
+    };
+    const [selectedSize, setSelectedSize] = React.useState<number>(0);
+    const { data, isLoading, error } = useQuery({
+      queryKey: ["customDrink", beverageId], // 음료 ID별 캐싱을 위해 key 설정
+      queryFn: () => fetchCustomDrink(beverageId!),
+      enabled: !!beverageId, // query will not execute until beverageId exists
+    });
+  
+    // ✅ 로딩 상태
+    if (isLoading) return <p>Loading...</p>;
+    
+    // ✅ 에러 처리
+    if (error) return <p>Error: {error.message}</p>;
+  
+    // ✅ 정상적으로 데이터 로드된 경우
+    const drinkData: BeverageDetail = data?.data || {} as BeverageDetail;
+    
+    const updatedSizeDetails: SizeProps[]  = drinkData.sizeDetails.map(({ sizeType, volume }: { sizeType: string; volume: number }) => ({
+      sizeType,
+      volume,
+    }));
 
-    const handleStarClick = () => {
+    const    handleStarClick = () => {
         setIsModalOpen(true); // 모달 열기
     };
 
@@ -82,24 +100,29 @@ const CustomMain: React.FC<Props> = ({ brand, drink, sugar, kcal, caffeine }) =>
     const handleSlideUpClose = () => {
       setIsSlideUpOpen(false); // 슬라이드 업 모달 닫기
   };
+  const handleScrap = () => {
+    setIsModalOpen(false); // 모달 닫기
+
+    setrealScrap(prev => !prev); // 스크랩 상태 토글
+};
 
       
     return (
         <Container>
             <CustomTop/>
-            <Brandrink brand={brand} drink={drink} onClick={handleStarClick} />
-            <SizeComponent sizes={sizes} />
-            <SKC sugar={sugar} kcal={kcal} caffeine={caffeine} />
+            <Brandrink brand={drinkData.brand} drink={drinkData.name} onClick={handleStarClick} onClick1={handleScrap} scrap ={drinkData.favorite} />
+            <SizeComponent sizes={updatedSizeDetails} selectedSize={selectedSize} handleSizeClick={handleSizeClick}/>
+            <SKC sugar={drinkData.sizeDetails[selectedSize].sugar} kcal={drinkData.sizeDetails[selectedSize].calories} caffeine={drinkData.sizeDetails[selectedSize].caffeine} />
             <GrayBox />
-            <Recommend  sugar={sugar}  brand={brand} />
+            <Recommend recom={drinkData.sizeDetails[selectedSize].recommends} sugar={drinkData.sizeDetails[selectedSize].sugar}  brand={drinkData.brand} />
             <Askinfo>정보 수정을 요청하고 싶어요</Askinfo>
-            <Recoding sugar={sugar} onClick ={handleRecodingClick } />
+            <Recoding  onClick ={handleRecodingClick } />
             {/* 팝업 모달 */}
             {isModalOpen && (
-                <Modal onClick={handleModalClose} sizes={sizes}/>
+                <Modal onClick={handleModalClose} onClick1={handleScrap}brand={drinkData.brand} drink={drinkData.name}/>
             )}
-              {isSlideUpOpen && (
-                <Syrup  sugar={sugar} onClick={handleSlideUpClose}/>
+            {isSlideUpOpen && (
+                <Syrup  Syrup={Syrupinfo} onClick={handleSlideUpClose}/>
             )}
             
         </Container>

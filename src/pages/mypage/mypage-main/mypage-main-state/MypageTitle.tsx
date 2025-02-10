@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 
 const MypageTitleBox = styled.div`
 width: 393px;
-height:63px;
+height:auto;
     display : inline-flex;
-    padding: 10px 24px;
+    padding: 30px 24px 10px 24px;
     align-items: center;
-    gap: 46px;
+    gap: 18px;
 `;
 
 const MyPageTitleLeft = styled.div`
@@ -55,7 +56,22 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 `;
+const RightBox = styled.div`
+display:flex;
+gap:10px;
+`;
+const Mypagesetting = styled.img``;
 const MypageTitle: React.FC = () => {
+
+    const navigate = useNavigate();
+
+    const handleEditClick = () => {
+        navigate('/mypage/revise');
+    };
+    const handleSettingClick = () => {
+        navigate('/mypage/setting');
+    };
+   
     return (
         <MypageTitleBox>
             <MyPageTitleLeft>
@@ -68,8 +84,10 @@ const MypageTitle: React.FC = () => {
                 </MypageTitleLeftRight>
             </MyPageTitleLeft>
             {/* 안에 들어가는거 애매함  */}
-            <MyPageTitleRight>편집하기</MyPageTitleRight>
-            {/* 얜 버튼튼 */}
+            <RightBox>
+            <MyPageTitleRight onClick={handleEditClick}>편집하기</MyPageTitleRight>
+            <Mypagesetting src='mypagesetting.svg'alt='set'onClick={handleSettingClick}/>
+            </RightBox>
         </MypageTitleBox>
     );
 };

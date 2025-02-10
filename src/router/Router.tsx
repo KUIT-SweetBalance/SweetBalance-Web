@@ -22,6 +22,7 @@ import SignIn from '../pages/onboarding/sign-in/SignIn';
 import AllBrands from '../pages/main/search/AllBrands';
 import BrandSearchResult from '../pages/main/search/BrandSearchResult';
 import DrinkSearchResult from '../pages/main/search/DrinkSearchResult';
+import MypageScrap from '../pages/mypage/mypage-scrap/MypageScrap';
 
 const router = createBrowserRouter([
   {
@@ -61,26 +62,55 @@ const router = createBrowserRouter([
     element: <EditDrink />,
   },
   {
-    path: '/custom',
+    path: '/custom/:beverageId',
     element: (
-      <CustomMain
-        brand="스타벅스"
-        drink="아이스 아메리카노"
-        sugar={0}
-        kcal={0}
-        caffeine={5}
-      />
+      <CustomMain/>
     ),
   },
   {
+    path: '/mypage/record/:beverageId',
+    element: (
+      <CustomMain/>
+    ),
+  },
+  
+  {
     path: '/mypage',
     element: <Mypage />,
-    children: [
-      { path: 'revise', element: <Mypagerevise /> },
-      { path: 'setting', element: <MypageSettingManage /> },
-      { path: 'record', element: <MypageRecord /> },
-      { path: 'navi', element: <BottomNavi /> },
-    ],
+  },
+  {
+    path: '/mypage/revise',
+    element: <Mypagerevise />,
+  },
+  {
+    path: '/mypage/setting',
+    element: <MypageSettingManage />,
+  },
+  {
+    path: '/mypage/record',
+    element: <MypageRecord />,
+  },
+  // {
+  //   path: '/mypage/record/custom',
+  //   element: (
+  //     <CustomMain
+  //       brand="스타벅스"
+  //       drink="아이스 아메리카노"
+  //       sugar={0}
+  //       kcal={0}
+  //       caffeine={5}
+  //       scrap ={false}
+  //     />
+  //   ),
+  // },
+  {
+    path: '/mypage/scrap',
+    element: <MypageScrap/>,
+  },
+  
+  {
+    path: '/edit/completed',
+    element: <EditCompleted />,
   },
   {
     path: '/edit/completed',

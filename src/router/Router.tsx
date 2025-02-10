@@ -62,16 +62,15 @@ const router = createBrowserRouter([
     element: <EditDrink />,
   },
   {
-    path: '/custom',
+    path: '/custom/:beverageId',
     element: (
-      <CustomMain
-        brand="스타벅스"
-        drink="아이스 아메리카노"
-        sugar={0}
-        kcal={0}
-        caffeine={5}
-        scrap ={false}
-      />
+      <CustomMain/>
+    ),
+  },
+  {
+    path: '/mypage/record/:beverageId',
+    element: (
+      <CustomMain/>
     ),
   },
   
@@ -91,6 +90,19 @@ const router = createBrowserRouter([
     path: '/mypage/record',
     element: <MypageRecord />,
   },
+  // {
+  //   path: '/mypage/record/custom',
+  //   element: (
+  //     <CustomMain
+  //       brand="스타벅스"
+  //       drink="아이스 아메리카노"
+  //       sugar={0}
+  //       kcal={0}
+  //       caffeine={5}
+  //       scrap ={false}
+  //     />
+  //   ),
+  // },
   {
     path: '/mypage/scrap',
     element: <MypageScrap/>,

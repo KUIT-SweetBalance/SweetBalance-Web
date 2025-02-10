@@ -24,7 +24,7 @@ const MypageTitle = styled.div`
 const MypageInput = styled.input`
   width: 345px;
   height: 60px;
-  padding: 20px 30px;
+  padding: 15px 30px 15px 20px;
   border-radius: 100px;
   border: 2px solid #f3f3f3;
   background: #fff;
@@ -51,14 +51,18 @@ const MypageSelect = styled.select`
   outline: none;
   cursor: pointer;
 `;
-
+const HeaderPadding = styled.div`
+padding: 0 14px 0 21px;
+`;
 const Mypagerevise: React.FC = () => {
   const [nickname, setNickname] = useState("");
   const [sex, setSex] = useState("");
 
   return (
     <>
+      <HeaderPadding>
       <Header headerTitle="내 프로필 편집하기" confirmButton="완료" />
+      </HeaderPadding>
       <MypagereviseBox>
         {/* 닉네임 입력 */}
         <MypagereviseItem>
@@ -85,7 +89,7 @@ const Mypagerevise: React.FC = () => {
         <MypagereviseItem>
           <MypageTitle>성별</MypageTitle>
           <MypageSelect value={sex} onChange={(e) => setSex(e.target.value)}>
-          <option value="성별">성별</option>
+            <option value="성별">성별</option>
             <option value="남자">남자</option>
             <option value="여자">여자</option>
           </MypageSelect>

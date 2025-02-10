@@ -1,112 +1,128 @@
-import React from 'react';
-import Header from '../../../components/header/Header'; 
-import SearchInput from '../../../components/input/searchInput/SearchInput';
-import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
-import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
-import Arrangement from './Arrangement';
-import MypageDrinkInfo from './MypageDrinkInfo';
-import { useState } from 'react';
-import EditModal from './Edit/Editmodel';
-import DeleModal from './Dele/Delemodal';
-import Deleted from './Dele/Deleted';
+import React, { useState } from "react";
+import { useQuery,useMutation, useQueryClient  } from "@tanstack/react-query";
+import { useForm} from "react-hook-form";
+import styled from "styled-components";
 
-interface DrinkInfo {
-  id: number; // 유니크한 식별자
-  date: {
-  year: number;
-  month: number;
-  day: number;
-  weekday: string; // "월", "화" 등 요일
-  };
-  time: {
-  hour: number;
-  minute: number;
-  };
-  brand: string; // 브랜드 (예: "스타벅스")
-  name: string; // 음료 이름 (예: "아이스 카페 아메리카노")
-  size: string; // 사이즈 (예: "tall")
-  syrup: number; // 시럽 개수 (예: 0)
-  sugar: string; // 당 함량 (예: "0g")
-  calories: string; // 칼로리 (예: "0 kcal")
-  imageUrl: string; // 음료 이미지 URL
-}
+import Header from "../../../components/header/Header";
+import SearchInput from "../../../components/input/searchInput/SearchInput";
+import MypageDrinkInfo from "./MypageDrinkInfo";
+import Arrangement from "./Arrangement";
+import EditModal from "./Edit/Editmodel";
+import DeleModal from "./Dele/Delemodal";
+import Deleted from "./Dele/Deleted";
+import { RecoringDrinkData, fetchRecoringDrinks,DeleteRecordingDrinks } from "../../../api/mypage/record/MypageRecord";
+
 const Padding = styled.div`
-padding: 25px;
+  padding: 25px;
 `;
+const HeaderPadding = styled.div`
+  padding: 0 14px 0 21px;
+`;
+
 const MypageRecord: React.FC = () => {
+  // React Query로 음료 데이터 불러오기
+  const { data, isLoading, error } = useQuery<RecoringDrinkData>({
+    queryKey: ["recordingDrinks"],
+    queryFn: fetchRecoringDrinks,
+  });
+  const queryClient = useQueryClient();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpen1, setIsModalOpen1] = useState(false);
-  const [Delete, setDelete] = useState(false);
+  // 음료 데이터를 가져오고, 없을 경우 빈 배열로 처리
+  const drinks = data?.data || [];
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  // 각 음료별 모달 상태를 객체 형태로 관리
+  const [modalStates, setModalStates] = useState<{ [key: number]: boolean }>({});
+  const [deleteStates, setDeleteStates] = useState<{ [key: number]: boolean }>({});
+
+  // 수정 모달 열기 & 닫기
+  const openModal = (id: number) => {
+    setModalStates((prev) => ({ ...prev, [id]: true }));
+  };
+  const closeModal = (id: number) => {
+    setModalStates((prev) => ({ ...prev, [id]: false }));
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  // 삭제 모달 열기 & 닫기
+  const openDeleteModal = (id: number) => {
+    setDeleteStates((prev) => ({ ...prev, [id]: true }));
   };
-  const openModal1 = () => {
-    setIsModalOpen1(true);
+  const closeDeleteModal = (id: number) => {
+    setDeleteStates((prev) => ({ ...prev, [id]: false }));
   };
-
-  const closeModal1 = () => {
-    setIsModalOpen1(false);
-    setDelete(true);
-
-  };
-  // const openDele = () => {
-  //   setDelete(true);
-  // };
-
-  const closeDele = () => {
-    setDelete(false);
-  };
-  const drink: DrinkInfo = {
-    id: 15,
-    date: {
-      year: 2024,
-      month: 11,
-      day: 26,
-      weekday: "화",
+  const deleteRecordMutation = useMutation({
+    mutationFn: (BeverageId: number) => DeleteRecordingDrinks(BeverageId),
+    onSuccess: () => {
+      // ✅ 삭제 후, 최신 데이터로 UI 업데이트
+      queryClient.invalidateQueries(["recordingDrinks"]);
     },
-    time: {
-      hour: 13,
-      minute: 23,
+    onError: (error) => {
+      console.error("삭제 실패:", error);
     },
-    brand: "스타벅스",
-    name: "아이스 카페 아메리카노",
-    size: "tall",
-    syrup: 0,
-    sugar: "0",
-    calories: "0",
-    imageUrl: "/Drinkinfo/americano.svg",
+  });
+  const handleDelete = (BeverageId: number) => {
+    deleteRecordMutation.mutate(BeverageId);
+    console.log(BeverageId)
+    closeDeleteModal(BeverageId); // 모달 닫기
   };
-     const {
-        // watch, // 입력 필드 값 실시간 확인
-        getValues, // 입력값 가져오기
-        register, // 유효성 검사와 값 관리에 사용
-      } = useForm(); // mode: onChange로 설정
-      const handleSearchClick = () => {
-        const inputValue = getValues('SearchDrink');
-        console.log(inputValue);
-      };
-    return (
-        <>
-        <Header headerTitle='나의 기록 목록' confirmButton='완료' />
-        <Padding>
-            <SearchInput id='MypageRecord' type='input' placeholder='검색어로 빠르게 기록 찾기' register={register}
-            onSearch={handleSearchClick} />
-        </Padding>
-        <Arrangement title ='내가 기록한 음료'/>
-        <MypageDrinkInfo drink = {drink} onClick={openModal} onClick1={openModal1}/>
-      
-        {isModalOpen&&<EditModal onClick={openModal} onClick1={closeModal} drink={drink.name} brand={drink.brand}/>}
-        {isModalOpen1&&<DeleModal onClick={closeModal1} onClick1={closeModal1} drink={drink.name} brand={drink.brand}/>}
-        {Delete&&<Deleted onClick={closeDele}/>}
-        </>
-    );
+  // 검색 기능
+  const { getValues, register } = useForm();
+  const handleSearchClick = () => {
+    const inputValue = getValues("SearchDrink");
+    console.log(inputValue);
+  };
+
+  // 로딩 및 에러 핸들링
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
+    <>
+      <HeaderPadding>
+        <Header headerTitle="나의 기록 목록" confirmButton="완료" />
+      </HeaderPadding>
+      <Padding>
+        <SearchInput
+          id="MypageRecord"
+          type="input"
+          placeholder="검색어로 빠르게 기록 찾기"
+          register={register}
+          onSearch={handleSearchClick}
+        />
+      </Padding>
+      <Arrangement title="내가 기록한 음료" />
+
+      {drinks.map((drink) => (
+        <div key={drink.beverageLogId}>
+          {/* 음료 리스트 */}
+          <MypageDrinkInfo 
+            drink={drink} 
+            onClick={() => openModal(drink.beverageLogId)} 
+            onClick1={() => openDeleteModal(drink.beverageLogId)} 
+          />
+
+          {/* 수정 모달 */}
+          {modalStates[drink.beverageLogId] && (
+            <EditModal 
+              onClick={() => closeModal(drink.beverageLogId)} 
+              // onClick1={() => closeModal(drink.beverageLogId)} 
+              drink={drink} 
+              
+            />
+          )}
+
+          {/* 삭제 확인 모달 */}
+          {deleteStates[drink.beverageLogId] && (
+            <DeleModal 
+              onClick={() => closeDeleteModal(drink.beverageLogId)} 
+              onClick1={() => handleDelete(drink.beverageLogId)} 
+              drink={drink.beverageName} 
+              brand={drink.brand} 
+            />
+          )}
+        </div>
+      ))}
+    </>
+  );
 };
 
 export default MypageRecord;

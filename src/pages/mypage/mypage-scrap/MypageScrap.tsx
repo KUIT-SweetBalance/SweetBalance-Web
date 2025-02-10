@@ -2,90 +2,95 @@ import React from 'react';
 import Header from '../../../components/header/Header'; 
 import SearchInput from '../../../components/input/searchInput/SearchInput';
 import { useForm } from 'react-hook-form';
+import { useQuery ,useMutation, useQueryClient } from "@tanstack/react-query";
 import styled from 'styled-components';
-import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
 import { useState } from 'react';
 import Arrangement from '../mypage-record/Arrangement';
-import MypageDrinkInfo from '../mypage-record/MypageDrinkInfo';
 import DeleModal from '../mypage-record/Dele/Delemodal';
+import { ScrapDrinkData,fetchScrapDrinks,DeleteScrapDrinks} from "../../../api/mypage/scrap/MypageScrap";
+import MypageScrapInfo from './MypageScrapinfo';
 
-
-
-interface DrinkInfo {
-  id: number; // 유니크한 식별자
-  date: {
-  year: number;
-  month: number;
-  day: number;
-  weekday: string; // "월", "화" 등 요일
-  };
-  time: {
-  hour: number;
-  minute: number;
-  };
-  brand: string; // 브랜드 (예: "스타벅스")
-  name: string; // 음료 이름 (예: "아이스 카페 아메리카노")
-  size: string; // 사이즈 (예: "tall")
-  syrup: number; // 시럽 개수 (예: 0)
-  sugar: string; // 당 함량 (예: "0g")
-  calories: string; // 칼로리 (예: "0 kcal")
-  imageUrl: string; // 음료 이미지 URL
-}
 const Padding = styled.div`
 padding: 25px;
 `;
+const HeaderPadding = styled.div`
+  padding: 0 14px 0 21px;
+`;
+
+
 const MypageScrap: React.FC = () => {
+  const { data, isLoading, error } = useQuery<ScrapDrinkData>({
+      queryKey: ["scrapDrinks"],
+      queryFn: fetchScrapDrinks,
+    });
+    const queryClient = useQueryClient();
+    // 음료 데이터를 가져오고, 없을 경우 빈 배열로 처리
+    const drinks = data?.data || [];
 
-  const [isModalOpen1, setIsModalOpen1] = useState(false);
-
-
-  const openModal1 = () => {
-    setIsModalOpen1(true);
+  const [deleteStates, setDeleteStates] = useState<{ [key: number]: boolean }>({});
+  
+  const openDeleteModal = (id: number) => {
+    setDeleteStates((prev) => ({ ...prev, [id]: true }));
   };
-
-  const closeModal1 = () => {
-    setIsModalOpen1(false);
+  const closeDeleteModal = (id: number) => {
+    setDeleteStates((prev) => ({ ...prev, [id]: false }));
   };
-  const drink: DrinkInfo = {
-    id: 15,
-    date: {
-      year: 2024,
-      month: 11,
-      day: 26,
-      weekday: "화",
+  
+  const deleteScrapMutation = useMutation({
+    mutationFn: (favoriteId: number) => DeleteScrapDrinks(favoriteId),
+    onSuccess: () => {
+      // ✅ 삭제 후, 최신 데이터로 UI 업데이트
+      queryClient.invalidateQueries(["scrapDrinks"]);
     },
-    time: {
-      hour: 13,
-      minute: 23,
+    onError: (error) => {
+      console.error("삭제 실패:", error);
     },
-    brand: "스타벅스",
-    name: "아이스 카페 아메리카노",
-    size: "tall",
-    syrup: 0,
-    sugar: "0",
-    calories: "0",
-    imageUrl: "/Drinkinfo/americano.svg",
+  });
+  const handleDelete = (favoriteId: number) => {
+    deleteScrapMutation.mutate(favoriteId);
+    console.log(favoriteId)
+    closeDeleteModal(favoriteId); // 모달 닫기
   };
-     const {
-        // watch, // 입력 필드 값 실시간 확인
-        getValues, // 입력값 가져오기
-        register, // 유효성 검사와 값 관리에 사용
-      } = useForm(); // mode: onChange로 설정
-      const handleSearchClick = () => {
-        const inputValue = getValues('SearchDrink');
-        console.log(inputValue);
-      };
+    const {
+      // watch, // 입력 필드 값 실시간 확인e
+      getValues, // 입력값 가져오기
+      register, // 유효성 검사와 값 관리에 사용
+    } = useForm(); // mode: onChange로 설정
+    const handleSearchClick = () => {
+      const inputValue = getValues('SearchDrink');
+      console.log(inputValue);
+    };
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error.message}</p>;
     return (
         <>
+        <HeaderPadding>
         <Header headerTitle='나의 즐겨찾기 목록' confirmButton='완료' />
+        </HeaderPadding>
         <Padding>
             <SearchInput id='MypageRecord' type='input' placeholder='검색어로 빠르게 기록 찾기' register={register}
             onSearch={handleSearchClick} />
         </Padding>
         <Arrangement title ='내가 즐겨찾기한 음료'/>
-        <MypageDrinkInfo drink = {drink} onClick={openModal1} onClick1={openModal1}/>
-      
-        {isModalOpen1&&<DeleModal onClick={closeModal1} onClick1={closeModal1} drink={drink.name} brand={drink.brand}/>}
+        {drinks.map((drink) => (
+        <div key={drink.favoriteId}>
+          {/* 음료 리스트 */}
+          <MypageScrapInfo 
+            drink={drink} 
+            onClick={() => openDeleteModal(drink.favoriteId)}  
+          />
+
+          {/* 삭제 확인 모달 */}
+          {deleteStates[drink.favoriteId] && (
+            <DeleModal 
+              onClick={() => closeDeleteModal(drink.favoriteId)} 
+              onClick1={() => handleDelete(drink.favoriteId)} 
+              drink={drink.name}
+              brand={drink.brand}
+            />
+          )}
+        </div>
+      ))}
 
         </>
     );

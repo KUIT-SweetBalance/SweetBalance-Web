@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-
+import { RecoringDrink } from "../../../api/mypage/record/MypageRecord";
 // 슬라이더 컨테이너
 const SliderContainer = styled.div`
   position: relative;
@@ -40,11 +40,14 @@ const PumpValue = styled.div`
   color: #8b5a4b;
 `;
 
-const PumpSlider = () => {
-  const [pumpValue, setPumpValue] = useState(0); // 초기 펌프 값
-  const [angle, setAngle] = useState(-180); // 드래그 회전 각도 (-180 ~ 0)
+const PumpSlider:React.FC<{Syrup:number}> = ({Syrup}) => {
+  const initialPumpValue = Syrup + 4; // Syrup을 기반으로 초기 펌프 값 설정
+const initialAngle = (initialPumpValue * 21) - 180; // ✅ 초기 각도 계산
+const [pumpValue, setPumpValue] = useState(initialPumpValue);
+const [angle, setAngle] = useState(initialAngle);
+
   const sliderRef = useRef(null);
-  const [realpumpValue, setRealPumpValue] = useState(0); // 초기 펌프 값
+  const [realpumpValue, setRealPumpValue] = useState(initialPumpValue-4); // 초기 펌프 값
 
   const pumpimg = ['/pump-4.svg','/pump-3.svg','/pump-2.svg','/pump-1.svg','/pump.svg','/pump1.svg','/pump2.svg','/pump3.svg','/pump4.svg']
   // 버튼 위치 계산 함수 (반원 안쪽에서 이동)

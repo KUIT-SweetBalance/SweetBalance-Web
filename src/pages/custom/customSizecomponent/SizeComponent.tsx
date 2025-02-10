@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 
-  interface SizeProps {
-    name: string;
-    size: number;
-  }
+interface SizeProps {
+  sizeType: string;
+  volume: number;
+}
 const SizeList = styled.div`
   display: flex;
   justify-content: space-around;
@@ -67,21 +67,18 @@ const SizeMl = styled.div`
   margin-top: 8px;
 `;
 
-const SizeComponent: React.FC<{ sizes: SizeProps[] }> = ({ sizes }) => {
-  const handleSizeClick = (index: number) => {
-    setSelectedSize(index);
-  };
-  const [selectedSize, setSelectedSize] = React.useState<number>(0);
+const SizeComponent: React.FC<{ sizes: SizeProps[]; selectedSize:number;handleSizeClick:(index:number)=>void}> = ({ sizes,selectedSize,handleSizeClick }) => {
+  
     return (
       <SizeList>
         {sizes.map((size, index) => (
           <SizeBox key={index}>
             {  selectedSize===index?
-                <Sizeimg onClick={() => handleSizeClick(index)}><Img src={`/size/fill${size.name}.svg`} alt="size"/></Sizeimg>:
-                <Sizeimg2 onClick={() => handleSizeClick(index)}><Img src={`/size/unfill${size.name}.svg`} alt="size"/></Sizeimg2>
+                <Sizeimg onClick={() => handleSizeClick(index)}><Img src={`/size/fill${size.sizeType}.svg`} alt="size"/></Sizeimg>:
+                <Sizeimg2 onClick={() => handleSizeClick(index)}><Img src={`/size/unfill${size.sizeType}.svg`} alt="size"/></Sizeimg2>
           }
-            <SizeName>{size.name}</SizeName>
-            <SizeMl>{size.size}ml</SizeMl>
+            <SizeName>{size.sizeType}</SizeName>
+            <SizeMl>{size.volume}ml</SizeMl>
           </SizeBox>
         ))}
       </SizeList>

@@ -4,6 +4,7 @@ interface LargeFavoriteDrinkModalState {
   isOpen: boolean;
   cafeName?: string;
   drinkName?: string;
+  imgUrl?: string;
   sugar?: number;
   syrupType?: string;
   syrup?: number;
@@ -11,6 +12,7 @@ interface LargeFavoriteDrinkModalState {
   openFavoriteModal: (drinkData: {
     cafeName: string;
     drinkName: string;
+    imgUrl?: string;
     sugar?: number;
     syrupType?: string;
     syrup?: number;
@@ -23,6 +25,7 @@ const useLargeFavoriteDrinkModalStore = create<LargeFavoriteDrinkModalState>((se
   isOpen: false,
   cafeName: '',
   drinkName: '',
+  imgUrl: '',
   sugar: undefined,
   syrupType: '',
   syrup: undefined,

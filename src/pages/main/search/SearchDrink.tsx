@@ -11,8 +11,10 @@ import { brands } from '../../../types/brands';
 import {
   DrinkListResponse,
   fetchDrinkList,
+  InfiniteDrinkListResponse,
 } from '../../../api/main/search/DrinkList';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
+import useInfiniteScroll from '../../../hooks/useInfiniteScroll';
 
 const SearchDrink = () => {
   const {
@@ -45,7 +47,6 @@ const SearchDrink = () => {
   const handleSearchClick = () => {
     const inputValue = getValues('SearchDrink');
     if (!inputValue) {
-      alert('검색어를 입력해주세요!');
       return;
     }
     console.log(inputValue);
@@ -60,27 +61,71 @@ const SearchDrink = () => {
 
   const drinkCategory = ['전체', '커피', '음료', '시그니쳐', '기타'];
 
-  // page, size
-  const [page, setPage] = useState(0);
-  const [size, setSize] = useState(20);
-
   // 음료 데이터 get 요청
+  // const {
+  //   data: drinkList,
+  //   isLoading,
+  //   isError,
+  //   error,
+  // } = useQuery<DrinkListResponse, Error>({
+  //   queryKey: ['drinkList', selectedFilter, selectedCategory], // cafeName이 바뀌면 다시 요청 보냄(여기서는 필요 없을 듯?)
+  //   queryFn: () =>
+  //     fetchDrinkList({
+  //       sort: selectedFilter,
+  //       category: drinkCategory[selectedCategory],
+  //     }),
+  // });
+
   const {
-    data: drinkList,
-    isLoading,
-    isError,
-    error,
-    refetch,
-  } = useQuery<DrinkListResponse, Error>({
-    queryKey: ['popularDrinks', page, size, selectedFilter, selectedCategory], // cafeName이 바뀌면 다시 요청 보냄(여기서는 필요 없을 듯?)
-    queryFn: () =>
+    data: drinkList, // 가져온 모든 페이지의 데이터 포함
+    fetchNextPage, // 다음 페이지의 데이터를 가져오는 함수
+    hasNextPage, // 다음 페이지가 존재하는지 여부를 나타내는 불리언 값
+    isFetchingNextPage, // 다음 페이지 가져오는 중인지 여부 나타냄
+  } = useInfiniteQuery<
+    InfiniteDrinkListResponse,
+    Error,
+    InfiniteDrinkListResponse,
+    number
+  >({
+    // 각 페이지의 반환 타입
+    // 에러 타입
+    // 단일 페이지의 데이터 타입
+    // PageParam의 타입
+    queryKey: ['drinkList', selectedCategory, selectedFilter],
+    queryFn: (
+      { pageParam = 0 }: { pageParam: number }, // pageParam의 형식지정 number로 안하면 'unknown' 형식은 'number'형식에 할당할 수 없습니다 라는 오류 발생
+    ) =>
       fetchDrinkList({
-        page: page,
-        size: size,
+        page: pageParam,
         sort: selectedFilter,
         category: drinkCategory[selectedCategory],
       }),
-    // keepPreviousData: true, // 이전 데이터를 유지하여 부드러운 페이지 전환
+
+    // getNextPageParam: useInfiniteQuery의 옵션 함수
+    // 클라이언트가 다음 페이지를 어떻게 가져올지 정하는 '사용자 정의' 함수
+    // 이때 getNextPageParam의 매개변수는 React Query에서 제공, 그 매개변수를 어떻게 활용할 지는 사용자 정의
+    getNextPageParam: (lastPage, allPages): number | false => {
+      // lastPage: 가장 최근에 반환된 페이지 데이터. lastPage는 queryFn의 반환값, 즉 서버가 반환하는 JSON 데이터와 동일한 형태로 반환됨, InfiniteDrinkListResponse 타입이 아님!
+      // allPages: 지금까지 가져온 모든 페이지 데이터의 배열
+      // 반환타입은 number | null | undefined 이어야 함(근데 위에처럼 명시적으로 지정해주면 false를 반환하는 것도 가능한 듯(오류안남))
+      // 반환값이 null이면 더이상 데이터 fetching을 수행하지 않음
+
+      // const lastPageData = lastPage?.pages?.at(-1)?.data; // at(-1): 배열의 마지막 요소에 바로 접근
+      // if (!lastPageData || lastPageData.length === 0) {
+      //   return false; // 데이터가 없으면 요청 중지
+      // }
+
+      return allPages.length; // 다음 페이지 번호를 현재 페이지 수로 반환 -> queryFn의 pageParam에 반환됨
+    },
+    initialPageParam: 0,
+  });
+
+  console.log('hasNextPage:', hasNextPage); // hasNextPage 값 확인
+
+  // Intersection Observer 연결
+  const target = useInfiniteScroll({
+    hasNextPage: !!hasNextPage,
+    fetchNextPage,
   });
 
   return (
@@ -159,38 +204,49 @@ const SearchDrink = () => {
       </div>
 
       <div className="w-[calc(100%-48px)] overflow-x-auto scrollbar-hide mt-[15px]">
-        <div className="flex space-x-[32px] justify-between border-b-[3px] ">
-          {drinkCategory.map((category, index) => (
-            <button
-              key={index}
-              type="button"
-              onClick={() => handleCategoryClick(index)}
-              className={`text-center text-[14px] px-[4px] w-auto pb-[7px] whitespace-nowrap ${
-                selectedCategory === index
-                  ? 'text-primary font-medium border-b-[3px] border-primary'
-                  : 'text-[#B5B5B5] font-normal border-b-[3px] border-transparent'
-              }`}
-              // whitespace-nowrap: 텍스트가 width를 초과했을 때 자동으로 줄바꿈을 하고싶지 않은 경우 적용
-            >
-              {category}
-            </button>
-          ))}
+        <div className="relative">
+          <div className="absolute w-full h-[3px] bg-[#F4F4F4] bottom-[0px]"></div>
+
+          <div className="flex space-x-[32px] justify-between relative pb-[7px]">
+            {drinkCategory.map((category, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleCategoryClick(index)}
+                className={`text-center text-[14px] px-[4px] w-auto pb-[7px] whitespace-nowrap transition-all duration-300 ${
+                  selectedCategory === index
+                    ? 'text-primary font-[600] relative'
+                    : 'text-[#B5B5B5] font-[400]'
+                }`}
+              >
+                {category}
+
+                {/* Primary 색상의 border */}
+                {selectedCategory === index && (
+                  <div className="absolute w-full h-[3px] bg-primary bottom-[-7px] left-0"></div>
+                )}
+              </button>
+            ))}
+          </div>
         </div>
-        {/* <div className='absolute z-0 w-full h-[3px] bg-[#F4F4F4] bottom-0'></div> */}
-        {/* <div className="w-full h-[3px] bg-[#F4F4F4] bottom-0"></div> */}
       </div>
 
       <div className="flex flex-col w-full mt-[10px] mb-5">
-        {drinkList?.data.map((drinkItem, index) => (
-          <DrinkInfo
-            key={index}
-            drinkName={drinkItem.name}
-            imgUrl={drinkItem.imgUrl}
-            isFavoriteBtnExist={true}
-            cafeNameTop={drinkItem.brand}
-            sugar={drinkItem.sugarPer100ml}
-          />
-        ))}
+        {drinkList?.pages
+          .map((page) => page.data) // 각 페이지의 data 배열 추출
+          .flat() // 추출된 배열을 평탄화
+          .map((drinkItem) => (
+            <DrinkInfo
+              key={drinkItem.beverageId}
+              drinkName={drinkItem.name}
+              imgUrl={drinkItem.imgUrl}
+              isFavoriteBtnExist={true}
+              cafeNameTop={drinkItem.brand}
+              sugar={drinkItem.sugarPer100ml}
+            />
+          ))}
+        {isFetchingNextPage && <div>Loading more drinks...</div>}
+        <div ref={target}></div>
       </div>
 
       <BottomNavi />

@@ -78,18 +78,10 @@ const BrandSearchResult = () => {
     isLoading,
     isError,
     error,
-    refetch,
   } = useQuery<BeverageResponse, Error>({
-    queryKey: ['popularDrinks', cafeName], // cafeName이 바뀌면 다시 요청 보냄(여기서는 필요 없을 듯?)
+    queryKey: ['popularDrinks', cafeName],
     queryFn: () => fetchPopularDrinks(cafeName),
   });
-
-  // 임시 데이터
-  const brands = [
-    '딸기딸기딸기 아메리카노',
-    '바닐라 크림 콜드 브루',
-    '당근수박당근수박참외참외',
-  ];
 
   const drinkCategory = ['전체', '커피', '음료', '시그니처', '기타'];
 

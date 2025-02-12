@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import SearchInput from '../../../components/input/searchInput/SearchInput';
 import DrinkInfo from '../../../components/drinkInfo/DrinkInfo';
-import useLargeFavoriteDrinkModalStore from '../../../store/modal/LargeFavoriteModalStore';
-import LargeFavoriteDrinkModal from '../modal/LargeFavoriteDrinkModal';
+import {
+  DrinkListResponse,
+  fetchDrinkList,
+} from '../../../api/main/search/DrinkList';
+import { useQuery } from '@tanstack/react-query';
 
 const DrinkSearchResult = () => {
   const { cafeName, drinkName } = useParams();
@@ -26,6 +29,27 @@ const DrinkSearchResult = () => {
   const handleBackClick = () => {
     navigate(-1);
   };
+
+  // page, size
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(20);
+
+  // 음료 데이터 get 요청
+  const {
+    data: drinkList,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery<DrinkListResponse, Error>({
+    queryKey: ['drinkList', page, size, drinkName], // cafeName이 바뀌면 다시 요청 보냄(여기서는 필요 없을 듯?)
+    queryFn: () =>
+      fetchDrinkList({
+        page: page,
+        keyword: drinkName,
+      }),
+    // keepPreviousData: true, // 이전 데이터를 유지하여 부드러운 페이지 전환
+  });
 
   return (
     <div className="flex flex-col items-center mt-[60px] w-full">
@@ -60,34 +84,22 @@ const DrinkSearchResult = () => {
         )}
         <span className="text-[18px] font-[600]">'{drinkName}'&nbsp;</span>
         <span className="text-[18px] text-gray_text">검색 결과&nbsp;</span>
-        <span className="text-[18px] text-primary">{8}</span>
+        <span className="text-[18px] text-primary">{drinkList?.data.length ?? 0}</span>
       </p>
 
+      { }
+
       <div className="flex flex-col w-full  mb-5">
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
+        {drinkList?.data.map((drinkItem, index) => (
+          <DrinkInfo
+            key={index}
+            drinkName={drinkItem.name}
+            imgUrl={drinkItem.imgUrl}
+            isFavoriteBtnExist={true}
+            cafeNameTop={drinkItem.brand}
+            sugar={drinkItem.sugarPer100ml}
+          />
+        ))}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import ApiManager from '../../ApiManager';
+import { InfiniteData } from '@tanstack/react-query';
 
 interface DrinkList {
   beverageId: number;
@@ -16,28 +17,28 @@ export interface DrinkListResponse {
   data: DrinkList[];
 }
 
+export type InfiniteDrinkListResponse = InfiniteData<DrinkListResponse>;
+
 export const fetchDrinkList = async ({
   page,
-  size,
   brandName,
   category,
   keyword,
   sort,
 }: {
-  page?: number;
-  size?: number;
+  page: number;
   brandName?: string;
   category?: string;
   keyword?: string;
   sort?: string;
 }): Promise<DrinkListResponse> => {
   const params = {
-    // brand: brandName,
-    category: category,
-    // keyword: keyword,
-    sort: sort,
     page: page,
-    size: size,
+    size: 50,
+    brand: brandName,
+    category: category,
+    keyword: keyword,
+    sort: sort,
   };
 
   try {
@@ -47,10 +48,11 @@ export const fetchDrinkList = async ({
         params,
       },
     );
-    console.log('fetchDrinkItem request succeeded');
+    console.log('fetchDrinkList request succeeded');
+    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error('fetchDrinkItem request failed: ', error);
+    console.error('fetchDrinkList request failed: ', error);
     throw error;
   }
 };

@@ -42,6 +42,9 @@ const SearchDrink = () => {
   };
 
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  const handleCategoryClick = (index: number) => {
+    setSelectedCategory(index);
+  };
 
   // 검색버튼 클릭 시 실행되는 메서드
   const handleSearchClick = () => {
@@ -53,29 +56,11 @@ const SearchDrink = () => {
     navigate(`/drink-result/${encodeURIComponent(inputValue)}`);
   };
 
-  const handleCategoryClick = (index: number) => {
-    setSelectedCategory(index);
-  };
-
   const { isOpen } = useLargeFavoriteDrinkModalStore();
 
   const drinkCategory = ['전체', '커피', '음료', '시그니쳐', '기타'];
 
-  // 음료 데이터 get 요청
-  // const {
-  //   data: drinkList,
-  //   isLoading,
-  //   isError,
-  //   error,
-  // } = useQuery<DrinkListResponse, Error>({
-  //   queryKey: ['drinkList', selectedFilter, selectedCategory], // cafeName이 바뀌면 다시 요청 보냄(여기서는 필요 없을 듯?)
-  //   queryFn: () =>
-  //     fetchDrinkList({
-  //       sort: selectedFilter,
-  //       category: drinkCategory[selectedCategory],
-  //     }),
-  // });
-
+  // 무한스크롤 useInfiniteQuery
   const {
     data: drinkList, // 가져온 모든 페이지의 데이터 포함
     fetchNextPage, // 다음 페이지의 데이터를 가져오는 함수
@@ -100,27 +85,11 @@ const SearchDrink = () => {
         sort: selectedFilter,
         category: drinkCategory[selectedCategory],
       }),
-
-    // getNextPageParam: useInfiniteQuery의 옵션 함수
-    // 클라이언트가 다음 페이지를 어떻게 가져올지 정하는 '사용자 정의' 함수
-    // 이때 getNextPageParam의 매개변수는 React Query에서 제공, 그 매개변수를 어떻게 활용할 지는 사용자 정의
     getNextPageParam: (lastPage, allPages): number | false => {
-      // lastPage: 가장 최근에 반환된 페이지 데이터. lastPage는 queryFn의 반환값, 즉 서버가 반환하는 JSON 데이터와 동일한 형태로 반환됨, InfiniteDrinkListResponse 타입이 아님!
-      // allPages: 지금까지 가져온 모든 페이지 데이터의 배열
-      // 반환타입은 number | null | undefined 이어야 함(근데 위에처럼 명시적으로 지정해주면 false를 반환하는 것도 가능한 듯(오류안남))
-      // 반환값이 null이면 더이상 데이터 fetching을 수행하지 않음
-
-      // const lastPageData = lastPage?.pages?.at(-1)?.data; // at(-1): 배열의 마지막 요소에 바로 접근
-      // if (!lastPageData || lastPageData.length === 0) {
-      //   return false; // 데이터가 없으면 요청 중지
-      // }
-
       return allPages.length; // 다음 페이지 번호를 현재 페이지 수로 반환 -> queryFn의 pageParam에 반환됨
     },
     initialPageParam: 0,
   });
-
-  console.log('hasNextPage:', hasNextPage); // hasNextPage 값 확인
 
   // Intersection Observer 연결
   const target = useInfiniteScroll({
@@ -234,7 +203,7 @@ const SearchDrink = () => {
       <div className="flex flex-col w-full mt-[10px] mb-5">
         {drinkList?.pages
           .map((page) => page.data) // 각 페이지의 data 배열 추출
-          .flat() // 추출된 배열을 평탄화
+          .flat() 
           .map((drinkItem) => (
             <DrinkInfo
               key={drinkItem.beverageId}

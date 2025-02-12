@@ -9,7 +9,15 @@ import {
   BeverageResponse,
   fetchPopularDrinks,
 } from '../../../api/main/search/BrandSearchResult/BrandSearchResult';
-import { useQuery } from '@tanstack/react-query';
+import {
+  DrinkListResponse,
+  fetchDrinkList,
+  InfiniteDrinkListResponse,
+} from '../../../api/main/search/DrinkList';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
+import useInfiniteScroll from '../../../hooks/useInfiniteScroll';
+import LargeFavoriteDrinkModal from '../modal/LargeFavoriteDrinkModal';
+import useLargeFavoriteDrinkModalStore from '../../../store/modal/LargeFavoriteModalStore';
 
 const BrandSearchResult = () => {
   // input필드 설정
@@ -27,8 +35,11 @@ const BrandSearchResult = () => {
   // 검색버튼 클릭 시 실행되는 메서드
   const handleSearchClick = () => {
     const inputValue = getValues('SearchDrink');
+    if (!inputValue) {
+      return;
+    }
     navigate(
-      `/drink-result/${encodeURIComponent('스타벅스')}/${encodeURIComponent(inputValue)}`,
+      `/drink-result/${encodeURIComponent(cafeName)}/${encodeURIComponent(inputValue)}`,
     );
     console.log(inputValue);
   };
@@ -41,21 +52,24 @@ const BrandSearchResult = () => {
 
   // 검색결과 필터링
   const [selectedFilter, setSelectedFilter] = useState<
-    'ascending' | 'descending'
-  >('ascending');
-  const handleFilterClick = (selected: 'ascending' | 'descending') => {
-    if (selected === 'ascending') {
-      setSelectedFilter('descending');
+    'sugarAsc' | 'sugarDesc'
+  >('sugarDesc');
+  const handleFilterClick = (selected: 'sugarAsc' | 'sugarDesc') => {
+    if (selected === 'sugarAsc') {
+      setSelectedFilter('sugarDesc');
     } else {
-      setSelectedFilter('ascending');
+      setSelectedFilter('sugarAsc');
     }
   };
 
   // 음료 카테고리 클릭
-  const [clickedCategory, setClickedCategory] = useState<number>(0);
+  const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const handleCategoryClick = (index: number) => {
-    setClickedCategory(index);
+    setSelectedCategory(index);
   };
+
+  // 즐겨찾기 모달창
+  const { isOpen } = useLargeFavoriteDrinkModalStore();
 
   // 현재 날짜 정보 저장('사람들이 많이 마신 음료' 컴포넌트에 사용)
   const [currentDate, setCurrentDate] = useState<string>('');
@@ -83,7 +97,45 @@ const BrandSearchResult = () => {
     queryFn: () => fetchPopularDrinks(cafeName),
   });
 
-  const drinkCategory = ['전체', '커피', '음료', '시그니처', '기타'];
+  // 무한스크롤 useInfiniteQuery
+  const {
+    data: drinkList, // 가져온 모든 페이지의 데이터 포함
+    fetchNextPage, // 다음 페이지의 데이터를 가져오는 함수
+    hasNextPage, // 다음 페이지가 존재하는지 여부를 나타내는 불리언 값
+    isFetchingNextPage, // 다음 페이지 가져오는 중인지 여부 나타냄
+  } = useInfiniteQuery<
+    InfiniteDrinkListResponse,
+    Error,
+    InfiniteDrinkListResponse,
+    number
+  >({
+    // 각 페이지의 반환 타입
+    // 에러 타입
+    // 단일 페이지의 데이터 타입
+    // PageParam의 타입
+    queryKey: ['drinkList', cafeName, selectedCategory, selectedFilter],
+    queryFn: (
+      { pageParam = 0 }: { pageParam: number }, // pageParam의 형식지정 number로 안하면 'unknown' 형식은 'number'형식에 할당할 수 없습니다 라는 오류 발생
+    ) =>
+      fetchDrinkList({
+        page: pageParam,
+        brandName: cafeName,
+        sort: selectedFilter,
+        category: drinkCategory[selectedCategory],
+      }),
+    getNextPageParam: (lastPage, allPages): number | false => {
+      return allPages.length; // 다음 페이지 번호를 현재 페이지 수로 반환 -> queryFn의 pageParam에 반환됨
+    },
+    initialPageParam: 0,
+  });
+
+  // Intersection Observer 연결
+  const target = useInfiniteScroll({
+    hasNextPage: !!hasNextPage,
+    fetchNextPage,
+  });
+
+  const drinkCategory = ['전체', '커피', '음료', '시그니쳐', '기타'];
 
   return (
     <div className="flex flex-col items-center mt-[60px] w-full">
@@ -153,30 +205,26 @@ const BrandSearchResult = () => {
         ))}
       </div>
 
-      <div className="w-full h-[10px] mt-10 bg-[#F4F4F4]"></div>
+      <div className="w-full h-[10px] mt-10 mb-[30px] bg-[#F4F4F4]"></div>
 
-      <div className="flex flex-col w-[calc(100%-48px)] mt-7 mb-[18px]">
+      <div className="flex flex-col w-[calc(100%-48px)] mt-[10px] mb-[18px]">
         <div className="flex justify-between items-baseline">
-          <div className="space-x-[10px]">
-            <span className="font-[500] text-[18px]">검색결과</span>
-            <span className="text-[14px] text-gray_text">{122}건</span>
-          </div>
-
+          <div className="font-medium text-[18px]">음료 카테고리</div>
           <button
             type="button"
             className="flex text-[14px] text-primary space-x-[6px]"
             onClick={() => handleFilterClick(selectedFilter)}
           >
             <span>
-              {selectedFilter === 'ascending'
-                ? '당 함량 높은 순'
-                : '당 함량 낮은 순'}
+              {selectedFilter === 'sugarAsc'
+                ? '당 함량 낮은 순'
+                : '당 함량 높은 순'}
             </span>
             <img
               src="/updown.png"
               alt="정렬기준"
               className={`w-[15.6px] h-[14px] transition-transform duration-300 ${
-                selectedFilter === 'ascending' ? '' : 'scale-y-[-1]'
+                selectedFilter === 'sugarDesc' ? '' : 'scale-y-[-1]'
               }`}
             />
           </button>
@@ -186,54 +234,51 @@ const BrandSearchResult = () => {
         </span>
       </div>
 
-      <div className="relative w-[calc(100%-48px)] overflow-x-auto scrollbar-hide mt-[15px]">
-        <div className="relative z-10 flex space-x-[32px] justify-between">
-          {drinkCategory.map((category, index) => (
-            <button
-              key={index}
-              type="button"
-              onClick={() => handleCategoryClick(index)}
-              className={`text-center text-[14px] px-[4px] w-auto pb-[7px] whitespace-nowrap ${
-                clickedCategory === index
-                  ? 'text-primary font-medium border-b-[3px] border-primary'
-                  : 'text-[#B5B5B5] font-normal border-b-[3px] border-transparent'
-              }`}
-              // whitespace-nowrap: 텍스트가 width를 초과했을 때 자동으로 줄바꿈을 하고싶지 않은 경우 적용
-            >
-              {category}
-            </button>
-          ))}
+      <div className="w-[calc(100%-48px)] overflow-x-auto scrollbar-hide mt-[15px]">
+        <div className="relative">
+          <div className="absolute w-full h-[3px] bg-[#F4F4F4] bottom-[0px]"></div>
+
+          <div className="flex space-x-[32px] justify-between relative pb-[7px]">
+            {drinkCategory.map((category, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleCategoryClick(index)}
+                className={`text-center text-[14px] px-[4px] w-auto pb-[7px] whitespace-nowrap transition-all duration-300 ${
+                  selectedCategory === index
+                    ? 'text-primary font-[600] relative'
+                    : 'text-[#B5B5B5] font-[400]'
+                }`}
+              >
+                {category}
+
+                {selectedCategory === index && (
+                  <div className="absolute w-full h-[3px] bg-primary bottom-[-7px] left-0"></div>
+                )}
+              </button>
+            ))}
+          </div>
         </div>
-        {/* <div className='absolute z-0 w-full h-[3px] bg-[#F4F4F4] bottom-0'></div> */}
-        <div className="absolute w-full z-0 h-[3px] bg-[#F4F4F4] bottom-0"></div>
       </div>
 
       <div className="flex flex-col w-full mt-[10px] mb-5">
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
-        <DrinkInfo
-          drinkName="아이스 아메리카노"
-          isFavoriteBtnExist={true}
-          cafeNameTop="투썸플레이스"
-          sugar={1}
-        />
+        {drinkList?.pages
+          .map((page) => page.data) // 각 페이지의 data 배열 추출
+          .flat()
+          .map((drinkItem) => (
+            <DrinkInfo
+              key={drinkItem.beverageId}
+              drinkName={drinkItem.name}
+              imgUrl={drinkItem.imgUrl}
+              isFavoriteBtnExist={true}
+              cafeNameTop={drinkItem.brand}
+              sugar={drinkItem.sugarPer100ml}
+            />
+          ))}
+        <div ref={target}></div>
       </div>
+
+      {isOpen && <LargeFavoriteDrinkModal />}
     </div>
   );
 };

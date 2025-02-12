@@ -42,7 +42,7 @@ const EditDrink = () => {
         </div>
 
         <div className='flex-grow flex mb-[70px]'>
-          <NoContents />
+          <NoContents contentString='아직 기록이 없습니다'/>
         </div>
       </div>
     );

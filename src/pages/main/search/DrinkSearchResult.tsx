@@ -16,7 +16,13 @@ import NoContents from '../../../components/noContents/NoContents';
 
 const DrinkSearchResult = () => {
   const { cafeName, drinkName } = useParams();
-  const placeholderText = `${cafeName} 내에서 제품명을 검색해주세요`;
+
+  var placeholderText = '';
+  if (!cafeName) {
+    placeholderText = '제품명을 검색해주세요';
+  } else {
+    placeholderText = `${cafeName} 내에서 제품명을 검색해주세요`;
+  }
 
   const {
     // watch, // 입력 필드 값 실시간 확인
@@ -48,6 +54,7 @@ const DrinkSearchResult = () => {
     fetchNextPage, // 다음 페이지의 데이터를 가져오는 함수
     hasNextPage, // 다음 페이지가 존재하는지 여부를 나타내는 불리언 값
     isFetchingNextPage, // 다음 페이지 가져오는 중인지 여부 나타냄
+    isLoading
   } = useInfiniteQuery<
     InfiniteDrinkListResponse,
     Error,
@@ -78,8 +85,11 @@ const DrinkSearchResult = () => {
     hasNextPage: !!hasNextPage,
     fetchNextPage,
   });
+  if (isLoading) {
+    return <div>로딩 중...</div>
+  }
 
-  if (drinkList?.pages[0].data.length === 0) {
+  if (drinkList?.pages[0].data.totalBeverageNum === 0) {
     return (
       <div className="flex flex-col h-screen items-center mt-[60px]">
         <div className="flex justify-center w-full pb-[10px] px-[23px]">
@@ -112,12 +122,12 @@ const DrinkSearchResult = () => {
           <span className="text-[18px] font-[600]">'{drinkName}'&nbsp;</span>
           <span className="text-[18px] text-gray_text">검색 결과&nbsp;</span>
           <span className="text-[18px] text-primary">
-            {/* {drinkList?.pages.data.length ?? 0} */}
+            {drinkList?.pages[0].data.totalBeverageNum ?? 0}
           </span>
         </p>
 
         <div className="flex-grow flex mb-[70px]">
-          <NoContents />
+          <NoContents contentString="검색 결과가 없습니다" />
         </div>
       </div>
     );
@@ -157,13 +167,13 @@ const DrinkSearchResult = () => {
         <span className="text-[18px] font-[600]">'{drinkName}'&nbsp;</span>
         <span className="text-[18px] text-gray_text">검색 결과&nbsp;</span>
         <span className="text-[18px] text-primary">
-          {/* {drinkList?.pages.data.length ?? 0} */}
+          {drinkList?.pages[0].data.totalBeverageNum}
         </span>
       </p>
 
       <div className="flex flex-col w-full  mb-5">
         {drinkList?.pages
-          .map((page) => page.data) // 각 페이지의 data 배열 추출
+          .map((page) => page.data.beverages) // 각 페이지의 data 배열 추출
           .flat()
           .map((drinkItem) => (
             <DrinkInfo

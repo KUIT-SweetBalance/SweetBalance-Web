@@ -10,11 +10,17 @@ interface DrinkList {
   favorite: boolean;
 }
 
+interface DrinkListData {
+  totalBeverageNum: number;
+  beverages: DrinkList[];
+}
+
+
 export interface DrinkListResponse {
   status: number;
   code: number;
   message: string;
-  data: DrinkList[];
+  data: DrinkListData;
 }
 
 export type InfiniteDrinkListResponse = InfiniteData<DrinkListResponse>;

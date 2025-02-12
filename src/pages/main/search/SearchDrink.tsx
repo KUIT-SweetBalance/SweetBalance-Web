@@ -147,7 +147,12 @@ const SearchDrink = () => {
 
       <div className="flex flex-col w-[calc(100%-48px)] mt-[10px] mb-[18px]">
         <div className="flex justify-between items-baseline">
-          <div className="font-medium text-[18px]">음료 카테고리</div>
+          <div className="flex items-baseline">
+            <div className="font-medium text-[18px]">음료 카테고리</div>
+            <span className="ml-[6px] text-[14px] text-primary">
+              {drinkList?.pages[0].data.totalBeverageNum ?? 0}개
+            </span>
+          </div>
           <button
             type="button"
             className="flex text-[14px] text-primary space-x-[6px]"
@@ -202,8 +207,8 @@ const SearchDrink = () => {
 
       <div className="flex flex-col w-full mt-[10px] mb-5">
         {drinkList?.pages
-          .map((page) => page.data) // 각 페이지의 data 배열 추출
-          .flat() 
+          .map((page) => page.data.beverages) // 각 페이지의 data 배열 추출
+          .flat()
           .map((drinkItem) => (
             <DrinkInfo
               key={drinkItem.beverageId}

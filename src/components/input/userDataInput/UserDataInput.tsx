@@ -46,13 +46,15 @@ const UserDataInput = ({
         <input
           className={`
           w-full
+          box-border
           h-[6.52vh]
-          p-3 
+          p-3
           border 
           rounded-full 
           text-[12px]
           text-[#909090] 
           placeholder-gray-400
+          focus:bg-transparent
           focus:outline-none 
           focus:ring-1 
           focus:ring-primary 

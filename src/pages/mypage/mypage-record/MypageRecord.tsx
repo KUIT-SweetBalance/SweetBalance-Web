@@ -50,7 +50,7 @@ const MypageRecord: React.FC = () => {
     setDeleteStates((prev) => ({ ...prev, [id]: false }));
   };
   const deleteRecordMutation = useMutation({
-    mutationFn: (BeverageId: number) => DeleteRecordingDrinks(BeverageId),
+    mutationFn: (BeverageLogId: number) => DeleteRecordingDrinks(BeverageLogId),
     onSuccess: () => {
       // ✅ 삭제 후, 최신 데이터로 UI 업데이트
       queryClient.invalidateQueries(["recordingDrinks"]);
@@ -59,10 +59,10 @@ const MypageRecord: React.FC = () => {
       console.error("삭제 실패:", error);
     },
   });
-  const handleDelete = (BeverageId: number) => {
-    deleteRecordMutation.mutate(BeverageId);
-    console.log(BeverageId)
-    closeDeleteModal(BeverageId); // 모달 닫기
+  const handleDelete = (BeverageLogId: number) => {
+    deleteRecordMutation.mutate(BeverageLogId);
+    console.log(BeverageLogId)
+    closeDeleteModal(BeverageLogId); // 모달 닫기
   };
   // 검색 기능
   const { getValues, register } = useForm();

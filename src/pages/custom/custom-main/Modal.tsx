@@ -65,7 +65,7 @@ padding-top:24px;
 width: 100%;
 justify-content:space-evenly;
 `;
-const Modal: React.FC<{ onClick: () => void; onClick1:()=>void;drink: string; brand:string; }> = ({ onClick,onClick1, drink,brand })  => {
+const Modal: React.FC<{onClick: () => void; onClick1:()=>void;drink: string; brand:string; }> = ({onClick,onClick1, drink,brand })  => {
     
     return (
         <ModalContainer>

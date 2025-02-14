@@ -44,15 +44,40 @@ export interface RecommendedBeverage {
   }
   
 
-export const fetchCustomDrink = async (beverageId: string): Promise<BeverageDetailResponse> => {
+export const fetchCustomDrink = async (beverageId: number): Promise<BeverageDetailResponse> => {
   try {
     const response = await ApiManager.get<BeverageDetailResponse>(
       `https://13.125.187.188.nip.io/api/beverages/${beverageId}`,
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error('음료 데이터 가져오기 실패:', error);
     throw error;
   }
 };
+export interface ReviseDrink{
+  beverageSizeId: number;
+  syrupName: string;
+  syrupCount: number;
+}
+export interface ReviseDrinks{
+  beverageSizeId: number;
+  beverageId:number;
+  syrupName: string;
+  syrupCount: number;
+}
+export const ReviseCustomDrink = async (revisedrinks: ReviseDrinks): Promise<void> => {
+  const { beverageId, ...revisedrink }: ReviseDrinks = revisedrinks;
+
+  try {
+    const response = await ApiManager.post<ReviseDrink>(
+      `https://13.125.187.188.nip.io/api/user/beverage-record/${revisedrinks.beverageId}`,
+      revisedrink
+    );
+    console.log('음료 수정 성공:', response.data);
+  } catch (error) {
+    console.error('음료 데이터 가져오기 실패:', error);
+    throw error;
+  }
+};
+

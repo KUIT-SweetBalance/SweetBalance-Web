@@ -12,6 +12,9 @@ interface Props {
 type BrandProps = Pick<Props, 'brand' | 'drink'|'scrap'>;
 const BrandrinkBox = styled.div`
   height: auto;
+  position: relative;
+    z-index: 2;
+    background-color: white;
 `;
 const BrandBox = styled.div`
   display: flex;

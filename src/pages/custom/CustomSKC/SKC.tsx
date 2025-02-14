@@ -13,9 +13,9 @@ const SKCBox = styled.div`
 const SKCList = styled.div`
   padding: 20px 29.5px 20px 51.5px;
   
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 78px;
+    justify-content: space-between;
 `;
 const SKCitem = styled.div`
   align-items: center;

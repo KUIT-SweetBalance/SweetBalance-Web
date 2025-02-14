@@ -87,7 +87,7 @@ const LoginForm = () => {
           style={{ textUnderlineOffset: '3px' }}
           onClick={() => navigate('/forgot-password')}
         >
-          임시 비밀번호 발급받기
+          비밀번호 재발급
         </button>
       </div>
 

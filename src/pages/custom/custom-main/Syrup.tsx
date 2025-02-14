@@ -79,7 +79,7 @@ const Syrup: React.FC<{Syrupmenu: string[];  Syrup:RecoringDrink;beverageSizeId:
   const [syrupCount, setSyrupCount] = useState(Syrup.syrupCount);
   const navigate = useNavigate();
   const handleSyrupCountChange = (newCount: number) => {
-    if (newCount >= 0 && newCount <= 5) {
+    if (newCount >= -4 && newCount <= 4) {
       setSyrupCount(newCount);
     }
   };

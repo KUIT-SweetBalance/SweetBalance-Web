@@ -40,14 +40,13 @@ const PumpValue = styled.div`
   color: #8b5a4b;
 `;
 
-const PumpSlider:React.FC<{Syrup:number}> = ({Syrup}) => {
+const PumpSlider:React.FC<{Syrup:number;handleSyrupCountChange:(newName:number)=>void}> = ({Syrup,handleSyrupCountChange}) => {
   const initialPumpValue = Syrup + 4; // Syrup을 기반으로 초기 펌프 값 설정
 const initialAngle = (initialPumpValue * 21) - 180; // ✅ 초기 각도 계산
 const [pumpValue, setPumpValue] = useState(initialPumpValue);
 const [angle, setAngle] = useState(initialAngle);
 
   const sliderRef = useRef(null);
-  const [realpumpValue, setRealPumpValue] = useState(initialPumpValue-4); // 초기 펌프 값
 
   const pumpimg = ['/pump-4.svg','/pump-3.svg','/pump-2.svg','/pump-1.svg','/pump.svg','/pump1.svg','/pump2.svg','/pump3.svg','/pump4.svg']
   // 버튼 위치 계산 함수 (반원 안쪽에서 이동)
@@ -84,7 +83,7 @@ const [angle, setAngle] = useState(initialAngle);
 
     setAngle(newAngle);
     setPumpValue(Math.round((newAngle + 180) / 21)>8?8:Math.round((newAngle + 180) / 21) );
-    setRealPumpValue(pumpValue-4)
+    handleSyrupCountChange(pumpValue-4)
   };
 
   // 마우스 이벤트 설정
@@ -112,7 +111,7 @@ const [angle, setAngle] = useState(initialAngle);
         onMouseDown={handleMouseDown}
         onTouchMove={handleDrag}
       />
-      <PumpValue>{realpumpValue} 펌프</PumpValue>
+      <PumpValue>{Syrup} 펌프</PumpValue>
     </SliderContainer>
   );
 };

@@ -3,6 +3,9 @@ import { DrinkInfoProps } from '../../types/drink';
 import { useNavigate } from 'react-router-dom';
 import useLargeFavoriteDrinkModalStore from '../../store/modal/LargeFavoriteModalStore';
 import useEditDrinkModalStore from '../../store/modal/EditDrinkModal';
+import useDeleteDrinkModalStore from '../../store/modal/DeleteDrinkModal';
+
+// RecordingDrink
 
 const DrinkInfo = (props: DrinkInfoProps) => {
   const navigate = useNavigate();
@@ -46,6 +49,19 @@ const DrinkInfo = (props: DrinkInfoProps) => {
     };
 
     openEditModal(modalData);
+  };
+
+  // 음료 삭제 모달창 띄우기
+  const { openDeleteModal } = useDeleteDrinkModalStore();
+  const handleDeleteButtonClick = () => {
+    const modalData = {
+      cafeName:
+        props.cafeNameMiddle || props.cafeNameTop || props.cafeNameBottom || '',
+      drinkName: props.drinkName || '',
+      content: '을/를 수정하시겠어요?',
+      button1: '아니오',
+      button2: '수정할래요',
+    };
   };
 
   // 음료 삭제 모달창 띄우기
@@ -124,9 +140,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
             <span className="flex items-start ">당 {props.sugar}g</span>
           )}
           {props.syrupType === null ? (
-            <span className="flex items-start ">
-              시럽없음
-            </span>
+            <span className="flex items-start ">시럽없음</span>
           ) : (
             <span className="flex items-start ">
               {props.syrupType}&nbsp;{props.syrup}

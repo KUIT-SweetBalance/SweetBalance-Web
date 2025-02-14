@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import useLargeFavoriteDrinkModalStore from './LargeFavoriteModalStore';
 
-interface EditDrinkModalState {
+interface DeleteDrinkModalState {
   isOpen: boolean;
   cafeName: string;
   drinkName: string;
@@ -10,7 +10,7 @@ interface EditDrinkModalState {
   button1: string; // 왼쪽 버튼 내용(아니오)
   button2: string; // 오른쪽 버튼 내용(추가할래요, 삭제할래요)
   editCompleted?: string;
-  openEditModal: (modalData: {
+  openDeleteModal: (modalData: {
     cafeName: string;
     drinkName: string;
     content: string;
@@ -21,7 +21,7 @@ interface EditDrinkModalState {
   closeModal: () => void;
 }
 
-const useEditDrinkModalStore = create<EditDrinkModalState>((set) => ({
+const useDeleteDrinkModalStore = create<DeleteDrinkModalState>((set) => ({
   isOpen: false,
   cafeName: '',
   drinkName: '',
@@ -30,10 +30,10 @@ const useEditDrinkModalStore = create<EditDrinkModalState>((set) => ({
   button1: '',
   button2: '',
   editCompleted: '',
-  openEditModal: (modalData) => {
+  openDeleteModal: (modalData) => {
     set({ isOpen: true, ...modalData });
   },
   closeModal: () => set({ isOpen: false }),
 }));
 
-export default useEditDrinkModalStore;
+export default useDeleteDrinkModalStore;

@@ -102,7 +102,7 @@ const Syrup: React.FC<{Syrupmenu: string[];  Syrup:RecoringDrink;beverageSizeId:
     },
   });
   let revisedrinks: ReviseDrinks | undefined;
-
+  const beverageLogId = Syrup.beverageLogId
   if (
     syrupName && syrupName.trim().length > 0 && 
     Number.isInteger(beverageSizeId) && beverageSizeId > 0 &&  // ✅ 숫자 체크
@@ -112,7 +112,8 @@ const Syrup: React.FC<{Syrupmenu: string[];  Syrup:RecoringDrink;beverageSizeId:
       beverageSizeId,
       beverageId,
       syrupName,
-      syrupCount
+      syrupCount,
+      beverageLogId,
       //: beverageId.toString() // ✅ API가 문자열을 요구할 경우 변환
     };
   }

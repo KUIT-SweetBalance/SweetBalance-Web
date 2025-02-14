@@ -61,22 +61,37 @@ export interface ReviseDrink{
   syrupCount: number;
 }
 export interface ReviseDrinks{
+  beverageLogId:number;
   beverageSizeId: number;
   beverageId:number;
   syrupName: string;
   syrupCount: number;
 }
 export const ReviseCustomDrink = async (revisedrinks: ReviseDrinks): Promise<void> => {
-  const { beverageId, ...revisedrink }: ReviseDrinks = revisedrinks;
+  const { beverageId,beverageLogId, ...revisedrink }: ReviseDrinks = revisedrinks;
 
   try {
     const response = await ApiManager.post<ReviseDrink>(
-      `https://13.125.187.188.nip.io/api/user/beverage-record/${revisedrinks.beverageId}`,
+      `https://13.125.187.188.nip.io/api/user/beverage-record/${revisedrinks.beverageLogId}`,
       revisedrink
     );
     console.log('음료 수정 성공:', response.data);
   } catch (error) {
-    console.error('음료 데이터 가져오기 실패:', error);
+    console.error('음료 수정 실패:', error);
+    throw error;
+  }
+};
+
+export const ScrapCustomDrink = async (beverageId: number): Promise<void> => {
+
+  try {
+    const response = await ApiManager.post(
+      `https://13.125.187.188.nip.io/api/user/favorite/${beverageId}`,
+      
+    );
+    console.log('즐겨찾기에 추가 성공!:', response.data);
+  } catch (error) {
+    console.error('즐겨찾기에 추가 실패.:', error);
     throw error;
   }
 };

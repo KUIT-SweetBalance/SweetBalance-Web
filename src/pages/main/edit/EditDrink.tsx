@@ -115,20 +115,41 @@ const EditDrink = () => {
       {/* 음료 정보 */}
       <div className="flex flex-col w-full  mb-5">
         {drinkListTodayData?.data?.map((drink, index) => (
-          <DrinkInfo
-            key={index}
-            imgUrl={drink.imgUrl}
-            dateAndTime={drink.createdAt}
-            isEditDeleteBtnExist={true}
-            cafeNameMiddle={drink.brand}
-            drinkName={drink.beverageName}
-            sugar={drink.sugar}
-            syrupType={drink.syrupName}
-            syrup={drink.syrupCount}
-            size={drink.sizeType}
-            onClick={() => openModal(drink.beverageLogId)}
-            onClick1={() => openDeleteModal(drink.beverageLogId)}
-          />
+          <div>
+            <DrinkInfo
+              key={index}
+              imgUrl={drink.imgUrl}
+              dateAndTime={drink.createdAt}
+              isEditDeleteBtnExist={true}
+              cafeNameMiddle={drink.brand}
+              drinkName={drink.beverageName}
+              sugar={drink.sugar}
+              syrupType={drink.syrupName}
+              syrup={drink.syrupCount}
+              size={drink.sizeType}
+              onClick={() => openModal(drink.beverageLogId)}
+              onClick1={() => openDeleteModal(drink.beverageLogId)}
+            />
+
+            {/* 수정 모달 */}
+            {modalStates[drink.beverageLogId] && (
+              <EditModal
+                onClick={() => closeModal(drink.beverageLogId)}
+                // onClick1={() => closeModal(drink.beverageLogId)}
+                drink={drink}
+              />
+            )}
+
+            {/* 삭제 확인 모달 */}
+            {deleteStates[drink.beverageLogId] && (
+              <DeleModal
+                onClick={() => closeDeleteModal(drink.beverageLogId)}
+                onClick1={() => handleDelete(drink.beverageLogId)}
+                drink={drink.beverageName}
+                brand={drink.brand}
+              />
+            )}
+          </div>
         ))}
       </div>
 

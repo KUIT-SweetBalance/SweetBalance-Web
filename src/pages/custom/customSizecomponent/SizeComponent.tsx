@@ -9,10 +9,13 @@ interface SizeProps {
 const SizeList = styled.div`
   display: flex;
   justify-content: space-around;
-  padding: 0 25px 0 25px;
+  padding: 9px 25px 0 25px;
   /* 18px gap..? 존재 */
   height: 125px;
-  margin-top: 9px;
+  /* margin-top: 9px; */
+  position: relative;
+  z-index: 2;
+  background-color:white;
 `;
 
 // Single Size Box

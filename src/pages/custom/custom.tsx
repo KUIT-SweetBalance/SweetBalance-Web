@@ -59,7 +59,8 @@ const CustomMain: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
     const [isSlideUpOpen, setIsSlideUpOpen] = useState(false); // 슬라이드 업 모달
     const [realScrap, setrealScrap] = useState(false); // 슬라이드 업 모달
-    const { beverageId } = useParams();
+    const { beverageId } = useParams<{ beverageId: string }>();
+    const beverageIdNumber = Number(beverageId);
     const location = useLocation();
     const Syrupinfo = location.state?.drink;
     const handleSizeClick = (index: number) => {
@@ -67,9 +68,9 @@ const CustomMain: React.FC = () => {
     };
     const [selectedSize, setSelectedSize] = React.useState<number>(0);
     const { data, isLoading, error } = useQuery({
-      queryKey: ["customDrink", beverageId], // 음료 ID별 캐싱을 위해 key 설정
-      queryFn: () => fetchCustomDrink(beverageId!),
-      enabled: !!beverageId, // query will not execute until beverageId exists
+      queryKey: ["customDrink", beverageIdNumber], // 음료 ID별 캐싱을 위해 key 설정
+      queryFn: () => fetchCustomDrink(beverageIdNumber!),
+      enabled: !!beverageIdNumber, // query will not execute until beverageIdNumber exists
     });
   
     // ✅ 로딩 상태
@@ -80,7 +81,7 @@ const CustomMain: React.FC = () => {
   
     // ✅ 정상적으로 데이터 로드된 경우
     const drinkData: BeverageDetail = data?.data || {} as BeverageDetail;
-    
+    console.log(drinkData)
     const updatedSizeDetails: SizeProps[]  = drinkData.sizeDetails.map(({ sizeType, volume }: { sizeType: string; volume: number }) => ({
       sizeType,
       volume,
@@ -109,20 +110,20 @@ const CustomMain: React.FC = () => {
       
     return (
         <Container>
-            <CustomTop/>
+            <CustomTop imgUrl={drinkData.imgUrl}/>
             <Brandrink brand={drinkData.brand} drink={drinkData.name} onClick={handleStarClick} onClick1={handleScrap} scrap ={drinkData.favorite} />
             <SizeComponent sizes={updatedSizeDetails} selectedSize={selectedSize} handleSizeClick={handleSizeClick}/>
             <SKC sugar={drinkData.sizeDetails[selectedSize].sugar} kcal={drinkData.sizeDetails[selectedSize].calories} caffeine={drinkData.sizeDetails[selectedSize].caffeine} />
             <GrayBox />
             <Recommend recom={drinkData.sizeDetails[selectedSize].recommends} sugar={drinkData.sizeDetails[selectedSize].sugar}  brand={drinkData.brand} />
             <Askinfo>정보 수정을 요청하고 싶어요</Askinfo>
-            <Recoding  onClick ={handleRecodingClick } />
+            <Recoding  onClick ={handleRecodingClick }/>
             {/* 팝업 모달 */}
             {isModalOpen && (
                 <Modal onClick={handleModalClose} onClick1={handleScrap}brand={drinkData.brand} drink={drinkData.name}/>
             )}
             {isSlideUpOpen && (
-                <Syrup  Syrup={Syrupinfo} onClick={handleSlideUpClose}/>
+                <Syrup Syrupmenu={drinkData.syrups} Syrup={Syrupinfo} beverageId={beverageIdNumber} beverageSizeId={drinkData.sizeDetails[selectedSize].id}/>
             )}
             
         </Container>

@@ -91,11 +91,15 @@ const DrinkInfo = (props: DrinkInfoProps) => {
               <button
                 type="button"
                 className="w-[14px] h-[14px]"
-                onClick={handleEditButtonClick}
+                onClick={props.onClick}
               >
                 <img src="/EditDrink.png" alt="음료수정" />
               </button>
-              <button type="button" className="w-[14px] h-[14px]">
+              <button
+                type="button"
+                className="w-[14px] h-[14px]"
+                onClick={props.onClick1}
+              >
                 <img src="/X.png" alt="음료삭제" />
               </button>
             </div>

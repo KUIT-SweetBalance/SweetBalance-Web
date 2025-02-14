@@ -38,4 +38,6 @@ export interface DrinkInfoProps extends BaseDrinkInfoProps {
     cafeNameBottom?: string;
     isEditDeleteBtnExist?: boolean;
     isFavoriteBtnExist?: boolean;
+    onClick?: () => void;
+    onClick1?: () => void;
 }

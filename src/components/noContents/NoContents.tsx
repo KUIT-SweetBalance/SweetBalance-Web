@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface NoContentsProps {
-  height?: string;
+  contentString: string;
 }
 
 const NoContents = (props: NoContentsProps) => {
@@ -10,7 +10,7 @@ const NoContents = (props: NoContentsProps) => {
       className={`flex flex-grow justify-center items-center w-full text-gray_text text-[14px]`}
       // style={{ height: props.height }}
     >
-      아직 기록이 없습니다
+      {props.contentString}
     </div>
   );
 };

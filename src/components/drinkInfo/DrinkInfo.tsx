@@ -60,7 +60,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
       />
 
       {/* 오른쪽 */}
-      <div className="flex flex-col w-full justify-center">
+      <div className="flex flex-col w-full justify-center overflow-hidden">
         {/* 상단 */}
         <div className="flex justify-between">
           {props.dateAndTime && (
@@ -88,7 +88,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
 
         {/* 중단 */}
         <div className="flex justify-between mt-[2px] items-center">
-          <div className="flex items-center">
+          <div className="flex items-center overflow-hidden">
             {props.cafeNameMiddle && (
               <span className="text-[14px] font-[500] mr-[7px]">
                 {props.cafeNameMiddle}

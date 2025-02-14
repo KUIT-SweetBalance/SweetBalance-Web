@@ -49,7 +49,7 @@ const Home2TodayBody = () => {
 
       <div className="flex h-full py-[10px] px-[24px] gap-[10px] overflow-x-auto scrollbar-hide">
         {drinkListTodayData?.data?.length === 0 ? (
-          <NoContents />
+          <NoContents contentString='아직 기록이 없습니다'/>
         ) : (
           drinkListTodayData?.data?.map((drink, index) => (
             <DrinkCard

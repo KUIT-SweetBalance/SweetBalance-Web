@@ -145,11 +145,11 @@ const Home2TodayHeader = () => {
           );
         } else if (fetchedData && fetchedData.totalSugar >= 26) {
           return (
-            <div className="flex justify-end mr-[27px] mt-[-10px] transform translate-y-[-30px]">
+            <div className="flex justify-end mr-[27px] mt-[-65px] transform translate-y-[-30px]">
               <img
                 src="/sugar/sugar_angry_big.png"
                 alt="설탕이"
-                className="w-[160px] h-[180px]"
+                className="w-[160px] h-[170px]"
               />
             </div>
           );

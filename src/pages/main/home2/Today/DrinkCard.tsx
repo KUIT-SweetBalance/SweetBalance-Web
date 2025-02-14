@@ -34,16 +34,16 @@ const DrinkCard = (props: DrinkCardProps) => {
         <p className="text-[20px] truncate">{props.drinkName}</p>
       </div>
 
-      <div className="flex text-center justify-between text-[12px] px-[15px] whitespace-nowrap">
-        <span className="">당 {props.sugar}g</span>
+      <div className="flex justify-between text-center text-[12px] px-[7px] hitespace-nowrap">
+        <span className="whitespace-nowrap">당 {props.sugar}g</span>
         {props.syrupType === null ? (
           <span className="w-[80px] truncate">시럽없음</span>
         ) : (
           <span className="w-[80px] truncate">
-            {props.syrupType}&nbsp;{props.syrup}
+            &nbsp;{props.syrupType}&nbsp;{props.syrup}
           </span>
         )}
-        <span className="">{props.size}</span>
+        <span className="whitespace-nowrap truncate">{props.size}</span>
       </div>
     </div>
   );

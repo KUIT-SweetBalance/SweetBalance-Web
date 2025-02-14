@@ -1,117 +1,219 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '../../../components/button/Button';
 import { useNavigate } from 'react-router-dom';
+import backarrow from '../../../assets/onboarding/backarrow.svg';
+import UserDataInput from '../../../components/input/userDataInput/UserDataInput';
+import Modal from '../../../components/modal/Modal';
 
-const TopMessage = () => {
+const TopBar = () => {
   return (
-    <div className={`flex flex-col gap-[10px] pt-[45px] pl-[30px] pb-[30px]`}>
-      <div className={`text-[30px]`}>비밀번호 찾기</div>
-      <div className={`text-[18px]`}>
-        이전에 사용하셨던 닉네임을 입력해주세요.
-      </div>
+    <div className="flex items-center py-[2.35vh] gap-[26.21vw]">
+      <button className="pl-[7.89vw]">
+        <img src={backarrow}></img>
+      </button>
+      <p className="text-[18px]">비밀번호 재설정</p>
+    </div>
+  );
+};
+const Callout = () => {
+  return (
+    <div
+      className={`border flex flex-col justify-center gap-[0.59vh] mx-[3.56vw] my-[1.17vh] border-gray_light px-[10px] py-[5.9vw] rounded-[20px]`}
+    >
+      <p className={`text-[12px]`}>이메일 정보로 재설정</p>
+      <p className={`text-[12px] text-gray_text`}>
+        가입한 스윗밸런스 계정의 이메일 정보로 비밀번호를 재설정할 수 있어요
+      </p>
     </div>
   );
 };
 
-const Input = ({ onSubmit }: { onSubmit: (nickname: string) => void }) => {
+const EmailVerification = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
-  } = useForm<{ nickname: string }>({ mode: 'onChange' }); // 실시간 유효성 검사
+    formState: { errors },
+    watch,
+  } = useForm();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [isEmailEntered, setIsEmailEntered] = useState(false);
+  const [isCodeVerified, setIsCodeVerified] = useState(false);
 
-  const handleFormSubmit = (data: { nickname: string }) => {
-    onSubmit(data.nickname); // 상위 컴포넌트에 닉네임 전달
+  const emailInput = watch('email');
+  const verificationCode = watch('code');
+  const isCodeEntered = verificationCode && verificationCode.length > 0;
+
+  const handleVerifyEmail = (data: any) => {
+    setEmail(data.email);
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmCode = (data: any) => {
+    if (data.code === '1234') {
+      // 예제 코드 ->  서버와 검증 필요
+      setIsCodeVerified(true);
+    } else {
+      alert('인증번호가 틀렸습니다. 다시 입력해주세요.');
+    }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(handleFormSubmit)}
-      className="flex flex-col gap-[15px]"
-    >
-      <div
-        className={`w-[100%-50px] mx-auto h-[550px] flex flex-col justify-center gap-[10px]`}
+    <div className="w-full flex flex-col items-center">
+      <form
+        onSubmit={handleSubmit(handleVerifyEmail)}
+        className="flex w-full justify-between  box-border  text-[12px]  px-[10px] py-[1.7vh] "
       >
-        <input
-          type="text"
-          autoComplete="off" // 자동완성 비활성화
-          placeholder="닉네임을 입력해주세요."
-          {...register('nickname', {
-            required: '닉네임은 필수 입력 항목입니다.',
-          })}
-          className={` h-[6.7vh] p-4 border rounded-full text-base focus:outline-none focus:ring-2 focus:ring-primary ${
-            errors.nickname ? 'border-red-500' : 'border-gray-300'
-          } `}
-        />
-        {errors.nickname && (
-          <p className="text-red-500 text-sm ">{errors.nickname.message}</p>
-        )}
-      </div>
-      <Button
-        content="다음"
-        size="xl"
-        bgColor="bg-primary"
-        disabled={!isValid}
-      />
-    </form>
+        {/* 이메일 입력 필드 */}
+        <div className="my-auto text-[12px] pr-[14px]">아이디 (이메일)</div>
+        <div className="w-[45.23vw]">
+          <UserDataInput
+            id="email"
+            label=""
+            type="email"
+            placeholder=""
+            requiredMessage="이메일을 입력하세요."
+            register={register}
+            errors={errors}
+          />
+        </div>
+
+        {/* 인증하기 버튼 -> 이메일 입력 시 활성화 */}
+        <button
+          type="submit"
+          onClick={() => setIsModalOpen(true)}
+          className={`my-auto w-[18.67vw] h-[5.16vh] text-white rounded-[22px] text-[12px] ${emailInput ? 'bg-[#F0807F]' : 'bg-gray-300 '}`}
+          disabled={!emailInput}
+        >
+          인증하기
+        </button>
+      </form>
+
+      {/* 인증번호 입력 필드 (항상 표시) */}
+      <form
+        onSubmit={handleSubmit(handleConfirmCode)}
+        className="flex w-full justify-between  box-border  text-[12px]  px-[10px] py-[1.7vh]"
+      >
+        <div className="text-transparent pr-[14px]">아이디 (이메일)</div>
+        <div className="w-[45.23vw]">
+          <UserDataInput
+            id="code"
+            label=""
+            type="text"
+            placeholder=""
+            requiredMessage="인증번호를 입력하세요."
+            register={register}
+            errors={errors}
+          />
+        </div>
+
+        {/* 확인 버튼 (인증번호 입력 시 활성화) */}
+        <button
+          type="submit"
+          className={`my-auto w-[18.67vw] h-[5.16vh] rounded-[22px] text-white text-[12px] ${isCodeEntered ? 'bg-[#F0807F]  ' : 'bg-gray-300 '}`}
+          disabled={!isCodeEntered}
+        >
+          확인
+        </button>
+      </form>
+
+      {/* 모달 */}
+      {isModalOpen && (
+        <Modal onClose={() => setIsModalOpen(false)} email={email} />
+      )}
+    </div>
   );
 };
 
-const TempPasswordMessage = ({ tempPassword }: { tempPassword: string }) => {
-  const navigate = useNavigate();
+const UserPassword = () => {
+  // 비밀번호 입력
+  const {
+    watch,
+    getValues,
+    register,
+    formState: { errors },
+  } = useForm({ mode: 'onChange' });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const passwordValue = watch('userPassword');
+  const passwordConfirmValue = watch('userPasswordConfirm');
+
+  useEffect(() => {
+    console.log('비밀번호:', passwordValue);
+    console.log('비밀번호 확인:', passwordConfirmValue);
+  }, [passwordValue, passwordConfirmValue]);
+
   return (
     <>
-      <div className="flex flex-col gap-[10px] pt-[45px] pl-[30px] pb-[30px]">
-        <p className="text-[30px]">임시 비밀번호입니다</p>
-        <p className="text-[18px]">보안을 위해 24시간 내 변경해주세요</p>
-      </div>
-      <div className={`h-[550px] flex items-center`}>
-        <div
-          className={`w-[calc(100%-150px)] h-[6.7vh] flex items-center justify-center bg-[rgba(214, 172, 138, 0.20)] text-[24px] rounded-full text-[#F0807F]
-          border-[1px] 
-          border-solid 
-          border-[var(--alert,_#F0807F)]
-          mx-auto
-          `}
-        >
-          {tempPassword}
+      <div className="py-[2vh] px-[2.35vh] flex justify-between">
+        <div className="my-auto text-[12px] pr-[32px]">새 비밀번호</div>
+        <div className="w-[65.91vw] h-[5.16vh]">
+          <UserDataInput
+            useFormMode="onChange"
+            id="userPassword"
+            type="password"
+            placeholder="비밀번호를 입력해주세요"
+            requiredMessage="비밀번호는 필수 입력 항목입니다"
+            pattern={{
+              value: /^(?=.*[a-z])(?=.*\d)[a-z\d]{6,12}$/,
+              message:
+                '숫자와 영문 소문자로 이루어진 6-12자 비밀번호를 생성해주세요',
+            }}
+            position="left"
+            register={register}
+            errors={errors}
+            togglePasswordVisibility={togglePasswordVisibility}
+            showPassword={showPassword}
+          />
         </div>
       </div>
-      <div className={`pt-[15px] pb-[20px]`}>
-        <Button
-          content="완료"
-          bgColor="bg-primary"
-          size="xl"
-          disabled={false}
-          onClick={() => navigate('/login')}
-        />
+      <div className=" px-[2.35vh] flex justify-between">
+        <div className="my-auto text-[12px]  pr-[32px]"></div>
+
+        <div className="w-[65.91vw] py-[3vh] box-border">
+          <UserDataInput
+            useFormMode="onChange"
+            id="userPasswordConfirm"
+            type="password"
+            placeholder="비밀번호를 다시 한 번 입력해주세요"
+            requiredMessage="비밀번호는 필수 입력 항목입니다"
+            validate={(value: string) =>
+              value === getValues('userPassword') ||
+              '비밀번호가 일치하지 않습니다.'
+            }
+            position="left"
+            register={register}
+            errors={errors}
+          />
+        </div>
       </div>
     </>
   );
 };
 
 const ForgotPassword = () => {
-  const [step, setStep] = useState(1);
-  const [tempPassword, setTempPassword] = useState('');
-
-  const handleNicknameSubmit = (nickname: string) => {
-    console.log('닉네임 입력됨:', nickname);
-    // 여기서 임시 비밀번호 생성 (서버 요청으로 받아오기 ..?)
-    const newPassword = '1234'; // 서버 연결 전 임시 비밀번호
-    setTempPassword(newPassword);
-    setStep(2); // 다음 페이지 렌더링
-  };
+  const navigate = useNavigate();
 
   return (
     <>
-      {step === 1 && (
-        <>
-          <TopMessage />
-          <Input onSubmit={handleNicknameSubmit} />
-        </>
-      )}
-      {step === 2 && <TempPasswordMessage tempPassword={tempPassword} />}
+      <TopBar />
+      <Callout />
+      <EmailVerification />
+      <UserPassword />
+      <div className="pt-[25vh]">
+        <Button
+          size="xl"
+          bgColor="bg-primary"
+          content="로그인하러 가기"
+          onClick={() => navigate('/login')}
+        />
+      </div>
     </>
   );
 };

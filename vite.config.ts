@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ mode }) => {
   const isProduction = mode === "production"; // 배포 환경 여부 확인
-
+  
   return {
     plugins: [react()],
     build: {

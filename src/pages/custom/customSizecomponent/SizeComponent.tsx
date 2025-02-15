@@ -71,14 +71,23 @@ const SizeMl = styled.div`
 `;
 
 const SizeComponent: React.FC<{ sizes: SizeProps[]; selectedSize:number;handleSizeClick:(index:number)=>void}> = ({ sizes,selectedSize,handleSizeClick }) => {
-  
+  const svgFiles = [
+    "/size/fillSHORT.svg",
+    "/size/fillTALL.svg",
+    "/size/fillGRANDE.svg",
+    "/size/fillVENTI.svg",
+    "/size/unfillSHORT.svg",
+    "/size/unfillTALL.svg",
+    "/size/unfillGRANDE.svg",
+    "/size/unfillVENTI.svg"
+  ];
     return (
       <SizeList>
         {sizes.map((size, index) => (
           <SizeBox key={index}>
             {  selectedSize===index?
-                <Sizeimg onClick={() => handleSizeClick(index)}><Img src={`/size/fill${size.sizeType}.svg`} alt="size"/></Sizeimg>:
-                <Sizeimg2 onClick={() => handleSizeClick(index)}><Img src={`/size/unfill${size.sizeType}.svg`} alt="size"/></Sizeimg2>
+                <Sizeimg onClick={() => handleSizeClick(index)}><Img src={svgFiles[index]} alt="size"/></Sizeimg>:
+                <Sizeimg2 onClick={() => handleSizeClick(index)}><Img src={svgFiles[index+4]} alt="size"/></Sizeimg2>
           }
             <SizeName>{size.sizeType}</SizeName>
             <SizeMl>{size.volume}ml</SizeMl>

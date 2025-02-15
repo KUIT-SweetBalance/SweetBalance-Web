@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MypageContentMiddle from './MypageContentMiddle';
 import MypageContentTop from './MypageContentTop';
+import { DailyNutritionIntake } from '../../../../api/main/home2/Today/Home2TodayHeader';
 
 const MypageContentBox = styled.div`
     width: 393px;
@@ -34,13 +35,14 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 letter-spacing: -0.3px;`;
-const MypageContent: React.FC = () => {
+const MypageContent: React.FC<{Sugar:DailyNutritionIntake;gender:"MALE"|"FEMALE"}> = ({Sugar,gender}) => {
+    const gendersugar = gender==="MALE"?38:25;
     return (
         <MypageContentBox>
             <MypageContentRealBox>
-                <MypageContentTop/>
-                <MypageContentMiddle/>
-                <MypageContentBottom>하루 적정 섭취량은 25g이에요.</MypageContentBottom>
+                <MypageContentTop totalSugar={Sugar.totalSugar}/>
+                <MypageContentMiddle totalSugar={Sugar.totalSugar} gendersugar={gendersugar}/>
+                <MypageContentBottom>{`하루 적정 섭취량은 ${gendersugar}g이에요.`}</MypageContentBottom>
             </MypageContentRealBox>
         </MypageContentBox>
     );

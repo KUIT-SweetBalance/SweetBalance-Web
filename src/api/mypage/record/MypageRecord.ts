@@ -1,5 +1,5 @@
 import ApiManager from "../../ApiManager";
-
+import { InfiniteData } from "@tanstack/react-query";
 export interface RecoringDrink {
     beverageLogId: number;
     beverageId:number;
@@ -19,11 +19,12 @@ export interface RecoringDrinkData {
   message: string;
   data: RecoringDrink[];
 }
+export type InfiniteRecordDrinkData = InfiniteData<RecoringDrinkData>
 
-export const fetchRecoringDrinks = async (): Promise<RecoringDrinkData> => {
+export const fetchRecoringDrinks = async (page:number): Promise<RecoringDrinkData> => {
   try {
     const response = await ApiManager.get<RecoringDrinkData>(
-      `https://13.125.187.188.nip.io/api/user/beverage-record?page=${0}&size=${8}`,
+      `https://13.125.187.188.nip.io/api/user/beverage-record?page=${page}&size=${8}`,
     );
     console.log(response.data);
     return response.data;
@@ -33,10 +34,10 @@ export const fetchRecoringDrinks = async (): Promise<RecoringDrinkData> => {
   }
 };
 
-export const DeleteRecordingDrinks = async (beverageId: number): Promise<void> => {
+export const DeleteRecordingDrinks = async (beverageLogId: number): Promise<void> => {
   try {
       const response = await ApiManager.delete(
-      `https://13.125.187.188.nip.io/api/user/beverage-record/${beverageId}`,
+      `https://13.125.187.188.nip.io/api/user/beverage-record/${beverageLogId}`,
       );
       console.log('삭제 성공!')
       return response.data;
@@ -46,15 +47,3 @@ export const DeleteRecordingDrinks = async (beverageId: number): Promise<void> =
   }
   };
 
-  export const ChangeRecordingDrinks = async (beverageId: number): Promise<void> => {
-    try {
-        const response = await ApiManager.post(
-        `https://13.125.187.188.nip.io/api/user/beverage-record/${beverageId}`,
-        );
-        console.log('수정 성공!')
-        return response.data;
-    } catch (error) {
-        console.error('음료 데이터 가져오기 실패:', error);
-        throw error;
-    }
-    };

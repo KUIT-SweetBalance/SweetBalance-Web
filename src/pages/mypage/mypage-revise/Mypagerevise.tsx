@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../../../components/header/Header";
+import { fetchUserInfo, UserData } from "../../../api/mypage/main/MypageMain";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { ChangeUserInfo, changeInfomation } from "../../../api/mypage/revise/Mypagerevise";
+import { useNavigate } from "react-router-dom";
 
 const MypagereviseBox = styled.div`
   margin-top: 35px;
@@ -51,20 +55,71 @@ const MypageSelect = styled.select`
   outline: none;
   cursor: pointer;
 `;
+
 const HeaderPadding = styled.div`
-padding: 0 14px 0 21px;
+  padding: 0 14px 0 21px;
 `;
+
 const Mypagerevise: React.FC = () => {
-  const [nickname, setNickname] = useState("");
-  const [sex, setSex] = useState("");
+  // ✅ useQuery를 가장 먼저 실행
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["UserInfo"],
+    queryFn: fetchUserInfo,
+  });
+
+  // ✅ 기본값 설정
+  const [nickname, setNickname] = useState<string>("");
+  const [gender, setGender] = useState<"MALE" | "FEMALE" | "OTHER">("OTHER");
+
+  // ✅ useEffect를 사용하여 userinfo 데이터가 들어오면 업데이트
+  useEffect(() => {
+    if (data?.data) {
+      setNickname(data.data.nickname);
+      setGender(data.data.gender);
+    }
+  }, [data]);
+
+  const queryClient = useQueryClient();
+
+  const UserInfoMutation = useMutation({
+    mutationFn: ChangeUserInfo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["UserInfo"] });
+    },
+    onError: (error) => {
+      console.error("유저 정보 수정 실패 ❌:", error);
+    },
+  });
+  const navigate = useNavigate();
+  const handleUser = () => {
+    if (gender === "OTHER") {
+      navigate('/mypage'); // API 호출 없이 바로 이동
+      return;
+    }
+  
+    const changeInfo: changeInfomation = {
+      nickname,
+      gender,
+    };
+  
+    UserInfoMutation.mutate(changeInfo, {
+      onSuccess: () => {
+        navigate('/mypage'); // 성공 시 이동
+      }
+    });
+  };
+  
+
+  // ✅ 로딩 및 오류 처리
+  if (isLoading) return <p>로딩 중...</p>;
+  if (error) return <p>데이터를 불러오는 중 오류 발생</p>;
 
   return (
     <>
       <HeaderPadding>
-      <Header headerTitle="내 프로필 편집하기" confirmButton="완료" />
+        <Header headerTitle="내 프로필 편집하기" confirmButton="완료" handler={handleUser} />
       </HeaderPadding>
       <MypagereviseBox>
-        {/* 닉네임 입력 */}
         <MypagereviseItem>
           <MypageTitle>닉네임</MypageTitle>
           <MypageInput
@@ -75,27 +130,19 @@ const Mypagerevise: React.FC = () => {
           />
         </MypagereviseItem>
 
-        {/* 이메일 (수정 불가능) */}
         <MypagereviseItem>
           <MypageTitle>이메일</MypageTitle>
-          <MypageDisabledInput
-            type="email"
-            value="sweetbalance@naver.com"
-            disabled
-          />
+          <MypageDisabledInput type="email" value={data?.data.email} disabled />
         </MypagereviseItem>
 
-        {/* 성별 선택 */}
         <MypagereviseItem>
           <MypageTitle>성별</MypageTitle>
-          <MypageSelect value={sex} onChange={(e) => setSex(e.target.value)}>
-            <option value="성별">성별</option>
-            <option value="남자">남자</option>
-            <option value="여자">여자</option>
+          <MypageSelect value={gender} onChange={(e) => setGender(e.target.value as "MALE" | "FEMALE" | "OTHER")}>
+            <option value="OTHER">성별</option>
+            <option value="MALE">남자</option>
+            <option value="FEMALE">여자</option>
           </MypageSelect>
         </MypagereviseItem>
-
-       
       </MypagereviseBox>
     </>
   );

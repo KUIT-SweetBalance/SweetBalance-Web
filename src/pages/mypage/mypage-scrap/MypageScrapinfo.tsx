@@ -6,7 +6,7 @@ interface FavoriteDrink {
     name: string;         // 음료 이름
     brand: string;        // 브랜드명 (예: "스타벅스")
     imgUrl: string;       // 음료 이미지 URL
-    sugar: number;        // 당 함량
+    sugarPer100ml: number;        // 당 함량
     timeString: string;   // 기록된 시간 (문자열 형식)
 }
 const ItemBox = styled.div`
@@ -42,6 +42,10 @@ font-style: normal;
 font-weight: 500;
 line-height: normal;
 letter-spacing: -0.4px;
+white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px; /* 부모 요소에 맞춰 자동 조정 */
 `;
 const RightImg = styled.img`
 width:14px;
@@ -84,7 +88,7 @@ const MypageScrapInfo: React.FC<{drink:FavoriteDrink;onClick:()=>void}> = ({drin
                 
                 <Name>{drink.brand}</Name>
                 |
-                <Name>당 {drink.sugar}g</Name>
+                <Name>당 {drink.sugarPer100ml}g</Name>
                     
                     
                     

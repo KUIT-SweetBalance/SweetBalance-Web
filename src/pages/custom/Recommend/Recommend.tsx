@@ -73,7 +73,8 @@ const UpColor = styled.div`
 
 
 
-const Recommend: React.FC<{brand:string;sugar:number;recom:RecommendedBeverage[]}> = ({ brand,sugar,recom }) => {
+const Recommend: React.FC<{brand:string;recom:RecommendedBeverage[]}> = ({ brand,recom }) => {
+ 
     return (
       <RecommentBox>
         <RecommendTitle>

@@ -1,12 +1,12 @@
 import ApiManager from "../../ApiManager";
-
+import { InfiniteData } from "@tanstack/react-query";
 interface FavoriteDrink {
     favoriteId: number;   // 즐겨찾기 음료 고유 ID
     beverageId: number;   // 음료 ID
     name: string;         // 음료 이름
     brand: string;        // 브랜드명 (예: "스타벅스")
     imgUrl: string;       // 음료 이미지 URL
-    sugar: number;        // 당 함량
+    sugarPer100ml: number;        // 당 함량
     timeString: string;   // 기록된 시간 (문자열 형식)
 }
 export interface ScrapDrinkData {
@@ -16,10 +16,12 @@ export interface ScrapDrinkData {
     data: FavoriteDrink[];
 }
 
-export const fetchScrapDrinks = async (): Promise<ScrapDrinkData> => {
+export type InfiniteScrapDrinkData = InfiniteData<ScrapDrinkData>
+
+export const fetchScrapDrinks = async (page:number): Promise<ScrapDrinkData> => {
 try {
     const response = await ApiManager.get<ScrapDrinkData>(
-    `https://13.125.187.188.nip.io/api/user/favorite?page=${0}&size=${8}`,
+    `https://13.125.187.188.nip.io/api/user/favorite?page=${page}&size=${8}`,
     );
     console.log(response.data);
     return response.data;

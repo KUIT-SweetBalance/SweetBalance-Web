@@ -75,12 +75,12 @@ const Drink = styled.div`
   height:auto;
 `;
 
-const Brandrink: React.FC<BrandProps & { onClick: () => void }&{onClick1:()=>void}> = ({ brand, drink, onClick,onClick1 ,scrap}) => {
+const Brandrink: React.FC<BrandProps & { onClick: () => void;beverageId:number}&{onClick1:(favoriteId:number)=>void}> = ({ beverageId,brand, drink, onClick,onClick1 ,scrap}) => {
     return (
         <BrandrinkBox>
             <BrandBox>
                 <Brand>{brand}</Brand>
-                <StarBox onClick={scrap?onClick1:onClick} src={scrap?"/fillstar.svg":"/unfillstar.svg"}alt="star">
+                <StarBox onClick={() => scrap ? onClick1(beverageId) : onClick()} src={scrap ? "/fillstar.svg" : "/unfillstar.svg"} alt="star">
                     {/* <StarImg src="/fillstar.svg" alt="star" />
                     <Star>즐겨찾기</Star> */}
                 </StarBox>

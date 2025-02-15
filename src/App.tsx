@@ -12,7 +12,6 @@ import EditDrinkModal from './pages/main/modal/EditDrinkModal';
 import Router from './router/Router';
 import { BrowserRouter } from 'react-router-dom';
 import LargeFavoriteDrinkModal from './pages/main/modal/LargeFavoriteDrinkModal';
-import SmallFavoriteDrinkModal from './pages/main/modal/SmallFavoriteDrinkModal';
 import EditCompleted from './pages/main/edit/EditCompleted';
 import Alarm from './pages/main/alarm/Alarm';
 import AllBrands from './pages/main/search/AllBrands';

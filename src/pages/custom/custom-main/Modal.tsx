@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import styled from 'styled-components';
+import Button from '../../../components/button/Button';
 const ModalContainer = styled.div`
   position: fixed;
   top: 0;
@@ -13,117 +14,75 @@ const ModalContainer = styled.div`
   z-index: 10;
   
 `;
-const ModalContent = styled.div`
-  
-  background: #fff;
-  border-radius: 20px;
-  text-align: center;
-  width: 345px;
-  height: 373px;
-`;
-
-const ModalTitleBox = styled.div`
-height: 102px;
-padding: 26px 94px 19px 30px;
-display: flex;
+const ModalContent=styled.div`
+display: inline-flex;
+padding: 20px;
+margin: 0 20px;
 flex-direction: column;
-`;
+align-items: flex-start;
 
-const ModalTitle = styled.div`
-  /* color: #722A2A; */
-  color: var(--text, #121212);
-font-family: Pretendard;
-font-size: 25px;
-font-style: normal;
-font-weight: 500;
-line-height: 28px;
-letter-spacing: -0.625px;
+border-radius: 20px;
+background: #FFF;
+box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
 `;
-const ModalTitleColor =styled.div`
-color: var(--primary, #722A2A);
-font-family: Pretendard;
-font-size: 25px;
-font-style: normal;
-font-weight: 500;
-line-height: 28px;
-letter-spacing: -0.625px;`;
-const Mo = styled.div`display:flex;
-gap: 5px;`;
-const ModalSubTitle = styled.div`
-color: var(--text, #121212);
-font-family: Pretendard;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 28px; /* 200% */
-letter-spacing: -0.35px;
-text-align: left;`
-
-const ModalContentContent = styled.div`
-padding: 0 30px;
-display: flex;
-flex-direction: column;
-gap: 20px;
-`;
-const SizeItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--text, #121212);
+const Brand = styled.div`
+color: #000;
 font-family: Pretendard;
 font-size: 20px;
 font-style: normal;
-font-weight: 500;
-line-height: 28px; /* 140% */
+font-weight: 400;
+line-height: normal;
 letter-spacing: -0.5px;
 `;
-
-const StarIcon = styled.img`
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+const DrinkContent=styled.div`
+display:flex;
+gap:0;
+flex-wrap: wrap;
+word-break: break-word;
+`;
+const Drink = styled.div`
+color: var(--primary, #722A2A);
+font-family: 'Pretendard';
+font-size: 25px;
+font-style: normal;
+font-weight: 600;
+line-height: 30px; /* 120% */
+letter-spacing: -0.625px;
 `;
 
-const ModalButton = styled.button`
-  width: 100%;
-  height:47px;
-  background: #722A2A;
-  color: #fff;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 18px;
-  margin-top: 10px;
+const Content = styled.div`
+color: var(--text, #121212);
+font-family: 'Pretendard';
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 30px;
+letter-spacing: -0.5px;
 `;
-interface SizeProps {
-    name: string;
-    size: number;
-  }
-
-const Modal: React.FC<{ onClick: () => void; sizes: SizeProps[] }> = ({ onClick, sizes })  => {
+const ButtonBox = styled.div`
+display:flex;
+padding-top:24px;
+width: 100%;
+justify-content:space-evenly;
+`;
+const Modal: React.FC<{onClick: () => void; onClick1:()=>void;drink: string; brand:string; }> = ({onClick,onClick1, drink,brand })  => {
     
-        const [selectedSize, setSelectedSize] = useState<string | null>(null); // 선택된 사이즈
     return (
         <ModalContainer>
-                    <ModalContent>
-                        <ModalTitleBox>
-                            <Mo><ModalTitleColor>즐겨찾는 메뉴</ModalTitleColor><ModalTitle> 등록하기</ModalTitle></Mo>
-                            <ModalSubTitle>음료 커스텀 저장은 불가능해요</ModalSubTitle>
-                        </ModalTitleBox>
-                        <ModalContentContent>
-                            {sizes.map((size, index) => (
-                                <SizeItem key={index}>
-                                    <span>{size.name}</span>
-                                    <StarIcon
-                                        src={selectedSize === size.name ? "/fillstar.svg" : "/emptystar.svg"}
-                                        onClick={() => setSelectedSize(size.name)}
-                                    />
-                                </SizeItem>
-                            ))}
-                            <ModalButton onClick={onClick}>완료</ModalButton>
-                        </ModalContentContent>
-                    </ModalContent>
-                </ModalContainer>
+          <ModalContent>
+            <Brand>{brand}</Brand>
+            <DrinkContent>
+              <Drink>{drink}</Drink>
+              <Content>를 즐겨찾기에 추가하시겠어요?</Content>
+            </DrinkContent>
+          <ButtonBox>
+            <Button content='아니오' bgColor='bg-white' size='md'onClick={onClick}/>
+            <Button content='추가할래요' bgColor='bg-primary' size='md'onClick={onClick1}/>
+
+          </ButtonBox>
+
+          </ModalContent>
+        </ModalContainer>
     );
 };
 

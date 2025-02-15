@@ -1,14 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { RecommendedBeverage } from "../../../api/custom/custommain";
 
-interface Props {
-    brand: string;
-    drink: string;
-    sugar: number;
-    kcal: number;
-    caffeine: number;
-  }
-type BrandjustProps = Pick<Props, 'brand'>;
 const RecommentBox = styled.div`
   width: 393px;
 `;
@@ -69,7 +62,7 @@ const DrinkSugar = styled.div`
   font-weight: 400;
 `;
 
-type DrinkAboutBrand = Pick<Props, 'drink' | 'sugar'>;
+
 const DownColor = styled.div`
   color: #92ada4;
 `;
@@ -80,17 +73,7 @@ const UpColor = styled.div`
 
 
 
-const Recommend: React.FC<BrandjustProps> = ({ brand }) => {
-    const recom: DrinkAboutBrand[] = [
-      { drink: '허니 자몽 블랙티', sugar: 25 },
-      { drink: '유스베리 티', sugar: 0 },
-      { drink: '잉글리시 블랙티', sugar: 0 },
-      { drink: '캐모마일 티', sugar: 0 },
-      { drink: '캐모마일 티', sugar: 0 },
-      { drink: '캐모마일 티', sugar: 0 },
-      { drink: '캐모마일 티', sugar: 0 },
-      { drink: '캐모마일 티', sugar: 0 },
-    ];
+const Recommend: React.FC<{brand:string;sugar:number;recom:RecommendedBeverage[]}> = ({ brand,sugar,recom }) => {
     return (
       <RecommentBox>
         <RecommendTitle>
@@ -99,13 +82,13 @@ const Recommend: React.FC<BrandjustProps> = ({ brand }) => {
         <RecommendDrinkBox>
           {recom.map((item, index) => (
             <RecommendDrink key={index}>
-              <DrinkImg src="/recomimg.svg" alt="drink" />
-              <DrinkName>{item.drink}</DrinkName>
+              <DrinkImg src={item.imgUrl} alt="drink" />
+              <DrinkName>{item.name}</DrinkName>
               <DrinkSugar>
-                {item.sugar > 0 ? (
-                  <DownColor>{item.sugar}g ▼</DownColor>
+                {item.sugarGap > 0 ? (
+                  <DownColor>{item.sugarGap}g ▼</DownColor>
                 ) : (
-                  <UpColor>{item.sugar}g ▼</UpColor>
+                  <UpColor>{item.sugarGap}  g ▲</UpColor>
                 )}
               </DrinkSugar>
             </RecommendDrink>

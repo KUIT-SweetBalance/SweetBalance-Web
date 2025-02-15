@@ -2,17 +2,20 @@ import React from "react";
 import styled from "styled-components";
 
 
-  interface SizeProps {
-    name: string;
-    size: number;
-  }
+interface SizeProps {
+  sizeType: string;
+  volume: number;
+}
 const SizeList = styled.div`
   display: flex;
   justify-content: space-around;
-  padding: 0 25px 0 25px;
+  padding: 9px 25px 0 25px;
   /* 18px gap..? 존재 */
   height: 125px;
-  margin-top: 9px;
+  /* margin-top: 9px; */
+  position: relative;
+  z-index: 2;
+  background-color:white;
 `;
 
 // Single Size Box
@@ -21,10 +24,27 @@ const SizeBox = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const Sizeimg = styled.img`
+const Sizeimg = styled.div`
   width: 73px;
   height: 73px;
+  border-radius: 50%;
+  background: rgba(240, 128, 127, 0.20);
+  border: 1.5px solid #F0807F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+const Sizeimg2 = styled.div`
+  width: 73px;
+  height: 73px;
+  border-radius: 50%;
+  background:#f4f4f4;
+  border: 1.5px solid #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Img = styled.img``;
 const SizeName = styled.div`
   color: #121212;
   text-align: center;
@@ -40,7 +60,7 @@ const SizeMl = styled.div`
   height: 20px;
   color: rgba(18, 18, 18, 0.5);
   text-align: center;
-  font-family: Pretendard;
+  font-family: 'Pretendard';
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -50,14 +70,18 @@ const SizeMl = styled.div`
   margin-top: 8px;
 `;
 
-const SizeComponent: React.FC<{ sizes: SizeProps[] }> = ({ sizes }) => {
+const SizeComponent: React.FC<{ sizes: SizeProps[]; selectedSize:number;handleSizeClick:(index:number)=>void}> = ({ sizes,selectedSize,handleSizeClick }) => {
+  
     return (
       <SizeList>
         {sizes.map((size, index) => (
           <SizeBox key={index}>
-            <Sizeimg src='/sizeimg.svg'alt='size'/>
-            <SizeName>{size.name}</SizeName>
-            <SizeMl>{size.size}ml</SizeMl>
+            {  selectedSize===index?
+                <Sizeimg onClick={() => handleSizeClick(index)}><Img src={`/size/fill${size.sizeType}.svg`} alt="size"/></Sizeimg>:
+                <Sizeimg2 onClick={() => handleSizeClick(index)}><Img src={`/size/unfill${size.sizeType}.svg`} alt="size"/></Sizeimg2>
+          }
+            <SizeName>{size.sizeType}</SizeName>
+            <SizeMl>{size.volume}ml</SizeMl>
           </SizeBox>
         ))}
       </SizeList>

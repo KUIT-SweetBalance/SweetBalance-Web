@@ -15,7 +15,7 @@ const Header = (props: HeaderProps) => {
   };
 
   return (
-    <div className="flex w-full px-[10px] justify-center justify-between">
+    <div className="flex w-full px-[10px] py-[20px] justify-center justify-between">
       <button type="button" className="w-[25px]">
         <img
           src={left}

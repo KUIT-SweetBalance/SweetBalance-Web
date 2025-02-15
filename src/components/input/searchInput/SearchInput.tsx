@@ -11,7 +11,7 @@ interface SearchInputProps {
   onSearch: () => void;
 }
 
-const SearchInput = ({ height = '40px', ...props }: SearchInputProps) => {
+const SearchInput = ({ height = '38px', ...props }: SearchInputProps) => {
   return (
     <div className="flex w-full relative">
       <input

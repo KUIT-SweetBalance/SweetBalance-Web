@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const MypageFeedContentBox = styled.div`
 display: inline-flex;
@@ -14,6 +15,9 @@ flex-direction: column;
 justify-content: flex-end;
 align-items: flex-end;
 gap: 14px;
+border-radius: 20px;
+border: 1px solid var(--gray-light, rgba(144, 144, 144, 0.20));
+background: #FFF;
 `;
 const MypageFeedContentRight = styled.div`
 display: flex;
@@ -22,6 +26,9 @@ flex-direction: column;
 justify-content: flex-end;
 align-items: flex-end;
 gap: 10px;
+border-radius: 20px;
+border: 1px solid var(--gray-light, rgba(144, 144, 144, 0.20));
+background: #FFF;
 `;
 const MypageFeedContentLeftTop = styled.div`
 display: flex;
@@ -48,9 +55,16 @@ width: 78px;
 height: 78px;
 flex-shrink: 0;`;
 const MypageFeedContent: React.FC = () => {
+    const navigate = useNavigate();
+    const handleRecordClick = () => {
+        navigate('/mypage/record');
+    };
+    const handleScrapClick = () => {
+        navigate('/mypage/scrap');
+    };
     return (
         <MypageFeedContentBox>
-            <MypageFeedContentLeft>
+            <MypageFeedContentLeft onClick={handleRecordClick}>
                 <MypageFeedContentLeftTop>
                     <MypageFeedContentTopText>나의</MypageFeedContentTopText>
                     <MypageFeedContentTopText>기록 목록</MypageFeedContentTopText>
@@ -58,10 +72,10 @@ const MypageFeedContent: React.FC = () => {
                 <MypageFeedContentLeftBottom src='/Feedrecord.svg' alt='record'/>
             </MypageFeedContentLeft>
 
-            <MypageFeedContentRight>
+            <MypageFeedContentRight onClick={handleScrapClick}>
                 <MypageFeedContentLeftTop>
                     <MypageFeedContentTopText>나의</MypageFeedContentTopText>
-                    <MypageFeedContentTopText>기록 목록</MypageFeedContentTopText>
+                    <MypageFeedContentTopText>즐겨찾기 목록</MypageFeedContentTopText>
                 </MypageFeedContentLeftTop>
                 <MypageFeedContentRightBottom src = '/FeedStar.svg' alt='Star'/>
             </MypageFeedContentRight>

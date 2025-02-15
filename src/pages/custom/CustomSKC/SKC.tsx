@@ -8,13 +8,14 @@ interface Props {
     caffeine: number;
   }
 const SKCBox = styled.div`
-  height: 126px;
+  /* height: 126px; */
 `;
 const SKCList = styled.div`
-  padding: 42px 60px 42px 59px;
-  display: inline-flex;
+  padding: 20px 29.5px 20px 51.5px;
+  
+  display: flex;
   align-items: center;
-  gap: 78px;
+    justify-content: space-between;
 `;
 const SKCitem = styled.div`
   align-items: center;

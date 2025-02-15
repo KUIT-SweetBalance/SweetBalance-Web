@@ -92,7 +92,7 @@ const Button = styled.a`
 const RedirectButton: React.FC = () => {
   return (
     // href에 백엔드 리디렉션 엔드포인트 설정
-    <Button href="http://13.209.98.76:8080/oauth2/authorization/kakao">
+    <Button href="https://13.125.187.188.nip.io/oauth2/authorization/kakao">
       <img className={`w-5 h-5 pr-1`} src={kakao_logo} alt="kakao_logo" />
       카카오 로그인
     </Button>

@@ -1,75 +1,104 @@
-import React from 'react';
-import styled from 'styled-components';
-import Header from '../../../components/header/Header';
-interface MypageInfoItem {
-    key: string;
-    value: string;
-  }
+import React, { useState } from "react";
+import styled from "styled-components";
+import Header from "../../../components/header/Header";
+
 const MypagereviseBox = styled.div`
-margin-top:35px;
+  margin-top: 35px;
 `;
+
 const MypagereviseItem = styled.div`
-display: inline-flex;
-padding: 10px 24px 5px 24px;
-flex-direction: column;
-align-items: flex-start;
-gap: 10px;`;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 24px 5px 24px;
+  gap: 10px;
+`;
+
 const MypageTitle = styled.div`
-display: flex;
-padding: 10px;
-justify-content: center;
-align-items: center;
-gap: 10px;
-color: var(--text, #121212);
-font-family: Pretendard;
-font-size: 18px;
-font-style: normal;
-font-weight: 500;
-line-height: 20px; /* 111.111% */
-letter-spacing: -0.45px;
+  color: #121212;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.45px;
 `;
-const MypageNickname = styled.div`
-display: flex;
-width: 345px;
-height: 60px;
-padding: 20px 30px;
-align-items: center;
-gap: 10px;
-border-radius: 100px;
-border: 2px solid var(--gray-light, #F3F3F3);
-background: #FFF;
+
+const MypageInput = styled.input`
+  width: 345px;
+  height: 60px;
+  padding: 15px 30px 15px 20px;
+  border-radius: 100px;
+  border: 2px solid #f3f3f3;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
 `;
-const Mypagerevisecontent = styled.div`
-color: var(--text, #121212);
-font-family: Pretendard;
-font-size: 16px;
-font-style: normal;
-font-weight: 500;
-line-height: 20px; /* 125% */
-letter-spacing: -0.4px;`;
+
+const MypageDisabledInput = styled(MypageInput)`
+  background: #f1f1f1;
+  color: #b3b3b3;
+  cursor: not-allowed;
+`;
+
+const MypageSelect = styled.select`
+  width: 345px;
+  height: 60px;
+  padding: 18px 30px;
+  border-radius: 100px;
+  border: 2px solid #f3f3f3;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+`;
+const HeaderPadding = styled.div`
+padding: 0 14px 0 21px;
+`;
 const Mypagerevise: React.FC = () => {
-    const info: MypageInfoItem[] = [
-        { key: 'nickname', value: '달달해' },
-        { key: 'sex', value: '여성' },
-        { key: 'introduce', value: '당뇨를 조심하자' },
-      ];
+  const [nickname, setNickname] = useState("");
+  const [sex, setSex] = useState("");
 
-    return (
-        <>
-        <Header headerTitle='내 프로필 편집하기 ' confirmButton='완료'/>
-            <MypagereviseBox>
-                {info.map((item,index)=>(
-                    <MypagereviseItem key = {index}>
-                        <MypageTitle>{item.key === 'nickname'?"닉네임":(item.key ==='sex'?"성별":"한 줄 소개")}</MypageTitle>
-                        <MypageNickname><Mypagerevisecontent>{item.value}</Mypagerevisecontent></MypageNickname>
-                    </MypagereviseItem>
-                ))}
-            
-            </MypagereviseBox>
-        </>
-            
+  return (
+    <>
+      <HeaderPadding>
+      <Header headerTitle="내 프로필 편집하기" confirmButton="완료" />
+      </HeaderPadding>
+      <MypagereviseBox>
+        {/* 닉네임 입력 */}
+        <MypagereviseItem>
+          <MypageTitle>닉네임</MypageTitle>
+          <MypageInput
+            type="text"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            placeholder="어플에서 사용할 닉네임을 입력해주세요."
+          />
+        </MypagereviseItem>
 
-    );
+        {/* 이메일 (수정 불가능) */}
+        <MypagereviseItem>
+          <MypageTitle>이메일</MypageTitle>
+          <MypageDisabledInput
+            type="email"
+            value="sweetbalance@naver.com"
+            disabled
+          />
+        </MypagereviseItem>
+
+        {/* 성별 선택 */}
+        <MypagereviseItem>
+          <MypageTitle>성별</MypageTitle>
+          <MypageSelect value={sex} onChange={(e) => setSex(e.target.value)}>
+            <option value="성별">성별</option>
+            <option value="남자">남자</option>
+            <option value="여자">여자</option>
+          </MypageSelect>
+        </MypagereviseItem>
+
+       
+      </MypagereviseBox>
+    </>
+  );
 };
 
 export default Mypagerevise;

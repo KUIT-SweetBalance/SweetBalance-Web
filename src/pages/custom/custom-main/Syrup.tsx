@@ -1,7 +1,13 @@
 import React ,{useState}from 'react';
 import styled from 'styled-components';
-import Dial from './dial';
 import Recoding from './Recording';
+import Pump from './pump';
+import SyrupSelect from './SyrupSelect/SyrupSelect';
+import { RecoringDrink } from '../../../api/mypage/record/MypageRecord';
+import { ReviseCustomDrink, ReviseDrink,ReviseDrinks } from '../../../api/custom/custommain';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+
 
 const SlideUpContainers = styled.div`
  position: fixed;
@@ -13,6 +19,7 @@ const SlideUpContainers = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
   `;
 const SlideUpContainer = styled.div`
  position: fixed;
@@ -26,57 +33,8 @@ const SlideUpContainer = styled.div`
   flex-direction: column;
   
   z-index: 10;`;
-const SizeLabel = styled.div`
-color: var(--text, #121212);
-font-family: Pretendard;
-font-size: 20px;
-font-style: normal;
-font-weight: 600;
-line-height: 28px; /* 140% */
-letter-spacing: -0.5px;
-padding: 24px 274px 10px 30px;
-`;
-const SizeSelector = styled.div`
-  display: flex;
-  padding: 0 30px 0 30px;
-  border-radius : 100px;
-`;
 
-const SizeButton = styled.button`
-  flex: 1;
-  height: 50px;
-  border: none;
-  background: #f4f4f4; /* 문자열 제거 */
-  color: #722a2a; /* 문자열 제거 */
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 400;
-  &:first-child {
-    border-radius: 100px 0 0 100px;
-  }
-  &:last-child {
-    border-radius: 0 100px 100px 0;
-  }
-  cursor: pointer;
-`;
 
-const SizeButtonSelected = styled.button`
-  flex: 1;
-  height: 50px;
-  border: none;
-  background: #722a2a; /* 문자열 제거 */
-  color: #fff; /* 문자열 제거 */
-  font-family: Pretendard;
-  font-size: 14px;
-  font-weight: 400;
-  &:first-child {
-    border-radius: 100px 0 0 100px;
-  }
-  &:last-child {
-    border-radius: 0 100px 100px 0;
-  }
-  cursor: pointer;
-`;
 
 
 const SyrupControlContainer = styled.div`
@@ -111,138 +69,85 @@ const SyrupsubLabel = styled.div`
     padding-top: 10px;
 `;
 
-
-
-const HowBox = styled.div`
-  display: flex;
-  gap: 148px;
-  align-items: center;
-  padding: 0 0 24px 30px ;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-weight: 500;
+const SyrupCotainer = styled.div`
+padding : 30px 30px 15px 30px;
 `;
 
-const HowTitle = styled.div`
-  display: flex;
-  align-items: center;
-  color: var(--text, #121212);
-font-family: Pretendard;
-font-size: 20px;
-font-style: normal;
-font-weight: 600;
-line-height: 28px; /* 140% */
-letter-spacing: -0.5px;`;
 
+const Syrup: React.FC<{Syrupmenu: string[];  Syrup:RecoringDrink;beverageSizeId:number;beverageId:number }> = ({Syrupmenu,Syrup,beverageSizeId,beverageId}) => {
+  const [syrupName, setSyrupName] = useState(Syrup.syrupName ?? "시럽 없음");
+  const [syrupCount, setSyrupCount] = useState(Syrup.syrupCount);
+  const navigate = useNavigate();
+  const handleSyrupCountChange = (newCount: number) => {
+    if (newCount >= -4 && newCount <= 4) {
+      setSyrupCount(newCount);
+    }
+  };
 
+  // ✅ 시럽 이름 변경 함수
+  const handleSyrupNameChange = (newName: string) => {
+    setSyrupName(newName);
+  };  
 
-const DrinkControl = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
-
-const ControlButton = styled.button`
-    width: 16px;
-    height: 16px;
-
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    background-color: var(--gray, #F4F4F4);
-    color: #722a2a;
-    font-size: 18px;
-    cursor: pointer;
-    line-height: 15px;
-  
-`;
-
-const DrinkCount = styled.div`
- color: var(--text, #121212);
-text-align: center;
-font-family: Pretendard;
-font-size: 25px;
-font-style: normal;
-font-weight: 600;
-line-height: 28px; /* 112% */
-letter-spacing: -0.625px;
-
-`;
-
-interface Props {
-    brand: string;
-    drink: string;
-    sugar: number;
-    kcal: number;
-    caffeine: number;
+   // ✅ useMutation에서 `mutationFn`을 올바르게 사용
+   const mutation = useMutation({
+    mutationFn: ReviseCustomDrink, // 함수 자체를 참조 (호출 X)
+    onSuccess: (data) => {
+      console.log('음료 수정 성공:', data);
+      alert('음료 수정이 완료되었습니다! 🎉');
+    },
+    onError: (error) => {
+      console.error('음료 수정 실패:', error);
+      alert('음료 수정 중 오류가 발생했습니다. ❌');
+    },
+  });
+  let revisedrinks: ReviseDrinks | undefined;
+  const beverageLogId = Syrup.beverageLogId
+  if (
+    syrupName && syrupName.trim().length > 0 && 
+    Number.isInteger(beverageSizeId) && beverageSizeId > 0 &&  // ✅ 숫자 체크
+    syrupCount !== undefined && syrupCount !== null
+  ) {
+    revisedrinks = {
+      beverageSizeId,
+      beverageId,
+      syrupName,
+      syrupCount,
+      beverageLogId,
+      //: beverageId.toString() // ✅ API가 문자열을 요구할 경우 변환
+    };
   }
-const Syrup: React.FC<Pick<Props, 'sugar'>& { onClick: () => void }> = ({sugar,onClick}) => {
-    const sizess = ["SHORT", "TALL", "GRANDE", "VENTI"];
-    const [Size, setSize] = useState("SHORT"); // 선택된 사이즈
-
-    const handleSizeClick = (size: string) => {
-        setSize(size);
-      };
-    
-    
-
-
-    
-      const [drinkCount, setDrinkCount] = useState(1); // 기본값: 1잔
-
-      const handleIncrease = () => {
-        setDrinkCount((prev) => prev + 1); // +1
-      };
-    
-      const handleDecrease = () => {
-        setDrinkCount((prev) => (prev > 1 ? prev - 1 : 1)); // -1, 최소값은 1
-      };
-    return (
+  // ✅ 버튼 클릭 시 mutation 실행
+  const handleClick = () => {
+    console.log(revisedrinks)
+    if (revisedrinks) {
+      mutation.mutate(revisedrinks);
+      // 여기에 navigate 넣으면 됨
+      navigate('/edit/completed')
+    } else {
+      console.log(revisedrinks)
+      alert('음료 정보를 입력하세요.');
+    }
+  };
+  return (
         <SlideUpContainers>
-                <SlideUpContainer >
-                    <SizeLabel>사이즈 변경</SizeLabel>
-                     <SizeSelector>
-                     {sizess.map((size) =>
-                      size === Size ? (
-                            <SizeButtonSelected
-                            key={size}
-                            onClick={() => handleSizeClick(size)}
-                            >
-                            {size}
-                            </SizeButtonSelected>
-                        ) : (
-                            <SizeButton
-                            key={size}
-                            onClick={() => handleSizeClick(size)}
-                            >
-                            {size}
-                            </SizeButton>
-                        )
-                        )}
-                    </SizeSelector>
-
+          <SlideUpContainer >
+            <SyrupCotainer>
+              <SyrupSelect Syrupmenu={Syrupmenu} syrupName={syrupName} onSyrupChange={handleSyrupNameChange}/>
+            </SyrupCotainer>
                     {/* 시럽량 조절 */}
-                    <SyrupControlContainer>
-  <SyrupTitle>
-    <SyrupLabel>시럽량 조절</SyrupLabel>
-    <SyrupsubLabel>최대 5펌프까지 빼거나 추가할 수 있어요</SyrupsubLabel>
-  </SyrupTitle>
+            <SyrupControlContainer>
+              <SyrupTitle>
+                <SyrupLabel>시럽량 조절</SyrupLabel>
+                <SyrupsubLabel>최대 5펌프까지 빼거나 추가할 수 있어요</SyrupsubLabel>
+              </SyrupTitle> 
 
-  <Dial/>
-</SyrupControlContainer>
+              <Pump Syrup={syrupCount} handleSyrupCountChange={handleSyrupCountChange}/>
+            </SyrupControlContainer>
 
-                    <HowBox>
-                <HowTitle>
-                    몇 잔 마셨나요?
-                </HowTitle>
-                <DrinkControl>
-                    <ControlButton onClick={handleDecrease}>-</ControlButton>
-                    <DrinkCount>{drinkCount}</DrinkCount>
-                    <ControlButton onClick={handleIncrease}>+</ControlButton>
-                </DrinkControl>
-              </HowBox>
-                    <Recoding sugar={sugar} onClick ={onClick} />
-                </SlideUpContainer>
-                </SlideUpContainers>
+            <Recoding  onClick={handleClick}/>
+          </SlideUpContainer>
+        </SlideUpContainers>
     );
 };
 

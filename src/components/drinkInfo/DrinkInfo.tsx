@@ -1,76 +1,161 @@
 import React, { useState } from 'react';
+import { DrinkInfoProps } from '../../types/drink';
 import { useNavigate } from 'react-router-dom';
-import heart from '../../assets/heart.png';
-import heartFilled from '../../assets/heart-filled.png';
-import LargeFavoriteDrinkModal from '../../pages/main/modal/LargeFavoriteDrinkModal';
 import useLargeFavoriteDrinkModalStore from '../../store/modal/LargeFavoriteModalStore';
+import useEditDrinkModalStore from '../../store/modal/EditDrinkModal';
+import useDeleteDrinkModalStore from '../../store/modal/DeleteDrinkModal';
 
-interface DrinkInfoProps {
-  cafeName: string;
-  drinkName: string;
-  sugar: number;
-  kcal: number;
-  size: string;
-  marginRight?: string;
-}
+// RecordingDrink
 
 const DrinkInfo = (props: DrinkInfoProps) => {
-  const { isOpen, openModal } = useLargeFavoriteDrinkModalStore();
-  // const [isFavoriteModalOpen, setIsFavoriteModalOpen] = useState(false);
+  const navigate = useNavigate();
+
   const [selected, setSelected] = useState<boolean>(false);
-  const handleFavoriteClick = () => {
-    setSelected((prev) => !prev);
-    openModal()
-    // setIsFavoriteModalOpen(true);
+
+  // 즐겨찾기 추가 모달창 띄우기
+  const { openFavoriteModal } = useLargeFavoriteDrinkModalStore();
+  const handleFavoriteButtonClick = () => {
+    console.log('Clicked');
+    setSelected(!selected);
+    if (!selected) {
+      const modalData = {
+        cafeName:
+          props.cafeNameMiddle ||
+          props.cafeNameTop ||
+          props.cafeNameBottom ||
+          '',
+        drinkName: props.drinkName || '',
+        imgUrl: props.imgUrl,
+        sugar: props.sugar,
+        syrupType: props.syrupType,
+        syrup: props.syrup,
+        size: props.size,
+      };
+
+      openFavoriteModal(modalData);
+    }
   };
-  // const handleModalClose = () => {
-  //   setIsFavoriteModalOpen(false);
-  // };
+
+  // 음료 수정 모달창 띄우기
+  const { openEditModal } = useEditDrinkModalStore();
+  const handleEditButtonClick = () => {
+    const modalData = {
+      cafeName:
+        props.cafeNameMiddle || props.cafeNameTop || props.cafeNameBottom || '',
+      drinkName: props.drinkName || '',
+      content: '을/를 수정하시겠어요?',
+      button1: '아니오',
+      button2: '수정할래요',
+    };
+
+    openEditModal(modalData);
+  };
+
+  // 음료 삭제 모달창 띄우기
+  const { openDeleteModal } = useDeleteDrinkModalStore();
+  const handleDeleteButtonClick = () => {
+    const modalData = {
+      cafeName:
+        props.cafeNameMiddle || props.cafeNameTop || props.cafeNameBottom || '',
+      drinkName: props.drinkName || '',
+      content: '을/를 수정하시겠어요?',
+      button1: '아니오',
+      button2: '수정할래요',
+    };
+  };
+
+  // 음료 삭제 모달창 띄우기
 
   return (
-    <>
-      <div className="w-full flex justify-between">
-        <div className="w-[74px] h-[74px] bg-[#F4F4F4] rounded-full"></div>
-        <div
-          className={`flex flex-col  ${props.marginRight ? `mr-${props.marginRight}` : ''}`}
-        >
-          {/* mr-{} 적용 안될 때 있는데 코드 지웠다가 다시 작성하면 적용됨 */}
-          <div className="text-xs mt-[2px]">{props.cafeName}</div>
-          <div className="flex justify-between">
-            <div className="text-[16px] font-medium mt-[4px]">
+    <div className="w-full px-[24px] py-[14px] flex border-b border-1-[#F4F4F4]">
+      {/* 왼쪽 */}
+      <img
+        src={props.imgUrl}
+        alt="음료 사진"
+        className="w-[74px] h-[74px] flex-shrink-0 bg-[#F4F4F4] rounded-full mr-[25px]"
+      />
+
+      {/* 오른쪽 */}
+      <div className="flex flex-col w-full justify-center overflow-hidden">
+        {/* 상단 */}
+        <div className="flex justify-between">
+          {props.dateAndTime && (
+            <div className="text-[12px] ">{props.dateAndTime}</div>
+          )}
+          {props.cafeNameTop && (
+            <div className="text-[12px]">{props.cafeNameTop}</div>
+          )}
+
+          {props.isEditDeleteBtnExist && (
+            <div className="space-x-[10px]">
+              <button
+                type="button"
+                className="w-[14px] h-[14px]"
+                onClick={props.onClick}
+              >
+                <img src="/EditDrink.png" alt="음료수정" />
+              </button>
+              <button
+                type="button"
+                className="w-[14px] h-[14px]"
+                onClick={props.onClick1}
+              >
+                <img src="/X.png" alt="음료삭제" />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* 중단 */}
+        <div className="flex justify-between mt-[2px] items-center">
+          <div className="flex items-center overflow-hidden">
+            {props.cafeNameMiddle && (
+              <span className="text-[14px] font-[500] mr-[7px]">
+                {props.cafeNameMiddle}
+              </span>
+            )}
+            <div className="text-[16px] font-[500] truncate">
               {props.drinkName}
             </div>
+          </div>
+
+          {props.isFavoriteBtnExist && (
             <button
               type="button"
-              onClick={handleFavoriteClick}
-              className="flex border w-[24px] h-[24px] bg-[#F4F4F4] rounded-full justify-center items-center"
+              className="flex w-[24px] h-[24px] justify-center items-center"
+              onClick={handleFavoriteButtonClick}
             >
               <img
-                src={selected ? heartFilled : heart}
+                src={selected ? '/star-filled.png' : '/star.png'}
                 alt="저장"
-                className="w-[14px] h-[13px]"
+                className="w-[14px] h-[13.3px]"
               />
             </button>
-          </div>
-          <div className="flex text-xs ml-[10px] space-x-10 mt-[10px]">
-            <div>당 {props.sugar}g</div>
-            <div>{props.kcal}kcal</div>
-            <div>{props.size}(size)</div>
-          </div>
+          )}
         </div>
-      </div>
 
-      {/* 즐겨찾기 추가 모달창 */}
-      {isOpen && (
-        <LargeFavoriteDrinkModal
-          cafeName={props.cafeName}
-          drinkName={props.drinkName}
-          sugar={props.sugar}
-          kcal={props.kcal}
-          size={props.size}
-        />
-      )}
-    </>
+        {/* 하단 */}
+        {/* pr-[10px] border-r border-[#909090] */}
+        <div className="flex text-[12px] space-x-[20px] mt-[5px] items-start whitespace-nowrap">
+          {props.cafeNameBottom && (
+            <span className="flex items-start">{props.cafeNameBottom}</span>
+          )}
+          {Number.isFinite(props.sugar) && (
+            <span className="flex items-start ">당 {props.sugar}g</span>
+          )}
+          {props.syrupType === null ? (
+            <span className="flex items-start ">시럽없음</span>
+          ) : (
+            <span className="flex items-start ">
+              {props.syrupType}&nbsp;{props.syrup}
+            </span>
+          )}
+          {props.size && <span className="flex items-start">{props.size}</span>}
+        </div>
+
+        <div className=""></div>
+      </div>
+    </div>
   );
 };
 

@@ -6,9 +6,11 @@ import axios, {
 
 // Axios 인스턴스 생성
 const ApiManager: AxiosInstance = axios.create({
-  baseURL: 'https://d543cd32-ca4d-4060-ac01-7c610ac6bc7b.mock.pstmn.io', // 기본 API URL
+  baseURL: 'https://13.125.187.188.nip.io', // 기본 API URL
   headers: {
     'Content-Type': 'application/json',
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwidXNlclR5cGUiOiJiYXNpYyIsInRva2VuVHlwZSI6ImFjY2VzcyIsImVtYWlsIjoidXNlcjFAbmF2ZXIuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTczODc2NjQ0NywiZXhwIjoxNzQ2NTQyNDQ3fQ.JNl_QKW8baS_CsmNakFUhrvn7RT3plLyUHW0G6txY30`,
+    // username6의 access token
   },
   timeout: 5000, // 요청 타임아웃
 });
@@ -38,7 +40,7 @@ ApiManager.interceptors.response.use(
   },
   (error) => {
     console.log('응답 인터셉터 실행 실패');
-    Promise.reject(error);
+    return Promise.reject(error);
   },
 );
 

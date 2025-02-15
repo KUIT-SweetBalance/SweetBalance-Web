@@ -60,12 +60,18 @@ font-size: 16px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
-letter-spacing: -0.4px;`;
+letter-spacing: -0.4px;
+white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px; 
+`;
 const Bottom = styled.div`
     display: flex;
 align-items: center;
 gap: 11px;
 align-self: stretch;
+
 
 `
 const Name = styled.div`

@@ -5,6 +5,7 @@ import left from '../../assets/chevron-left.png';
 interface HeaderProps {
   headerTitle: string;
   confirmButton?: string;
+  handler?:()=>void;
 }
 
 const Header = (props: HeaderProps) => {
@@ -13,6 +14,8 @@ const Header = (props: HeaderProps) => {
     navigate(-1);
     // 브라우저의 History API 사용(브라우저 히스토리를 프로그래밍적으로 다룰 수 있는 Javascript API)
   };
+
+ 
 
   return (
     <div className="flex w-full px-[10px] py-[20px] justify-center justify-between">
@@ -30,7 +33,8 @@ const Header = (props: HeaderProps) => {
       <button
         type="button"
         className="w-[25px] text-[14px] font-medium text-primary"
-      >
+        onClick={props.handler ? props.handler : undefined} // ✅ handler가 없으면 undefined 전달
+        >
         {props.confirmButton}
       </button>
     </div>

@@ -44,7 +44,7 @@ line-height: normal;
 letter-spacing: -0.3px;
 `;
 const MypageContentTopRight = styled.img``;
-const MypageContentTop: React.FC = () => {
+const MypageContentTop: React.FC<{totalSugar:number}> = ({totalSugar}) => {
     return (
         <MypageContentTopBox>
             <MypageContentTopLeft>
@@ -52,7 +52,7 @@ const MypageContentTop: React.FC = () => {
                     <MypageContentTopLeftTopText>나의 신호등 상태는?</MypageContentTopLeftTopText>
                     <MypageContentTopLeftTopBoldText>건강해요!</MypageContentTopLeftTopBoldText>
                 </MypageContentTopLeftTop>
-                <MypageContentTopLeftBottom>현재 섭취량 0g</MypageContentTopLeftBottom>
+                <MypageContentTopLeftBottom>{`현재 섭취량 ${totalSugar}g`}</MypageContentTopLeftBottom>
             </MypageContentTopLeft>
             <MypageContentTopRight src='/Character.svg' alt='character'/>
         </MypageContentTopBox>

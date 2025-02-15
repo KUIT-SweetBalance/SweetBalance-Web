@@ -23,11 +23,13 @@ const Splash: React.FC = () => {
 
   return (
     <div
-      className={`h-screen flex items-center justify-center bg-primary text-white transition-opacity duration-700 ${
+      className={`h-screen flex flex-col items-center justify-center bg-primary text-white transition-opacity duration-700 ${
         fadeOut ? 'opacity-0' : 'opacity-100'
       }`} // fadeOut 상태에 따라 opacity 조절
     >
-      <img src={logo} alt="Sweet Balance" />
+      <div className={`font-stylescript text-[65px] text-white font-medium`}>
+        Sweet Balance
+      </div>
     </div>
   );
 };

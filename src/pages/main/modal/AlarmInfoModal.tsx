@@ -38,16 +38,16 @@ const AlarmInfoModal = () => {
           />
         </div>
 
-        <div className="flex text-center mx-[10px] justify-between text-[16px] px-[15px] whitespace-nowrap">
-          <span className="">당 {sugar}g</span>
+        <div className="flex text-center mx-[10px] justify-between text-[16px] px-[15px] ">
+          <span className="flex-1">당 {sugar}g</span>
           {syrupType === null || syrupType === '' ? (
-            <span className="w-[80px] truncate">시럽없음</span>
+            <span className="flex-1 w-[80px] truncate">시럽없음</span>
           ) : (
-            <span className="w-[80px] truncate">
+            <span className="flex-1 w-[80px]">
               {syrupType}&nbsp;{syrup}
             </span>
           )}
-          <span className="">{size}</span>
+          <span className="flex-1">{size}</span>
         </div>
 
         <button

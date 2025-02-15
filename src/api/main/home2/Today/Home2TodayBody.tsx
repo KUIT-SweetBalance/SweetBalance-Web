@@ -2,13 +2,14 @@ import ApiManager from '../../../ApiManager';
 
 export interface DrinkListToday {
   beverageLogId: number;
+  beverageId: number;
   beverageSizeId: number;
   createdAt: string;
   brand: string;
   beverageName: string;
   imgUrl: string;
   sugar: number;
-  syrupName?: string;
+  syrupName: string | null;
   syrupCount: number;
   sizeType: string;
 }

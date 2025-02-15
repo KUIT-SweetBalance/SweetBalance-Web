@@ -17,6 +17,7 @@ export interface DrinkCardProps extends BaseDrinkInfoProps {
 }
 
 interface DrinkData {
+  beverageId: number;
   beverageLogId: number;
   beverageSizeId: number;
   createdAt: string;
@@ -24,20 +25,20 @@ interface DrinkData {
   beverageName: string;
   imgUrl: string;
   sugar: number;
-  syrupName: string;
+  syrupName: string | null;
   syrupCount: number;
   sizeType: string;
 }
 
 export interface DrinkInfoProps extends BaseDrinkInfoProps {
-    drinkData?: DrinkData;
-    imgUrl?: string;
-    dateAndTime?: string;
-    cafeNameTop?: string;
-    cafeNameMiddle?: string;
-    cafeNameBottom?: string;
-    isEditDeleteBtnExist?: boolean;
-    isFavoriteBtnExist?: boolean;
-    onClick?: () => void;
-    onClick1?: () => void;
+  drinkData: DrinkData;
+  imgUrl?: string;
+  dateAndTime?: string;
+  cafeNameTop?: string;
+  cafeNameMiddle?: string;
+  cafeNameBottom?: string;
+  isEditDeleteBtnExist?: boolean;
+  isFavoriteBtnExist?: boolean;
+  onClick?: () => void;
+  onClick1?: () => void;
 }

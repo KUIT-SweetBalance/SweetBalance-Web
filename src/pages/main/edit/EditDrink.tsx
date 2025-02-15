@@ -118,13 +118,14 @@ const EditDrink = () => {
           <div>
             <DrinkInfo
               key={index}
+              drinkData={drink}
               imgUrl={drink.imgUrl}
               dateAndTime={drink.createdAt}
               isEditDeleteBtnExist={true}
               cafeNameMiddle={drink.brand}
               drinkName={drink.beverageName}
               sugar={drink.sugar}
-              syrupType={drink.syrupName}
+              syrupType={drink.syrupName ?? ''}
               syrup={drink.syrupCount}
               size={drink.sizeType}
               onClick={() => openModal(drink.beverageLogId)}

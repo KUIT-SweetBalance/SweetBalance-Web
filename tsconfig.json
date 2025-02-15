@@ -8,6 +8,8 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "types": ["node"],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "noEmitOnError": false,
+    "skipLibCheck": true
   }
 }

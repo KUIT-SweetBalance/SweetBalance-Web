@@ -40,7 +40,7 @@ export const fetchDrinkList = async ({
 }): Promise<DrinkListResponse> => {
   const params = {
     page: page,
-    size: 50,
+    size: 20,
     brand: brandName,
     category: category,
     keyword: keyword,

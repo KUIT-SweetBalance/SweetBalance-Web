@@ -39,12 +39,12 @@ const Home2WeeklyHeader = () => {
 
   // 주 이동 < > 버튼
   const handleLastWeekClick = () => {
-    const newDate = new Date();
+    const newDate = new Date(selectedSunday);
     newDate.setDate(selectedSunday.getDate() - 7);
     setSelectedSunday(newDate);
   };
   const handleNextWeekClick = () => {
-    const newDate = new Date();
+    const newDate = new Date(selectedSunday);
     newDate.setDate(selectedSunday.getDate() + 7);
     setSelectedSunday(newDate);
   };

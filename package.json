@@ -13,10 +13,11 @@
   },
   "homepage": "https://kuit-sweetbalance.github.io/SweetBalance-Web/",
   "dependencies": {
-    "@tanstack/react-query": "^5.64.2",
+    "@tanstack/react-query": "^5.66.0",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "chartjs-plugin-annotation": "^3.1.0",
+    "framer-motion": "^12.0.11",
     "gh-pages": "^6.3.0",
     "normalize.css": "^8.0.1",
     "react": "^18.3.1",

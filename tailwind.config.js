@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         sans: ['Pretendard', 'Arial', 'sans-serif'], // Tailwind의 기본 sans를 덮어쓰기
         agbalumo: ['Agbalumo', 'sans-serif'],
+        stylescript: ['"Style Script"', 'cursive'],
       },
       colors: {
         primary: '#722A2A',

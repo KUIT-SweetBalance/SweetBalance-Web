@@ -17,7 +17,9 @@ const LoginLogo = () => {
       <div
         className={`bg-primary flex justify-center items-center flex-col w-[100%] gap-[20px] pt-[50px] pb-[90px]`}
       >
-        <img src={logo} alt="logo" className={`w-[239.69px] h-[28.112px]`} />
+        <div className={`font-stylescript text-[65px] text-white font-medium`}>
+          Sweet Balance
+        </div>{' '}
         <p className={`text-white text-sm font-light`}>
           스마트한 당 관리, 지금 바로 시작하세요!
         </p>
@@ -26,7 +28,11 @@ const LoginLogo = () => {
       <div
         className={`flex flex-col justify-center items-center  bg-white w-full rounded-tr-[20px] rounded-tl-[20px] -mt-[30px] pt-[40px] pb-[40px]`}
       >
-        <img src={login_text} alt="login_text" />
+        <div
+          className={`font-stylescript text-[45px] text-primary font-medium`}
+        >
+          Log In
+        </div>
       </div>
     </div>
   );
@@ -73,7 +79,7 @@ const LoginForm = () => {
       </form>
 
       <div
-        className={`w-[calc(100%-48px)] flex justify-between text-gray_text text-[12px] mt-[10px]`}
+        className={`w-[calc(100%-48px)] flex  gap-[116px] text-gray_text text-[12px] mt-[10px]`}
       >
         <p>비밀번호를 잊으셨나요?</p>
         <button
@@ -81,7 +87,7 @@ const LoginForm = () => {
           style={{ textUnderlineOffset: '3px' }}
           onClick={() => navigate('/forgot-password')}
         >
-          임시 비밀번호 발급받기
+          비밀번호 재발급
         </button>
       </div>
 

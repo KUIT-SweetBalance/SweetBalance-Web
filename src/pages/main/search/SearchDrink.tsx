@@ -9,11 +9,10 @@ import useLargeFavoriteDrinkModalStore from '../../../store/modal/LargeFavoriteM
 import LargeFavoriteDrinkModal from '../modal/LargeFavoriteDrinkModal';
 import { brands } from '../../../types/brands';
 import {
-  DrinkListResponse,
   fetchDrinkList,
   InfiniteDrinkListResponse,
 } from '../../../api/main/search/DrinkList';
-import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import useInfiniteScroll from '../../../hooks/useInfiniteScroll';
 
 const SearchDrink = () => {
@@ -212,6 +211,7 @@ const SearchDrink = () => {
           .map((drinkItem) => (
             <DrinkInfo
               key={drinkItem.beverageId}
+              drinkData={drinkItem}
               drinkName={drinkItem.name}
               imgUrl={drinkItem.imgUrl}
               isFavoriteBtnExist={true}

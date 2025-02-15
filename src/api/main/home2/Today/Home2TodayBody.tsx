@@ -9,7 +9,7 @@ export interface DrinkListToday {
   beverageName: string;
   imgUrl: string;
   sugar: number;
-  syrupName?: string;
+  syrupName: string | null;
   syrupCount: number;
   sizeType: string;
 }

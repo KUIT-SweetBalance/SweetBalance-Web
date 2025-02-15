@@ -7,13 +7,17 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
+  "homepage": "https://kuit-sweetbalance.github.io/SweetBalance-Web/",
   "dependencies": {
     "@tanstack/react-query": "^5.64.2",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "chartjs-plugin-annotation": "^3.1.0",
+    "gh-pages": "^6.3.0",
     "normalize.css": "^8.0.1",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.3.0",

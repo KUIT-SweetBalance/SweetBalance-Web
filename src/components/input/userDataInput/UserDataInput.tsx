@@ -47,8 +47,8 @@ const UserDataInput = ({
           className={`
           w-full
           box-border
-          h-[6.52vh]
-          p-3
+          py-[15px]
+          pl-[15px]
           border 
           rounded-full 
           text-[12px]

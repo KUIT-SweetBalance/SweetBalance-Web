@@ -79,7 +79,7 @@ const LoginForm = () => {
       </form>
 
       <div
-        className={`w-[calc(100%-48px)] flex  gap-[116px] text-gray_text text-[12px] mt-[10px]`}
+        className={`w-[calc(100%-48px)] px-[10px] pt-[5px] flex justify-between text-gray_text text-[12px] mt-[10px]`}
       >
         <p>비밀번호를 잊으셨나요?</p>
         <button
@@ -87,7 +87,7 @@ const LoginForm = () => {
           style={{ textUnderlineOffset: '3px' }}
           onClick={() => navigate('/forgot-password')}
         >
-          비밀번호 재발급
+          비밀번호 재설정
         </button>
       </div>
 

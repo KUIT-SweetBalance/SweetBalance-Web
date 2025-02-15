@@ -14,11 +14,6 @@ const Home2WeeklyHeader = () => {
     navigate('/alarm');
   };
 
-  // dummy data
-  const sugarData = [30, 10, 25, 32, 30, 0, 35]; // 일요일~토요일 섭취량 데이터
-  const startDate = '10월 16일';
-  const endDate = '10월 23일';
-
   // 오늘을 기준으로 가장 최근의 일요일 찾기
   const getLastSunday = () => {
     const today = new Date();
@@ -35,7 +30,35 @@ const Home2WeeklyHeader = () => {
     // padStart(): 문자열의 길이가 지정된 길이(2)보타 짧으면 앞에 특정 문자('0')를 추가
     return `${year}-${month}-${day}`;
   };
-  const lastSunday = getLastSunday(); //
+  const lastSunday = getLastSunday();
+
+  // 주 이동 < > 버튼
+  const [selectedSunday, setSelectedSunday] = useState<Date | undefined>(
+    undefined,
+  );
+  useEffect(() => {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 일: 0, 월: 1, 화: 2, ...
+    const daysToLastSunday = dayOfWeek; // 마지막 일요일 이후 며칠이 지났는지
+
+    const lastSunday = new Date(today);
+    lastSunday.setDate(today.getDate() - daysToLastSunday); // getDate(): 2월8일이라면 8을 반환함
+    setSelectedSunday(lastSunday);
+  }, []);
+  const handleLastWeekClick = () => {
+    if (selectedSunday) {
+      const newDate = new Date(selectedSunday);
+      newDate.setDate(selectedSunday.getDate() - 7);
+      setSelectedSunday(newDate);
+    }
+  };
+  const handleNextWeekClick = () => {
+    if (selectedSunday) {
+      const newDate = new Date(selectedSunday);
+      newDate.setDate(selectedSunday.getDate() + 7);
+      setSelectedSunday(newDate);
+    }
+  };
 
   // query instance
   const {
@@ -45,7 +68,7 @@ const Home2WeeklyHeader = () => {
     error,
     refetch,
   } = useQuery<WeeklyNutritionIntakeResponse, Error>({
-    queryKey: ['WeeklyNutritionIntakeResponse', lastSunday],
+    queryKey: ['WeeklyNutritionIntakeResponse', lastSunday, selectedSunday],
     queryFn: () => fetchWeeklyNutritionIntake(lastSunday),
   });
 
@@ -86,14 +109,22 @@ const Home2WeeklyHeader = () => {
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-3">
             <button type="button" className="w-[8px] h-[13px]">
-              <img src="/chevron-left.png" alt="지난주" />
+              <img
+                src="/chevron-left.png"
+                alt="지난주"
+                onClick={handleLastWeekClick}
+              />
             </button>
             <span className="text-[13px] text-white text-opacity-50 pt-[2px]">
               {fetchedDateData[0]}&nbsp;-&nbsp;
               {fetchedDateData[fetchedDateData.length - 1]}
             </span>
             <button type="button" className="w-[8px] h-[13px]">
-              <img src="/chevron-right.png" alt="다음주" />
+              <img
+                src="/chevron-right.png"
+                alt="다음주"
+                onClick={handleNextWeekClick}
+              />
             </button>
           </div>
 

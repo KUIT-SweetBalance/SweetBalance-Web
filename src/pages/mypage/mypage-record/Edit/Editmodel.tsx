@@ -83,7 +83,7 @@ const EditModal: React.FC<{ onClick: () => void;drink: RecoringDrink }> = ({ onC
             <Brand>{drink.brand}</Brand>
             <DrinkContent>
               <Drink>{drink.beverageName}</Drink>
-              <Content>를 수정하시겠어요?</Content>
+              <Content>을/를 수정하시겠어요?</Content>
             </DrinkContent>
           <ButtonBox>
             <Button content='아니오' bgColor='bg-white' size='md'onClick={onClick}/>

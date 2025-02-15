@@ -16,7 +16,21 @@ export interface DrinkCardProps extends BaseDrinkInfoProps {
   isAdded?: boolean; // 즐겨찾기 추가 여부
 }
 
+interface DrinkData {
+  beverageLogId: number;
+  beverageSizeId: number;
+  createdAt: string;
+  brand: string;
+  beverageName: string;
+  imgUrl: string;
+  sugar: number;
+  syrupName: string;
+  syrupCount: number;
+  sizeType: string;
+}
+
 export interface DrinkInfoProps extends BaseDrinkInfoProps {
+    drinkData?: DrinkData;
     imgUrl?: string;
     dateAndTime?: string;
     cafeNameTop?: string;
@@ -24,4 +38,6 @@ export interface DrinkInfoProps extends BaseDrinkInfoProps {
     cafeNameBottom?: string;
     isEditDeleteBtnExist?: boolean;
     isFavoriteBtnExist?: boolean;
+    onClick?: () => void;
+    onClick1?: () => void;
 }

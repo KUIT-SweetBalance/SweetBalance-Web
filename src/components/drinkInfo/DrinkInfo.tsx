@@ -3,6 +3,9 @@ import { DrinkInfoProps } from '../../types/drink';
 import { useNavigate } from 'react-router-dom';
 import useLargeFavoriteDrinkModalStore from '../../store/modal/LargeFavoriteModalStore';
 import useEditDrinkModalStore from '../../store/modal/EditDrinkModal';
+import useDeleteDrinkModalStore from '../../store/modal/DeleteDrinkModal';
+
+// RecordingDrink
 
 const DrinkInfo = (props: DrinkInfoProps) => {
   const navigate = useNavigate();
@@ -49,6 +52,19 @@ const DrinkInfo = (props: DrinkInfoProps) => {
   };
 
   // 음료 삭제 모달창 띄우기
+  const { openDeleteModal } = useDeleteDrinkModalStore();
+  const handleDeleteButtonClick = () => {
+    const modalData = {
+      cafeName:
+        props.cafeNameMiddle || props.cafeNameTop || props.cafeNameBottom || '',
+      drinkName: props.drinkName || '',
+      content: '을/를 수정하시겠어요?',
+      button1: '아니오',
+      button2: '수정할래요',
+    };
+  };
+
+  // 음료 삭제 모달창 띄우기
 
   return (
     <div className="w-full px-[24px] py-[14px] flex border-b border-1-[#F4F4F4]">
@@ -75,11 +91,15 @@ const DrinkInfo = (props: DrinkInfoProps) => {
               <button
                 type="button"
                 className="w-[14px] h-[14px]"
-                onClick={handleEditButtonClick}
+                onClick={props.onClick}
               >
                 <img src="/EditDrink.png" alt="음료수정" />
               </button>
-              <button type="button" className="w-[14px] h-[14px]">
+              <button
+                type="button"
+                className="w-[14px] h-[14px]"
+                onClick={props.onClick1}
+              >
                 <img src="/X.png" alt="음료삭제" />
               </button>
             </div>
@@ -124,9 +144,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
             <span className="flex items-start ">당 {props.sugar}g</span>
           )}
           {props.syrupType === null ? (
-            <span className="flex items-start ">
-              시럽없음
-            </span>
+            <span className="flex items-start ">시럽없음</span>
           ) : (
             <span className="flex items-start ">
               {props.syrupType}&nbsp;{props.syrup}

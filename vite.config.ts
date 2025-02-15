@@ -8,6 +8,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      external: ['fs', 'path', 'url'], // Node.js 전용 모듈 제외
+    },
+  },
   css: {
     postcss: {
       plugins: [tailwindcss()], // TailwindCSS 설정 추가

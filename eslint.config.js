@@ -30,7 +30,10 @@ export default [
       'plugin:prettier/recommended', // Prettier와 ESLint의 충돌 방지
     ],
     plugins: { prettier: pluginPrettier },
-    rules: { 'prettier/prettier': ['error', { endOfLine: 'auto' }] },
+    rules: {
+      'prettier/prettier': ['error', { endOfLine: 'auto' }],
+      'no-unused-vars': 'off',
+    },
   },
 
   // Prettier와 ESLint 충돌 방지

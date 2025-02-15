@@ -2,6 +2,7 @@ import ApiManager from '../../../ApiManager';
 
 export interface DrinkListToday {
   beverageLogId: number;
+  beverageId: number;
   beverageSizeId: number;
   createdAt: string;
   brand: string;

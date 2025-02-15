@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 // Progress Bar 컨테이너
@@ -12,36 +12,25 @@ const ProgressBarContainer = styled.div`
 `;
 
 // Progress Bar의 채우기 부분
-const ProgressBarFill = styled.div`
+const ProgressBarFill = styled.div<{ width: number }>`
   height: 100%;
+  width: ${(props) => props.width}%;
   background: linear-gradient(to right, #F0807F, #ffa07a);
   transition: width 0.3s ease-in-out;
   border-radius: 10px;
 `;
 
+const MypageContentMiddle: React.FC<{ totalSugar: number;gendersugar:number }> = ({ totalSugar,gendersugar }) => {
+  const sugarPercentage = Math.min(totalSugar * (100/gendersugar), 100); // ✅ 최대 100% 제한
 
-const MypageContentMiddle: React.FC = () => {
-  const [value, setValue] = useState(50); // 초기값 50%
-
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setValue(Number(e.target.value));
-//     // 스타일을 직접 DOM에 반영
-//    
-//   };
-const bar = document.getElementById("progress-bar");
-    if (bar) {
-      bar.style.width = `${value}%`;
-    }
   return (
     <div>
       <ProgressBarContainer>
-        {/* 채우기 부분에 클래스 대신 DOM 스타일 조작 */}
-        <ProgressBarFill id="progress-bar" />
+        {/* ✅ width를 props로 전달하여 Styled Components에서 반영 */}
+        <ProgressBarFill width={sugarPercentage} />
       </ProgressBarContainer>
-    
     </div>
   );
 };
-
 
 export default MypageContentMiddle;

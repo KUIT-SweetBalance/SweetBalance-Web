@@ -5,7 +5,9 @@ import Button from '../../../components/button/Button';
 import styled from 'styled-components';
 import { MypageLogout,MypageRealLogout } from './mypage-logout-message/MypageLogout'; 
 import Button2 from '../../../components/button/Button2';
-
+const HeaderPadding = styled.div`
+  padding: 0 14px 0 21px;
+`;
 const ButtonBox = styled.div`
 /* padding: 24px; */
 display:flex;
@@ -80,8 +82,10 @@ const MypageSettingManage: React.FC = () => {
 
     }
     return (
-        <>
+        <><HeaderPadding>
             <Header headerTitle='설정 관리'/>
+        </HeaderPadding>
+            
             <MypageSettingManagement onClick={handleNumber}/>
             <ButtonBox>
             <Button2 content='로그아웃' bgColor='bg-white' size='xl' onClick={handleLogoutClick}/>

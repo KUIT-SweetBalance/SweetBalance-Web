@@ -7,6 +7,7 @@ display: inline-flex;
 padding: 0px 24px 20px 24px;
 align-items: center;
 gap: 5px;
+width:100%;
 `;
 const MypageFeedContentLeft = styled.div`
 display: flex;
@@ -18,6 +19,7 @@ gap: 14px;
 border-radius: 20px;
 border: 1px solid var(--gray-light, rgba(144, 144, 144, 0.20));
 background: #FFF;
+width: 50%;
 `;
 const MypageFeedContentRight = styled.div`
 display: flex;
@@ -29,10 +31,11 @@ gap: 10px;
 border-radius: 20px;
 border: 1px solid var(--gray-light, rgba(144, 144, 144, 0.20));
 background: #FFF;
+width:50%;
 `;
 const MypageFeedContentLeftTop = styled.div`
 display: flex;
-padding: 10px 30px 10px 10px;
+padding: 10px 0 10px 10px;
 flex-direction: column;
 justify-content: center;
 align-items: left;

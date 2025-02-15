@@ -4,10 +4,10 @@ import MypageFeedContent from './mypage-feed/MypageFeedContent';
 
 
 const MypageFeedBox = styled.div`
-    width: 393px;`;
+    width: 100%;`;
 const MypageFeedTitle = styled.div`
 display: inline-flex;
-padding: 10px 263px 10px 34px;
+padding: 10px 0 10px 34px;
 justify-content: center;
 align-items: center;
 gap: 10px;

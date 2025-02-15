@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
+import { UserData } from '../../../../api/mypage/main/MypageMain';
 
 const MypageTitleBox = styled.div`
 width: 393px;
@@ -16,8 +16,22 @@ const MyPageTitleLeft = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0;
+    width: 65%;
 `;
 const MypageTitleBoldText = styled.div`
+color: var(--text, #121212);
+font-family: Pretendard;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 20px; /* 111.111% */
+letter-spacing: -0.45px;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+width:100%;
+`;
+const MypageTitleBoldTexts = styled.div`
 color: var(--text, #121212);
 font-family: Pretendard;
 font-size: 18px;
@@ -29,6 +43,12 @@ letter-spacing: -0.45px;
 const MypageTitleLeftRight = styled.div`
     display: flex;
     gap: 3px;
+    width:100%;
+`;
+const MypageTitleLeftRightH = styled.div`
+    display: flex;
+    gap: 3px;
+    width:100%;
 `;
 const MypageTitleNormalText = styled.div`
 color: #121212;
@@ -61,7 +81,7 @@ display:flex;
 gap:10px;
 `;
 const Mypagesetting = styled.img``;
-const MypageTitle: React.FC = () => {
+const MypageTitle: React.FC<{userinfo:UserData;additionalSugar:number}> = ({userinfo,additionalSugar}) => {
 
     const navigate = useNavigate();
 
@@ -75,12 +95,12 @@ const MypageTitle: React.FC = () => {
     return (
         <MypageTitleBox>
             <MyPageTitleLeft>
-                <MypageTitleBoldText>달달해님!</MypageTitleBoldText>
+                <MypageTitleBoldText>{`${userinfo.nickname}님!`}</MypageTitleBoldText>
                 <MypageTitleLeftRight>
                     <MypageTitleNormalText>아직 </MypageTitleNormalText>
                     
-                    <MypageTitleBoldText> 당 00g</MypageTitleBoldText>
-                    <MypageTitleNormalText>을 더 마실 수 있어요</MypageTitleNormalText>
+                    <MypageTitleBoldTexts> {`당 ${additionalSugar}g`}</MypageTitleBoldTexts>
+                    <MypageTitleBoldTexts>을 더 마실 수 있어요</MypageTitleBoldTexts>
                 </MypageTitleLeftRight>
             </MyPageTitleLeft>
             {/* 안에 들어가는거 애매함  */}

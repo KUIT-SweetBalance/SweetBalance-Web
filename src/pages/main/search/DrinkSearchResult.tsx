@@ -134,7 +134,7 @@ const DrinkSearchResult = () => {
   }
 
   return (
-    <div className="flex flex-col items-center mt-[60px] w-full">
+    <div className="flex flex-col items-center mt-[30px] w-full">
       {/* <AppTitle leftButton={true} /> */}
 
       <div className="flex justify-center w-full pb-[10px] px-[23px]">

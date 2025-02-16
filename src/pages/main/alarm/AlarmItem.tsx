@@ -51,7 +51,6 @@ const AlarmItem = (props: AlarmItemProps) => {
     openAlarmInfoModal(modalData);
     mutation.mutate(props.beverageLogId ?? 0);
   };
-  
 
   const timeTextColor = props.isRead ? 'text-gray_text' : 'text-primary';
   const infoTextColor = props.isRead ? 'text-gray_text' : 'text-black';

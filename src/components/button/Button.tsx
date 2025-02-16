@@ -7,6 +7,7 @@ interface ButtonProps {
   size: 'xl' | 'lg' | 'md' | 'sm'; // 버튼 사이즈
   disabled?: boolean;
   onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset' 
 }
 
 const sizeClass = {
@@ -22,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   size,
   disabled,
   onClick,
+  type = 'button' // 기본값
 }) => {
   const combinedClassName = (() => {
     switch (bgColor) {
@@ -43,6 +45,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      type={type} // type이 'submit'면 이 버튼을 form태그 안에서 사용했을 때 form의 'onSubmit'가 실행됨
       className={`
         ${
           disabled

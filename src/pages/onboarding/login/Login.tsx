@@ -5,6 +5,8 @@ import login_text from '../../../assets/onboarding/login_text.svg';
 import UserDataInput from '../../../components/input/userDataInput/UserDataInput';
 import Button from '../../../components/button/Button';
 import { useNavigate, Outlet } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { LoginResponse, registerUser } from '../../../api/onboarding/Login';
 
 interface LoginFormInputs {
   userId: string;
@@ -42,22 +44,51 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const {
-    handleSubmit,
+    handleSubmit, // 폼 내의 모든 register된 필드의 값을 객체 형태(LoginFormInputs)로 반환
     register,
     formState: { isValid, errors },
+    reset,
   } = useForm<LoginFormInputs>({ mode: 'onChange' });
 
   const onSubmit = (data: { userId: string; userPassword: string }) => {
     console.log('로그인 정보:', data);
+    mutation.mutate({ userId: data.userId, userPassword: data.userPassword });
   };
+
+  const queryClient = useQueryClient();
+  // 캐시 관리, 자동 refetch, 요청 재시도, 데이터 동기화 등의 작업 수행 가능
+  // main.tsx에서 new QueryClient()로 생성된 queryClient 인스턴스를
+  // 하위 컴포넌트인 Login.tsx에서 useQueryClient()로 받아와 사용하는 것
+
+  const mutation = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data) => {
+      console.log('registerUser request onSuccess', data);
+      // 응답 데이터에서 access token을 로컬 스토리지에 저장
+      if (data.data?.access) {
+        localStorage.setItem('token', data.data.access); // 'token' 키로 저장
+      }
+      queryClient.invalidateQueries({ queryKey: ['registerUser'] });
+
+      // 네비게이션
+      navigate('/home');
+    },
+    onError: (error) => {
+      console.log('registerUser request failed: ', error);
+
+      reset({
+        userId: '',
+        userPassword: '',
+      });
+    },
+  });
+
   return (
-    <div
+    <form
+      onSubmit={handleSubmit(onSubmit)} // handleSubmit으로 폼 데이터 처리
       className={`flex flex-col items-center pt-[10px] pb-[10px] box-border`}
     >
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={`flex flex-col gap-[13px] w-[calc(100%-48px)]`}
-      >
+      <div className={`flex flex-col gap-[13px] w-[calc(100%-48px)]`}>
         <UserDataInput
           id="userId"
           type="text"
@@ -76,7 +107,7 @@ const LoginForm = () => {
           register={register}
           errors={errors}
         />
-      </form>
+      </div>
 
       <div
         className={`w-[calc(100%-48px)] px-[10px] pt-[5px] flex justify-between text-gray_text text-[12px] mt-[10px]`}
@@ -96,9 +127,9 @@ const LoginForm = () => {
         bgColor="bg-primary"
         size="xl"
         disabled={!isValid}
-        onClick={() => navigate('/home')}
+        type="submit"
       />
-    </div>
+    </form>
   );
 };
 

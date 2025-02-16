@@ -16,6 +16,7 @@ const SizeList = styled.div`
   position: relative;
   z-index: 2;
   background-color:white;
+  margin-top:-1px;
 `;
 
 // Single Size Box

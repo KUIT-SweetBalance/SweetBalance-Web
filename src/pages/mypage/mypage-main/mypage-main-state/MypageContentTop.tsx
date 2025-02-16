@@ -36,7 +36,7 @@ letter-spacing: -0.75px;
 `;
 const MypageContentTopLeftBottom = styled.div`
 color: #121212;
-font-family: Pretendard;
+font-family: 'Pretendard';
 font-size: 12px;
 font-style: normal;
 font-weight: 400;
@@ -44,17 +44,18 @@ line-height: normal;
 letter-spacing: -0.3px;
 `;
 const MypageContentTopRight = styled.img``;
-const MypageContentTop: React.FC<{totalSugar:number}> = ({totalSugar}) => {
+const MypageContentTop: React.FC<{totalSugar:number;Danger:number}> = ({totalSugar,Danger}) => {
+    
     return (
         <MypageContentTopBox>
             <MypageContentTopLeft>
                 <MypageContentTopLeftTop>
                     <MypageContentTopLeftTopText>나의 신호등 상태는?</MypageContentTopLeftTopText>
-                    <MypageContentTopLeftTopBoldText>건강해요!</MypageContentTopLeftTopBoldText>
+                    <MypageContentTopLeftTopBoldText>{Danger===0?`건강해요!`:Danger===1?"주의해요!":"위험해요."}</MypageContentTopLeftTopBoldText>
                 </MypageContentTopLeftTop>
                 <MypageContentTopLeftBottom>{`현재 섭취량 ${totalSugar}g`}</MypageContentTopLeftBottom>
             </MypageContentTopLeft>
-            <MypageContentTopRight src='/Character.svg' alt='character'/>
+            <MypageContentTopRight src={`/character/Character${Danger}.svg`} alt='character'/>
         </MypageContentTopBox>
     );
 };

@@ -9,7 +9,7 @@ import { fetchUserInfo, UserData, UserInfoResponse } from '../../../api/mypage/m
 import { fetchDailyNutritionIntake, DailyNutritionIntake,DailyNutritionIntakeResponse } from '../../../api/main/home2/Today/Home2TodayHeader';
 
 const MypageBox = styled.div`
-    width: 393px;
+    width: 100%;
 `;
 
 const CenterLine = styled.div`
@@ -66,11 +66,17 @@ const Mypages: React.FC = () => {
     // ✅ API 데이터 추출
     const userinfo: UserData = userInfoQuery.data?.data ?? defaultUserData;
     const Sugar: DailyNutritionIntake = SugarQuery.data?.data ?? defaultSugarData;
-    
+    const gendersugar = userinfo.gender==="MALE"?38:25;
+
+    const Danger = Sugar.totalSugar > gendersugar 
+  ? 2 
+  : Sugar.totalSugar >= gendersugar - 5 && Sugar.totalSugar < gendersugar
+    ? 1 
+    : 0;
     return (
         <>
             <MypageBox>
-                <MypageTitle userinfo={userinfo} additionalSugar={Sugar.additionalSugar}/>
+                <MypageTitle userinfo={userinfo} additionalSugar={Sugar.additionalSugar}Danger={Danger}/>
                 <MypageContent Sugar={Sugar} gender={userinfo.gender!="OTHER"?userinfo.gender:"MALE"}/>
             </MypageBox>
             <CenterLine/>

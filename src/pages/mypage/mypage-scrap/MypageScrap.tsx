@@ -18,7 +18,7 @@ const HeaderPadding = styled.div`
   padding: 0 14px 0 21px;
 `;
 const NoDataMessage = styled.div`
-  
+  width:100%;
   display: inline-flex;
 padding: 214px 130px;
 justify-content: center;
@@ -34,6 +34,11 @@ letter-spacing: -0.35px;
 `;
 
 const MypageScrap: React.FC = () => {
+
+  const [isReversed, setIsReversed] = useState(false);
+  const handleSortToggle = () => {
+    setIsReversed((prev) => !prev);
+  };
   //삭제 모달
   const [deleteStates, setDeleteStates] = useState<{ [key: number]: boolean }>({});
   const openDeleteModal = (id: number) => {
@@ -119,7 +124,6 @@ const target = useInfiniteScroll({
 const filteredDrinks = drinkList?.pages
     .flatMap((page) => page.data)
     .filter((drink) => searchTerm ? drink.name.toLowerCase().includes(searchTerm.toLowerCase()) : true) || [];
-
     return (
         <>
         <HeaderPadding>
@@ -133,7 +137,7 @@ const filteredDrinks = drinkList?.pages
             register={register}
             onSearch={handleSearchClick} />
         </Padding>
-        <Arrangement title ='내가 즐겨찾기한 음료'/>
+        <Arrangement title ='내가 즐겨찾기한 음료' handleSortToggle={handleSortToggle}/>
         {filteredDrinks.length === 0 ? (
         <NoDataMessage>아직 기록이 없습니다.</NoDataMessage>
       ) : (

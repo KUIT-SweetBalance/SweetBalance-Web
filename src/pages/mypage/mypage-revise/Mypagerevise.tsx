@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../../../components/header/Header";
-import { fetchUserInfo, UserData } from "../../../api/mypage/main/MypageMain";
+import { fetchUserInfo } from "../../../api/mypage/main/MypageMain";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { ChangeUserInfo, changeInfomation } from "../../../api/mypage/revise/Mypagerevise";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +26,7 @@ const MypageTitle = styled.div`
 `;
 
 const MypageInput = styled.input`
-  width: 345px;
+  width: 100%;
   height: 60px;
   padding: 15px 30px 15px 20px;
   border-radius: 100px;
@@ -44,7 +44,7 @@ const MypageDisabledInput = styled(MypageInput)`
 `;
 
 const MypageSelect = styled.select`
-  width: 345px;
+  width: 100%;
   height: 60px;
   padding: 18px 30px;
   border-radius: 100px;
@@ -54,6 +54,7 @@ const MypageSelect = styled.select`
   font-weight: 500;
   outline: none;
   cursor: pointer;
+  appearance: none;
 `;
 
 const HeaderPadding = styled.div`

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const CustomTTop = styled.div`
-  width: 393px;
+  width: 100%;
   height: 306px;
   background: #722a2a;
   display: flex;
@@ -21,7 +21,7 @@ const DrinkImage= styled.img`
     z-index: 1;
 `
 const White = styled.div`
-width:393px;
+width:100%;
 height:20px;
 background : white;
 border-radius: 20px 20px 0 0;

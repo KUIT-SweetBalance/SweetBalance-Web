@@ -24,7 +24,7 @@ const SlideUpContainers = styled.div`
 const SlideUpContainer = styled.div`
  position: fixed;
   bottom: -40px;
-  width: 393px;
+  width: 100%;
   height: 570px;
   border-radius: 20px;
   background: #FFF;

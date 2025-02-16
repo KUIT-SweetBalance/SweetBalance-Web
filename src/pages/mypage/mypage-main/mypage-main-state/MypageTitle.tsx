@@ -33,25 +33,13 @@ white-space: nowrap;
 text-overflow: ellipsis;
 width:100%;
 `;
-const MypageTitleBoldTexts = styled.div`
-color: var(--text, #121212);
-font-family: Pretendard;
-font-size: 18px;
-font-style: normal;
-font-weight: 600;
-line-height: 20px; /* 111.111% */
-letter-spacing: -0.45px;
-`;
+
 const MypageTitleLeftRight = styled.div`
     display: flex;
     gap: 3px;
     width:100%;
 `;
-const MypageTitleLeftRightH = styled.div`
-    display: flex;
-    gap: 3px;
-    width:100%;
-`;
+
 const MypageTitleNormalText = styled.div`
 color: #121212;
 font-family: Pretendard;

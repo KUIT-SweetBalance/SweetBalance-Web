@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { RecommendedBeverage } from "../../../api/custom/custommain";
 
 const RecommentBox = styled.div`
-  width: 393px;
+  width: 100%;
 `;
 const RecommendTitle = styled.div`
   padding: 30px 0 30px 25px;

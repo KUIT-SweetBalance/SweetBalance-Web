@@ -19,13 +19,13 @@ interface SizeProps {
 }
 
 const Container = styled.div`
-  width: 393px;
+  width: 100%;
   height: 1057px;
   background-color: #fff;
 `;
 
 const GrayBox = styled.div`
-  width: 393px;
+  width: 100%;
   height: 15px;
   background: #f4f4f4;
   margin: 20px 0 0 0;
@@ -33,7 +33,7 @@ const GrayBox = styled.div`
 
 const Askinfo = styled.div`
   padding: 22px 0;
-  width: 393px;
+  width: 100%;
   color: rgba(18, 18, 18, 0.5);
   text-align: center;
   font-size: 12px;

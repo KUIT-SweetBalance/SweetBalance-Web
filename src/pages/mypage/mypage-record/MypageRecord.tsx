@@ -20,7 +20,7 @@ const HeaderPadding = styled.div`
   padding: 0 14px 0 21px;
 `;
 const NoDataMessage = styled.div`
-  
+  width:100%;
   display: inline-flex;
 padding: 214px 130px;
 justify-content: center;
@@ -35,11 +35,10 @@ line-height: normal;
 letter-spacing: -0.35px;
 `;
 const MypageRecord: React.FC = () => {
-  // React Query로 음료 데이터 불러오기
-  // const { data, isLoading, error } = useQuery<RecoringDrinkData>({
-  //   queryKey: ["recordingDrinks"],
-  //   queryFn: fetchRecoringDrinks,
-  // });
+  const [isReversed, setIsReversed] = useState(false);
+    const handleSortToggle = () => {
+      setIsReversed((prev) => !prev);
+    };
   const queryClient = useQueryClient();
 
   // 음료 데이터를 가져오고, 없을 경우 빈 배열로 처리
@@ -151,7 +150,7 @@ const filteredDrinks = drinkList?.pages
           onSearch={handleSearchClick}
         />
       </Padding>
-      <Arrangement title="내가 기록한 음료" />
+      <Arrangement title="내가 기록한 음료"handleSortToggle={handleSortToggle} />
 
       {filteredDrinks.length === 0 ? (
         <NoDataMessage>아직 기록이 없습니다.</NoDataMessage>

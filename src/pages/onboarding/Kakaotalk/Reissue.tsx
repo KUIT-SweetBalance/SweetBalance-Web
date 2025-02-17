@@ -31,7 +31,7 @@ const Reissue: React.FC = () => {
   // ✅ refreshToken을 쿠키에 담아 accessToken을 재발급하는 함수
   const reissueToken = async () => {
     try {
-      const response = await axios.post(
+      const response = await ApiManager.post(
         "/api/auth/reissue",
         {}, // ✅ body는 빈 객체
         {

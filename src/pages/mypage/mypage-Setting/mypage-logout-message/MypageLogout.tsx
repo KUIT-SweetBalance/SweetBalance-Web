@@ -66,7 +66,7 @@ letter-spacing: -0.35px;
 
 `;
 
-export const MypageLogout: React.FC<{ onClick: () => void }> = ({ onClick }) => {
+export const MypageLogout: React.FC<{ onClick: () => void;YesClick:()=>void }> = ({ onClick,YesClick }) => {
 
    
 
@@ -74,7 +74,7 @@ export const MypageLogout: React.FC<{ onClick: () => void }> = ({ onClick }) => 
         <MypageLogoutBox>
             <MypageLogoutTop>로그아웃 하시겠습니까?</MypageLogoutTop>
             <MypageLogoutBottom>
-                <MiniButton onClick={onClick}/>
+                <MiniButton onClick={onClick} YesClick={YesClick}/>
             </MypageLogoutBottom>
         </MypageLogoutBox>
     );
@@ -86,7 +86,7 @@ export const MypageRealLogout: React.FC<{ onClick: () => void }> = ({ onClick })
             <MypageLogoutTop>정말 떠나시겠어요?</MypageLogoutTop>
             <MypageLogoutMiddle>지금까지 커스텀 음료 기록과 <br />맞춤형 추천 서비스를 유지할 수 없게 돼요.</MypageLogoutMiddle>
             <MypageLogoutBottom>
-                <MiniButton onClick={onClick} />
+                <MiniButton onClick={onClick} YesClick={onClick} />
             </MypageLogoutBottom>
         </MypageLogoutRealBox>
     );

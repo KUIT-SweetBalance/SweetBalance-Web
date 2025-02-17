@@ -38,10 +38,10 @@ letter-spacing: -0.45px;
 
 
 
-const MiniButton: React.FC<{ onClick: (response: boolean) => void }> = ({ onClick }) => {
+const MiniButton: React.FC<{ onClick: (response: boolean) => void ;YesClick:()=>void;}> = ({ onClick,YesClick }) => {
     return (
         <MiniButtonBox>
-            <MiniButtonYes onClick={() => onClick(true)}>네</MiniButtonYes>
+            <MiniButtonYes onClick={YesClick}>네</MiniButtonYes>
             <MiniButtonNo onClick={() => onClick(false)}>아니오</MiniButtonNo>
         </MiniButtonBox>
     );

@@ -7,6 +7,7 @@ import Button2 from '../../../components/button/Button2';
 import { LogoutApi } from '../../../api/mypage/setting/Logout';
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import ApiManager from '../../../api/ApiManager';
 const HeaderPadding = styled.div`
   padding: 0 14px 0 21px;
 `;
@@ -85,25 +86,28 @@ const MypageSettingManage: React.FC = () => {
     }
     const navigate = useNavigate();
 
-    const useLogout = () => {
-      
-        return useMutation({
-          mutationFn: LogoutApi,
-          onSuccess: () => {
-            console.log("✅ 로그아웃 성공");
-      
-            // ✅ localStorage에 저장된 토큰 제거
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-      
-            // ✅ 홈으로 리다이렉트
-            navigate("/");
-          },
-          onError: (error) => {
-            console.error("❌ 로그아웃 실패:", error);
-          },
-        });
-      };
+    const logoutMutation = useMutation({
+        mutationFn: async () => {
+          return await ApiManager.post(
+            "/api/auth/sign-out",
+            {},
+            { withCredentials: true } // ✅ 쿠키 자동 포함
+          );
+        },
+        onSuccess: () => {
+          console.log("✅ 로그아웃 성공");
+    
+          // ✅ localStorage에서 토큰 제거
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+    
+          // ✅ 홈으로 이동
+          navigate("/");
+        },
+        onError: (error) => {
+          console.error("❌ 로그아웃 실패:", error);
+        },
+      });
 
 
     return (
@@ -119,7 +123,7 @@ const MypageSettingManage: React.FC = () => {
             </ButtonBox>
             {logout && 
             <GrayBox>
-                <MypageLogout onClick={useLogout}/>
+                <MypageLogout onClick={handleWithdrawClick} YesClick={() => logoutMutation.mutate()}/>
                 {/* 로그아웃 들어갈 곳곳 */}
             </GrayBox>
             }

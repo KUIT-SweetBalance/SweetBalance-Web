@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import backarrow from '../../../assets/onboarding/backarrow.svg';
 import UserDataInput from '../../../components/input/userDataInput/UserDataInput';
 import Modal from '../../../components/modal/Modal';
+import Header from '../../../components/header/Header';
 
 const TopBar = () => {
   return (
@@ -19,9 +20,9 @@ const TopBar = () => {
 const Callout = () => {
   return (
     <div
-      className={`border flex flex-col justify-center gap-[0.59vh] mx-[3.56vw] my-[1.17vh] border-gray_light px-[10px] py-[5.9vw] rounded-[20px]`}
+      className={`border flex flex-col justify-center gap-[7px] py-[10px] px-[20px] border-gray_light rounded-[20px]`}
     >
-      <p className={`text-[12px]`}>이메일 정보로 재설정</p>
+      <p className={`text-[12px] font-[600]`}>이메일 정보로 재설정</p>
       <p className={`text-[12px] text-gray_text`}>
         가입한 스윗밸런스 계정의 이메일 정보로 비밀번호를 재설정할 수 있어요
       </p>
@@ -61,39 +62,45 @@ const EmailVerification = () => {
 
   return (
     <div className="w-full flex flex-col items-center">
+      {/* '인증하기' 버튼  form태그 */}
       <form
         onSubmit={handleSubmit(handleVerifyEmail)}
-        className="flex w-full justify-between  box-border  text-[12px]  px-[10px] py-[1.7vh] "
+        className="flex w-full items-center justify-between box-border text-[12px]"
       >
-        {/* 이메일 입력 필드 */}
-        <div className="my-auto text-[12px] pr-[14px]">아이디 (이메일)</div>
-        <div className="w-[45.23vw]">
-          <UserDataInput
-            id="email"
-            label=""
-            type="email"
-            placeholder=""
-            requiredMessage="이메일을 입력하세요."
-            register={register}
-            errors={errors}
-          />
+        <div>
+          {/* 이메일 입력 필드 */}
+          <div className="text-[12px] whitespace-nowrap pr-[14px]">아이디 (이메일)</div>
         </div>
 
-        {/* 인증하기 버튼 -> 이메일 입력 시 활성화 */}
-        <button
-          type="submit"
-          onClick={() => setIsModalOpen(true)}
-          className={`my-auto w-[18.67vw] h-[5.16vh] text-white rounded-[22px] text-[12px] ${emailInput ? 'bg-[#F0807F]' : 'bg-gray-300 '}`}
-          disabled={!emailInput}
-        >
-          인증하기
-        </button>
+        <div className='flex w-full gap-[10px]'>
+          <div className="w-full">
+            <UserDataInput
+              id="email"
+              label=""
+              type="email"
+              placeholder=""
+              requiredMessage="이메일을 입력하세요."
+              register={register}
+              errors={errors}
+            />
+          </div>
+
+          {/* 인증하기 버튼 -> 이메일 입력 시 활성화 */}
+          <button
+            type="submit"
+            onClick={() => setIsModalOpen(true)}
+            className={`p-[15px] shrink-0 text-white rounded-[20px] text-[12px] ${emailInput ? 'bg-[#F0807F]' : 'bg-gray-300 '}`}
+            disabled={!emailInput}
+          >
+            인증하기
+          </button>
+        </div>
       </form>
 
       {/* 인증번호 입력 필드 (항상 표시) */}
       <form
         onSubmit={handleSubmit(handleConfirmCode)}
-        className="flex w-full justify-between  box-border  text-[12px]  px-[10px] py-[1.7vh]"
+        className="flex w-full items-center justify-between box-border text-[12px]"
       >
         <div className="text-transparent pr-[14px]">아이디 (이메일)</div>
         <div className="w-[45.23vw]">
@@ -111,7 +118,7 @@ const EmailVerification = () => {
         {/* 확인 버튼 (인증번호 입력 시 활성화) */}
         <button
           type="submit"
-          className={`my-auto w-[18.67vw] h-[5.16vh] rounded-[22px] text-white text-[12px] ${isCodeEntered ? 'bg-[#F0807F]  ' : 'bg-gray-300 '}`}
+          className={`p-[15px] shrink-0 text-white rounded-[20px] text-[12px] ${isCodeEntered ? 'bg-[#F0807F]  ' : 'bg-gray-300 '}`}
           disabled={!isCodeEntered}
         >
           확인
@@ -201,10 +208,19 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
 
   return (
-    <>
-      <TopBar />
-      <Callout />
-      <EmailVerification />
+    <div className="mt-[20px]">
+      <div className="px-[24px]">
+        <Header headerTitle="비밀번호 재설정" />
+      </div>
+
+      <div className="px-[14px] my-[10px]">
+        <Callout />
+      </div>
+
+      <div className="w-full mt-[30px] px-[24px] my-[10px]">
+        <EmailVerification />
+      </div>
+
       <UserPassword />
       <div className="pt-[25vh]">
         <Button
@@ -214,7 +230,7 @@ const ForgotPassword = () => {
           onClick={() => navigate('/login')}
         />
       </div>
-    </>
+    </div>
   );
 };
 

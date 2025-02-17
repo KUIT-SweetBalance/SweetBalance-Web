@@ -13,19 +13,19 @@ const Reissue: React.FC = () => {
 
     if (refreshToken) {
       console.log("🔄 Refresh Token 확인:", refreshToken);
-      saveRefreshToken(refreshToken); // ✅ refreshToken 저장
+    //   saveRefreshToken(refreshToken); // ✅ refreshToken 저장
       reissueToken();
     }
   }, []);
 
-  // ✅ refreshToken을 localStorage에 저장하는 함수
-  const saveRefreshToken = (refreshToken: string) => {
-    localStorage.setItem("refreshToken", refreshToken);
-    document.cookie = `refreshToken=${refreshToken}; path=/; secure`;
-    console.log("✅ Refresh Token 저장 완료");
-  };
+  // ✅ refreshToken을 localStorage와 쿠키에 저장하는 함수
+//   const saveRefreshToken = (refreshToken: string) => {
+//     localStorage.setItem("refreshToken", refreshToken);
+//     document.cookie = `refresh=${refreshToken}; path=/; secure; HttpOnly`;
+//     console.log("✅ Refresh Token 저장 완료");
+//   };
 
-  // ✅ refreshToken을 이용해 accessToken을 재발급하는 함수
+  // ✅ refreshToken을 쿠키에 담아 accessToken을 재발급하는 함수
   const reissueToken = async () => {
     try {
       const refreshToken = localStorage.getItem("refreshToken");
@@ -33,8 +33,13 @@ const Reissue: React.FC = () => {
 
       const response = await axios.post(
         "/api/auth/reissue",
-        {}, // ✅ refreshToken을 body에 넣지 않음 (쿠키에 저장된 상태)
-        { withCredentials: true } // ✅ 쿠키 자동 포함
+        {}, // ✅ body는 빈 객체
+        {
+          withCredentials: true, // ✅ 쿠키 자동 포함
+          headers: {
+            Cookie: `refresh=${refreshToken}`, // ✅ 쿠키 헤더에 refreshToken 추가
+          },
+        }
       );
 
       console.log("✅ Access Token 재발급 성공:", response.data.access);
@@ -48,7 +53,7 @@ const Reissue: React.FC = () => {
       navigate("/home"); // ✅ 홈으로 이동
     } catch (error) {
       console.error("❌ Access Token 재발급 실패:", error);
-    //   navigate("/auth-selection"); // 로그인 화면으로 이동
+      // navigate("/auth-selection"); // 로그인 화면으로 이동
     }
   };
 

@@ -64,7 +64,9 @@ const SyrupSelect: React.FC<{Syrupmenu: string[];syrupName:string|null;onSyrupCh
           value={syrupName ?? "시럽 없음"} // ✅ null이면 "시럽 없음" 사용
           onChange={(e) => onSyrupChange(e.target.value)}
         >
-          
+          <option key="시럽 없음" value="시럽 없음">
+          시럽 없음
+          </option>
           {Syrupmenu.map((syrup) => (
           <option key={syrup} value={syrup}>
             {syrup}

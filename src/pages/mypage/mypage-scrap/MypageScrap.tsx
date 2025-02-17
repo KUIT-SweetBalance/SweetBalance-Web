@@ -96,17 +96,18 @@ InfiniteScrapDrinkData,
   Error,
   InfiniteScrapDrinkData,
   number
->({
+>({  
   // 각 페이지의 반환 타입
   // 에러 타입
   // 단일 페이지의 데이터 타입
   // PageParam의 타입
-  queryKey: ["scrapDrinks"],
+  queryKey: ["scrapDrinks",isReversed],
   queryFn: (
     { pageParam = 0 }: { pageParam: number }, // pageParam의 형식지정 number로 안하면 'unknown' 형식은 'number'형식에 할당할 수 없습니다 라는 오류 발생
   ) =>
     fetchScrapDrinks(
       pageParam,
+      isReversed,
     ),
   getNextPageParam: (lastPage, allPages): number | false => {
     return allPages.length; // 다음 페이지 번호를 현재 페이지 수로 반환 -> queryFn의 pageParam에 반환됨

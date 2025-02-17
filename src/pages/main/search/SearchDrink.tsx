@@ -57,7 +57,7 @@ const SearchDrink = () => {
 
   const { isOpen } = useLargeFavoriteDrinkModalStore();
 
-  const drinkCategory = ['전체', '커피', '음료', '시그니쳐', '기타'];
+  const drinkCategory = ['전체', '커피', '음료', '시그니처', '기타'];
 
   // 무한스크롤 useInfiniteQuery
   const {

@@ -135,7 +135,7 @@ const BrandSearchResult = () => {
     fetchNextPage,
   });
 
-  const drinkCategory = ['전체', '커피', '음료', '시그니쳐', '기타'];
+  const drinkCategory = ['전체', '커피', '음료', '시그니처', '기타'];
 
   return (
     <div className="flex flex-col items-center mt-[30px] w-full">

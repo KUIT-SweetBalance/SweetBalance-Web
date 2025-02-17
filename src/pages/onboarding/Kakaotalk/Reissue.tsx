@@ -40,11 +40,13 @@ const Reissue: React.FC = () => {
       console.log("✅ Access Token 재발급 성공:", response.data.data.access);
       console.log("응답",response)
       // ✅ 새로운 accessToken을 localStorage에 저장
-      localStorage.setItem("accessToken", response.data.data.access);
+      localStorage.setItem("token", response.data.data.access);
 
       // ✅ ApiManager의 Authorization 헤더 업데이트
       ApiManager.defaults.headers.Authorization = `Bearer ${response.data.data.access}`;
-
+      document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; secure; SameSite=None";
+      console.log("🚮 Refresh Token 쿠키 삭제 완료");
+    
       navigate("/home"); // ✅ 홈으로 이동
     } catch (error) {
       console.error("❌ Access Token 재발급 실패:", error);

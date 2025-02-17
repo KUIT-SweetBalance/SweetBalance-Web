@@ -39,7 +39,7 @@ const Reissue: React.FC = () => {
       );
 
       console.log("✅ Access Token 재발급 성공:", response.data.access);
-      
+      console.log("응답",response)
       // ✅ 새로운 accessToken을 localStorage에 저장
       localStorage.setItem("accessToken", response.data.access);
 

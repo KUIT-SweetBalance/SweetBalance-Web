@@ -21,6 +21,7 @@ const Reissue: React.FC = () => {
   // ✅ refreshToken을 localStorage에 저장하는 함수
   const saveRefreshToken = (refreshToken: string) => {
     localStorage.setItem("refreshToken", refreshToken);
+    document.cookie = `refreshToken=${refreshToken}; path=/; secure`;
     console.log("✅ Refresh Token 저장 완료");
   };
 

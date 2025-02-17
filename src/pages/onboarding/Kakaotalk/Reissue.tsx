@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import ApiManager from "../../../api/ApiManager";
 
 const Reissue: React.FC = () => {
@@ -25,14 +24,14 @@ const Reissue: React.FC = () => {
     // ✅ 쿠키에 저장 (HttpOnly는 서버에서 설정해야 함)
     document.cookie = `refreshToken=${refreshToken}; path=/; secure; SameSite=None`;
     
-    console.log("✅ Refresh Token 저장 완료");
+    console.log("✅ Refresh Token 저장 완료 6");
   };
 
   // ✅ refreshToken을 쿠키에 담아 accessToken을 재발급하는 함수
   const reissueToken = async () => {
     try {
       const response = await ApiManager.post(
-        "/api/auth/reissue",
+        "https://13.125.187.188.nip.io/api/auth/reissue",
         {}, // ✅ body는 빈 객체
         {
           withCredentials: true, // ✅ 쿠키 자동 포함 (headers에 넣지 말 것!)

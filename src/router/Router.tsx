@@ -23,6 +23,8 @@ import AllBrands from '../pages/main/search/AllBrands';
 import BrandSearchResult from '../pages/main/search/BrandSearchResult';
 import DrinkSearchResult from '../pages/main/search/DrinkSearchResult';
 import MypageScrap from '../pages/mypage/mypage-scrap/MypageScrap';
+import KakaoSignIn from '../pages/onboarding/sign-in/KakaoSignIn';
+import Reissue from '../pages/onboarding/Kakaotalk/Reissue';
 
 const router = createBrowserRouter([
   {
@@ -131,6 +133,10 @@ const router = createBrowserRouter([
   {
     path: '/drink-result/:cafeName/:drinkName',
     element: <DrinkSearchResult />
+  },
+  {
+    path:'/oauth2_redirect',
+    element:<Reissue/>
   }
 ]);
 

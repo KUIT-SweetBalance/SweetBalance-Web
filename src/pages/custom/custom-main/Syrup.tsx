@@ -4,7 +4,7 @@ import Recoding from './Recording';
 import Pump from './pump';
 import SyrupSelect from './SyrupSelect/SyrupSelect';
 import { RecoringDrink } from '../../../api/mypage/record/MypageRecord';
-import { ReviseCustomDrink, ReviseDrink,ReviseDrinks } from '../../../api/custom/custommain';
+import { ReviseCustomDrink, ReviseDrinks,AddDrink,AddRecordDrink } from '../../../api/custom/custommain';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
@@ -75,8 +75,8 @@ padding : 30px 30px 15px 30px;
 
 
 const Syrup: React.FC<{Syrupmenu: string[];  Syrup:RecoringDrink;beverageSizeId:number;beverageId:number }> = ({Syrupmenu,Syrup,beverageSizeId,beverageId}) => {
-  const [syrupName, setSyrupName] = useState(Syrup.syrupName ?? "시럽 없음");
-  const [syrupCount, setSyrupCount] = useState(Syrup.syrupCount);
+  const [syrupName, setSyrupName] = useState(Syrup?.syrupName ?? "시럽 없음");
+  const [syrupCount, setSyrupCount] = useState(Syrup?.syrupCount??0);
   const navigate = useNavigate();
   const handleSyrupCountChange = (newCount: number) => {
     if (newCount >= -4 && newCount <= 4) {
@@ -102,7 +102,7 @@ const Syrup: React.FC<{Syrupmenu: string[];  Syrup:RecoringDrink;beverageSizeId:
     },
   });
   let revisedrinks: ReviseDrinks | undefined;
-  const beverageLogId = Syrup.beverageLogId
+  const beverageLogId = Syrup.beverageLogId??0
   if (
     syrupName && syrupName.trim().length > 0 && 
     Number.isInteger(beverageSizeId) && beverageSizeId > 0 &&  // ✅ 숫자 체크
@@ -117,16 +117,35 @@ const Syrup: React.FC<{Syrupmenu: string[];  Syrup:RecoringDrink;beverageSizeId:
       //: beverageId.toString() // ✅ API가 문자열을 요구할 경우 변환
     };
   }
-  // ✅ 버튼 클릭 시 mutation 실행
+  let Adddrinks: AddDrink = {
+    beverageSizeId,
+    syrupName,
+    syrupCount,
+  }
+  const anotherApiMutation = useMutation({
+    mutationFn: AddRecordDrink, 
+    onSuccess: (data) => {
+      console.log('생성 성공:', data);
+      
+    },
+    onError: (error) => {
+      console.error('생성 실패:', error);
+    },
+  });
+
+  // ✅ 현재 경로에 따라 버튼 텍스트 변경
+  const buttonText = location.pathname.includes(`/mypage/record/${beverageId}`)
+    ? '수정하기'
+    : '기록하기';
   const handleClick = () => {
     console.log(revisedrinks)
-    if (revisedrinks) {
+    if (revisedrinks&&buttonText==="수정하기") {
       mutation.mutate(revisedrinks);
       // 여기에 navigate 넣으면 됨
       navigate('/edit/completed')
     } else {
-      console.log(revisedrinks)
-      alert('음료 정보를 입력하세요.');
+      anotherApiMutation.mutate(Adddrinks)
+      navigate('/edit/completed')
     }
   };
   return (

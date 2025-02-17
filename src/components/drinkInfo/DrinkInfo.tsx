@@ -56,7 +56,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
   const handleDeleteButtonClick = () => {
     const modalData = {
       cafeName:
-        props.cafeNameMiddle || props.cafeNameTop || props.cafeNameBottom || '',
+      props.cafeNameMiddle || props.cafeNameTop || props.cafeNameBottom || '',
       drinkName: props.drinkName || '',
       content: '을/를 수정하시겠어요?',
       button1: '아니오',
@@ -66,9 +66,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
 
   const handleDrinkInfoClick = () => {
     console.log('clicked')
-    navigate(`/mypage/record/${props.drinkData.beverageId}`, {
-      state: props.drinkData , // 전체 drink 객체를 함께 전달
-    });
+    navigate(`/custom/${props.drinkData.beverageId}`);
   }
 
   return (

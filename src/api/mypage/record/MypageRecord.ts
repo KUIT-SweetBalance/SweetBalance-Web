@@ -1,17 +1,17 @@
 import ApiManager from "../../ApiManager";
 import { InfiniteData } from "@tanstack/react-query";
 export interface RecoringDrink {
-    beverageLogId: number;
+    beverageLogId: number;//
     beverageId:number;
     beverageSizeId: number;
-    createdAt: string; // 날짜 형식이므로 문자열로 유지
-    brand: string;
+    createdAt: string; 
+    brand: string;//
     beverageName: string;
     imgUrl: string;
     sugar: number;
     syrupName: string | null;
     syrupCount: number;
-    sizeType: string; // 다른 사이즈 확장 가능성 고려
+    sizeType: string; 
   }
 export interface RecoringDrinkData {
   status: number;
@@ -21,10 +21,11 @@ export interface RecoringDrinkData {
 }
 export type InfiniteRecordDrinkData = InfiniteData<RecoringDrinkData>
 
-export const fetchRecoringDrinks = async (page:number): Promise<RecoringDrinkData> => {
+export const fetchRecoringDrinks = async (page:number, isReversed: boolean): Promise<RecoringDrinkData> => {
+  const Old = isReversed?"old":""
   try {
     const response = await ApiManager.get<RecoringDrinkData>(
-      `https://13.125.187.188.nip.io/api/user/beverage-record?page=${page}&size=${8}`,
+      `https://13.125.187.188.nip.io/api/user/beverage-record?page=${page}&size=${8}&sort=${Old}`,
     );
     console.log(response.data);
     return response.data;

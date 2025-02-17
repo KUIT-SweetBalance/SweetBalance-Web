@@ -38,13 +38,13 @@ const Reissue: React.FC = () => {
         }
       );
 
-      console.log("✅ Access Token 재발급 성공:", response.data.access);
+      console.log("✅ Access Token 재발급 성공:", response.data.data.access);
       console.log("응답",response)
       // ✅ 새로운 accessToken을 localStorage에 저장
-      localStorage.setItem("accessToken", response.data.access);
+      localStorage.setItem("accessToken", response.data.data.access);
 
       // ✅ ApiManager의 Authorization 헤더 업데이트
-      ApiManager.defaults.headers.Authorization = `Bearer ${response.data.access}`;
+      ApiManager.defaults.headers.Authorization = `Bearer ${response.data.data.access}`;
 
       navigate("/home"); // ✅ 홈으로 이동
     } catch (error) {

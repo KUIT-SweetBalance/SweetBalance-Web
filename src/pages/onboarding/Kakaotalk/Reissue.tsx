@@ -23,10 +23,10 @@ const reissueToken = async () => {
     console.log("✅ Access Token 재발급 성공:", response.data.data.access);
     console.log("응답",response)
       // ✅ 새로운 accessToken을 localStorage에 저장
+    localStorage.setItem("refresh", response.data.data.refresh);
     localStorage.setItem("token", response.data.data.access);
 
     ApiManager.defaults.headers.Authorization = `Bearer ${response.data.data.access}`;
-    
     
       navigate("/home"); // ✅ 홈으로 이동
     } catch (error) {

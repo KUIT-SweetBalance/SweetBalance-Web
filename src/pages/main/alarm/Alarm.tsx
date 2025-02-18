@@ -9,6 +9,7 @@ import {
 } from '../../../api/main/alarm/Alarm';
 import useAlarmInfoModalStore from '../../../store/modal/AlarmInfo';
 import AlarmInfoModal from '../modal/AlarmInfoModal';
+import NoContents from '../../../components/noContents/NoContents';
 
 const Alarm = () => {
   const {
@@ -24,6 +25,20 @@ const Alarm = () => {
   const fetchedData = alarmResponse?.data;
 
   const { isOpen } = useAlarmInfoModalStore();
+
+  if (!fetchedData || fetchedData.length === 0) {
+    return (
+      <div className="flex flex-col h-screen items-center mt-[30px]">
+        <div className="flex w-[calc(100%-48px)]">
+          <Header headerTitle="알림 페이지" />
+        </div>
+
+        <div className="flex-grow flex mb-[70px]">
+          <NoContents contentString="아직 기록이 없습니다" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center mb-[20px] overflow-y-auto scrollbar-hide">

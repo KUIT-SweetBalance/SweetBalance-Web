@@ -31,21 +31,19 @@ interface WeeklySugarChartProps {
 const WeeklySugarChart = (props: WeeklySugarChartProps) => {
   const labels = ['일', '월', '화', '수', '목', '금', '토'];
 
-  const [angrySugar, setAngrySugar] = useState<HTMLImageElement | null>(null);
 
-  useEffect(() => {
-    const img = new Image();
-    img.src = '/sugar_angry.png';
-    img.onload = () => {
-      img.width = 50; //
-      img.height = 50; //
-      console.log('angrySugar 이미지 로드 성공', img);
-      setAngrySugar(img);
-    };
-    img.onerror = () => {
-      console.error('angrySugar 이미지 로드 실패');
-    };
-  }, []);
+  // useEffect(() => {
+  //   const img = new Image();
+  //   img.src = '/sugar_angry.png';
+  //   img.onload = () => {
+  //     img.width = 50; //
+  //     img.height = 50; //
+  //     console.log('angrySugar 이미지 로드 성공', img);
+  //   };
+  //   img.onerror = () => {
+  //     console.error('angrySugar 이미지 로드 실패');
+  //   };
+  // }, []);
 
   // Chart.js에 전달할 데이터 및 스타일 설정
   // <Line />에 chartData를 넘겨줌

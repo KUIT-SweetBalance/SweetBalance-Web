@@ -77,7 +77,7 @@ const DeleModal: React.FC<{ onClick: () => void; onClick1:()=>void;drink: string
               <Content>을/를 삭제하시겠어요?</Content>
             </DrinkContent>
           <ButtonBox>
-            <Button content='아니오' bgColor='bg-white' size='md'onClick={onClick1}/>
+            <Button content='아니오' bgColor='bg-white' size='md'onClick={onClick}/>
             <Button content='삭제할래요' bgColor='bg-primary' size='md'onClick={onClick1}/>
 
           </ButtonBox>

@@ -51,7 +51,7 @@ const MypageScrap: React.FC = () => {
   //즐겨찾기 삭제
   const queryClient = useQueryClient();
   const deleteScrapMutation = useMutation({
-    mutationFn: (favoriteId: number) => DeleteScrapDrinks(favoriteId),
+    mutationFn: (beverageId: number) => DeleteScrapDrinks(beverageId),
     onSuccess: () => {
       // ✅ 삭제 후, 최신 데이터로 UI 업데이트
       queryClient.invalidateQueries({ queryKey: ['scrapDrinks'] });
@@ -60,9 +60,10 @@ const MypageScrap: React.FC = () => {
       console.error("삭제 실패:", error);
     },
   });
-  const handleDelete = (favoriteId: number) => {
-    deleteScrapMutation.mutate(favoriteId);
-    closeDeleteModal(favoriteId); // 모달 닫기
+  const handleDelete = (beverageId: number) => {
+    console.log("즐겨찾기 id",beverageId)
+    deleteScrapMutation.mutate(beverageId);
+    closeDeleteModal(beverageId); // 모달 닫기
   };
 
 
@@ -148,14 +149,15 @@ const filteredDrinks = drinkList?.pages
           {/* 음료 리스트 */}
           <MypageScrapInfo 
             drink={drinkItem} 
-            onClick={() => openDeleteModal(drinkItem.favoriteId)}  
+            onClick={() => openDeleteModal(drinkItem.beverageId)}  
           />
 
           {/* 삭제 확인 모달 */}
-          {deleteStates[drinkItem.favoriteId] && (
+          {deleteStates[drinkItem.beverageId] && (
             <DeleModal 
-              onClick={() => closeDeleteModal(drinkItem.favoriteId)} 
-              onClick1={() => handleDelete(drinkItem.favoriteId)} 
+              onClick={() => closeDeleteModal(drinkItem.beverageId)} 
+              // onClick={() => console.log(drinkItem)}
+              onClick1={() => handleDelete(drinkItem.beverageId)} 
               drink={drinkItem.name}
               brand={drinkItem.brand}
             />

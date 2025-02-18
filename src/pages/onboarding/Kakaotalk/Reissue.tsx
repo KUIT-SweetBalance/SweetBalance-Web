@@ -21,7 +21,7 @@ const Reissue: React.FC = () => {
   const saveRefreshToken = (refreshToken: string) => {
     
     // ✅ 쿠키에 저장 (HttpOnly는 서버에서 설정해야 함)
-    document.cookie = `refreshToken=${refreshToken}; path=/; secure; SameSite=None`;
+    // document.cookie = `refreshToken=${refreshToken}; path=/; secure; SameSite=None`;
     
     console.log("✅ Refresh Token 저장 완료 6");
   };
@@ -44,10 +44,10 @@ const Reissue: React.FC = () => {
 
       // ✅ ApiManager의 Authorization 헤더 업데이트
       ApiManager.defaults.headers.Authorization = `Bearer ${response.data.data.access}`;
-      document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; secure; SameSite=None";
-      document.cookie = "refresh=; path=/; domain=13.125.187.188.nip.io; expires=Thu, 01 Jan 1970 00:00:00 UTC; secure; SameSite=None";
-      document.cookie = "refresh=; path=/; domain=effervescent-cassata-4682e8.netlify.app; expires=Thu, 01 Jan 1970 00:00:00 UTC; secure; SameSite=None";
-            document.cookie = `refresh=${response.data.data.refresh}; path=/; secure; SameSite=None`;
+    //   document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; secure; SameSite=None";
+    //   document.cookie = "refresh=; path=/; domain=13.125.187.188.nip.io; expires=Thu, 01 Jan 1970 00:00:00 UTC; secure; SameSite=None";
+    //   document.cookie = "refresh=; path=/; domain=effervescent-cassata-4682e8.netlify.app; expires=Thu, 01 Jan 1970 00:00:00 UTC; secure; SameSite=None";
+    //         document.cookie = `refresh=${response.data.data.refresh}; path=/; secure; SameSite=None`;
 
       console.log("🚮 Refresh Token 쿠키 삭제 완료");
     

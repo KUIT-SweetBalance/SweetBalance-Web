@@ -5,19 +5,19 @@ import ApiManager from "../../../api/ApiManager";
 const Reissue: React.FC = () => {
   const navigate = useNavigate();
 
-//   useEffect(() => {
-//     // ✅ 현재 URL에서 `refreshToken`을 가져옴
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const refreshToken = urlParams.get("refresh");
+  useEffect(() => {
+    // ✅ 현재 URL에서 `refreshToken`을 가져옴
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const refreshToken = urlParams.get("refresh");
 
-//     if (refreshToken) {
-//       console.log("🔄 Refresh Token 확인:", refreshToken);
-//     //   saveRefreshToken(refreshToken); // ✅ refreshToken 저장
-//       reissueToken();
-//     }
-//   }, []);
+    // if (refreshToken) {
+    //   console.log("🔄 Refresh Token 확인:", refreshToken);
+    // //   saveRefreshToken(refreshToken); // ✅ refreshToken 저장
+      reissueToken();
+    // }
+  }, []);
 
-  // ✅ refreshToken을 localStorage와 쿠키에 저장하는 함수
+//   ✅ refreshToken을 localStorage와 쿠키에 저장하는 함수
 //   const saveRefreshToken = (refreshToken: string) => {
     
 //     // ✅ 쿠키에 저장 (HttpOnly는 서버에서 설정해야 함)

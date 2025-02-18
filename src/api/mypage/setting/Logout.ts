@@ -9,7 +9,6 @@ export const LogoutApi = async () =>{
             {},
             {
                 withCredentials: true, // ✅ 쿠키 자동 포함 (headers에 넣지 말 것!)
-
             }
         );
         console.log("logout 성공",response)

@@ -68,8 +68,13 @@ export interface ReviseDrinks{
   syrupCount?: number;
 }
 export const ReviseCustomDrink = async (revisedrinks: ReviseDrinks): Promise<void> => {
+  
   const { beverageId,beverageLogId, ...revisedrink }: ReviseDrinks = revisedrinks;
-
+  if (revisedrink.syrupName === '시럽 없음') {
+    delete revisedrink.syrupName;
+    delete revisedrink.syrupCount;
+    console.log("지금입니다",revisedrink)
+  }
   try {
     const response = await ApiManager.post<ReviseDrink>(
       `https://13.125.187.188.nip.io/api/user/beverage-record/${revisedrinks.beverageLogId}`,
@@ -101,7 +106,11 @@ export interface AddDrink{
   syrupCount?: number,
 }
 export const AddRecordDrink = async (adddrinkinfo: AddDrink): Promise<void> => {
-
+  if (adddrinkinfo.syrupName === '시럽 없음') {
+    delete adddrinkinfo.syrupName;
+    delete adddrinkinfo.syrupCount;
+    console.log("지금입니다",adddrinkinfo)
+  }
   try {
     const response = await ApiManager.post<AddDrink>(
       `https://13.125.187.188.nip.io/api/user/beverage-record`,

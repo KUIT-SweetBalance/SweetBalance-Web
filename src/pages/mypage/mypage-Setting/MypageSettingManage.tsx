@@ -1,10 +1,13 @@
 import React from 'react';
 import MypageSettingManagement from './MypageSettingManagement';
 import Header from '../../../components/header/Header';
-import Button from '../../../components/button/Button';
 import styled from 'styled-components';
 import { MypageLogout,MypageRealLogout } from './mypage-logout-message/MypageLogout'; 
 import Button2 from '../../../components/button/Button2';
+import { LogoutApi } from '../../../api/mypage/setting/Logout';
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import ApiManager from '../../../api/ApiManager';
 const HeaderPadding = styled.div`
   padding: 0 14px 0 21px;
 `;
@@ -81,6 +84,32 @@ const MypageSettingManage: React.FC = () => {
         setnumber(prev=>!prev);
 
     }
+    const navigate = useNavigate();
+
+    const logoutMutation = useMutation({
+        mutationFn: async () => {
+          return await ApiManager.post(
+            "/api/auth/sign-out",
+            {},
+            { withCredentials: true } // ✅ 쿠키 자동 포함
+          );
+        },
+        onSuccess: () => {
+          console.log("✅ 로그아웃 성공");
+    
+          // ✅ localStorage에서 토큰 제거
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+    
+          // ✅ 홈으로 이동
+          navigate("/");
+        },
+        onError: (error) => {
+          console.error("❌ 로그아웃 실패:", error);
+        },
+      });
+
+
     return (
         <><HeaderPadding>
             <Header headerTitle='설정 관리'/>
@@ -94,7 +123,8 @@ const MypageSettingManage: React.FC = () => {
             </ButtonBox>
             {logout && 
             <GrayBox>
-                <MypageLogout onClick={handleWithdrawClick}/>
+                <MypageLogout onClick={handleWithdrawClick} YesClick={() => logoutMutation.mutate()}/>
+                {/* 로그아웃 들어갈 곳곳 */}
             </GrayBox>
             }
             {withdraw &&

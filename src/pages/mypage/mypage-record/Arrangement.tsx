@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 interface ArrangementProps {
     title: string;
+    handleSortToggle?:()=>void;
 }
 
 const Container = styled.div`
@@ -38,12 +39,12 @@ letter-spacing: -0.35px;`;
 const Rightimg = styled.img`width:
  11.176px;
 height: 10px;`;
-const Arrangement: React.FC<ArrangementProps> = ({ title }) => {
+const Arrangement: React.FC<ArrangementProps> = ({ title,handleSortToggle }) => {
     return (
         <Container>
             <Lefttitle>{title}</Lefttitle>
             <Righttitle>
-                <Rightcontent>최신순</Rightcontent>
+                <Rightcontent onClick={handleSortToggle}>최신순</Rightcontent>
                 <Rightimg src='/arrowtwo.svg'alt='arrow'/>
             </Righttitle>
         </Container>

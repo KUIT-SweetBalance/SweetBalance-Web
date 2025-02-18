@@ -106,9 +106,7 @@ const MypageDrinkInfo: React.FC<{drink:RecoringDrink;onClick:()=>void;onClick1:(
                     <Name>{drink.syrupName ? drink.syrupName +` ${drink.syrupCount}` : '시럽 없음'}</Name>
                     |
                     <Name>사이즈 {drink.sizeType}</Name>
-                    
-                    
-                    {/* <Name>{drink.calories}kcal</Name> */}
+
                 </Bottom>
             </ContentBox>
         </ItemBox>

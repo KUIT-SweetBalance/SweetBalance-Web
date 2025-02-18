@@ -19,13 +19,13 @@ interface SizeProps {
 }
 
 const Container = styled.div`
-  width: 393px;
+  width: 100%;
   height: 1057px;
   background-color: #fff;
 `;
 
 const GrayBox = styled.div`
-  width: 393px;
+  width: 100%;
   height: 15px;
   background: #f4f4f4;
   margin: 20px 0 0 0;
@@ -33,7 +33,7 @@ const GrayBox = styled.div`
 
 const Askinfo = styled.div`
   padding: 22px 0;
-  width: 393px;
+  width: 100%;
   color: rgba(18, 18, 18, 0.5);
   text-align: center;
   font-size: 12px;
@@ -47,7 +47,12 @@ const CustomMain: React.FC = () => {
   const [isSlideUpOpen, setIsSlideUpOpen] = useState(false);
   const { beverageId } = useParams<{ beverageId: string }>();
   const location = useLocation();
-  const Syrupinfo = location.state?.drink;
+  const [selectedSize, setSelectedSize] = useState<number>(0);
+
+  
+  const Syrupinfo = location.state?.drink ?? location.state ?? {};
+  
+
   const queryClient = useQueryClient();
 
   const beverageIdNumber = useMemo(() => {
@@ -64,14 +69,20 @@ const CustomMain: React.FC = () => {
     },
   });
 
-  const [selectedSize, setSelectedSize] = useState<number>(0);
-
-  // ✅ undefined 방지 및 초기화 로직 개선
-  useEffect(() => {
-    if (data?.data?.sizeDetails?.length) {
-      setSelectedSize(0);
+  // ✅ size 갖고 와서 그렇게 설정하는 거고
+  useEffect(() => {  
+    if (data?.data?.sizeDetails?.length && Syrupinfo?.beverageSizeId) {
+      const foundIndex = data.data.sizeDetails.findIndex(
+        (size) => size.id === Syrupinfo.beverageSizeId
+      );
+      // 찾은 인덱스가 유효한 경우에만 `setSelectedSize` 업데이트
+      if (foundIndex !== -1) {
+        setSelectedSize(foundIndex);
+      } else {
+        setSelectedSize(0); // 기본값 설정
+      }
     }
-  }, [data]);
+  }, [data, Syrupinfo]);
 
   const drinkData: BeverageDetail = data?.data || ({} as BeverageDetail);
 

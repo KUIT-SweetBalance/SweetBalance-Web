@@ -57,15 +57,15 @@ export const fetchCustomDrink = async (beverageId: number): Promise<BeverageDeta
 };
 export interface ReviseDrink{
   beverageSizeId: number;
-  syrupName: string;
-  syrupCount: number;
+  syrupName?: string;
+  syrupCount?: number;
 }
 export interface ReviseDrinks{
   beverageLogId:number;
   beverageSizeId: number;
   beverageId:number;
-  syrupName: string;
-  syrupCount: number;
+  syrupName?: string;
+  syrupCount?: number;
 }
 export const ReviseCustomDrink = async (revisedrinks: ReviseDrinks): Promise<void> => {
   const { beverageId,beverageLogId, ...revisedrink }: ReviseDrinks = revisedrinks;
@@ -95,4 +95,21 @@ export const ScrapCustomDrink = async (beverageId: number): Promise<void> => {
     throw error;
   }
 };
+export interface AddDrink{
+  beverageSizeId: number,
+  syrupName?: string,
+  syrupCount?: number,
+}
+export const AddRecordDrink = async (adddrinkinfo: AddDrink): Promise<void> => {
 
+  try {
+    const response = await ApiManager.post<AddDrink>(
+      `https://13.125.187.188.nip.io/api/user/beverage-record`,
+      adddrinkinfo
+    );
+    console.log('음료 생성 성공:', response.data);
+  } catch (error) {
+    console.error('음료 생성 실패:', error);
+    throw error;
+  }
+};

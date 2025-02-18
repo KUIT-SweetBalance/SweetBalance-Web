@@ -20,7 +20,7 @@ const HeaderPadding = styled.div`
   padding: 0 14px 0 21px;
 `;
 const NoDataMessage = styled.div`
-  
+  width:100%;
   display: inline-flex;
 padding: 214px 130px;
 justify-content: center;
@@ -35,17 +35,14 @@ line-height: normal;
 letter-spacing: -0.35px;
 `;
 const MypageRecord: React.FC = () => {
-  // React Query로 음료 데이터 불러오기
-  // const { data, isLoading, error } = useQuery<RecoringDrinkData>({
-  //   queryKey: ["recordingDrinks"],
-  //   queryFn: fetchRecoringDrinks,
-  // });
+  const [isReversed, setIsReversed] = useState(false);
+  // 위에 있는 친구로 넣으면 됨됨
+    const handleSortToggle = () => {
+      setIsReversed((prev) => !prev);
+    };
   const queryClient = useQueryClient();
 
-  // 음료 데이터를 가져오고, 없을 경우 빈 배열로 처리
-  // const drinks = data?.data || [];
 
-  // 각 음료별 모달 상태를 객체 형태로 관리
   const [modalStates, setModalStates] = useState<{ [key: number]: boolean }>({});
   const [deleteStates, setDeleteStates] = useState<{ [key: number]: boolean }>({});
 
@@ -112,12 +109,13 @@ InfiniteRecordDrinkData,
   // 에러 타입
   // 단일 페이지의 데이터 타입
   // PageParam의 타입
-  queryKey: ["recordingDrinks"],
+  queryKey: ["recordingDrinks", isReversed],
   queryFn: (
     { pageParam = 0 }: { pageParam: number }, // pageParam의 형식지정 number로 안하면 'unknown' 형식은 'number'형식에 할당할 수 없습니다 라는 오류 발생
   ) =>
     fetchRecoringDrinks(
       pageParam,
+      isReversed
     ),
   getNextPageParam: (lastPage, allPages): number | false => {
     return allPages.length; // 다음 페이지 번호를 현재 페이지 수로 반환 -> queryFn의 pageParam에 반환됨
@@ -151,7 +149,7 @@ const filteredDrinks = drinkList?.pages
           onSearch={handleSearchClick}
         />
       </Padding>
-      <Arrangement title="내가 기록한 음료" />
+      <Arrangement title="내가 기록한 음료"handleSortToggle={handleSortToggle} />
 
       {filteredDrinks.length === 0 ? (
         <NoDataMessage>아직 기록이 없습니다.</NoDataMessage>

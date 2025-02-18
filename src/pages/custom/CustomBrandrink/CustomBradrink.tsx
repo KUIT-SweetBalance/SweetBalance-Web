@@ -63,7 +63,6 @@ const Drink = styled.div`
   font-weight: 700;
   line-height: 35px; /* 116.667% */
   letter-spacing: 0.25px;
-
   padding: 0px 51px 15px 25px;
   /* height: 50px; */
   width: 22rem;

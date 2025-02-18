@@ -18,10 +18,12 @@ export interface ScrapDrinkData {
 
 export type InfiniteScrapDrinkData = InfiniteData<ScrapDrinkData>
 
-export const fetchScrapDrinks = async (page:number): Promise<ScrapDrinkData> => {
+export const fetchScrapDrinks = async (page:number, isReversed: boolean): Promise<ScrapDrinkData> => {
+    const Old = isReversed?"old":""
+
 try {
     const response = await ApiManager.get<ScrapDrinkData>(
-    `https://13.125.187.188.nip.io/api/user/favorite?page=${page}&size=${8}`,
+    `https://13.125.187.188.nip.io/api/user/favorite?page=${page}&size=${8}&sort=${Old}`,
     );
     console.log(response.data);
     return response.data;

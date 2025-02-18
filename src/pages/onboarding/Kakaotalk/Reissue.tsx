@@ -12,19 +12,19 @@ const Reissue: React.FC = () => {
 
     if (refreshToken) {
       console.log("🔄 Refresh Token 확인:", refreshToken);
-      saveRefreshToken(refreshToken); // ✅ refreshToken 저장
+    //   saveRefreshToken(refreshToken); // ✅ refreshToken 저장
       reissueToken();
     }
   }, []);
 
   // ✅ refreshToken을 localStorage와 쿠키에 저장하는 함수
-  const saveRefreshToken = (refreshToken: string) => {
+//   const saveRefreshToken = (refreshToken: string) => {
     
-    // ✅ 쿠키에 저장 (HttpOnly는 서버에서 설정해야 함)
-    // document.cookie = `refreshToken=${refreshToken}; path=/; secure; SameSite=None`;
+//     // ✅ 쿠키에 저장 (HttpOnly는 서버에서 설정해야 함)
+//     // document.cookie = `refreshToken=${refreshToken}; path=/; secure; SameSite=None`;
     
-    console.log("✅ Refresh Token 저장 완료 6");
-  };
+//     console.log("✅ Refresh Token 저장 완료 ");
+//   };
 
   // ✅ refreshToken을 쿠키에 담아 accessToken을 재발급하는 함수
   const reissueToken = async () => {

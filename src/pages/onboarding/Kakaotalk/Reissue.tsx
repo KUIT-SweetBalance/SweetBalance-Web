@@ -5,17 +5,17 @@ import ApiManager from "../../../api/ApiManager";
 const Reissue: React.FC = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // ✅ 현재 URL에서 `refreshToken`을 가져옴
-    const urlParams = new URLSearchParams(window.location.search);
-    const refreshToken = urlParams.get("refresh");
+//   useEffect(() => {
+//     // ✅ 현재 URL에서 `refreshToken`을 가져옴
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const refreshToken = urlParams.get("refresh");
 
-    if (refreshToken) {
-      console.log("🔄 Refresh Token 확인:", refreshToken);
-    //   saveRefreshToken(refreshToken); // ✅ refreshToken 저장
-      reissueToken();
-    }
-  }, []);
+//     if (refreshToken) {
+//       console.log("🔄 Refresh Token 확인:", refreshToken);
+//     //   saveRefreshToken(refreshToken); // ✅ refreshToken 저장
+//       reissueToken();
+//     }
+//   }, []);
 
   // ✅ refreshToken을 localStorage와 쿠키에 저장하는 함수
 //   const saveRefreshToken = (refreshToken: string) => {
@@ -42,14 +42,8 @@ const Reissue: React.FC = () => {
       // ✅ 새로운 accessToken을 localStorage에 저장
       localStorage.setItem("token", response.data.data.access);
 
-      // ✅ ApiManager의 Authorization 헤더 업데이트
       ApiManager.defaults.headers.Authorization = `Bearer ${response.data.data.access}`;
-    //   document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; secure; SameSite=None";
-    //   document.cookie = "refresh=; path=/; domain=13.125.187.188.nip.io; expires=Thu, 01 Jan 1970 00:00:00 UTC; secure; SameSite=None";
-    //   document.cookie = "refresh=; path=/; domain=effervescent-cassata-4682e8.netlify.app; expires=Thu, 01 Jan 1970 00:00:00 UTC; secure; SameSite=None";
-    //         document.cookie = `refresh=${response.data.data.refresh}; path=/; secure; SameSite=None`;
-
-      console.log("🚮 Refresh Token 쿠키 삭제 완료");
+   
     
       navigate("/home"); // ✅ 홈으로 이동
     } catch (error) {

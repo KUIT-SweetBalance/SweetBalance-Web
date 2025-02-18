@@ -96,7 +96,6 @@ const MypageSettingManage: React.FC = () => {
         },
         onSuccess: () => {
           console.log("✅ 로그아웃 성공");
-    
           // ✅ localStorage에서 토큰 제거
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
@@ -106,6 +105,27 @@ const MypageSettingManage: React.FC = () => {
         },
         onError: (error) => {
           console.error("❌ 로그아웃 실패:", error);
+        },
+      });
+
+      
+      const withDrawMutation = useMutation({
+        mutationFn: async () => {
+          return await ApiManager.delete(
+            "/api/auth/withdraw" // ✅ 쿠키 자동 포함
+          );
+        },
+        onSuccess: () => {
+          console.log("✅ 탈퇴 성공");
+          // ✅ localStorage에서 토큰 제거
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+    
+          // ✅ 홈으로 이동
+          navigate("/");
+        },
+        onError: (error) => {
+          console.error("❌ 탈퇴 실패:", error);
         },
       });
 
@@ -139,7 +159,7 @@ const MypageSettingManage: React.FC = () => {
             }
             {withdrawment2&&
             <GrayBox>
-                <With src='/withdrawbottom.svg' alt='dl'onClick={handleWithdraw3}/>
+                <With src='/withdrawbottom.svg' alt='dl'onClick={() => withDrawMutation.mutate()}/>
             </GrayBox>
             }
             {number&&

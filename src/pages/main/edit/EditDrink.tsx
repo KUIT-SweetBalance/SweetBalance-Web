@@ -128,8 +128,14 @@ const EditDrink = () => {
               syrupType={drink.syrupName ?? ''}
               syrup={drink.syrupCount}
               size={drink.sizeType}
-              onClick={() => openModal(drink.beverageLogId)}
-              onClick1={() => openDeleteModal(drink.beverageLogId)}
+              onClick={(event) => {
+                event.stopPropagation(); // 이벤트 버블링 방지
+                openModal(drink.beverageLogId);
+              }}
+              onClick1={(event) => {
+                event.stopPropagation(); // 이벤트 버블링 방지
+                openDeleteModal(drink.beverageLogId);
+              }}
             />
 
             {/* 수정 모달 */}

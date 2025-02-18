@@ -14,7 +14,8 @@ const DrinkInfo = (props: DrinkInfoProps) => {
 
   // 즐겨찾기 추가 모달창 띄우기
   const { openFavoriteModal } = useLargeFavoriteDrinkModalStore();
-  const handleFavoriteButtonClick = () => {
+  const handleFavoriteButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation(); // 이벤트 버블링 방지
     console.log('Clicked');
     setSelected(!selected);
     if (!selected) {
@@ -95,14 +96,20 @@ const DrinkInfo = (props: DrinkInfoProps) => {
                 <button
                   type="button"
                   className="w-[14px] h-[14px]"
-                  onClick={props.onClick}
+                  onClick={(event) => {
+                    event.stopPropagation(); // 이벤트 버블링 방지
+                    props.onClick?.(event);
+                  }}
                 >
                   <img src="/EditDrink.png" alt="음료수정" />
                 </button>
                 <button
                   type="button"
                   className="w-[14px] h-[14px]"
-                  onClick={props.onClick1}
+                  onClick={(event) => {
+                    event.stopPropagation(); // 이벤트 버블링 방지
+                    props.onClick1?.(event);
+                  }}
                 >
                   <img src="/X.png" alt="음료삭제" />
                 </button>

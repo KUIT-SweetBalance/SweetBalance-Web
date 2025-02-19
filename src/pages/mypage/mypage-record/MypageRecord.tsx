@@ -166,7 +166,7 @@ const MypageRecord: React.FC = () => {
       {filteredDrinks.length === 0 ? (
         <NoDataMessage>아직 기록이 없습니다.</NoDataMessage>
       ) : (
-        filteredDrinks.map((drinkItem) => (
+        filteredDrinks.map((drinkItem, index, array) => (
           <div key={drinkItem.beverageLogId}>
             <MypageDrinkInfo
               drink={drinkItem}
@@ -192,8 +192,12 @@ const MypageRecord: React.FC = () => {
                 brand={drinkItem.brand}
               />
             )}
-            {isFetchingNextPage && <div>Loading more drinks...</div>}
-            <div ref={target}></div>
+            
+            {/* 마지막 요소에만 ref 연결, isFetchingNextPage 마지막 요소에서만 렌더링하기*/}
+            {index === array.length - 1 && isFetchingNextPage && (
+              <div>Loading more drinks...</div>
+            )}
+            {index === array.length - 1 && <div ref={target}></div>}
           </div>
         ))
       )}

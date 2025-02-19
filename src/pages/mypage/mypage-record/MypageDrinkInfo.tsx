@@ -102,9 +102,9 @@ const MypageDrinkInfo: React.FC<{drink:RecoringDrink;onClick:()=>void;onClick1:(
                 <Bottom>
                     
                     <Name>당 {drink.sugar}g</Name>
-                    |
+                    <img src="/verticalBar.png" alt="구분선" className='h-[13px]'/>
                     <Name>{drink.syrupName ? drink.syrupName +` ${drink.syrupCount}` : '시럽 없음'}</Name>
-                    |
+                    <img src="/verticalBar.png" alt="구분선" className='h-[13px]'/>
                     <Name>사이즈 {drink.sizeType}</Name>
 
                 </Bottom>

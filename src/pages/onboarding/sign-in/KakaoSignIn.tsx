@@ -224,18 +224,19 @@ const KakaoSignIn:React.FC = () => {
   const [gender, setGender] = useState('');
   const [genderSelected, setGenderSelected] = useState(false); // 성별 선택 상태 추가
 const navigate = useNavigate()
-  const handleNext = () => {
-    const queryClient = useQueryClient();
+const queryClient = useQueryClient();
   
-    const UserInfoMutation = useMutation({
-      mutationFn: ChangeUserInfo,
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["UserInfo"] });
-      },
-      onError: (error) => {
-        console.error("유저 정보 수정 실패 ❌:", error);
-      },
-    });
+const UserInfoMutation = useMutation({
+  mutationFn: ChangeUserInfo,
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ["UserInfo"] });
+  },
+  onError: (error) => {
+    console.error("유저 정보 수정 실패 ❌:", error);
+  },
+});
+  const handleNext = () => {
+   
     if (step < 2) setStep((prev) => prev + 1);
     else if(step===2){
       const gen = gender==="남성"?"MALE":"FEMALE"

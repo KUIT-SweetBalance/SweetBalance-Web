@@ -108,7 +108,7 @@ const MypageSettingManage: React.FC = () => {
         },
       });
 
-      
+
       const withDrawMutation = useMutation({
         mutationFn: async () => {
           return await ApiManager.delete(
@@ -143,7 +143,7 @@ const MypageSettingManage: React.FC = () => {
             </ButtonBox>
             {logout && 
             <GrayBox>
-                <MypageLogout onClick={handleWithdrawClick} YesClick={() => logoutMutation.mutate()}/>
+                <MypageLogout onClick={handleLogoutClick} YesClick={() => logoutMutation.mutate()}/>
                 {/* 로그아웃 들어갈 곳곳 */}
             </GrayBox>
             }

@@ -38,10 +38,11 @@ const reissueToken = async () => {
       });
    
     console.log("데이터 잘 되는지",data.data.gender)
-    if(data.data.gender==="MALE"||"FEMALE"){
+    if (data.data.gender === "MALE" || data.data.gender === "FEMALE") {
         navigate("/home"); 
-    }      
-    navigate("/kakaosetting"); // ✅ 홈으로 이동
+    } else {
+        navigate("/kakaosetting"); 
+    }    
 
     } catch (error) {
     console.error("❌ Access Token 재발급 실패:", error);

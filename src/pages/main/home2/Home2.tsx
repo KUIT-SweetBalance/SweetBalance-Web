@@ -16,11 +16,17 @@ const Home2 = () => {
         onChange={(view) => setSelectedView(view)}
       />
 
-      <div className="flex flex-shrink-0 flex-col w-full h-[367px] bg-primary rounded-bl-[20px] rounded-br-[20px] mt-[-2px]">
-        {selectedView === 'today' ? <Home2TodayHeader /> : <Home2WeeklyHeader />}
+      <div
+        className="flex flex-shrink-0 flex-col w-full h-[367px] rounded-bl-[20px] rounded-br-[20px] mt-[-2px] bg-primary"
+      >
+        {selectedView === 'today' ? (
+          <Home2TodayHeader />
+        ) : (
+          <Home2WeeklyHeader />
+        )}
       </div>
-      
-      <div className='flex w-full flex-grow mt-[10px]'>
+
+      <div className="flex w-full flex-grow mt-[10px]">
         {selectedView === 'today' ? <Home2TodayBody /> : <Home2WeeklyBody />}
       </div>
 

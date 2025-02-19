@@ -7,6 +7,7 @@ import Button from '../../../components/button/Button';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { LoginResponse, registerUser } from '../../../api/onboarding/Login';
+import ApiManager from '../../../api/ApiManager';
 
 interface LoginFormInputs {
   userId: string;
@@ -67,6 +68,7 @@ const LoginForm = () => {
       // 응답 데이터에서 access token을 로컬 스토리지에 저장
       if (data.data?.access) {
         localStorage.setItem('token', data.data.access); // 'token' 키로 저장
+        ApiManager.defaults.headers.Authorization = `Bearer ${data.data.access}`;
       }
       queryClient.invalidateQueries({ queryKey: ['registerUser'] });
 

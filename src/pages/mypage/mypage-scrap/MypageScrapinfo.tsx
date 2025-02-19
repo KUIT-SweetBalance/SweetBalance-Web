@@ -87,7 +87,7 @@ const MypageScrapInfo: React.FC<{drink:FavoriteDrink;onClick:()=>void}> = ({drin
                 <Bottom>
                 
                 <Name>{drink.brand}</Name>
-                |
+                <img src="/verticalBar.png" alt="구분선" className='h-[13px]'/>
                 <Name>당 {drink.sugarPer100ml}g</Name>
                     
                     

@@ -1,14 +1,23 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ApiManager from "../../../api/ApiManager";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery,useQueryClient } from "@tanstack/react-query";
 import { fetchUserInfo } from "../../../api/mypage/main/MypageMain";
 const Reissue: React.FC = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  // ✅ 유저 정보 불러오기 (최상단에서 선언)
+  const { data } = useQuery({
+    queryKey: ["UserInfo"],
+    queryFn: fetchUserInfo,
+    enabled: false, // 처음에는 실행하지 않음
+  });
 
   useEffect(() => {
-      reissueToken();
+    reissueToken();
   }, []);
+ 
 
 
 const reissueToken = async () => {
@@ -30,16 +39,14 @@ const reissueToken = async () => {
     ApiManager.defaults.headers.Authorization = `Bearer ${response.data.data.access}`;
     
 
+    await queryClient.invalidateQueries({ queryKey: ["UserInfo"] });
 
-    // const { data } = useQuery({
-    //     queryKey: ["UserInfo"],
-    //     queryFn: fetchUserInfo,
-    //   });
-    // console.log("데이터 잘 되는지",data)
-    // if(data?.data.gender===null){
-    //     navigate("/kakaosetting"); // ✅ 홈으로 이동
+   
+    console.log("데이터 잘 되는지",data)
+    if(data?.data.gender===null){
+        navigate("/kakaosetting"); // ✅ 홈으로 이동
 
-    // }      
+    }      
     navigate("/kakaosetting"); // ✅ 홈으로 이동
 
     } catch (error) {

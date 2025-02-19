@@ -7,13 +7,6 @@ const Reissue: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  // ✅ 유저 정보 불러오기 (최상단에서 선언)
-  const { data } = useQuery({
-    queryKey: ["UserInfo"],
-    queryFn: fetchUserInfo,
-    enabled: false, // 처음에는 실행하지 않음
-  });
-
   useEffect(() => {
     reissueToken();
   }, []);
@@ -39,11 +32,13 @@ const reissueToken = async () => {
     ApiManager.defaults.headers.Authorization = `Bearer ${response.data.data.access}`;
     
 
-    await queryClient.invalidateQueries({ queryKey: ["UserInfo"] });
-
+    const data = await queryClient.fetchQuery({
+        queryKey: ["UserInfo"],
+        queryFn: fetchUserInfo,
+      });
    
     console.log("데이터 잘 되는지",data)
-    if(data?.data.gender===null){
+    if(data?.data.gender===undefined){
         navigate("/kakaosetting"); // ✅ 홈으로 이동
 
     }      

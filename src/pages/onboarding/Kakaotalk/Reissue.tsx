@@ -47,7 +47,7 @@ const reissueToken = async () => {
         navigate("/kakaosetting"); // ✅ 홈으로 이동
 
     }      
-    navigate("/kakaosetting"); // ✅ 홈으로 이동
+    navigate("/home"); // ✅ 홈으로 이동
 
     } catch (error) {
     console.error("❌ Access Token 재발급 실패:", error);

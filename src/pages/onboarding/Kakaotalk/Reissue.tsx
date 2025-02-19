@@ -38,7 +38,7 @@ const reissueToken = async () => {
       });
    
     console.log("데이터 잘 되는지",data)
-    if(data?.data.gender===undefined){
+    if(data?.data.gender===null){
         navigate("/kakaosetting"); // ✅ 홈으로 이동
 
     }      

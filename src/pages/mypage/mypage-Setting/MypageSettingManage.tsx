@@ -4,7 +4,6 @@ import Header from '../../../components/header/Header';
 import styled from 'styled-components';
 import { MypageLogout,MypageRealLogout } from './mypage-logout-message/MypageLogout'; 
 import Button2 from '../../../components/button/Button2';
-import { LogoutApi } from '../../../api/mypage/setting/Logout';
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import ApiManager from '../../../api/ApiManager';
@@ -80,11 +79,9 @@ const MypageSettingManage: React.FC = () => {
     const handleWithdraw3=()=>{
         setwithdrawment2(prev=>!prev);
         navigate("/");
-
     }
     const handleNumber=()=>{
         setnumber(prev=>!prev);
-
     }
     const navigate = useNavigate();
 
@@ -101,7 +98,7 @@ const MypageSettingManage: React.FC = () => {
           // ✅ localStorage에서 토큰 제거
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-    
+          delete ApiManager.defaults.headers.Authorization;
           // ✅ 홈으로 이동
           navigate("/");
         },
@@ -122,13 +119,11 @@ const MypageSettingManage: React.FC = () => {
           // ✅ localStorage에서 토큰 제거
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-    
-          // ✅ 홈으로 이동
         },
         onError: (error) => {
           console.error("❌ 탈퇴 실패:", error);
         },
-      });
+      });   
 
 
     return (

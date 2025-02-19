@@ -4,19 +4,51 @@ import { useNavigate } from 'react-router-dom';
 import useLargeFavoriteDrinkModalStore from '../../store/modal/LargeFavoriteModalStore';
 import useEditDrinkModalStore from '../../store/modal/EditDrinkModal';
 import useDeleteDrinkModalStore from '../../store/modal/DeleteDrinkModal';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { ScrapCustomDrink } from '../../api/custom/custommain';
+import { DeleteScrapDrinks } from '../../api/mypage/scrap/MypageScrap';
 
 // RecordingDrink
 
 const DrinkInfo = (props: DrinkInfoProps) => {
   const navigate = useNavigate();
-
+const queryClient = useQueryClient();
   const [selected, setSelected] = useState<boolean>(false);
-
+  const scrapMutation = useMutation({
+    mutationFn: ScrapCustomDrink,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["customDrink"] }); // 최신 데이터 가져오기
+    },
+    onError: (error) => {
+      console.error("즐겨찾기 추가 실패 ❌:", error);
+      alert("즐겨찾기 추가 중 오류 발생 ❌");
+    },
+  });
+  const deleteScrapMutation = useMutation({
+    mutationFn: (favoriteId: number) => DeleteScrapDrinks(favoriteId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["customDrink"] }); // 최신 데이터 가져오기
+    },
+    onError: (error) => {
+      console.error("삭제 실패 ❌:", error);
+    },
+  });
   // 즐겨찾기 추가 모달창 띄우기
   const { openFavoriteModal } = useLargeFavoriteDrinkModalStore();
   const handleFavoriteButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation(); // 이벤트 버블링 방지
     console.log('Clicked');
+    if(!selected){
+      scrapMutation.mutate(props.drinkData.beverageId)
+      console.log("추가완료료")
+    }
+    else{
+      deleteScrapMutation.mutate(props.drinkData.beverageId)
+      console.log("삭제완료료")
+
+    }
+
+
     setSelected(!selected);
     if (!selected) {
       const modalData = {

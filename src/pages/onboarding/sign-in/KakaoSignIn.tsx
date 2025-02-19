@@ -217,7 +217,7 @@ const SignInComplete: React.FC<{
   );
 };
 
-const KakaoSignIn = () => {
+const KakaoSignIn:React.FC = () => {
   const [step, setStep] = useState(1);
   const [nickname, setNickname] = useState('');
   const [nicknameValid, setNicknameValid] = useState(false); // 닉네임 유효성 상태 추가

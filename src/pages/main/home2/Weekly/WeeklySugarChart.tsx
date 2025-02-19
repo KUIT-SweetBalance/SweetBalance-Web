@@ -28,24 +28,24 @@ interface WeeklySugarChartProps {
   todayWeekDayIndex: number;
 }
 
+const storedGender = localStorage.getItem('gender');
+const userGender = storedGender ? storedGender : 'MALE';
+
 const WeeklySugarChart = (props: WeeklySugarChartProps) => {
   const labels = ['일', '월', '화', '수', '목', '금', '토'];
 
-  const [angrySugar, setAngrySugar] = useState<HTMLImageElement | null>(null);
-
-  useEffect(() => {
-    const img = new Image();
-    img.src = '/sugar_angry.png';
-    img.onload = () => {
-      img.width = 50; //
-      img.height = 50; //
-      console.log('angrySugar 이미지 로드 성공', img);
-      setAngrySugar(img);
-    };
-    img.onerror = () => {
-      console.error('angrySugar 이미지 로드 실패');
-    };
-  }, []);
+  // useEffect(() => {
+  //   const img = new Image();
+  //   img.src = '/sugar_angry.png';
+  //   img.onload = () => {
+  //     img.width = 50; //
+  //     img.height = 50; //
+  //     console.log('angrySugar 이미지 로드 성공', img);
+  //   };
+  //   img.onerror = () => {
+  //     console.error('angrySugar 이미지 로드 실패');
+  //   };
+  // }, []);
 
   // Chart.js에 전달할 데이터 및 스타일 설정
   // <Line />에 chartData를 넘겨줌
@@ -87,8 +87,8 @@ const WeeklySugarChart = (props: WeeklySugarChartProps) => {
           line1: {
             type: 'line',
             mode: 'horizontal', // 가로선
-            yMin: 25, // Y축 값 25에 선 고정
-            yMax: 25,
+            yMin: userGender === 'MALE' ? 38 : 25,
+            yMax: userGender === 'MALE' ? 38 : 25,
             borderColor: 'white', // 흰색 선
             borderWidth: 1.5, // 선 두께
           } as AnnotationOptions,
@@ -115,10 +115,7 @@ const WeeklySugarChart = (props: WeeklySugarChartProps) => {
         },
         grid: {
           color: (context: any) => {
-            if (context.tick.value === 25) {
-              return 'white'; // ✅ 25일 때 흰색 선
-            }
-            return 'rgba(214, 172, 138, 0.5)'; // ✅ 기본 X축 가로선 색상
+            return 'rgba(214, 172, 138, 0.5)'; // 기본 X축 가로선 색상
           },
           drawTicks: false,
           drawBorder: false,

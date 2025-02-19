@@ -37,7 +37,7 @@ const reissueToken = async () => {
         queryFn: fetchUserInfo,
       });
    
-    console.log("데이터 잘 되는지",data)
+    console.log("데이터 잘 되는지",data.data.gender)
     if(data.data.gender==="MALE"||"FEMALE"){
         navigate("/home"); 
     }      

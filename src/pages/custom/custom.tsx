@@ -51,7 +51,7 @@ const CustomMain: React.FC = () => {
 
   
   const Syrupinfo = location.state?.drink ?? location.state ?? {};
-  
+
 
   const queryClient = useQueryClient();
 
@@ -143,7 +143,7 @@ const CustomMain: React.FC = () => {
           <Brandrink
             brand={drinkData.brand}
             drink={drinkData.name}
-            onClick={handleScrap}
+            onClick={() => setIsModalOpen(true)}
             onClick1={handleDelete}
             scrap={drinkData.favorite}
             beverageId={drinkData.beverageId}

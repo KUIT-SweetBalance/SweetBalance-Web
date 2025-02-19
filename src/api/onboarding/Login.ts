@@ -26,7 +26,10 @@ export const registerUser = async (
       password: userData.userPassword,
     };
 
-    const response = await ApiManager.post('/api/auth/sign-in', requestBody);
+    const response = await ApiManager.post('/api/auth/sign-in', requestBody, 
+      {
+      withCredentials: true, // ✅ 쿠키 자동 포함 (headers에 넣지 말 것!)
+    });
     console.log('registerUser succeeded', response.data);
     return response.data;
   } catch (error) {

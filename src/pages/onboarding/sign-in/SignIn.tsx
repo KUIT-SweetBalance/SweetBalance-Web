@@ -16,6 +16,8 @@ import {
   sendVerificationCode,
   signUp,
 } from '../../../api/onboarding/SignIn';
+import Modal from '../../custom/custom-main/Modal';
+import OnboardingModal from '../../../components/modal/Modal';
 
 interface FormData {
   nickname: string;
@@ -245,26 +247,32 @@ const SignIn = () => {
     },
   });
 
+  // 모달창
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContents, setModalContents] = useState('');
+
   // 이메일 중복인증
-  // 사용 가능한 이메일인지 확인
+
+  // 이메일 중복확인 요청의 응답에서 사용 가능한 이메일인지 확인
   const [isEmailAvailable, setIsEmailAvailable] = useState<boolean | null>(
     null,
   );
-  const [emailServerMessage, setEmailServerMessage] = useState('');
   const emailMutation = useMutation({
     mutationFn: checkEmailAvailability,
     onSuccess: (data) => {
       console.log('checkEmailAvailability request onSuccess', data);
       queryClient.invalidateQueries({ queryKey: ['checkEmailAvailability'] });
       if (data.code === 0) {
-        console.log('사용 가능한 아이디입니다');
+        console.log('인증번호가 입력하신 이메일로 전송되었습니다');
+        setModalContents('인증번호가 입력하신 이메일로 전송되었습니다');
+        setIsModalOpen(true);
         setIsEmailAvailable(true);
-        setEmailServerMessage(data.message);
         sendVeriCodeMutation.mutate(emailValue);
       } else {
         console.log(data.message);
+        setModalContents(data.message);
+        setIsModalOpen(true);
         setIsEmailAvailable(false);
-        setEmailServerMessage(data.message);
       }
     },
     onError: (error) => {
@@ -418,7 +426,7 @@ const SignIn = () => {
               <button
                 type="button"
                 className={`p-[15px] text-[12px] font-[500] whitespace-nowrap rounded-full 
-                  ${isVerificationCodeFormatValid ? 'bg-alert text-white' : 'bg-gray_light text-gray_text cursor-not-allowed'}`}
+                  ${isVerificationCodeFormatValid && isEmailAvailable ? 'bg-alert text-white' : 'bg-gray_light text-gray_text cursor-not-allowed'}`}
                 onClick={handleCheckVerificationCodeClick}
                 disabled={!isVerificationCodeFormatValid && !isEmailAvailable}
               >
@@ -484,6 +492,13 @@ const SignIn = () => {
           다음
         </button>
       </div>
+
+      {isModalOpen && (
+        <OnboardingModal
+          onClose={() => setIsModalOpen(false)}
+          contents={modalContents}
+        />
+      )}
     </div>
   );
 };

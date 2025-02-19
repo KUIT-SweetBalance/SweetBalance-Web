@@ -38,9 +38,8 @@ const queryClient = useQueryClient();
   const handleFavoriteButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation(); // 이벤트 버블링 방지
     console.log('Clicked');
-    setSelected(!selected);
 
-    if(!selected){
+    if(selected){
       scrapMutation.mutate(props.drinkData.beverageId)
       console.log("추가완료")
     }
@@ -49,6 +48,7 @@ const queryClient = useQueryClient();
       console.log("삭제완료")
     }
 
+    setSelected(!selected);
 
     if (!selected) {
       const modalData = {

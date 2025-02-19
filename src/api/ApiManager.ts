@@ -73,7 +73,7 @@ ApiManager.interceptors.response.use(
       originalRequest._retry = true; // ✅ 무한 루프 방지
       const errorCode = error.response?.data?.code;
 
-      if ([402, 403, 404].includes(errorCode)) {
+      if ([402, 403, 404,405].includes(errorCode)) {
         console.log("🔄 토큰 만료 감지! 재발급 시도 중...");
         
         await reissueToken();

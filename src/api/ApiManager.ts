@@ -17,11 +17,12 @@ const ApiManager: AxiosInstance = axios.create({
 // 요청 인터셉터
 ApiManager.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    // const token = localStorage.getItem('token'); // 토큰 가져오기
-    // if (token) {
-    //   config.headers.Authorization = `Bearer ${token}`;
-    //   console.log('token data: ', token);
-    // }
+
+    const token = localStorage.getItem('token'); // 토큰 가져오기
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      // console.log('token data: ', token);
+    }
     console.log('요청 인터셉터 실행 성공');
     return config;
   },

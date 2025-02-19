@@ -27,7 +27,7 @@ const SearchDrink = () => {
   // 검색결과 필터링
   const [selectedFilter, setSelectedFilter] = useState<
     'sugarAsc' | 'sugarDesc'
-  >('sugarDesc');
+  >('sugarAsc');
   const handleFilterClick = (selected: 'sugarAsc' | 'sugarDesc') => {
     if (selected === 'sugarAsc') {
       setSelectedFilter('sugarDesc');

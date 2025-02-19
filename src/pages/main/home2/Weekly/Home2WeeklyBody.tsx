@@ -25,6 +25,9 @@ const Home2WeeklyBody = () => {
   };
   const lastSunday = getLastSunday(); //
 
+  const storedGender = localStorage.getItem('gender'); // 저장된 성별 값 불러오기
+  const userGender = storedGender ? storedGender : 'MALE';
+
   // query instance
   const {
     data: weeklyNutritionIntake,
@@ -39,35 +42,35 @@ const Home2WeeklyBody = () => {
   const fetchedData = weeklyNutritionIntake?.data;
 
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <div className="mt-[20px] ml-[34px] mb-[20px] text-[18px]">
         주간 당 통계를 분석했어요!
       </div>
 
       <div className="grid grid-cols-2 gap-[10px] mx-[24px]">
         <WeeklyIntakeStatBox
-          type="주간 음료 섭취량"
-          stat={fetchedData?.intake}
-          unit="잔"
-          recommended={12}
-        />
-        <WeeklyIntakeStatBox
           type="하루 평균 당 섭취량"
           stat={fetchedData?.averageSugar}
           unit="g"
-          recommended={12}
+          recommended={userGender === 'MALE' ? 38 : 25}
+        />
+        <WeeklyIntakeStatBox
+          type="주간 음료 섭취량"
+          stat={fetchedData?.intake}
+          unit="잔"
+          // recommended={12}
         />
         <WeeklyIntakeStatBox
           type="주간 당 섭취량"
           stat={fetchedData?.totalSugar}
           unit="g"
-          recommended={12}
+          // recommended={12}
         />
         <WeeklyIntakeStatBox
           type="주간 칼로리 섭취량"
           stat={fetchedData?.totalCalories}
           unit="kcal"
-          recommended={12}
+          // recommended={12}
         />
       </div>
     </div>

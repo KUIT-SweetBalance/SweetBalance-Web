@@ -15,7 +15,6 @@ import {
   DrinkListTodayResponse,
   fetchDrinkListToday,
 } from '../../../api/main/home2/Today/Home2TodayBody';
-import Arrangement from '../../mypage/mypage-record/Arrangement';
 import EditModal from '../../mypage/mypage-record/Edit/Editmodel';
 import DeleModal from '../../mypage/mypage-record/Dele/Delemodal';
 import Deleted from '../../mypage/mypage-record/Dele/Deleted';

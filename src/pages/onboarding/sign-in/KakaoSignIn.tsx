@@ -72,9 +72,8 @@ const UserNicknameForm: React.FC<{
                 언제든지 변경 가능해요
               </p>
             </div>
-            <div
-              className={`flex flex-col w-[70vw] justify-center items-center`}
-            >
+
+            <div className={`flex flex-col w-full justify-center items-center`}>
               <UserDataInput
                 id="nickname"
                 type="text"
@@ -86,9 +85,11 @@ const UserNicknameForm: React.FC<{
                 }}
                 register={register}
                 errors={errors}
+                position="center"
               />
             </div>
           </div>
+
           <div className={`w-full py-[3vh] `}>
             <Button
               content="다음"

@@ -139,7 +139,7 @@ const router = createBrowserRouter([
     element:<Reissue/>
   },
   {
-    path:'/kakaosetting ',
+    path:'/kakaosetting',
     element:<KakaoSignIn/>
   }
 ]);

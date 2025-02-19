@@ -7,7 +7,8 @@ import Button from '../../../components/button/Button';
 import icon from '../../../assets/onboarding/onboarding1_icon.svg';
 import ellipse_gray from '../../../assets/onboarding/ellipse_gray.svg';
 import ellipse_primary from '../../../assets/onboarding/ellipse_primary.svg';
-
+import { useMutation,useQueryClient } from '@tanstack/react-query';
+import { ChangeUserInfo,changeInfomation } from '../../../api/mypage/revise/Mypagerevise';
 const StepBar: React.FC<{
   step: number;
   nicknameValid: boolean;
@@ -222,11 +223,34 @@ const KakaoSignIn = () => {
   const [nicknameValid, setNicknameValid] = useState(false); // 닉네임 유효성 상태 추가
   const [gender, setGender] = useState('');
   const [genderSelected, setGenderSelected] = useState(false); // 성별 선택 상태 추가
-
+const navigate = useNavigate()
   const handleNext = () => {
-    if (step < 3) setStep((prev) => prev + 1);
+    const queryClient = useQueryClient();
+  
+    const UserInfoMutation = useMutation({
+      mutationFn: ChangeUserInfo,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["UserInfo"] });
+      },
+      onError: (error) => {
+        console.error("유저 정보 수정 실패 ❌:", error);
+      },
+    });
+    if (step < 2) setStep((prev) => prev + 1);
+    else if(step===2){
+      const gen = gender==="남성"?"MALE":"FEMALE"
+       const changeInfo:changeInfomation = {
+            nickname,
+            gender:gen ,
+          };
+          UserInfoMutation.mutate(changeInfo, {
+            onSuccess: () => {
+              navigate('/home'); // 성공 시 이동
+            }
+          });
+    }
   };
-
+  
   return (
     <div className={`w-full flex flex-col items-center`}>
       {step !== 3 && (

@@ -137,6 +137,10 @@ const router = createBrowserRouter([
   {
     path:'/oauth2_redirect',
     element:<Reissue/>
+  },
+  {
+    path:'/kakaosetting',
+    element:<KakaoSignIn/>
   }
 ]);
 

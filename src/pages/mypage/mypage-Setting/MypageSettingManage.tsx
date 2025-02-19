@@ -4,7 +4,6 @@ import Header from '../../../components/header/Header';
 import styled from 'styled-components';
 import { MypageLogout,MypageRealLogout } from './mypage-logout-message/MypageLogout'; 
 import Button2 from '../../../components/button/Button2';
-import { LogoutApi } from '../../../api/mypage/setting/Logout';
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import ApiManager from '../../../api/ApiManager';
@@ -70,6 +69,7 @@ const MypageSettingManage: React.FC = () => {
         setLogout(false)
         setWithdraw(false)
         setwithdrawment(prev => !prev);
+        withDrawMutation.mutate()
     }
     const handleWithdraw2Click = () =>{
         
@@ -78,11 +78,10 @@ const MypageSettingManage: React.FC = () => {
     }
     const handleWithdraw3=()=>{
         setwithdrawment2(prev=>!prev);
-
+        navigate("/");
     }
     const handleNumber=()=>{
         setnumber(prev=>!prev);
-
     }
     const navigate = useNavigate();
 
@@ -99,7 +98,7 @@ const MypageSettingManage: React.FC = () => {
           // ✅ localStorage에서 토큰 제거
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-    
+          delete ApiManager.defaults.headers.Authorization;
           // ✅ 홈으로 이동
           navigate("/");
         },
@@ -108,11 +107,11 @@ const MypageSettingManage: React.FC = () => {
         },
       });
 
-      
+
       const withDrawMutation = useMutation({
         mutationFn: async () => {
           return await ApiManager.delete(
-            "/api/auth/withdraw" // ✅ 쿠키 자동 포함
+            "/api/auth/withdraw" 
           );
         },
         onSuccess: () => {
@@ -120,14 +119,11 @@ const MypageSettingManage: React.FC = () => {
           // ✅ localStorage에서 토큰 제거
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-    
-          // ✅ 홈으로 이동
-          navigate("/");
         },
         onError: (error) => {
           console.error("❌ 탈퇴 실패:", error);
         },
-      });
+      });   
 
 
     return (
@@ -143,7 +139,7 @@ const MypageSettingManage: React.FC = () => {
             </ButtonBox>
             {logout && 
             <GrayBox>
-                <MypageLogout onClick={handleWithdrawClick} YesClick={() => logoutMutation.mutate()}/>
+                <MypageLogout onClick={handleLogoutClick} YesClick={() => logoutMutation.mutate()}/>
                 {/* 로그아웃 들어갈 곳곳 */}
             </GrayBox>
             }
@@ -159,7 +155,7 @@ const MypageSettingManage: React.FC = () => {
             }
             {withdrawment2&&
             <GrayBox>
-                <With src='/withdrawbottom.svg' alt='dl'onClick={() => withDrawMutation.mutate()}/>
+                <With src='/withdrawbottom.svg' alt='dl'onClick={handleWithdraw3}/>
             </GrayBox>
             }
             {number&&

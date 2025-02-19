@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import {
@@ -27,6 +27,12 @@ const Home2TodayHeader = () => {
   // 유저 성별
   const userGender = userInfoData?.data?.gender;
   const isMale = userGender === 'MALE';
+  useEffect(() => {
+    if (userInfoData?.data?.gender) {
+      localStorage.setItem('gender', userInfoData.data.gender);
+    }
+  }, [userInfoData]);
+
 
   // 성별에 따른 적정 섭취량
   const recommendedSugarIntake = isMale ? 38 : 25;

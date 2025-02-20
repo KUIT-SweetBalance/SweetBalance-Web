@@ -235,6 +235,10 @@ const SignIn = () => {
     },
   });
 
+  // 모달창
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContents, setModalContents] = useState('');
+
   // 인증번호 전송
   const sendVeriCodeMutation = useMutation({
     mutationFn: sendVerificationCode,
@@ -243,13 +247,11 @@ const SignIn = () => {
       queryClient.invalidateQueries({ queryKey: ['sendVerificationCode'] });
     },
     onError: (error) => {
+      setModalContents('일치하지 않는 인증번호입니다');
+      setIsModalOpen(true);
       console.log('sendVerificationCode request onError: ', error);
     },
   });
-
-  // 모달창
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContents, setModalContents] = useState('');
 
   // 이메일 중복인증
 

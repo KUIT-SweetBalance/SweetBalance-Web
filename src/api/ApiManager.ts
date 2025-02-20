@@ -82,7 +82,7 @@ ApiManager.interceptors.response.use(
          return ApiManager(originalRequest); // ✅ 기존 요청 다시 시도
 
       }
-      else if(([4088].includes(errorCode)))
+      else if(([405,406,407,408,409].includes(errorCode)))
       {console.log("🔄 리프레쉬 토큰 이상 감지! 로그인으로 이동합니다....");
         localStorage.removeItem("token");
         localStorage.removeItem("refresh");

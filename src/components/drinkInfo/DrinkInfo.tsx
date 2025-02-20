@@ -39,7 +39,7 @@ const queryClient = useQueryClient();
     event.stopPropagation(); // 이벤트 버블링 방지
     console.log('Clicked');
 
-    if(selected){
+    if(!selected){
       scrapMutation.mutate(props.drinkData.beverageId)
       console.log("추가완료")
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DrinkInfoProps } from '../../types/drink';
 import { useNavigate } from 'react-router-dom';
 import useLargeFavoriteDrinkModalStore from '../../store/modal/LargeFavoriteModalStore';
@@ -14,6 +14,10 @@ const DrinkInfo = (props: DrinkInfoProps) => {
   const navigate = useNavigate();
 const queryClient = useQueryClient();
   const [selected, setSelected] = useState<boolean>();
+  useEffect(() => {
+    // ✅ props에서 초기값을 설정
+    setSelected(props.favorite)
+  }, [selected]); 
   const scrapMutation = useMutation({
     mutationFn: ScrapCustomDrink,
     onSuccess: () => {

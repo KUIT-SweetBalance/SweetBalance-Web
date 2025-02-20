@@ -17,7 +17,7 @@ const queryClient = useQueryClient();
   useEffect(() => {
     // ✅ props에서 초기값을 설정
     setSelected(props.favorite)
-  }, [selected]); 
+  }, [props.favorite]); 
   const scrapMutation = useMutation({
     mutationFn: ScrapCustomDrink,
     onSuccess: () => {

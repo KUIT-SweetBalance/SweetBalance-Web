@@ -58,9 +58,10 @@ const reissueToken = async () => {
     localStorage.removeItem("token");
     localStorage.removeItem("refresh");
     delete ApiManager.defaults.headers.Authorization;
-    navigate("/auth-selection")
+    
+    // ✅ 로그인 페이지로 이동
+    window.location.href = "/auth-selection";
     }
-
 
 };
 // 응답 인터셉터
@@ -73,13 +74,18 @@ ApiManager.interceptors.response.use(
       originalRequest._retry = true; // ✅ 무한 루프 방지
       const errorCode = error.response?.data?.code;
 
-      if ([402, 403, 404,405].includes(errorCode)) {
+      if ([402, 403, 404].includes(errorCode)) {
         console.log("🔄 토큰 만료 감지! 재발급 시도 중...");
-        
-        await reissueToken();
-        return ApiManager(originalRequest); // ✅ 기존 요청 다시 시도
-        
+         await reissueToken()
+         return ApiManager(originalRequest); // ✅ 기존 요청 다시 시도
+
       }
+      else if(([405, 406,407, 408,409].includes(errorCode)))
+        console.log("🔄 리프레쉬 토큰 만료 감지! 로그인으로 이동합니다....");
+      localStorage.removeItem("token");
+      localStorage.removeItem("refresh");
+      delete ApiManager.defaults.headers.Authorization;
+      window.location.href = "/auth-selection";
     }
 
     return Promise.reject(error);

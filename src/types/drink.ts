@@ -31,6 +31,7 @@ interface DrinkData {
 }
 
 export interface DrinkInfoProps extends BaseDrinkInfoProps {
+  favorite: boolean;
   drinkData: DrinkData;
   imgUrl?: string;
   dateAndTime?: string;

@@ -13,7 +13,7 @@ import { DeleteScrapDrinks } from '../../api/mypage/scrap/MypageScrap';
 const DrinkInfo = (props: DrinkInfoProps) => {
   const navigate = useNavigate();
 const queryClient = useQueryClient();
-  const [selected, setSelected] = useState<boolean>(false);
+  const [selected, setSelected] = useState<boolean>();
   const scrapMutation = useMutation({
     mutationFn: ScrapCustomDrink,
     onSuccess: () => {
@@ -169,7 +169,7 @@ const queryClient = useQueryClient();
                 onClick={handleFavoriteButtonClick}
               >
                 <img
-                  src={selected ? '/star-filled.png' : '/star.png'}
+                  src={props.favorite ? '/star-filled.png' : '/star.png'}
                   alt="저장"
                   className="w-[14px] h-[13.3px]"
                 />

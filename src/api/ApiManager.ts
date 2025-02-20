@@ -59,7 +59,7 @@ const reissueToken = async () => {
     delete ApiManager.defaults.headers.Authorization;
     
     // ✅ 로그인 페이지로 이동
-    window.location.href = "/auth-selection";
+    // window.location.href = "/auth-selection";
     }
 
 };
@@ -84,7 +84,7 @@ ApiManager.interceptors.response.use(
 
       }
       else if(([405, 406,407, 408,409].includes(errorCode)))
-        console.log("🔄 리프레쉬 토큰 만료 감지! 로그인으로 이동합니다....");
+        console.log("🔄 리프레쉬 토큰 이상 감지! 로그인으로 이동합니다....");
       localStorage.removeItem("token");
       localStorage.removeItem("refresh");
       delete ApiManager.defaults.headers.Authorization;

@@ -18,8 +18,9 @@ const ItemBox = styled.div`
     border-bottom: 1px solid var(--gray-light, rgba(144, 144, 144, 0.20));
 `;
 const DrinkImg = styled.img`
-width: 67px;
-/* height: 67px; */
+width: 74px;
+height:74px;
+flex-shrink:0;
 border-radius: 50%;
 `;
 const ContentBox= styled.div`

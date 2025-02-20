@@ -2,7 +2,7 @@ export interface BaseDrinkInfoProps {
   cafeName?: string;
   drinkName?: string;
   sugar?: number; // 당 포함량
-  syrupType?: string; // 시럽 종류
+  syrupType?: string | null; // 시럽 종류
   syrup?: number; //시럽량
   size?: string; // 음료 사이즈
 }
@@ -31,7 +31,7 @@ interface DrinkData {
 }
 
 export interface DrinkInfoProps extends BaseDrinkInfoProps {
-  favorite: boolean;
+  favorite?: boolean;
   drinkData: DrinkData;
   imgUrl?: string;
   dateAndTime?: string;

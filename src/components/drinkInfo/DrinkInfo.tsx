@@ -194,7 +194,7 @@ const queryClient = useQueryClient();
             {Number.isFinite(props.sugar) && (
               <span className="flex items-start ">당 {props.sugar}g</span>
             )}
-            {!props.syrupType ? (
+            {props.syrupType === null ? (
               <span className="flex items-start ">시럽없음</span>
             ) : (
               <span className="flex items-start ">

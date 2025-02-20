@@ -246,7 +246,7 @@ const UserPassword: React.FC<{ email: string }> = ({ email }) => {
         </div>
       </div>
 
-      <div className="mt-[350px]">
+      <div className="mt-[350px] mb-[40px]">
         <Button
           size="xl"
           bgColor="bg-primary"

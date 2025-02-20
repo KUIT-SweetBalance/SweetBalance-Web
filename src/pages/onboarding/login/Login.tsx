@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import logo from '../../../assets/onboarding/login_logo.svg';
 import login_text from '../../../assets/onboarding/login_text.svg';
@@ -8,6 +8,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { LoginResponse, registerUser } from '../../../api/onboarding/Login';
 import ApiManager from '../../../api/ApiManager';
+import OnboardingModal from '../../../components/modal/Modal';
 
 interface LoginFormInputs {
   userId: string;
@@ -41,56 +42,58 @@ const LoginLogo = () => {
   );
 };
 
-const LoginForm = () => {
+// props 타입 정의
+interface LoginFormProps {
+  setIsModalOpen: (open: boolean) => void;
+  setModalContents: (content: string) => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({
+  setIsModalOpen,
+  setModalContents,
+}) => {
   const navigate = useNavigate();
 
   const {
-    handleSubmit, // 폼 내의 모든 register된 필드의 값을 객체 형태(LoginFormInputs)로 반환
+    handleSubmit,
     register,
     formState: { isValid, errors },
     reset,
-  } = useForm<LoginFormInputs>({ mode: 'onChange' });
-
-  const onSubmit = (data: { userId: string; userPassword: string }) => {
-    console.log('로그인 정보:', data);
-    mutation.mutate({ userId: data.userId, userPassword: data.userPassword });
-  };
+  } = useForm<{ userId: string; userPassword: string }>({ mode: 'onChange' });
 
   const queryClient = useQueryClient();
-  // 캐시 관리, 자동 refetch, 요청 재시도, 데이터 동기화 등의 작업 수행 가능
-  // main.tsx에서 new QueryClient()로 생성된 queryClient 인스턴스를
-  // 하위 컴포넌트인 Login.tsx에서 useQueryClient()로 받아와 사용하는 것
 
   const mutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
       console.log('registerUser request onSuccess', data);
-      // 응답 데이터에서 access token을 로컬 스토리지에 저장
       if (data.data?.access) {
-        localStorage.setItem('token', data.data.access); // 'token' 키로 저장
+        localStorage.setItem('token', data.data.access);
         ApiManager.defaults.headers.Authorization = `Bearer ${data.data.access}`;
       }
       queryClient.invalidateQueries({ queryKey: ['registerUser'] });
 
-      // 네비게이션
       navigate('/home');
     },
     onError: (error) => {
       console.log('registerUser request failed: ', error);
-
-      reset({
-        userId: '',
-        userPassword: '',
-      });
+      setModalContents('사용자 정보를 찾을 수 없습니다');
+      setIsModalOpen(true);
+      reset({ userId: '', userPassword: '' });
     },
   });
 
+  const onSubmit = (data: { userId: string; userPassword: string }) => {
+    console.log('로그인 정보:', data);
+    mutation.mutate(data);
+  };
+
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)} // handleSubmit으로 폼 데이터 처리
-      className={`flex flex-col items-center pt-[10px] pb-[10px] box-border`}
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col items-center pt-[10px] pb-[10px] box-border"
     >
-      <div className={`flex flex-col gap-[13px] w-[calc(100%-48px)]`}>
+      <div className="flex flex-col gap-[13px] w-[calc(100%-48px)]">
         <UserDataInput
           id="userId"
           type="text"
@@ -111,12 +114,10 @@ const LoginForm = () => {
         />
       </div>
 
-      <div
-        className={`w-[calc(100%-48px)] px-[10px] pt-[5px] flex justify-between text-gray_text text-[12px] mt-[10px]`}
-      >
+      <div className="w-[calc(100%-48px)] px-[10px] pt-[5px] flex justify-between text-gray_text text-[12px] mt-[10px]">
         <p>비밀번호를 잊으셨나요?</p>
         <button
-          className={`underline decoration-1 text-[#F0807F] text-[12px] mb-[75px] `}
+          className="underline decoration-1 text-[#F0807F] text-[12px] mb-[75px]"
           style={{ textUnderlineOffset: '3px' }}
           onClick={() => navigate('/forgot-password')}
         >
@@ -155,11 +156,28 @@ const SignUpButton = () => {
 };
 
 const Login = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContents, setModalContents] = useState('');
+
   return (
-    <div className={`bg-white flex flex-col justify-center gap-0 `}>
+    <div className="bg-white flex flex-col justify-center gap-0">
       <LoginLogo />
-      <LoginForm />
+
+      {/* ✅ 상태를 props로 전달 */}
+      <LoginForm
+        setIsModalOpen={setIsModalOpen}
+        setModalContents={setModalContents}
+      />
+
       <SignUpButton />
+
+      {/* ✅ 모달 조건부 렌더링 */}
+      {isModalOpen && (
+        <OnboardingModal
+          onClose={() => setIsModalOpen(false)}
+          contents={modalContents}
+        />
+      )}
     </div>
   );
 };

@@ -86,8 +86,8 @@ const Recommend: React.FC<{brand:string;recom:RecommendedBeverage[]}> = ({ brand
               <DrinkImg src={item.imgUrl} alt="drink" />
               <DrinkName>{item.name}</DrinkName>
               <DrinkSugar>
-                {item.sugarGap > 0 ? (
-                  <DownColor>{item.sugarGap}g ▼</DownColor>
+                {item.sugarGap < 0 ? (
+                  <DownColor>{Math.abs(item.sugarGap)}g ▼</DownColor>
                 ) : (
                   <UpColor>{item.sugarGap}  g ▲</UpColor>
                 )}

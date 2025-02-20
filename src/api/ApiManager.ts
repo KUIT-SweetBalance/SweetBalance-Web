@@ -35,7 +35,6 @@ ApiManager.interceptors.request.use(
   },
 );
 const reissueToken = async () => {
-  const navigate = useNavigate()
     try {
     const response = await ApiManager.post(
         "https://13.125.187.188.nip.io/api/auth/reissue",
@@ -68,8 +67,12 @@ const reissueToken = async () => {
 ApiManager.interceptors.response.use(
   (response: AxiosResponse) => response,
   async (error) => {
-    const originalRequest = error.config;
+    console.error("❌ [interceptors.response] 요청 실패:", error);
 
+    const originalRequest = error.config;
+    const errorCode = error.response?.data?.code;
+
+    console.log("🛑 [interceptors.response] 에러 코드:", errorCode);
     if (!originalRequest._retry) {
       originalRequest._retry = true; // ✅ 무한 루프 방지
       const errorCode = error.response?.data?.code;

@@ -21,19 +21,18 @@ const queryClient = useQueryClient();
   const scrapMutation = useMutation({
     mutationFn: ScrapCustomDrink,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["customDrink"] }); // 최신 데이터 가져오기
+      queryClient.invalidateQueries({ queryKey: ["drinkList"] }); // 최신 데이터 가져오기
       setSelected(true); // ✅ 성공 시 상태 업데이트
 
     },
     onError: (error) => {
       console.error("즐겨찾기 추가 실패 ❌:", error);
-      alert("즐겨찾기 추가 중 오류 발생 ❌");
     },
   });
   const deleteScrapMutation = useMutation({
     mutationFn: (favoriteId: number) => DeleteScrapDrinks(favoriteId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["customDrink"] }); // 최신 데이터 가져오기
+      queryClient.invalidateQueries({ queryKey: ["drinkList"] }); // 최신 데이터 가져오기
       setSelected(false); // ✅ 성공 시 상태 업데이트
 
     },

@@ -9,6 +9,9 @@ interface Props {
   }
 const SKCBox = styled.div`
   /* height: 126px; */
+  z-index:2;
+  position: relative;
+  background-color:white;
 `;
 const SKCList = styled.div`
   padding: 20px 29.5px 20px 51.5px;

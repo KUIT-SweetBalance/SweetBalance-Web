@@ -4,6 +4,9 @@ import { RecommendedBeverage } from "../../../api/custom/custommain";
 
 const RecommentBox = styled.div`
   width: 100%;
+  z-index:2;
+  position: relative;
+  background-color:white;
 `;
 const RecommendTitle = styled.div`
   padding: 30px 0 30px 25px;
@@ -14,6 +17,7 @@ const RecommendTitle = styled.div`
   font-weight: 400;
   line-height: 20px; /* 111.111% */
   letter-spacing: 0.25px;
+  
 `;
 const BoldText = styled.span`
   font-weight: 700; /* 굵게 표시 */

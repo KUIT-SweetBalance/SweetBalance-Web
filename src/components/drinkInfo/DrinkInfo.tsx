@@ -14,7 +14,9 @@ const DrinkInfo = (props: DrinkInfoProps) => {
 
   // 즐겨찾기 추가 모달창 띄우기
   const { openFavoriteModal } = useLargeFavoriteDrinkModalStore();
-  const handleFavoriteButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleFavoriteButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     event.stopPropagation(); // 이벤트 버블링 방지
     console.log('Clicked');
     setSelected(!selected);
@@ -57,7 +59,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
   const handleDeleteButtonClick = () => {
     const modalData = {
       cafeName:
-      props.cafeNameMiddle || props.cafeNameTop || props.cafeNameBottom || '',
+        props.cafeNameMiddle || props.cafeNameTop || props.cafeNameBottom || '',
       drinkName: props.drinkName || '',
       content: '을/를 수정하시겠어요?',
       button1: '아니오',
@@ -66,12 +68,12 @@ const DrinkInfo = (props: DrinkInfoProps) => {
   };
 
   const handleDrinkInfoClick = () => {
-    console.log('clicked')
+    console.log('clicked');
     navigate(`/custom/${props.drinkData.beverageId}`);
-  }
+  };
 
   return (
-    <button type="button" onClick={handleDrinkInfoClick} className='w-full'>
+    <button type="button" onClick={handleDrinkInfoClick} className="w-full">
       <div className="w-full px-[24px] py-[14px] flex border-b border-1-[#F4F4F4]">
         {/* 왼쪽 */}
         <img

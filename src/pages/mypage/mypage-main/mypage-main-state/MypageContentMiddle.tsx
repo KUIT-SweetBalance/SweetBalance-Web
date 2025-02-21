@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // ✅ Progress Bar 컨테이너 (width를 props로 받아 반응형 조정)
 const ProgressBarContainer = styled.div<{ width: number }>`
-  width: ${(props) => props.width}px; /* ✅ 동적으로 width 적용 */
+  width: 90%; /* ✅ 동적으로 width 적용 */
   background-color: #f0f0f0;
   height:20px;
   border-radius: 10px;

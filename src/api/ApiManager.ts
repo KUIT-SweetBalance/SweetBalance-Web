@@ -87,7 +87,8 @@ ApiManager.interceptors.response.use(
         localStorage.removeItem("token");
         localStorage.removeItem("refresh");
         delete ApiManager.defaults.headers.Authorization;
-        window.location.href = "/auth-selection";}
+        window.location.href = "/auth-selection";
+      }
     }
 
     return Promise.reject(error);

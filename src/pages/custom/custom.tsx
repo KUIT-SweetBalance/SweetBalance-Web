@@ -28,7 +28,10 @@ const GrayBox = styled.div`
   width: 100%;
   height: 15px;
   background: #f4f4f4;
-  margin: 20px 0 0 0;
+  /* margin: 20px 0 0 0;/ */
+  z-index:2;
+  position: relative;
+  background-color:white;
 `;
 
 const Askinfo = styled.div`
@@ -40,6 +43,9 @@ const Askinfo = styled.div`
   font-weight: 400;
   line-height: 20px;
   letter-spacing: -0.3px;
+  z-index:2;
+  position: relative;
+  background-color:white;
 `;
 
 const CustomMain: React.FC = () => {

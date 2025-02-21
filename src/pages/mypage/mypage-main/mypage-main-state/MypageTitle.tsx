@@ -43,8 +43,7 @@ const MypageTitleLeftRight = styled.div`
 const MypageTitleNormalText = styled.div`
 color: #121212;
 font-family: Pretendard;
-font-size: 18px;
-font-style: normal;
+font-size: clamp(14px, 4vw, 18px);font-style: normal;
 font-weight: 400;
 line-height: 20px; /* 111.111% */
 letter-spacing: -0.45px;
@@ -52,7 +51,7 @@ letter-spacing: -0.45px;
 const MyPageTitleRight = styled.button`
 display: flex;
 height: 30px;
-padding: 8px 16px;
+padding: 8px 10px;
 justify-content: center;
 align-items: center;
 gap: 10px;
@@ -61,8 +60,7 @@ background: var(--primary, #722A2A);
 color: #FFF;
 text-align: center;
 font-family: Pretendard;
-font-size: 12px;
-font-style: normal;
+font-size: clamp(10px, 4vw, 12px);font-style: normal;
 font-weight: 400;
 line-height: normal;
 `;
@@ -93,7 +91,7 @@ const MypageTitle: React.FC<{Danger:number;userinfo:UserData;additionalSugar:num
                         Danger===1?`오늘의 당 허용량이 ${additionalSugar}g 남았어요! 조금 더 신경 써주세요!`:
                         `오늘의 당 섭취량이 초과됐어요!`}
                     
-                        </MypageTitleNormalText>
+                    </MypageTitleNormalText>
                     
                     {/* <MypageTitleBoldTexts> </MypageTitleBoldTexts>
                     <MypageTitleBoldTexts></MypageTitleBoldTexts> */}

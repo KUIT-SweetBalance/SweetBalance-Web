@@ -9,7 +9,7 @@ import RedirectButton from '../Kakaotalk/LoginButton';
 const Logo = () => {
   return (
     <div
-      className={`flex flex-col items-center justify-center mt-[3.87vh] pt-[2.35vh] pb-[2.35vh] gap-[2.35vh]`}
+      className={`flex flex-col items-center justify-center mt-[3.87vh] pt-[2.35vh] pb-[2.35vh] mb-[20px] gap-[2.35vh]`}
     >
       {/* <img src={onboarding1_logo} alt="Sweet Balance" /> */}
       <div
@@ -43,7 +43,7 @@ const Icon = () => {
 const SignInButton = () => {
   const navigate = useNavigate();
   return (
-    <div className={`flex justify-center py-2.5`}>
+    <div className={`flex justify-center py-2.5 mt-[40px]`}>
       <Button
         content="간편하게 시작하기"
         bgColor="bg-primary"

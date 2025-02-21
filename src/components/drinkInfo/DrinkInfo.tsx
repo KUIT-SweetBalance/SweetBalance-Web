@@ -1,17 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DrinkInfoProps } from '../../types/drink';
 import { useNavigate } from 'react-router-dom';
 import useLargeFavoriteDrinkModalStore from '../../store/modal/LargeFavoriteModalStore';
 import useEditDrinkModalStore from '../../store/modal/EditDrinkModal';
 import useDeleteDrinkModalStore from '../../store/modal/DeleteDrinkModal';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { ScrapCustomDrink } from '../../api/custom/custommain';
+import { DeleteScrapDrinks } from '../../api/mypage/scrap/MypageScrap';
 
 // RecordingDrink
 
 const DrinkInfo = (props: DrinkInfoProps) => {
   const navigate = useNavigate();
+const queryClient = useQueryClient();
+  const [selected, setSelected] = useState<boolean>();
+  useEffect(() => {
+    // ✅ props에서 초기값을 설정
+    setSelected(props.favorite)
+  }, [props.favorite]); 
+  const scrapMutation = useMutation({
+    mutationFn: ScrapCustomDrink,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["drinkList"] }); // 최신 데이터 가져오기
+      setSelected(true); // ✅ 성공 시 상태 업데이트
 
-  const [selected, setSelected] = useState<boolean>(false);
+    },
+    onError: (error) => {
+      console.error("즐겨찾기 추가 실패 ❌:", error);
+    },
+  });
+  const deleteScrapMutation = useMutation({
+    mutationFn: (favoriteId: number) => DeleteScrapDrinks(favoriteId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["drinkList"] }); // 최신 데이터 가져오기
+      setSelected(false); // ✅ 성공 시 상태 업데이트
 
+    },
+    onError: (error) => {
+      console.error("삭제 실패 ❌:", error);
+    },
+  });
   // 즐겨찾기 추가 모달창 띄우기
   const { openFavoriteModal } = useLargeFavoriteDrinkModalStore();
   const handleFavoriteButtonClick = (
@@ -19,7 +47,19 @@ const DrinkInfo = (props: DrinkInfoProps) => {
   ) => {
     event.stopPropagation(); // 이벤트 버블링 방지
     console.log('Clicked');
+
+    if(!selected){
+      scrapMutation.mutate(props.drinkData.beverageId)
+      console.log("추가완료")
+
+    }
+    else{
+      deleteScrapMutation.mutate(props.drinkData.beverageId)
+      console.log("삭제완료")
+    }
+
     setSelected(!selected);
+
     if (!selected) {
       const modalData = {
         cafeName:
@@ -139,7 +179,7 @@ const DrinkInfo = (props: DrinkInfoProps) => {
                 onClick={handleFavoriteButtonClick}
               >
                 <img
-                  src={selected ? '/star-filled.png' : '/star.png'}
+                  src={props.favorite ? '/star-filled.png' : '/star.png'}
                   alt="저장"
                   className="w-[14px] h-[13.3px]"
                 />

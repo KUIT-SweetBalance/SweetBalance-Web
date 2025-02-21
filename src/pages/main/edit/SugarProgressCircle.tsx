@@ -62,8 +62,8 @@ const SugarProgressCircle = ({ sugarAmount }: SugarProgressCircleProps) => {
       {/* 가운데 아이콘 및 텍스트 */}
       <div className="absolute flex flex-col items-center">
         <img src="/DrinkSugar.png" alt="음료 아이콘" className="w-[59px] h-[88px]" />
-        <p className="text-[17px] mt-2">당 {sugarAmount}g</p>
-        <p className="text-[17px] text-secondary font-[500] mt-1">수정 완료!</p>
+        {/* <p className="text-[17px] mt-2">당 {sugarAmount}g</p> */}
+        <p className="text-[17px] text-secondary font-[500] mt-3">기록 완료!</p>
       </div>
     </div>
   );

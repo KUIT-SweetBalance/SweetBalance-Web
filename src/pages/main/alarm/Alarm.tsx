@@ -44,7 +44,7 @@ const Alarm = () => {
     <div className="flex flex-col items-center mb-[20px] overflow-y-auto scrollbar-hide">
       {/* <AppTitle /> */}
 
-      <div className="w-[calc(100%-48px)] mt-[50px] mb-[-10px]">
+      <div className="w-[calc(100%-48px)] mt-[30px] mb-[-10px]">
         <Header headerTitle="알림 페이지" />
       </div>
 

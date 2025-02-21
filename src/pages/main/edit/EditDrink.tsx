@@ -96,7 +96,7 @@ const EditDrink = () => {
   }
 
   return (
-    <div className="flex flex-col items-center mt-[30px]">
+    <div className="flex flex-col items-center mt-[20px]">
       <div className="flex w-[calc(100%-48px)]">
         <Header headerTitle="수정하기" />
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DrinkInfoProps } from '../../types/drink';
 import { useNavigate } from 'react-router-dom';
 import useLargeFavoriteDrinkModalStore from '../../store/modal/LargeFavoriteModalStore';
@@ -13,21 +13,28 @@ import { DeleteScrapDrinks } from '../../api/mypage/scrap/MypageScrap';
 const DrinkInfo = (props: DrinkInfoProps) => {
   const navigate = useNavigate();
 const queryClient = useQueryClient();
-  const [selected, setSelected] = useState<boolean>(false);
+  const [selected, setSelected] = useState<boolean>();
+  useEffect(() => {
+    // ✅ props에서 초기값을 설정
+    setSelected(props.favorite)
+  }, [props.favorite]); 
   const scrapMutation = useMutation({
     mutationFn: ScrapCustomDrink,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["customDrink"] }); // 최신 데이터 가져오기
+      queryClient.invalidateQueries({ queryKey: ["drinkList"] }); // 최신 데이터 가져오기
+      setSelected(true); // ✅ 성공 시 상태 업데이트
+
     },
     onError: (error) => {
       console.error("즐겨찾기 추가 실패 ❌:", error);
-      alert("즐겨찾기 추가 중 오류 발생 ❌");
     },
   });
   const deleteScrapMutation = useMutation({
     mutationFn: (favoriteId: number) => DeleteScrapDrinks(favoriteId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["customDrink"] }); // 최신 데이터 가져오기
+      queryClient.invalidateQueries({ queryKey: ["drinkList"] }); // 최신 데이터 가져오기
+      setSelected(false); // ✅ 성공 시 상태 업데이트
+
     },
     onError: (error) => {
       console.error("삭제 실패 ❌:", error);
@@ -39,9 +46,10 @@ const queryClient = useQueryClient();
     event.stopPropagation(); // 이벤트 버블링 방지
     console.log('Clicked');
 
-    if(selected){
+    if(!selected){
       scrapMutation.mutate(props.drinkData.beverageId)
       console.log("추가완료")
+
     }
     else{
       deleteScrapMutation.mutate(props.drinkData.beverageId)
@@ -169,7 +177,7 @@ const queryClient = useQueryClient();
                 onClick={handleFavoriteButtonClick}
               >
                 <img
-                  src={selected ? '/star-filled.png' : '/star.png'}
+                  src={props.favorite ? '/star-filled.png' : '/star.png'}
                   alt="저장"
                   className="w-[14px] h-[13.3px]"
                 />

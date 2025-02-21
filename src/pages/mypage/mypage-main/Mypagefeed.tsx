@@ -4,7 +4,8 @@ import MypageFeedContent from './mypage-feed/MypageFeedContent';
 
 
 const MypageFeedBox = styled.div`
-    width: 100%;`;
+    width: 100%;
+    margin-bottom:80px;`;
 const MypageFeedTitle = styled.div`
 display: inline-flex;
 padding: 10px 0 10px 34px;

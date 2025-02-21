@@ -79,7 +79,7 @@ const EditDrink = () => {
 
   if (!drinkListTodayData?.data || drinkListTodayData.data.length === 0) {
     return (
-      <div className="flex flex-col h-screen items-center mt-[30px]">
+      <div className="flex flex-col h-screen items-center">
         <div className="flex w-[calc(100%-48px)]">
           <Header headerTitle="수정하기" />
         </div>
@@ -124,7 +124,7 @@ const EditDrink = () => {
               cafeNameMiddle={drink.brand}
               drinkName={drink.beverageName}
               sugar={drink.sugar}
-              syrupType={drink.syrupName ?? ''}
+              syrupType={drink.syrupName}
               syrup={drink.syrupCount}
               size={drink.sizeType}
               onClick={(event) => {

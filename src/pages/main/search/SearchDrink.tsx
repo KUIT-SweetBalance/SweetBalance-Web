@@ -211,6 +211,7 @@ const SearchDrink = () => {
           .map((drinkItem) => (
             <DrinkInfo
               key={drinkItem.beverageId}
+              favorite={drinkItem.favorite}
               drinkData={drinkItem}
               drinkName={drinkItem.name}
               imgUrl={drinkItem.imgUrl}

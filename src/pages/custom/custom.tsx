@@ -89,6 +89,17 @@ const CustomMain: React.FC = () => {
       }
     }
   }, [data, Syrupinfo]);
+  useEffect(() => {
+    if (isModalOpen || isSlideUpOpen) {
+      document.body.style.overflow = "hidden"; // 📌 전체 페이지 스크롤 차단
+    } else {
+      document.body.style.overflow = "auto"; // 📌 다시 스크롤 가능
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"; // 📌 Cleanup (안전한 복원)
+    };
+  }, [isModalOpen, isSlideUpOpen]); 
 
   const drinkData: BeverageDetail = data?.data || ({} as BeverageDetail);
 

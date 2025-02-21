@@ -131,7 +131,10 @@ const Home2WeeklyHeader = () => {
         >
           <div className="relative inline-block">
             <img src="/bell2.png" alt="알림" className="w-[16px] h-[18px]" />
-            <div className="absolute top-0 right-0 w-[6px] h-[6px] bg-alert rounded-full"></div>
+            {Number.isFinite(fetchedData?.unreadAlarmCount) &&
+              fetchedData?.unreadAlarmCount !== 0 && (
+                <div className="absolute top-0 right-0 w-[6px] h-[6px] bg-alert rounded-full"></div>
+              )}
           </div>
         </button>
       </div>

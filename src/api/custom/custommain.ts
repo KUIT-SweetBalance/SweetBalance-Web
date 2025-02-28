@@ -47,7 +47,7 @@ export interface RecommendedBeverage {
 export const fetchCustomDrink = async (beverageId: number): Promise<BeverageDetailResponse> => {
   try {
     const response = await ApiManager.get<BeverageDetailResponse>(
-      `https://api.sweetbalance.site/api/beverages/${beverageId}`,
+      `/api/beverages/${beverageId}`,
     );
     return response.data;
   } catch (error) {

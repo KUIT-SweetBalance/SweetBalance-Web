@@ -11,7 +11,6 @@ const ApiManager: AxiosInstance = axios.create({
   baseURL: 'https://api.sweetbalance.site', // 기본 API URL
   headers: {
     'Content-Type': 'application/json'
-    // username6의 access token
   },
   timeout: 5000, // 요청 타임아웃
 });
@@ -37,7 +36,7 @@ ApiManager.interceptors.request.use(
 const reissueToken = async () => {
     try {
     const response = await ApiManager.post(
-        "https://13.125.187.188.nip.io/api/auth/reissue",
+        "https://api.sweetbalance.site/api/auth/reissue",
         {}, // ✅ body는 빈 객체
         {
           withCredentials: true, // ✅ 쿠키 자동 포함 (headers에 넣지 말 것!)

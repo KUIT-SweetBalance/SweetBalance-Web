@@ -25,7 +25,7 @@ export const fetchRecoringDrinks = async (page:number, isReversed: boolean): Pro
   const Old = isReversed?"old":""
   try {
     const response = await ApiManager.get<RecoringDrinkData>(
-      `https://13.125.187.188.nip.io/api/user/beverage-record?page=${page}&size=${8}&sort=${Old}`,
+      `/api/user/beverage-record?page=${page}&size=${8}&sort=${Old}`,
     );
     console.log(response.data);
     return response.data;
@@ -38,7 +38,7 @@ export const fetchRecoringDrinks = async (page:number, isReversed: boolean): Pro
 export const DeleteRecordingDrinks = async (beverageLogId: number): Promise<void> => {
   try {
       const response = await ApiManager.delete(
-      `https://13.125.187.188.nip.io/api/user/beverage-record/${beverageLogId}`,
+      `/api/user/beverage-record/${beverageLogId}`,
       );
       console.log('삭제 성공!')
       return response.data;

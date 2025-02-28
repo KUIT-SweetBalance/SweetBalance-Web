@@ -7,7 +7,7 @@ export const WithdrawApi = async () =>{
         localStorage.clear();
         delete ApiManager.defaults.headers.Authorization;
         const response = await ApiManager.post(
-            "https://13.125.187.188.nip.io/api/auth/withdraw"
+            "/api/auth/withdraw"
             
         );
         console.log("탈퇴 성공",response);

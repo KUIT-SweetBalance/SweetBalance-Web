@@ -23,7 +23,7 @@ export const fetchScrapDrinks = async (page:number, isReversed: boolean): Promis
 
 try {
     const response = await ApiManager.get<ScrapDrinkData>(
-    `https://13.125.187.188.nip.io/api/user/favorite?page=${page}&size=${8}&sort=${Old}`,
+    `/api/user/favorite?page=${page}&size=${8}&sort=${Old}`,
     );
     console.log(response.data);
     return response.data;
@@ -35,7 +35,7 @@ try {
 export const DeleteScrapDrinks = async (favoriteId: number): Promise<void> => {
     try {
         const response = await ApiManager.delete(
-        `https://13.125.187.188.nip.io/api/user/favorite/${favoriteId}`,
+        `/api/user/favorite/${favoriteId}`,
         );
         console.log('삭제 성공!')
         return response.data;

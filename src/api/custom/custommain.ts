@@ -47,7 +47,7 @@ export interface RecommendedBeverage {
 export const fetchCustomDrink = async (beverageId: number): Promise<BeverageDetailResponse> => {
   try {
     const response = await ApiManager.get<BeverageDetailResponse>(
-      `https://13.125.187.188.nip.io/api/beverages/${beverageId}`,
+      `https://api.sweetbalance.site/api/beverages/${beverageId}`,
     );
     return response.data;
   } catch (error) {
@@ -77,7 +77,7 @@ export const ReviseCustomDrink = async (revisedrinks: ReviseDrinks): Promise<voi
   }
   try {
     const response = await ApiManager.post<ReviseDrink>(
-      `https://13.125.187.188.nip.io/api/user/beverage-record/${revisedrinks.beverageLogId}`,
+      `/api/user/beverage-record/${revisedrinks.beverageLogId}`,
       revisedrink
     );
     console.log('음료 수정 성공:', response.data);
@@ -91,7 +91,7 @@ export const ScrapCustomDrink = async (beverageId: number): Promise<void> => {
 
   try {
     const response = await ApiManager.post(
-      `https://13.125.187.188.nip.io/api/user/favorite/${beverageId}`,
+      `/api/user/favorite/${beverageId}`,
       
     );
     console.log('즐겨찾기에 추가 성공!:', response.data);
@@ -113,7 +113,7 @@ export const AddRecordDrink = async (adddrinkinfo: AddDrink): Promise<void> => {
   }
   try {
     const response = await ApiManager.post<AddDrink>(
-      `https://13.125.187.188.nip.io/api/user/beverage-record`,
+      `/api/user/beverage-record`,
       adddrinkinfo
     );
     console.log('음료 생성 성공:', response.data);

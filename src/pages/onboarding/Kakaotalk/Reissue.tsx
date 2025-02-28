@@ -16,7 +16,7 @@ const Reissue: React.FC = () => {
 const reissueToken = async () => {
     try {
     const response = await ApiManager.post(
-        "https://13.125.187.188.nip.io/api/auth/reissue",
+        "/api/auth/reissue",
         {}, // ✅ body는 빈 객체
         {
           withCredentials: true, // ✅ 쿠키 자동 포함 (headers에 넣지 말 것!)

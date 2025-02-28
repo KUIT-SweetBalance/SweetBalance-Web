@@ -11,7 +11,7 @@ export interface changeInfomation {
 export const ChangeUserInfo = async (userInfo: changeInfomation): Promise<void> => {
     try {
         const response = await ApiManager.post(
-        `https://13.125.187.188.nip.io/api/user/meta-data`,
+        `/api/user/meta-data`,
         userInfo
         );
         console.log(response)

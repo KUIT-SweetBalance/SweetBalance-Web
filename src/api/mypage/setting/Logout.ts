@@ -7,7 +7,7 @@ export const LogoutApi = async () =>{
         localStorage.clear();
         delete ApiManager.defaults.headers.Authorization;
         const response = await ApiManager.post(
-            "https://13.125.187.188.nip.io/api/auth/sign-out",
+            "/api/auth/sign-out",
             {},
             {
                 withCredentials: true, // ✅ 쿠키 자동 포함 (headers에 넣지 말 것!)

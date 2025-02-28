@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Axios 인스턴스 생성
 const ApiManager: AxiosInstance = axios.create({
-  baseURL: 'https://13.125.187.188.nip.io', // 기본 API URL
+  baseURL: 'https://api.sweetbalance.site', // 기본 API URL
   headers: {
     'Content-Type': 'application/json'
     // username6의 access token
